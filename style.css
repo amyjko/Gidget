@@ -1,0 +1,238 @@
+body {
+	font-family:	Arial;
+	background: 	black;
+	color: 			white;
+	padding:		1em;
+}
+
+#content {
+	margin-left:	auto;
+	margin-right:	auto;
+	width:			60em;
+	height:			auto;
+	background:		black;
+	border:			1px solid gray;
+	border-radius:  .25em;
+	padding:		1em;
+	padding-top:	0em;
+}
+
+#content td {
+	vertical-align: top;
+	text-align: 	left;
+	padding:		0em;
+	padding-right:	1em;
+}
+
+#leftPanel {
+	width:			24em;
+}
+
+#rightPanel {
+	width:			15em;
+}
+
+#centerPanel {
+	width:			20em;
+}
+
+#grid {
+	margin:			0em; 
+	border-radius:  .25em;
+}
+
+#memory {
+	padding-left:	1em;
+	padding-right:	0em;
+	padding-bottom:	1em;
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	2px;
+	background-color: rgb(42,33,28);
+}
+
+#controls {
+	padding:		.25em;
+	margin-top:		.5em;
+	text-align: 	center;
+}
+
+#code {
+	width:			20em;
+	height:			18.5em;
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	2px;
+}
+
+#goalBox {
+	width:100%;
+	background-color:rgb(42,33,28);
+	padding:.2em;
+	padding-left:0em;
+}
+
+#goalLine {
+	font-size:8pt;
+	color:rgb(201,170,55);
+	padding-left:.3em;
+	padding-top:.25em;
+	padding-bottom:.25em;
+	padding-right:.25em;
+	font-family: "Monaco";
+	background-color: rgb(76,74,65);
+}
+
+#goals {
+	font-family:	"Monaco";
+	font-size:		8pt;
+	padding-left:	.5em;
+	padding-top:	.25em;
+	padding-bottom:	.25em;
+	padding-right:	.25em;
+	color:			rgb(190,189,188);
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	2px;
+	background-color:rgb(42,33,28);
+}
+
+.goal {
+	font-family: "Monaco";
+	font-size:	8pt;
+}
+
+.success {
+	font-family:	"Arial";
+	font-size:		10pt;
+	margin-left:	1em;
+	color:			green;
+}
+
+.failure {
+	font-family:	"Arial";
+	font-size:		10pt;
+	margin-left:	1em;
+	color:			red;
+}
+
+h1 {
+	font-family: 	Arial;
+	text-transform: lowercase;
+	font-size: 		x-large;
+	margin:			0em;
+	margin-bottom:	.5em;
+	margin-top:		1em;
+}
+
+h2 {
+	font-family: 	Arial;
+	text-transform: lowercase;
+	font-size: 		large;
+	margin:			0em;
+	margin-bottom:	.5em;
+	margin-top:		1em;
+}
+
+h3 {
+	font-family: 	Arial;
+	text-transform: lowercase;
+	font-size: 		small;
+	margin:			0em;
+}
+
+textarea {
+	padding:		1em;
+	margin: 		0em;
+	font-family: 	monospace;
+	font-size: 		medium;
+}
+
+.runtimeInfoContainer {
+	font-family:	Monaco;
+	font-size:		small;
+	width:			20em;
+	min-height:		4em;
+	text-align: 	left;
+}
+
+.thoughtBubble {
+	background-color: white;
+	color:			black;
+	padding:		1em;
+	margin-top:		.5em;
+	min-height:		2em;
+	font-family: 	"Verdana";
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	1em;
+}
+
+#energy {
+	font-size:		x-large;
+	color:			white;
+}
+
+.thing {
+	width:			2em;
+	height:			2em;
+	border:			none;
+}
+
+.thingBox {
+	float:			left;
+	text-align:		center;
+	font-family:	Arial;
+	font-size:		9pt;
+	border:			4px solid rgba(255,255,255,0.0);
+}
+
+.bracket {
+	float:			left;
+	font-size:		2.75em;
+	color:			white;
+	font-family:	Arial;
+}
+
+.thingList {
+	text-align:		left;
+	width:			100%;
+	min-height:		1em;
+	margin: 		0em;
+	padding: 		0em;
+}
+
+.selection {
+	border:			4px solid rgb(0,255,0);
+	border-radius:	5px;
+}
+
+.runtimeInfoContainer .runtimeReference, #goals.runtimeReference {
+	border:			4px solid rgb(255,0,0);
+	border-radius:	5px;
+}
+
+#thought .runtimeReference {
+	border-bottom:	4px solid rgb(255,0,0);
+}
+
+/* I'm not using this anymore, but it might come in handy later for popups. */
+#api {
+	width:			20em;
+	margin-left:	-10em;
+	left:			50%;
+	display:		none;
+	position:		absolute;
+	top: 			2em;
+	text-align:		left;
+	z-index:		50;
+	padding: 		1em;
+}
+
+.thoughtTable td {
+	text-align: 	left;
+	vertical-align: top;
+	color:			black;
+	padding:		.5em;
+	margin:			0em;
+}
+
+.thoughtTable {
+	margin:			0em;
+}

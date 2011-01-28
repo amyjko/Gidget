@@ -1,0 +1,86 @@
+<html>
+
+<head>
+
+	<link rel=StyleSheet href="style.css" type="text/css">
+
+	<link id="bespin_base" href="bespin"/>
+	<script type='text/javascript' src='bespin/BespinEmbedded.js'></script>
+
+	<script type='text/javascript' src='lib/jquery.js'></script>
+	<script type='text/javascript' src='runtime.js'></script>
+	<script type='text/javascript' src='parser.js'></script>
+	<script type='text/javascript' src='things.js'></script>
+	<script type='text/javascript' src='ui.js'></script>
+	<script type='text/javascript' src='levels.js'></script>
+	
+	<!-- This must be last, since it assumes all of the above scripts are loaded -->
+	<script type='text/javascript' src='initialize.js'></script>
+
+</head>
+
+<body>
+
+	<table id='content' width='100%' height='100%'>
+
+		<tr>
+			<td id='leftPanel'>
+
+				<h2>You</h2>
+			
+				<div id='code' class='bespin' data-bespinoptions='{ "stealFocus":true, "syntax": "" }'></div>
+				
+				<h2>Goals</h2>
+				<div id='goals'></div>
+
+			</td>
+			
+			<td id='centerPanel'>
+
+				<h2>World <select id='levels'></select></h2>
+				<canvas id="grid" width="300" height="300"></canvas>
+
+				<div id='controls'>
+					<button id='reset' onclick='GIDGET.ui.startOver();'>default</button>
+					<button id='zip' onclick='GIDGET.ui.runToEnd();'>end</button>
+					<button id='play' onclick='GIDGET.ui.playToEnd();'>play</button>
+					<button id='start' onclick='GIDGET.ui.runToNextLine();'>next line</button>
+					<button id='step' onclick='GIDGET.ui.step(false, true);'>step</button>
+				</div>
+				<div id='thought' class='thoughtBubble'></div>
+			</td>
+
+			<td id='rightPanel'>
+
+				<h2>Gidget</h2>
+
+				<div id='memory'>
+						
+					<h2><span id='energy'></span></h2>
+													
+					<h3>Scanned</h3>
+					<div class='runtimeInfoContainer' id='scanned'></div>	
+				
+					<h3>Analyzed</h3>
+					<div class='runtimeInfoContainer' id='analyzed'></div>	
+				
+					<h3>Grabbed</h3>
+					<div class='runtimeInfoContainer' id='grabbed'></div>		
+	
+					<h3>Focus</h3>
+					<div class='runtimeInfoContainer' id='focused'></div>
+	
+					<h3>Results</h3>
+					<div class='runtimeInfoContainer' id='results'></div>
+					
+				</div>
+
+			</td>
+
+		</tr>
+		
+	</table>
+
+</body>
+
+</html>
