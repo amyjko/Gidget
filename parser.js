@@ -49,12 +49,11 @@ GIDGET.parser = {
 	
 	},
 
-	Token: function(text, kind, line, column, index) {
+	Token: function(text, kind, line, index) {
 
 		this.text = text;
 		this.kind = kind;
 		this.line = line;
-		this.column = column;
 		this.index = index;
 
 	},
@@ -67,7 +66,7 @@ GIDGET.parser = {
 		this.peek = function() { return this.hasMore() ? this.tokens[0].text : undefined; };
 		this.eat = function() { return this.hasMore() && this.tokens.splice(0, 1)[0]; };
 		this.nextIs = function(text) { return this.hasMore() && this.peek() == text; };
-		this.eol = function() { return this.hasMore() && this.peek() == '\n'; };
+		this.eol = function() { return this.hasMore() && this.peek().match(/\r\n|\r|\n/); };
 		this.nextIsComma = function() { return this.hasMore() && this.peek() == ','; };
 		this.nextIsString = function() { return this.hasMore() && this.tokens[0].kind === 'string'; };
 		this.nextIsEndOfCommand = function() { return this.hasMore() && (this.nextIsComma() || this.eol()); };
@@ -87,12 +86,47 @@ GIDGET.parser = {
 		
 		// First split the program into [a-zA-Z0-9] words separated by spaces, newlines, apostrophes, and commas
 		var lines = code.split(/\r\n|\r|\n/);
-		var lineNumber, tokenNumber;
-		var spaced = undefined;
-		var count = 0;
-		var col = 0;
-		
+		var lineNumber;
+		var line;
 		for(lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+				
+			line = lines[lineNumber];
+			var charIndex, char;
+			var id = "";
+			for(charIndex = 0; charIndex < line.length; charIndex++) {
+				
+				char = line.charAt(charIndex);
+
+				// If it's a space, add a space and whatever was accumulated.
+				if(char.match(/\s/)) {
+					if(id.length > 0)
+						this.tokens.push(new GIDGET.parser.Token(id, "string", lineNumber, this.tokens.length));
+					id = "";
+				}
+				// If it's a comma, add the accumulated id if necessary and then add a comma,
+				// resetting the accumulated id.
+				else if(char === ',') {
+				
+					if(id.length > 0)
+						this.tokens.push(new GIDGET.parser.Token(id, "string", lineNumber, this.tokens.length));
+					this.tokens.push(new GIDGET.parser.Token(',', "comma", lineNumber, this.tokens.length));
+					id = "";
+
+				}
+				// Otherwise, just accumulate characters for the id.
+				else
+					id = id + char;
+			
+			}
+
+			// If there's text accumulated for the id, generate a token for it.			
+			if(id.length > 0)
+				this.tokens.push(new GIDGET.parser.Token(id, "string", lineNumber, this.tokens.length));
+			
+			// End the line.
+			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, this.tokens.length));
+		
+/*		
 		
 			// Divide up each line by text separated by spaces and new lines.
 			spaced = lines[lineNumber].split(/\s/);
@@ -147,6 +181,8 @@ GIDGET.parser = {
 			}
 				
 			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, col, count));
+		
+*/
 				
 		}
 

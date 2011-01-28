@@ -69,6 +69,103 @@ GIDGET.ui = {
 	
 	},
 
+	gidgetCodeToHTML: function(code) {
+	
+		var count = 0;
+		var first = false;
+	
+		function tokenToHTML(string) {
+		
+			var classes = 'sourceToken';
+			
+			if(string.match(/scan|analyze|goto|ask|to|grab|drop|it|if|is|on/))
+				classes = classes + ' keyword';		
+				
+			if(first) {
+				classes = classes + ' first';
+				first = false;	
+			}
+
+			var html = "<span class='" + classes + "' id='sourceToken" + count + "'>" + string + "</span>";
+			count++;
+			return html;					
+		
+		}
+	
+		// Convert the given gidget code into marked up HTML amenable for highlighting.
+		var lines = code.split(/\r\n|\r|\n/);
+		var lineNumber;
+		var html = "";
+		for(lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+
+			first = true;
+			var line = lines[lineNumber];
+
+			var lineText = "<div class='sourceLine' + id='sourceLine" + lineNumber + "'>";
+
+			var charIndex, char;
+			var id = "";
+			for(charIndex = 0; charIndex < line.length; charIndex++) {
+				
+				char = line.charAt(charIndex);
+
+				// If it's a space, add a space.
+				if(char.match(/\s/)) {
+					if(id.length > 0)
+						lineText = lineText + tokenToHTML(id);
+					lineText = lineText + "&nbsp;";
+					id = "";
+				}
+				// If it's a comma, add the accumulated id if necessary and then add a comma,
+				// resetting the accumulated id.
+				else if(char === ',') {
+				
+					if(id.length > 0)
+						lineText = lineText + tokenToHTML(id);
+					lineText = lineText + tokenToHTML(",");
+					id = "";
+
+				}
+				// Otherwise, just accumulate characters for the id.
+				else
+					id = id + char;
+			
+			}
+
+			// If there's text accumulated for the id, generate a token for it.			
+			if(id.length > 0)
+				lineText = lineText + tokenToHTML(id);
+			
+			// End the line.
+			lineText = lineText + tokenToHTML("\n") + "</div>";
+			
+			// Add the line to the html.
+			html = html + lineText;
+			
+		}
+	
+		return html;
+	
+	},
+	
+	htmlToGidgetCode: function(html) {
+
+		// Convert the given HTML to Gidget source code amenable for execution.
+		// <div>s are treated as new lines.	
+		var code = "";
+		var lines = $('#code').children();
+		var lineNumber;
+		for(lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+		
+			var line = $(lines[lineNumber]).text().trim();
+			code = code + line + "\n";
+		
+		}
+	
+		return code;
+	
+	},	
+
 	// Should only be called once upon starting the level or when the user requests to start over.
 	setLevel: function(level) {
 
@@ -77,9 +174,7 @@ GIDGET.ui = {
 		this.reset();
 
 		// Initialize the Gidget code with the code provided in the level specification.
-		$('#code')[0].bespin.editor.value = this.world.code;
-
-		$('#code')[0].bespin.editor.setLineNumber(2);		
+		$('#code').html(this.gidgetCodeToHTML(this.world.code));
 
 		this.world.gidget.runtime.state = 'sad';
 		this.setThought(this.world.mission, 0);
@@ -105,7 +200,7 @@ GIDGET.ui = {
 		// Add the goals text.
 		var i;
 		for(i = 0; i < this.world.goals.length; i++)
-			$('#goals').append("<div class='goal'>" + this.world.goals[i] + "<span class='success'>success</span><span class='failure'>failure</span></div>");
+			$('#goals').append("<div class='goal'>" + this.gidgetCodeToHTML(this.world.goals[i]) + "<span class='success'>success</span><span class='failure'>failure</span></div>");
 
 		$('.success').hide();
 		$('.failure').hide();
@@ -120,8 +215,7 @@ GIDGET.ui = {
 	
 	done: function() {
 		
-		$('#code')[0].bespin.editor.readOnly = false;
-		$('#code')[0].bespin.editor.selection = { start: { row: 0, col: 0 }, end: { row: 0, col: 0 } };
+		$('#code').attr('contentEditable', 'true');
 
 	},
 
@@ -132,14 +226,16 @@ GIDGET.ui = {
 
 		$('#goal').css('backgroundColor', 'rgb(42,33,28)');
 	
-		$('#code')[0].bespin.editor.readOnly = true;
+		$('#code').attr('contentEditable', 'false');
 
 		// Start the world, but give Gidget the users code.
-		this.world.start($('#code')[0].bespin.editor.value);
+		this.world.start(this.htmlToGidgetCode($('#code').html()));
 
 		this.updateRuntimeUserInterface();
-		
-		this.step(false, true);
+	
+		// It may be the case that there is no code.	
+		if(this.world.gidget.runtime.isExecuting())
+			this.step(false, true);
 
 	},
 
@@ -649,33 +745,13 @@ GIDGET.ui = {
 
 	highlightToken: function(token) {
 
-		var editor = document.getElementById('code').bespin.editor;
-		
-				
-		if(isDef(token)) {
+		console.log("Highlighting " + token.index);
 	
-			console.log("highlighting " + token.text);
+		$('.sourceLine').removeClass('runtimeReference');
+		$('.sourceToken').removeClass('runtimeReference');
 
-			editor.selection = {
-		        start: {
-	                row: token.line,
-	                col: token.column
-	            },
-	            end: {
-	                row: token.line,
-	                col: token.column + token.text.length
-	            }
-			};
-			
-		}
-		else {
-		
-			editor.selection = {
-		        start: { row: 0, col: 0 },
-	            end: { row: 0, col: 0 }
-			};
-		
-		}
+		$('#sourceToken' + token.index).addClass('runtimeReference');
+		$('#sourceLine' + token.line).addClass('runtimeReference');
 	
 	},
 

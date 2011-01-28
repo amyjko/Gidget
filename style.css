@@ -61,6 +61,22 @@ body {
 	height:			18.5em;
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	2px;
+	color: 			white;
+	background-color: rgb(42,33,28);
+	font-family: 	"Courier New";
+	font-size: 		small;
+	padding: 		1em;
+}
+
+#code[contentEditable="false"] {
+	background-color: rgb(42,33,28);
+	overflow-x: 	hidden;
+}
+
+#code[contentEditable="true"] {
+	background-color: black;
+	color:			white;
+	overflow-x: 	auto;
 }
 
 #goalBox {
@@ -71,23 +87,16 @@ body {
 }
 
 #goalLine {
-	font-size:8pt;
 	color:rgb(201,170,55);
 	padding-left:.3em;
 	padding-top:.25em;
 	padding-bottom:.25em;
 	padding-right:.25em;
-	font-family: "Monaco";
 	background-color: rgb(76,74,65);
 }
 
 #goals {
-	font-family:	"Monaco";
-	font-size:		8pt;
-	padding-left:	.5em;
-	padding-top:	.25em;
-	padding-bottom:	.25em;
-	padding-right:	.25em;
+	padding:		.75em;
 	color:			rgb(190,189,188);
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	2px;
@@ -95,8 +104,8 @@ body {
 }
 
 .goal {
-	font-family: "Monaco";
-	font-size:	8pt;
+	font-family: 	"Courier New";
+	font-size:		small;
 }
 
 .success {
@@ -210,6 +219,19 @@ textarea {
 
 #thought .runtimeReference {
 	border-bottom:	4px solid rgb(255,0,0);
+}
+
+.sourceToken.runtimeReference {
+	border-bottom:	4px solid rgb(255,0,0);
+}
+
+.sourceLine.runtimeReference {
+	background-color: rgb(100,0,0);
+}
+
+.sourceToken.keyword {
+/* 	font-weight: bold; */
+	color:			green;
 }
 
 #mission {

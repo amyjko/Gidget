@@ -4,9 +4,6 @@
 
 	<link rel=StyleSheet href="style.css" type="text/css">
 
-	<link id="bespin_base" href="bespin"/>
-	<script type='text/javascript' src='bespin/BespinEmbedded.js'></script>
-
 	<script type='text/javascript' src='lib/jquery.js'></script>
 	<script type='text/javascript' src='runtime.js'></script>
 	<script type='text/javascript' src='parser.js'></script>
@@ -31,7 +28,9 @@
 				<h2>You</h2>
 
 				<div>
-				<div id='code' class='bespin' data-bespinoptions='{ "stealFocus":true, "syntax": "" }'></div>
+
+				<div id='code' contentEditable='true'></div>
+
 				<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 				</div>			
 				

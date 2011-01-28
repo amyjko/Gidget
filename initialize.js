@@ -1,13 +1,6 @@
-window.onBespinLoad = function() {
-
-    var edit = document.getElementById("code");
-    var env = edit.bespin;
-    var editor = env.editor;
-	GIDGET.ui.editor = editor;
+$().ready(function() {
 
 	GIDGET.ui.setLevel(GIDGET.levels.getRedRock);
-
-	env.settings.set("fontsize", 11);
 
 	// Populate the level selection drop down.
 	for(var level in GIDGET.levels) {
@@ -25,6 +18,13 @@ window.onBespinLoad = function() {
 		}
 	}
 	
+	$('#code').focusout(function() {
+	
+		// Format the formatting each time to update the line and token numbers.
+		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
+	
+	});
+	
 	function animate() {
 		GIDGET.ui.percentRemaining -= 10;
 		if(GIDGET.ui.percentRemaining < 0) {
@@ -38,5 +38,4 @@ window.onBespinLoad = function() {
 	}
 	setTimeout(animate);
 
-
-};
+});
