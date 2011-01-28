@@ -627,7 +627,7 @@ GIDGET.ui = {
 			GIDGET.ui.drawGrid();
 		
 			if(isDef(runtime.lastPC)) {
-				var token = runtime.instructions[runtime.lastPC].representativeToken;
+				var token = runtime.steps[runtime.lastPC].representativeToken;
 				if(isDef(token) && !runtime.isGoal)
 					this.highlightToken(token);
 			}

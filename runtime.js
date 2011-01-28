@@ -14,7 +14,7 @@ var GIDGET = {};
 // Instantiates a runtime for a Thing, usually Gidget, but other Things can do things too.
 GIDGET.Runtime = function(thing, world) {
 
-	// The index of the current instruction
+	// The index of the current step
 	this.pc = undefined;
 	
 	// The pc that executed before this
@@ -40,14 +40,14 @@ GIDGET.Runtime = function(thing, world) {
 	this.getCurrentLine = function() {
 	
 		if(!this.isExecuting()) return undefined;
-		else return this.instructions[this.pc].representativeToken.line;
+		else return this.steps[this.pc].representativeToken.line;
 	
 	}
 
 	// Returns whether there's an active, executing execution.	
-	this.isExecuting = function() { return this.pc < this.instructions.length && (this.isExecutingGoal === true || thing.energy > 0); };
+	this.isExecuting = function() { return this.pc < this.steps.length && (this.isExecutingGoal === true || thing.energy > 0); };
 	
-	this.instructions = undefined;
+	this.steps = undefined;
 	this.isExecutingGoal = undefined;
 	
 	// Returns true if the given thing is in the scope on the top of the scope stack.	
@@ -248,13 +248,13 @@ GIDGET.Runtime = function(thing, world) {
 
 	this.step = function() {
 
-		if(this.pc < 0 || this.pc >= this.instructions.length) {
+		if(this.pc < 0 || this.pc >= this.steps.length) {
 			return undefined;
 		}
 	
-		console.log("[" + thing.name + "]: " + this.pc + " " + this.instructions[this.pc].toString());
+		console.log("[" + thing.name + "]: " + this.pc + " " + this.steps[this.pc].toString());
 
-		var step = this.instructions[this.pc];
+		var step = this.steps[this.pc];
 		
 		// Remember the last program counter for the UI, so it can know what executed.
 		this.lastPC = this.pc;
@@ -279,13 +279,13 @@ GIDGET.Runtime = function(thing, world) {
 	this.start = function(code, isGoal, arguments) {
 	
 		// Parse the program
-		this.instructions = isGoal === true ? GIDGET.parser.parseGoal(code) : GIDGET.parser.parseScript(code);
+		this.steps = isGoal === true ? GIDGET.parser.parseGoal(code) : GIDGET.parser.parseScript(code);
 		this.isExecutingGoal = isGoal;
 
 		// Print out the steps, just for reference
 		var i;
-		for(i = 0; i < this.instructions.length; i++) {
-			console.log(i + " " + this.instructions[i].toString());	
+		for(i = 0; i < this.steps.length; i++) {
+			console.log(i + " " + this.steps[i].toString());	
 		}
 
 		// Prepare the execution metadata.
@@ -389,7 +389,7 @@ GIDGET.Runtime = function(thing, world) {
 	
 };
 
-// The collection of instructions that know how to execute a Gidget program, produced by the parser.
+// The collection of steps that know how to execute a Gidget program, produced by the parser.
 GIDGET.runtime = {
 	
 	Step_IF: function(ast, representativeToken, offset) {

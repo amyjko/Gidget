@@ -230,7 +230,7 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 	// The world is executing while Gidget is executing.
 	this.isExecuting = function() {
 	
-		return isDef(this.gidget) && isDef(this.gidget.runtime) && isDef(this.gidget.runtime.instructions) && this.gidget.runtime.isExecuting();
+		return isDef(this.gidget) && isDef(this.gidget.runtime) && isDef(this.gidget.runtime.steps) && this.gidget.runtime.isExecuting();
 	
 	};
 	

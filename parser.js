@@ -192,9 +192,9 @@ GIDGET.parser = {
 	
 		var tokens = new GIDGET.parser.TokenStream(code);
 		var ast = this.parseProgram(tokens);
-		var instructions = ast.serialize();
+		var steps = ast.serialize();
 		
-		return instructions;
+		return steps;
 	
 	},
 
@@ -203,7 +203,7 @@ GIDGET.parser = {
 		var tokens = new GIDGET.parser.TokenStream(code);
 		var ast = this.parsePredicate(tokens);
 				
-		var instructions = ast.serialize();
+		var steps = ast.serialize();
 		
 		var unknown = [];
 		while(tokens.hasMore()) {
@@ -214,11 +214,11 @@ GIDGET.parser = {
 			
 		if(unknown.length > 0) {
 		
-			instructions.push(new GIDGET.runtime.Step_UNKNOWN(this, unknown[0], unknown))
+			steps.push(new GIDGET.runtime.Step_UNKNOWN(this, unknown[0], unknown))
 		
 		}
 
-		return instructions;
+		return steps;
 	
 	},
 
@@ -757,10 +757,10 @@ GIDGET.parser = {
 
 				steps = steps.concat(this.predicate.serialize());
 				
-				var instructionSteps = this.then.serialize(steps);
+				var thenSteps = this.then.serialize(steps);
 
-				steps.push(new GIDGET.runtime.Step_IF(this, this.test, instructionSteps.length + 1));
-				steps = steps.concat(instructionSteps);
+				steps.push(new GIDGET.runtime.Step_IF(this, this.test, thenSteps.length + 1));
+				steps = steps.concat(thenSteps);
 				
 				return steps;
 			
