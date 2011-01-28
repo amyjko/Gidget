@@ -216,6 +216,7 @@ GIDGET.ui = {
 	done: function() {
 		
 		$('#code').attr('contentEditable', 'true');
+		this.highlightToken(undefined);
 
 	},
 
@@ -744,14 +745,16 @@ GIDGET.ui = {
 	},
 
 	highlightToken: function(token) {
-
-		console.log("Highlighting " + token.index);
 	
 		$('.sourceLine').removeClass('runtimeReference');
 		$('.sourceToken').removeClass('runtimeReference');
 
-		$('#sourceToken' + token.index).addClass('runtimeReference');
-		$('#sourceLine' + token.line).addClass('runtimeReference');
+		if(isDef(token)) {
+
+			$('#sourceToken' + token.index).addClass('runtimeReference');
+			$('#sourceLine' + token.line).addClass('runtimeReference');
+			
+		}
 	
 	},
 

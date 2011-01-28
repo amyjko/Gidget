@@ -25,7 +25,8 @@
 		<tr>
 			<td id='leftPanel'>
 
-				<h2>You</h2>
+				<h2>Commands <button id='reset' onclick='GIDGET.ui.startOver();'>start over</button>
+</h2>
 
 				<div>
 
@@ -45,11 +46,10 @@
 				<canvas id="grid" width="300" height="300"></canvas>
 
 				<div id='controls'>
-					<button id='reset' onclick='GIDGET.ui.startOver();'>default</button>
-					<button id='zip' onclick='GIDGET.ui.runToEnd();'>end</button>
 					<button id='play' onclick='GIDGET.ui.playToEnd();'>play</button>
+					<button id='step' onclick='GIDGET.ui.step(false, true);'>next step</button>
 					<button id='start' onclick='GIDGET.ui.runToNextLine();'>next line</button>
-					<button id='step' onclick='GIDGET.ui.step(false, true);'>step</button>
+					<button id='zip' onclick='GIDGET.ui.runToEnd();'>the end</button>
 				</div>
 				<div id='thought' class='thoughtBubble'></div>
 			</td>
