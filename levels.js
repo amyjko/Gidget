@@ -9,8 +9,10 @@ GIDGET.levels = {
 			"goto blackhole\n" +
 			"drop rock\n" +
 			"scan ship, goto it";
-	
-		var world = new GIDGET.World(10, 10, 2, 8, code);
+
+		var mission = "One of these rocks is glowing red and could be dangerous! I'm supposed to bring it back to the ship for analysis. I can't seem to figure out how to get it there.";
+
+		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
 		world.addGoal("rock on blackhole is red");
 		world.addGoal("gidget on ship");
 		

@@ -79,10 +79,13 @@ GIDGET.Action = function(arguments, script) {
 
 };
 
-GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code) {
+GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission) {
 
 	// Remember the initial code
 	this.code = code;
+
+	// Remember the mission so it can be placed in the UI.	
+	this.mission = isDef(mission) ? mission : "I don't know what I'm supposed to do here. No one gave me a mission :(";
 
 	// Remember the goal
 	this.goals = [];

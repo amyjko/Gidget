@@ -80,6 +80,14 @@ GIDGET.ui = {
 		$('#code')[0].bespin.editor.value = this.world.code;
 
 		$('#code')[0].bespin.editor.setLineNumber(2);		
+
+		this.world.gidget.runtime.state = 'sad';
+		this.setThought(this.world.mission, 0);
+		
+/*
+		$('#missionText').html(this.world.mission);
+		$('#mission').show();
+*/
 		
 		this.reset();
 	
@@ -145,8 +153,7 @@ GIDGET.ui = {
 	
 		var html = this.createThoughtHTML(message);
 	
-		if(delay === 0) {
-			console.log("Skipping animation");
+		if(!isDef(delay) || delay === 0) {
 			$('#thought').html(html);
 		}
 		else {

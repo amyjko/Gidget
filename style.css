@@ -212,17 +212,24 @@ textarea {
 	border-bottom:	4px solid rgb(255,0,0);
 }
 
-/* I'm not using this anymore, but it might come in handy later for popups. */
-#api {
-	width:			20em;
-	margin-left:	-10em;
-	left:			50%;
+#mission {
+	width:			18em;
+	height:			17em;
+	top: 			4.5em;
 	display:		none;
 	position:		absolute;
-	top: 			2em;
-	text-align:		left;
+	background:		rgb(42,33,28);
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	2px;
+	text-align:		right;
 	z-index:		50;
 	padding: 		1em;
+}
+
+#missionText {
+	font-family: 	"Verdana";
+	padding-bottom:	1em;
+	text-align: 	left;
 }
 
 .thoughtTable td {

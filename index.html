@@ -29,8 +29,11 @@
 			<td id='leftPanel'>
 
 				<h2>You</h2>
-			
+
+				<div>
 				<div id='code' class='bespin' data-bespinoptions='{ "stealFocus":true, "syntax": "" }'></div>
+				<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
+				</div>			
 				
 				<h2>Goals</h2>
 				<div id='goals'></div>
