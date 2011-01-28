@@ -265,3 +265,8 @@ textarea {
 .thoughtTable {
 	margin:			0em;
 }
+
+table {
+	padding: 0em;
+	margin: 0em;
+}

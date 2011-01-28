@@ -199,8 +199,11 @@ GIDGET.ui = {
 
 		// Add the goals text.
 		var i;
+		var table = "<table>";
 		for(i = 0; i < this.world.goals.length; i++)
-			$('#goals').append("<div class='goal'>" + this.gidgetCodeToHTML(this.world.goals[i]) + "<span class='success'>success</span><span class='failure'>failure</span></div>");
+			table = table + "<tr><td><div class='goal'>" + this.gidgetCodeToHTML(this.world.goals[i]) + "</div></td><td><span class='success'>&#x2714;</span><span class='failure'>&#x2716;</span></td></tr>";
+
+		$('#goals').html(table);
 
 		$('.success').hide();
 		$('.failure').hide();
