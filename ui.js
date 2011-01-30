@@ -934,6 +934,7 @@ GIDGET.ui = {
 		
 		}
 	
+		// If Gidget is scanning something, make an animated green glow!
 		if(isDef(this.animatingScanned)) {
 		
 			ctx.fillStyle = "rgb(0,255,0)";
@@ -951,6 +952,39 @@ GIDGET.ui = {
 			ctx.fill();			
 			ctx.stroke();
 			ctx.closePath();
+		
+		}
+		
+		// If gidget is focused, overlay a transparent cloud over everything to represent his singular focus.
+		if(isDef(this.world) && isDef(this.world.gidget) && this.world.gidget.runtime.focused.length > 0) {
+		
+			// This line commented out animates the fade, but there's no memory of whether the fade is new.
+/* 			ctx.fillStyle = "rgba(0,0,0," + (0.8 * ((100.0 - this.percentRemaining) / 100.0)) + ")"; */
+			ctx.fillStyle = "rgba(0,0,0,0.8)";
+			
+			var focus = this.world.gidget.runtime.focused[0];
+			var focusRow = focus.row;
+			var focusColumn = focus.column;
+			var padding = 3;
+			var size = cellSize + padding * 2;
+			var focusLeft = focusColumn * cellSize - padding;
+			var focusTop = focusRow * cellSize - padding;
+			var focusRight = focusLeft + size - 1;
+			var focusBottom = focusTop + size - 1;
+			
+			// Top three cells
+			ctx.fillRect(0,0,focusLeft, focusTop);
+			ctx.fillRect(focusLeft, 0, size, focusTop);
+			ctx.fillRect(focusRight,0,canvas.width - focusRight + 1, focusTop);
+
+			// Left and right middle cells
+			ctx.fillRect(0,focusTop,focusLeft, size);
+			ctx.fillRect(focusRight,focusTop,canvas.width - focusRight, size);
+
+			// Bottom three cells
+			ctx.fillRect(0,focusBottom,focusLeft, canvas.height - focusBottom);
+			ctx.fillRect(focusLeft, focusBottom, size, canvas.height - focusBottom);
+			ctx.fillRect(focusRight,focusBottom,canvas.width - focusRight + 1, canvas.height - focusBottom);
 		
 		}
 	
