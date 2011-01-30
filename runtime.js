@@ -1025,9 +1025,10 @@ GIDGET.runtime = {
 		};
 	},
 
-	Step_QUERY: function(ast, representativeToken, name, constraints, scoped) {
+	Step_QUERY: function(ast, parentAST, representativeToken, name, constraints, scoped) {
 		return {
 			ast: ast,
+			parentAST: parentAST,
 			representativeToken: representativeToken,
 			name: name,
 			constraints: constraints,
@@ -1209,8 +1210,24 @@ GIDGET.runtime = {
 						scope = [];
 				
 				}
-					
-				var result = "I looked for <b>" + nameToMatch.text + "</b>";
+				
+				var purposeText = "";
+				switch(this.parentAST.type) {
+					case "name": purposeText = "to <b>name</b>"; break;
+					case "scan": purposeText = "to <b>scan</b>"; break;
+					case "goto": purposeText = "to <b>go to</b>"; break;
+					case "analyze": purposeText = "to <b>analyze</b>"; break;
+					case "ask": purposeText = "to <b>ask</b>"; break;
+					case "grab": purposeText = "to <b>grab</b>"; break;
+					case "drop": purposeText = "to <b>drop</b>"; break;
+					case "modify": purposeText = "to <b>modify</b>"; break;
+					case "remove": purposeText = "to <b>remove</b>"; break;
+					case "is": purposeText = isDef(this.parentAST) && isDef(this.parentAST.keyword) ? "that <b>" + this.parentAST.keyword.text + " " + this.parentAST.tag.text + "</b>" : "that were at the <b>same place</b>"; break;
+					case "query": purposeText = "that were at the <b>same place</b>"; break;
+					default: purposeText = "";
+				}
+				
+				var result = nameToMatch.text === 'it' ? "I remembered what I'm <b>focused</b> on" : "I looked for <b>" + nameToMatch.text + "</b> " + purposeText;
 				var i;
 				if(scope.length > 0) {
 					

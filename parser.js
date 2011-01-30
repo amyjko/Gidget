@@ -409,7 +409,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?");
 
 		// eat the name to query
-		name.query = this.parseQuery(tokenStream, []);
+		name.query = this.parseQuery(tokenStream, name, []);
 
 		// If there was no parsable query, return the unknown AST.
 		if(name.query.type === 'unknown')
@@ -458,7 +458,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to scan something, but I don't know what. Can you tell me?");
 
 		// eat the name to query
-		scan.query = this.parseQuery(tokenStream, [ 'reachable', 'level' ] );
+		scan.query = this.parseQuery(tokenStream, scan, [ 'reachable', 'level' ] );
 
 		// If there was no parsable query, return the unknown AST.
 		if(scan.query.type === 'unknown')
@@ -499,7 +499,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to goto something, but I don't know what. Can you tell me?");
 
 		// eat the query
-		go.query = this.parseQuery(tokenStream, [ 'scanned' ]);
+		go.query = this.parseQuery(tokenStream, go, [ 'scanned' ]);
 
 		// If there was no parsable query, return the unknown AST.
 		if(go.query.type === 'unknown')
@@ -554,7 +554,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to analyze something, but I don't know what. Can you tell me?");
 
 		// eat the name to query
-		analyze.query = this.parseQuery(tokenStream, [ 'over', 'level' ]);
+		analyze.query = this.parseQuery(tokenStream, analyze, [ 'over', 'level' ]);
 
 		// If there was no parsable query, return the unknown AST.
 		if(analyze.query.type === 'unknown')
@@ -623,7 +623,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?");
 
 		// eat query
-		ask.query = this.parseQuery(tokenStream, [ 'over', 'analyzed' ]);
+		ask.query = this.parseQuery(tokenStream, ask, [ 'over', 'analyzed' ]);
 
 		// If there was no parsable query, return the unknown AST.
 		if(ask.query.type === 'unknown')
@@ -646,7 +646,7 @@ GIDGET.parser = {
 		// eat zero or more arguments
 		while(tokenStream.nextIsString()) {
 		
-			var query = this.parseQuery(tokenStream, [ 'scanned' ]);
+			var query = this.parseQuery(tokenStream, ask, [ 'scanned' ]);
 
 			// If there was no parsable query, return the unknown AST.
 			if(query.type === 'unknown')
@@ -689,7 +689,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to grab something, but I don't know what. Can you tell me?");		
 
 		// Eat the query.
-		grab.query = this.parseQuery(tokenStream, ['over']);
+		grab.query = this.parseQuery(tokenStream, grab, ['over']);
 
 		// If there was no parsable query, return the unknown AST.
 		if(grab.query.type === 'unknown')
@@ -729,7 +729,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?");		
 
 		// Eat the query		
-		drop.query = this.parseQuery(tokenStream, ['grabbed']);
+		drop.query = this.parseQuery(tokenStream, drop, ['grabbed']);
 
 		// If there was no parsable query, return the unknown AST.
 		if(drop.query.type === 'unknown')
@@ -823,7 +823,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to " + modify.keyword.text + " something, but I don't know what. Can you tell me?");
 		
 		// No implicit constraints on the query
-		modify.query = this.parseQuery(tokenStream);
+		modify.query = this.parseQuery(tokenStream, modify);
 
 		// If there was no parsable query, return the unknown AST.
 		if(modify.query.type === 'unknown')
@@ -910,7 +910,7 @@ GIDGET.parser = {
 			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?");		
 
 		// Eat the query		
-		ast.query = this.parseQuery(tokenStream, ['over']);
+		ast.query = this.parseQuery(tokenStream, ast, ['over']);
 
 		// If there was no parsable query, return the unknown AST.
 		if(ast.query.type === 'unknown')
@@ -999,7 +999,7 @@ GIDGET.parser = {
 			}
 		};
 
-		predicate.query = this.parseQuery(tokenStream);
+		predicate.query = this.parseQuery(tokenStream, predicate);
 
 		// If there was no parsable query, return the unknown AST.
 		if(predicate.query.type === 'unknown')
@@ -1024,7 +1024,7 @@ GIDGET.parser = {
 	},
 
 	// QUERY :: it | ( nearest | first | second | third | one | two | three | last | grabbed | reachable | scanned | analyzed | level | over | focused )* STRING [on QUERY]
-	parseQuery: function(tokenStream, constraints) {
+	parseQuery: function(tokenStream, parent, constraints) {
 
 		// If no constraint array was supplied, create an empty one.
 		if(!isDef(constraints))
@@ -1035,6 +1035,7 @@ GIDGET.parser = {
 			constraints: constraints,
 			name: undefined,
 			on: undefined,
+			parent: parent,
 			
 			serialize: function() {
 
@@ -1044,7 +1045,7 @@ GIDGET.parser = {
 					steps = steps.concat(this.on.serialize());				
 				}
 
-				steps.push(new GIDGET.runtime.Step_QUERY(this, this.name, this.name, this.constraints, isDef(this.on)));
+				steps.push(new GIDGET.runtime.Step_QUERY(this, this.parent, this.name, this.name, this.constraints, isDef(this.on)));
 				
 				return steps;
 			
@@ -1083,7 +1084,7 @@ GIDGET.parser = {
 			if(!tokenStream.nextIsString())
 				return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to find something on somethign else, but I don't know what something else. Can you tell me?");
 			
-			query.on = this.parseQuery(tokenStream);
+			query.on = this.parseQuery(tokenStream, parent);
 			
 			// If the query was unknown, return it instead.
 			if(isDef(query.on) && query.on.type === 'unknown')
