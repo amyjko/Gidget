@@ -952,6 +952,15 @@ GIDGET.ui = {
 			ctx.fill();			
 			ctx.stroke();
 			ctx.closePath();
+
+			if(this.percentRemaining > 10) {
+				ctx.beginPath();
+				ctx.lineWidth = "2";
+				ctx.moveTo(this.world.gidget.column * cellSize + cellSize / 2, this.world.gidget.row * cellSize + cellSize / 2);
+				ctx.lineTo(this.animatingScanned.column * cellSize + cellSize / 2, this.animatingScanned.row * cellSize + cellSize / 2);
+				ctx.stroke();
+				ctx.closePath();
+			}
 		
 		}
 		
