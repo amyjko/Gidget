@@ -572,7 +572,14 @@ GIDGET.ui = {
 					
 			}
 			else if(action.kind === 'PushResults') {
+
 				GIDGET.ui.updateRuntimeUserInterface();
+			
+				if(isDef(action.query) && action.query.name.text === 'it') {
+					$('#focused .thingBox:eq(0)').
+						addClass('runtimeReference');
+				}
+
 				$('#results .thingList:eq(0) .thingBox').
 					addClass('runtimeReference').
 					hide().show(duration);

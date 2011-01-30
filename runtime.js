@@ -103,11 +103,12 @@ GIDGET.Runtime = function(thing, world) {
 
 	};
 
-	this.PushResults = function(runtime, results) { 
+	this.PushResults = function(runtime, results, query) { 
  
 		this.runtime = runtime;
 		this.kind = 'PushResults';
 		this.results = results;
+		this.query = query;
 		this.execute = function() { this.runtime.pushResults(this.results); };
 
 	};
@@ -1235,7 +1236,7 @@ GIDGET.runtime = {
 					for(i = 0; i < scope.length; i++)
 						result = result + " $results@" + i + "(" + scope[i].name + ")" + (scope.length === 1 ? "" : i === scope.length - 1 ? "" : i === scope.length - 2 ? " and " : ",");
 					runtime.addDecision(result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results!",
-						new runtime.PushResults(runtime, scope));
+						new runtime.PushResults(runtime, scope, this));
 				}
 				else {
 					runtime.addDecision(
