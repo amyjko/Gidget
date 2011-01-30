@@ -465,7 +465,7 @@ GIDGET.levels = {
 
 		world.addGoal("rock on ship");
 
-		world.gidget.setEnergy(62);
+		world.gidget.setEnergy(100);
 
 		new GIDGET.Thing(world, "ship", 9, 9, "rgb(250,0,255)", {}, {});
 		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", { color: 'white'}, {});

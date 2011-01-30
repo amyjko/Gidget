@@ -169,7 +169,9 @@ GIDGET.ui = {
 	// Should only be called once upon starting the level or when the user requests to start over.
 	setLevel: function(level) {
 
-		this.level = level;
+		this.level = GIDGET.levels[level];
+		
+		localStorage.currentLevel = level;
 
 		this.reset();
 
@@ -180,6 +182,35 @@ GIDGET.ui = {
 		this.setThought(this.world.mission, 0);
 		
 		this.reset();
+	
+	},
+	
+	nextLevel: function() {
+	
+		var found = false;
+		var nextLevel = undefined;
+		for(var level in GIDGET.levels) {
+			if(GIDGET.levels.hasOwnProperty(level)) {
+				if(found) {
+					nextLevel = level;
+					break;
+				}
+				else if(level === localStorage.currentLevel) {
+					found = true;
+				}
+			}
+		}
+
+		if(isDef(nextLevel)) {
+		
+			this.setLevel(nextLevel);
+		
+		}
+		else {
+		
+			alert("You beat all of the levels!");
+		
+		}
 	
 	},
 
@@ -488,7 +519,7 @@ GIDGET.ui = {
 			
 			if(allGoalsAchieved === true) {
 				this.world.gidget.runtime.state = "default";
-				this.setThought("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!", 5);
+				this.setThought("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>", 5);
 			}
 			else {
 				this.world.gidget.runtime.state = "sad";

@@ -1,8 +1,13 @@
 body {
-	font-family:	Arial;
+	font-family:	Verdana;
 	background: 	black;
 	color: 			white;
 	padding:		1em;
+}
+
+p {
+	font-family:	Verdana;
+	color: 			white;
 }
 
 #content {
@@ -272,7 +277,7 @@ table {
 	margin: 0em;
 }
 
-#debug {
+.popup {
 	border:			solid 1px white;
 	border-radius: 	2px;
 	background-color: black;

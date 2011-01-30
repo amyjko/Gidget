@@ -1,7 +1,5 @@
 $().ready(function() {
 
-	GIDGET.ui.setLevel(GIDGET.levels.getRedRock);
-
 	// Populate the level selection drop down.
 	for(var level in GIDGET.levels) {
 		if(GIDGET.levels.hasOwnProperty(level)) {
@@ -11,7 +9,7 @@ $().ready(function() {
 				
 					var world = $(this).val();
 					if(GIDGET.levels.hasOwnProperty(world))
-						GIDGET.ui.setLevel(GIDGET.levels[world]);
+						GIDGET.ui.setLevel(world);
 
 				});
 			
@@ -39,7 +37,7 @@ $().ready(function() {
 	}
 	setTimeout(animate);
 	
-	$('#debug').hide();
+	$('.popup').hide();
 	
 	$(document).keyup(function(e) {
 	
@@ -49,5 +47,27 @@ $().ready(function() {
 		}
 	
 	});
+	
+	$('#clearLocalStorage').click(function() {
+	
+		localStorage.removeItem('currentLevel');
+		
+		alert("Cleared local storage.");
+	
+	});
 
+	var test = localStorage;
+
+	if(localStorage.getItem('currentLevel') === null) {
+	
+		localStorage.setItem('currentLevel', 'getRedRock');
+		
+		$('#welcome').show();
+			
+	}
+
+	// Set the current level to whatever was found in local storage (or the default).		
+	GIDGET.ui.setLevel(localStorage.currentLevel);
+
+	
 });

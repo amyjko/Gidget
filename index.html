@@ -85,9 +85,18 @@
 		
 	</table>
 	
-	<div id='debug'>
+	<div class='popup' id='debug'>
 		<h2>debug</h2>
-		<select id='levels'></select>
+		<p>Choose a level <select id='levels'></select><br>
+		<p>Reset all progress <button id='clearLocalStorage'>clear local storage</button>
+	</div>
+	
+	<div class='popup' id='welcome'>
+	
+		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
+		
+		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
+	
 	</div>
 
 </body>
