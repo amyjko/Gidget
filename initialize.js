@@ -30,6 +30,7 @@ $().ready(function() {
 		if(GIDGET.ui.percentRemaining < 0) {
 			GIDGET.ui.world.resetThingDeltas();		
 			GIDGET.ui.percentRemaining = 0;
+			GIDGET.ui.drawGrid();		
 		}
 		else if(GIDGET.ui.percentRemaining > 0) {
 			GIDGET.ui.drawGrid();		

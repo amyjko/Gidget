@@ -319,6 +319,7 @@ GIDGET.ui = {
 	},
 	
 	percentRemaining: 100,
+	animatingScanned: undefined,
 
 	// A hash table of lists of decisions, indexed by thing. These are the decisions
 	// remaining to be executed before moving on to the next step.
@@ -556,6 +557,8 @@ GIDGET.ui = {
 		if(isDef(action)) {
 		
 			var duration = 500;
+			
+			this.animatingScanned = undefined;
 		
 			// Animate draw grid on the given thing
 			// If the action is pop results, animate the first thing list results away
@@ -597,6 +600,8 @@ GIDGET.ui = {
 					
 				// Highlight what was scanned
 				this.referencedThings = [ this.world.gidget.runtime.scanned[0] ];
+				
+				this.animatingScanned = this.world.gidget.runtime.scanned[0];
 					
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
@@ -926,6 +931,26 @@ GIDGET.ui = {
 			ctx.strokeStyle = "rgb(0,255,0)";
 			ctx.lineWidth = "4";
 			ctx.strokeRect(this.hoveredThing.column * cellSize, this.hoveredThing.row * cellSize, cellSize, cellSize);		
+		
+		}
+	
+		if(isDef(this.animatingScanned)) {
+		
+			ctx.fillStyle = "rgb(0,255,0)";
+			ctx.strokeStyle = "rgb(0,128,0)";
+			ctx.lineWidth = "2";
+			ctx.beginPath();
+			ctx.moveTo(this.animatingScanned.column * cellSize + cellSize / 2, this.animatingScanned.row * cellSize + cellSize / 2);
+			ctx.arc(
+				this.animatingScanned.column * cellSize + cellSize / 2, // x
+				this.animatingScanned.row * cellSize + cellSize / 2, 	// y
+				cellSize / 2, 												// radius
+				0.0, 													// start angle
+				2 * Math.PI * (this.percentRemaining / 100.0), 			// end angle
+				false);													// anticlockwise mode
+			ctx.fill();			
+			ctx.stroke();
+			ctx.closePath();
 		
 		}
 	
