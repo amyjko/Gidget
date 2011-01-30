@@ -179,11 +179,6 @@ GIDGET.ui = {
 		this.world.gidget.runtime.state = 'sad';
 		this.setThought(this.world.mission, 0);
 		
-/*
-		$('#missionText').html(this.world.mission);
-		$('#mission').show();
-*/
-		
 		this.reset();
 	
 	},
@@ -933,7 +928,7 @@ GIDGET.ui = {
 			ctx.strokeRect(this.hoveredThing.column * cellSize, this.hoveredThing.row * cellSize, cellSize, cellSize);		
 		
 		}
-	
+
 		// If Gidget is scanning something, make an animated green glow!
 		if(isDef(this.animatingScanned)) {
 		

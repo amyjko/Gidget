@@ -38,5 +38,16 @@ $().ready(function() {
 		setTimeout(animate, 25);
 	}
 	setTimeout(animate);
+	
+	$('#debug').hide();
+	
+	$(document).keyup(function(e) {
+	
+		if(e.keyCode == 27) {
+		
+			$('#debug').toggle();
+		}
+	
+	});
 
 });

@@ -271,3 +271,16 @@ table {
 	padding: 0em;
 	margin: 0em;
 }
+
+#debug {
+	border:			solid 1px white;
+	border-radius: 	2px;
+	background-color: black;
+	padding:		1em;
+	padding-top:	0em;
+	position: 		fixed;
+	width:			20em;
+	margin-left:	-10em;
+	top:			4em;
+	left:			50%;
+}
