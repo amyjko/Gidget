@@ -690,11 +690,11 @@ GIDGET.ui = {
 			
 			// Add mouse over events for things
 			$('.thingBox').mouseenter(function() {
-				$(this).addClass('selection');
+				$(this).addClass('selection').css('border', '4px solid rgb(0,255,0)');
 				GIDGET.ui.highlightHoveredThing($(this).data('thing'));
 			});
 			$('.thingBox').mouseleave(function() {
-				$(this).removeClass('selection');
+				$(this).removeClass('selection').css('border', '');				
 				GIDGET.ui.unhighlightHoveredThing();
 			});
 				
