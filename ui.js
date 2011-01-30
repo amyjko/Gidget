@@ -309,7 +309,7 @@ GIDGET.ui = {
 			this.start();
 
 		var currentLine = this.world.gidget.runtime.getCurrentLine();
-		console.log("Line is " + currentLine);
+
 		while(this.world.isExecuting() && this.world.gidget.runtime.getCurrentLine() === currentLine)
 			GIDGET.ui.step(false, false);
 			
@@ -332,17 +332,22 @@ GIDGET.ui = {
 			this.start();
 
 		var index;
-				
+
 		// If the world is still executing, execute each thing's next decision.
 		if(this.world.isExecuting()) {
 
-			// How many decisions are left to execute across all things in the world?
-			var decisionCount = 0;
-			for(index = 0; index < this.decisionsRemaining.length; index++)
-				decisionCount += this.decisionsRemaining[index].length;
+			function countDecisionsRemaining(world) {
+			
+				// How many decisions are left to execute across all things in the world?
+				var decisionCount = 0;
+				for(index = 0; index < world.decisionsRemaining.length; index++)
+					decisionCount += world.decisionsRemaining[index].length;
+				return decisionCount;
+			
+			}
 
 			// If ther eare none left, get some more by stepping the world once.
-			if(decisionCount === 0)
+			while(this.world.isExecuting() && countDecisionsRemaining(this) === 0)
 				this.decisionsRemaining = this.world.step();
 
 			// Reset the animation loop.
@@ -405,7 +410,7 @@ GIDGET.ui = {
 			index = parseInt(decision.spans[span].index);
 			index = isNaN(index) ? undefined : index;
 
-			// If there's a reference, make a span to represent it.					
+			// If there's a reference, make a span to represent it.
 			if(isDef(reference)) {
 			
 				thought = thought + "<span class='runtimeReference'>" + text + "</span>";
@@ -415,7 +420,7 @@ GIDGET.ui = {
 			else {
 			
 				thought = thought + text;
-			
+
 			}
 
 		}
@@ -502,6 +507,8 @@ GIDGET.ui = {
 
 	updateRuntimeUserInterface: function(action) {
 
+		this.referencedThings = [];
+
 		function thingToHTML(thing) {
 		
 			var name = thing.name;
@@ -562,12 +569,17 @@ GIDGET.ui = {
 				$('#results .thingList:eq(0) .thingBox:eq(0)').
 					addClass('runtimeReference').
 					hide(duration, function() { GIDGET.ui.updateRuntimeUserInterface(); });
+					
 			}
 			else if(action.kind === 'PushResults') {
 				GIDGET.ui.updateRuntimeUserInterface();
 				$('#results .thingList:eq(0) .thingBox').
 					addClass('runtimeReference').
 					hide().show(duration);
+					
+				// Highlight all of the things pushed.
+				this.referencedThings = [].concat(this.world.gidget.runtime.peekResults());
+				
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
 			else if(action.kind === 'PushScanned') {
@@ -575,6 +587,10 @@ GIDGET.ui = {
 				$('#scanned .thingBox:eq(0)').
 					addClass('runtimeReference').
 					hide().show(duration);
+					
+				// Highlight what was scanned
+				this.referencedThings = [ this.world.gidget.runtime.scanned[0] ];
+					
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
 			else if(action.kind === 'PushAnalyzed') {
@@ -582,6 +598,10 @@ GIDGET.ui = {
 				$('#analyzed .thingBox:first').
 					addClass('runtimeReference').
 					hide().show(duration);
+					
+				// Highlight what was analyzed
+				this.referencedThings = [ this.world.gidget.runtime.analyzed[0] ];
+
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
 			else if(action.kind === 'PushGrabbed') {
@@ -589,6 +609,10 @@ GIDGET.ui = {
 				$('#grabbed .thingBox:first').
 					addClass('runtimeReference').
 					hide().show(duration);
+					
+				// Highlight what was analyzed
+				this.referencedThings = [ this.world.gidget.runtime.grabbed[0] ];
+
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
 			else if(action.kind === 'PopGrabbed') {
@@ -601,12 +625,33 @@ GIDGET.ui = {
 				GIDGET.ui.updateRuntimeUserInterface();
 				$('#focused .thingBox:first').
 					addClass('runtimeReference').hide().show(duration);
+					
+				// Highlight what was focused
+				this.referencedThings = [ this.world.gidget.runtime.focused[0] ];
+					
 			}
 			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
 			else if(action.kind === 'PopFocus') {
 				$('#focused .thingBox:eq(0)').
 					addClass('runtimeReference').
 					hide(duration, function() { GIDGET.ui.updateRuntimeUserInterface(); });
+			}
+			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
+			else if(action.kind === 'IncrementPC') {
+			
+			
+			}
+			// If its scanned, update the UI to include the new element, immediately hide it, and then animate it in.
+			else if(action.kind === 'Move') {
+			
+				GIDGET.ui.updateRuntimeUserInterface();
+				$('#results .thingList:eq(0) .thingBox:eq(0)').
+					addClass('runtimeReference').
+					show(duration);
+
+				// Highlight what we're moving to.
+				this.referencedThings = [ this.world.gidget.runtime.resultsStack[0][0] ];
+			
 			}
 			else
 				this.updateRuntimeUserInterface();
@@ -646,22 +691,25 @@ GIDGET.ui = {
 			// Add mouse over events for things
 			$('.thingBox').mouseenter(function() {
 				$(this).addClass('selection');
-				GIDGET.ui.highlightThing($(this).data('thing'));
+				GIDGET.ui.highlightHoveredThing($(this).data('thing'));
 			});
 			$('.thingBox').mouseleave(function() {
 				$(this).removeClass('selection');
-				GIDGET.ui.unhighlightThing();
+				GIDGET.ui.unhighlightHoveredThing();
 			});
 				
 		}		
 
 	},
 
-	higlightedThing: undefined,
+	hoveredThing: undefined,
 
-	highlightThing: function(thing) {
+	// Things referenced in thoughts that should be highlighted on the grid.
+	referencedThings: [],	
+
+	highlightHoveredThing: function(thing) {
 	
-		this.highlightedThing = thing;
+		this.hoveredThing = thing;
 		this.drawGrid();
 		
 		var index;
@@ -738,9 +786,9 @@ GIDGET.ui = {
 	
 	},
 	
-	unhighlightThing: function() {
+	unhighlightHoveredThing: function() {
 	
-		this.highlightedThing = undefined;
+		this.hoveredThing = undefined;
 		this.drawGrid();
 		
 		this.setThought("Now where was I?", 50);		
@@ -856,12 +904,21 @@ GIDGET.ui = {
 			
 		}
 
+		// Draw highlights around the referenced things
+		if(isDef(this.referencedThings)) {
+			for(var i = 0; i < this.referencedThings.length; i++) {
+				ctx.strokeStyle = "rgb(255,0,0)";
+				ctx.lineWidth = "4";
+				ctx.strokeRect(this.referencedThings[i].column * cellSize, this.referencedThings[i].row * cellSize, cellSize, cellSize);		
+			}
+		}
+
 		// Draw a highlight around the highlighted thing, if there is one.		
-		if(isDef(this.highlightedThing)) {
+		if(isDef(this.hoveredThing)) {
 		
 			ctx.strokeStyle = "rgb(0,255,0)";
 			ctx.lineWidth = "4";
-			ctx.strokeRect(this.highlightedThing.column * cellSize, this.highlightedThing.row * cellSize, cellSize, cellSize);		
+			ctx.strokeRect(this.hoveredThing.column * cellSize, this.hoveredThing.row * cellSize, cellSize, cellSize);		
 		
 		}
 	

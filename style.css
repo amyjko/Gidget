@@ -70,7 +70,8 @@ body {
 
 #code[contentEditable="false"] {
 	background-color: rgb(42,33,28);
-	overflow-x: 	hidden;
+	overflow-x: 	auto;
+	word-wrap: break-word;
 }
 
 #code[contentEditable="true"] {
@@ -207,11 +208,6 @@ textarea {
 	padding: 		0em;
 }
 
-.selection {
-	border:			4px solid rgb(0,255,0);
-	border-radius:	5px;
-}
-
 .runtimeInfoContainer .runtimeReference, #goals.runtimeReference {
 	border:			4px solid rgb(255,0,0);
 	border-radius:	5px;
@@ -232,6 +228,11 @@ textarea {
 .sourceToken.keyword {
 /* 	font-weight: bold; */
 	color:			green;
+}
+
+.selection {
+	border:			4px solid rgb(0,255,0);
+	border-radius:	5px;
 }
 
 #mission {

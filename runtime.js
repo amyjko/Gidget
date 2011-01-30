@@ -416,7 +416,7 @@ GIDGET.runtime = {
 						new runtime.IncrementPC(runtime, this.offset));
 					
 				}
-				
+
 				runtime.addDecision(
 					"Before I move on, I'm going to get rid of the recent results, now that I'm done with them.",
 					new runtime.PopResults(runtime));
@@ -469,10 +469,13 @@ GIDGET.runtime = {
 				runtime.addDecision(
 					"Now I'll add $results(the new results) to my list.", 
 					new runtime.PushResults(runtime, allTrue ? newResults : []));
-					
+
+				runtime.pc++;
+/*
 				runtime.addDecision(
 					"On to the next step!", 
 					new runtime.IncrementPC(runtime, 1));
+*/
 		
 			}
 		};
@@ -537,16 +540,22 @@ GIDGET.runtime = {
 						"I scanned " + "$scanned@0(" + runtime.peekResult().name + ") " + ". Let me add it to my list!",
 						new runtime.PushScanned(runtime, runtime.peekResult()));
 						
+					runtime.pc++;
+/*
 					runtime.addDecision(
 						"Next step!",
 						new runtime.IncrementPC(runtime, 1));
+*/
 
 				}
 				else {
 
+					runtime.pc += this.offset;
+/*
 					runtime.addDecision(
 						"All done scanning.",
 						new runtime.IncrementPC(runtime, this.offset));
+*/
 				
 				}
 					
@@ -814,9 +823,12 @@ GIDGET.runtime = {
 						"I analyzed $analyzed@0(" + runtime.peekResult().name + "). Now I can make it do things! Let me add it to my list.",
 						new runtime.PushAnalyzed(runtime, runtime.peekResult()));
 						
+/*
 					runtime.addDecision(
 						"On to the next step!",
 						new runtime.IncrementPC(runtime, 1));
+*/
+					runtime.pc++;
 									
 				}
 				else {
@@ -842,18 +854,24 @@ GIDGET.runtime = {
 
 				if(runtime.hasRecentResults()) {
 					
+/*
 					runtime.addDecision(
 						"I'm finished with this $results@0(result), get rid of it!",
 						new runtime.PopResult(runtime));
+*/
+					runtime.popResult();
 						
 					runtime.pc += this.offset;
 					
 				}
 				else {
-					
+
+/*
 					runtime.addDecision(
 						"I'm finished with $results@0(the last result).",
 						new runtime.PopResults(runtime));
+*/
+					runtime.popResults();
 
 					runtime.pc++;
 					
@@ -1192,9 +1210,11 @@ GIDGET.runtime = {
 				
 				}
 					
-				var result = "I found";
+				var result = "I looked for <b>" + nameToMatch.text + "</b>";
 				var i;
 				if(scope.length > 0) {
+					
+					result = result + " and found ";
 					for(i = 0; i < scope.length; i++)
 						result = result + " $results@" + i + "(" + scope[i].name + ")" + (scope.length === 1 ? "" : i === scope.length - 1 ? "" : i === scope.length - 2 ? " and " : ",");
 					runtime.addDecision(result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results!",
@@ -1202,7 +1222,7 @@ GIDGET.runtime = {
 				}
 				else {
 					runtime.addDecision(
-						"I didn't find anything called " + this.name.text + ".",
+						result + ", but didn't find anything.",
 						new runtime.PushResults(runtime, scope));
 				}
 				
