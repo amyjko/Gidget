@@ -1,19 +1,22 @@
 $().ready(function() {
 
 	// Populate the level selection drop down.
+	var levelCount = 1;
 	for(var level in GIDGET.levels) {
-		if(GIDGET.levels.hasOwnProperty(level)) {
 		
+		if(GIDGET.levels.hasOwnProperty(level)) {
 			$('#levels').
-				append("<option>" + level + "</option>").click(function() {
+				append("<option>" + levelCount + ". " + level + "</option>").click(function() {
 				
-					var world = $(this).val();
+					var world = ($(this).val()).replace(/[0-9]+.\s/g,'');
 					if(GIDGET.levels.hasOwnProperty(world))
 						GIDGET.ui.setLevel(world);
 
 				});
 			
 		}
+		
+		levelCount++;
 	}
 	
 	$('#code').focusout(function() {
