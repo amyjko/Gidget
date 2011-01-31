@@ -826,11 +826,7 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 2, 8, code);	
 		world.gidget.setEnergy(106);
 
-<<<<<<< HEAD
-		world.gidget.setEnergy(100);
-=======
 		world.addGoal("two rocks on ship");
->>>>>>> f1cfafc4f516d8915a361139e4ebd11ab12ed6f0
 
 		new GIDGET.Thing(world, "ship", 9, 9, "rgb(250,0,255)", {}, {});
 		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", { color: 'white'}, {});
