@@ -10,6 +10,8 @@
 	<script type='text/javascript' src='things.js'></script>
 	<script type='text/javascript' src='ui.js'></script>
 	<script type='text/javascript' src='levels.js'></script>
+	<script type='text/javascript' src='scenes.js'></script>
+	<script type='text/javascript' src='intro.js'></script>
 	
 	<!-- This must be last, since it assumes all of the above scripts are loaded -->
 	<script type='text/javascript' src='initialize.js'></script>
@@ -96,6 +98,12 @@
 		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
 		
 		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
+	
+	</div>
+	
+	<div class='popup' id='intro'>
+	
+		<canvas id="introCanvas" width="300" height="300"></canvas>
 	
 	</div>
 

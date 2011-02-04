@@ -48,6 +48,13 @@ $().ready(function() {
 		
 			$('#debug').toggle();
 		}
+		else if(e.keyCode == 13) {
+		
+			$('#intro').toggle();
+			var intro = GIDGET.createIntroduction();
+			intro.play($('#introCanvas')[0], function() { $('#intro').toggle(); });
+		
+		}
 	
 	});
 	
