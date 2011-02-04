@@ -3,6 +3,7 @@ body {
 	background: 	black;
 	color: 			white;
 	padding:		1em;
+	margin:			0em;
 }
 
 p {
@@ -20,6 +21,7 @@ p {
 	border-radius:  .25em;
 	padding:		1em;
 	padding-top:	0em;
+	padding-right:	0em;
 }
 
 #content td {
