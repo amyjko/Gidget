@@ -786,13 +786,14 @@ GIDGET.ui = {
 				}
 			}
 
-			var actions = "";
+			var actions = "<p>There is nothing I can <b>ask</b> it to do.";
 			var actionCount = 0;
 			for(var action in thing.actions)
 				if(thing.actions.hasOwnProperty(action))
 					actionCount++;
 					
 			if(actionCount > 0) {
+				actions = "";
 				for(var action in thing.actions) {
 					if(thing.actions.hasOwnProperty(action)) {
 					
@@ -813,10 +814,6 @@ GIDGET.ui = {
 					}
 				}
 			}
-			else {
-				actions = "<p>There's nothing I can ask it to do.";
-			}
-
 		
 			this.setThought("I know all about <b>" + thing.name + "</b> because I <b>analyzed</b> it! " + tags + ". " + actions, 50);
 			

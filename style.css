@@ -262,6 +262,11 @@ textarea {
 	text-align: 	left;
 }
 
+.thoughtBubble p {
+	font-family: 	"Verdana";
+	color:			black;
+}
+
 .thoughtTable td {
 	text-align: 	left;
 	vertical-align: top;
