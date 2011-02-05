@@ -163,7 +163,8 @@ GIDGET.Runtime = function(thing, world) {
 		this.runtime = runtime;
 		this.kind = 'PushScanned';
 		this.execute = function() {
-			runtime.scanned.unshift(thing);
+			if($.inArray(thing, runtime.scanned) < 0)
+				runtime.scanned.unshift(thing);
 		};
 
 	};
@@ -173,7 +174,8 @@ GIDGET.Runtime = function(thing, world) {
 		this.runtime = runtime;
 		this.kind = 'PushAnalyzed';
 		this.execute = function() {
-			runtime.analyzed.unshift(thing);
+			if($.inArray(thing, runtime.analyzed) < 0)
+				runtime.analyzed.unshift(thing);
 		};
 
 	};
@@ -184,7 +186,8 @@ GIDGET.Runtime = function(thing, world) {
 		this.kind = 'PushGrabbed';
 		this.thing = thing;
 		this.execute = function() {
-			runtime.grabbed.unshift(this.thing);
+			if($.inArray(thing, runtime.grabbed) < 0)
+				runtime.grabbed.unshift(this.thing);
 		};
 
 	};
