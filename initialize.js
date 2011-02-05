@@ -48,7 +48,7 @@ $().ready(function() {
 		
 			$('#debug').toggle();
 		}
-		else if(e.keyCode == 13) {
+		else if(e.keyCode == 112) {
 		
 			$('#intro').toggle();
 			var intro = GIDGET.createIntroduction();
