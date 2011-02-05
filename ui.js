@@ -393,12 +393,16 @@ GIDGET.ui = {
 					// Execute the decision's action, if there is one.
 					decision.execute();
 
-					// Update the UI so the decision can be visualized.
-					this.updateRuntimeUserInterface(decision.action);
-
 					// If this is Gidget, visualize the decision
-					if(runtime.thing.name === 'gidget')
+					if(runtime.thing.name === 'gidget') {
+
+						// Update the runtime UI
+						this.updateRuntimeUserInterface(decision.action);
+						
+						// Highlight the runtime UI to show what changed.
 						this.visualizeDecision(decision, animate);
+					
+					}
 					
 				}
 			
