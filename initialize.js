@@ -19,7 +19,8 @@ $().ready(function() {
 		levelCount++;
 	}
 	
-	$('#code').focusout(function() {
+	// When mouse leaves editor, format the code.
+	$('#code').mouseout(function() {
 	
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
