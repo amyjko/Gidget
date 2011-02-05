@@ -764,6 +764,10 @@ GIDGET.runtime = {
 					// Find the shortest path to the target using the above algorithm.
 					var path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, isDef(this.avoid) ? this.avoid.text : undefined);
 
+					// If we were avoiding and there was no path, try not avoiding.
+					if(isDef(this.avoid) && path.length < 1)
+						path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, undefined);
+
 					// If there was a path, remember it.
 					if(path.length > 1) {
 											
