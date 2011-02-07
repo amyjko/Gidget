@@ -16,7 +16,7 @@ MODIFY 		:: (raise | lower | change) QUERY ( energy | height ) INT [, COMMAND]
 ADD			:: add NAME
 REMOVE		:: remove QUERY
 FOCUS		:: , COMMAND
-IF 			:: if PREDICATE, COMMAND
+IF 			:: (if|when) PREDICATE, COMMAND
 PREDICATE 	:: IS [and PREDICATE]
 IS			:: QUERY [(is | isn't) STRING]
 QUERY 		:: it | FILTER* STRING [on QUERY]
@@ -278,7 +278,7 @@ GIDGET.parser = {
 		
 		var unknown = [];
 
-		if(tokenStream.nextIs('if')) {
+		if(tokenStream.nextIs('if') || tokenStream.nextIs('when')) {
 			return this.parseIf(tokenStream);
 		}
 		else if(tokenStream.nextIs('scan')) {
@@ -742,7 +742,7 @@ GIDGET.parser = {
 
 	},
 	
-	// IF :: if PREDICATE, COMMAND
+	// IF :: (if|when) PREDICATE, COMMAND
 	parseIf: function(tokenStream) {
 	
 		var conditional = {
@@ -761,8 +761,14 @@ GIDGET.parser = {
 
 				steps.push(new GIDGET.runtime.Step_IF(this, this.test, thenSteps.length + 1));
 				steps = steps.concat(thenSteps);
-				
-				return steps;
+
+				// If this is a conditional, return the steps
+				if(this.test.text === 'if')
+					return steps;
+				// Otherwise, return a when, which will execute every step.
+				else {				
+					return [ new GIDGET.runtime.Step_WHEN(this, this.test, steps) ];
+				}
 			
 			}
 

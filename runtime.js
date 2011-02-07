@@ -32,7 +32,11 @@ GIDGET.Runtime = function(thing, world) {
 	this.focused = [];
 	this.arguments = {};
 	this.asked = [];
+	
+	// This is a list of conditionals to execute each step; event-driven behaviors.
+	this.rules = [];
 
+	// Determines what image is chosen for the thing.
 	this.state = "default";
 	
 	this.decisions = [];
@@ -250,8 +254,43 @@ GIDGET.Runtime = function(thing, world) {
 	
 	};
 
-	this.step = function() {
+	this.step = function(executingRule) {
 
+		// Regardless of whether this object is done, we execute its rules.
+		var i, j;
+		var steps;
+		
+		// If we're not executing a rule, execute steps.
+		if(!isDef(executingRule)) {
+			for(i = 0; i < this.rules.length; i++) {
+		
+				console.log("Executing rule " + i);
+		
+				// Remember the old instructions and steps.
+				var ongoingSteps = this.steps;
+				var ongoingPC = this.pc;
+				
+				this.steps = this.rules[i].steps;
+				this.pc = 0;
+				
+				// Execute all of the steps until done.
+				while(this.pc < this.steps.length) {
+					
+					// Execute this step.					
+					var decisions = this.step(true);
+					for(j = 0; j < decisions.length; j++)
+						decisions[j].execute();
+					
+				}
+					
+				this.steps = ongoingSteps;
+				this.pc = ongoingPC;
+			
+			}
+			
+		}
+		
+		// If this code is done, no need to execute further.
 		if(this.pc < 0 || this.pc >= this.steps.length) {
 			return undefined;
 		}
@@ -274,7 +313,7 @@ GIDGET.Runtime = function(thing, world) {
 
 		// TODO: this is very preliminary.
 		this.thing.energy -= 1;
-	
+
 		return decisions;
 		
 	};
@@ -427,6 +466,24 @@ GIDGET.runtime = {
 
 			}
 		};
+	},
+
+	Step_WHEN: function(ast, representativeToken, steps) {
+		return {
+			ast: ast,
+			representativeToken: representativeToken,
+			steps: steps,
+			toString: function() { return "when"; },
+			execute: function(runtime) {		
+			
+				// Add the rule to the thing's runtime's cognizant list of rules.
+				runtime.rules.push(this);
+				
+				// Next step
+				runtime.pc++;
+			
+			}
+		};			
 	},
 
 	Step_IS: function(ast, representativeToken, keyword, name) {

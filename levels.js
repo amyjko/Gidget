@@ -462,9 +462,7 @@ GIDGET.levels = {
 
 		
 		b1.setCode(
-			"scan gidget\n" +
-			"analyze gidget\n" +
-			"grab rock"
+			"when gidget on blackhole, grab rocks\n"
 		);
 		
 
@@ -1434,17 +1432,17 @@ GIDGET.levels = {
 
 		
 		gull.setCode(
+			"when gidget on gull, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 25"
+			"goto gidget\n"
 		);
 		
 		gull.setSpeed(3);
 		
 		gull2.setCode(
+			"when gidget on gull, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 25"
+			"goto gidget\n"
 		);
 		
 		gull2.setSpeed(5);
