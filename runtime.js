@@ -190,8 +190,25 @@ GIDGET.Runtime = function(thing, world) {
 		this.kind = 'PushGrabbed';
 		this.thing = thing;
 		this.execute = function() {
-			if($.inArray(thing, runtime.grabbed) < 0)
-				runtime.grabbed.unshift(this.thing);
+		
+			// If the thing isn't grabbed, grab it.
+			if($.inArray(this.thing, this.runtime.grabbed) < 0) {
+			
+				// Remove the thing from everything else that's grabbed it.
+				var i;
+				for(i = 0; i < this.runtime.world.things.length; i++) {
+				
+					var index = $.inArray(this.thing, this.runtime.world.things[i].runtime.grabbed);
+					if(index >= 0)
+						this.runtime.world.things[i].runtime.grabbed.splice(index, 1);
+						
+				}
+
+				// Grab it!				
+				this.runtime.grabbed.unshift(this.thing);
+				
+			}
+			
 		};
 
 	};
