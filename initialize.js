@@ -1,5 +1,13 @@
 $().ready(function() {
 
+	Storage.prototype.setObject = function(key, value) {
+	    this.setItem(key, JSON.stringify(value));
+	}
+	
+	Storage.prototype.getObject = function(key) {
+	    return this.getItem(key) && JSON.parse(this.getItem(key));
+	}
+
 	// Populate the level selection drop down.
 	var levelCount = 1;
 	for(var level in GIDGET.levels) {
@@ -24,6 +32,8 @@ $().ready(function() {
 	
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
+
+		GIDGET.ui.saveCurrentLevelCode();
 	
 	});
 	
@@ -61,7 +71,7 @@ $().ready(function() {
 	
 	$('#clearLocalStorage').click(function() {
 	
-		localStorage.removeItem('currentLevel');
+		localStorage.clear();
 		
 		alert("Cleared local storage.");
 	

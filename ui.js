@@ -69,6 +69,53 @@ GIDGET.ui = {
 	
 	},
 
+	quit: function() {
+	
+		var level = localStorage.getItem('currentLevel');
+	
+		var versions = localStorage.getItem('levelMetadata');
+		
+		console.log("Save " + level);
+		console.log("Save " + versions);
+	
+	},
+	
+	getCurrentLevel: function() {
+	
+		return localStorage.getItem('currentLevel');
+	
+	},
+	
+	saveCurrentLevelCode: function() {
+	
+		var currentCode = this.htmlToGidgetCode($('#code').html());
+	
+		var levelData = localStorage.getObject('levelMetadata');
+		
+		// Create an empty object literal to store level versions.
+		if(levelData === null)
+			levelData = { };
+		
+		// Get the list of versions for this level. If there isn't one, make an empty list.
+		if(!levelData.hasOwnProperty(this.getCurrentLevel())) {
+		
+			levelData[this.getCurrentLevel()] = {
+				passed: false, 
+				startTime: (new Date()).getTime(), 
+				endTime: undefined,
+				versions: [] 
+			};
+		
+		}
+		
+		// Add the current version to the list of versions.
+		levelData[this.getCurrentLevel()].versions.push({ time: (new Date).getTime(), version: currentCode });
+		
+		// Stringify the current versions object
+		localStorage.setObject('levelMetadata', levelData);		
+	
+	},
+
 	gidgetCodeToHTML: function(code) {
 	
 		var count = 0;
@@ -187,6 +234,14 @@ GIDGET.ui = {
 	
 	nextLevel: function() {
 	
+		// Remember that this level was passed, what time, and the final code.
+		this.saveCurrentLevelCode();
+		var levelData = localStorage.getObject('levelMetadata');
+		levelData[this.getCurrentLevel()].passed = true;
+		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
+		localStorage.setObject('levelMetadata', levelData);
+
+		// Now find the next level.		
 		var found = false;
 		var nextLevel = undefined;
 		for(var level in GIDGET.levels) {
