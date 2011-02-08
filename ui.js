@@ -73,10 +73,19 @@ GIDGET.ui = {
 	
 		var level = localStorage.getItem('currentLevel');
 	
-		var versions = localStorage.getItem('levelMetadata');
-		
-		console.log("Save " + level);
-		console.log("Save " + versions);
+		var levelMetadata = localStorage.getItem('levelMetadata');
+
+		$.ajax({
+			type: "POST",
+			url: "finished.php",
+			data: "levelMetadata=" + levelMetadata,
+			success: function(msg) {
+				alert('finished! ' + msg);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("I couldn't send the game data:<p>" + errorThrown);
+			}
+		});
 	
 	},
 	
