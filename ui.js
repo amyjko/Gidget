@@ -34,7 +34,7 @@ GIDGET.ui = {
 
 	        	// An image has loaded! Create the image, cache it, and update the UI.
 				var image = new Image();
-				// Only once the image has loaded to we store it and update the image in the database; this is because sometimes local AJAX requests lie.
+				// Only once the image has loaded do we store it and update the image in the database; this is because sometimes local AJAX requests lie.
 				// Moreover, we set the callback first, then the source, because sometimes the callback gets called asynchronously before the callback is set
 				// when we define the source first.
 				image.onload = function () {
