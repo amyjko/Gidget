@@ -789,10 +789,12 @@ GIDGET.ui = {
 	
 			$('#energy').html(runtime.thing.energy + " units");
 			
-			if(runtime.thing.energy > 0)
-				$('#energy').css('color', 'white');
-			else
+			if(runtime.thing.energy <= 0)
 				$('#energy').css('color', 'red');
+			else if(runtime.thing.energy < 20)
+				$('#energy').css('color', 'gold');
+			else
+				$('#energy').css('color', '#00FF00');
 			
 			// Add mouse over events for things
 			$('.thingBox').mouseenter(function() {
