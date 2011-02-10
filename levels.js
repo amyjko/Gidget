@@ -7,9 +7,10 @@ GIDGET.levels = {
 		var code = 
 			"scan gidget";
 	
-		var mission = "I have to report on what is in this area. I can't seem to figure out how to do that.";
+		var mission = "Ouch, I think that fall scrambled some of my circuits. I have to report on what is in this area but I can't seem to figure out how to do that.";
 					
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
+		world.gidget.setEnergy(100);
 		
 		world.addGoal("scanned gidget");
 
@@ -23,16 +24,20 @@ GIDGET.levels = {
 
 		var code = 
 			"scan gidget\n" +
-			"scan gidget";
+			"scan goop";
 	
 		var mission = "I have to report on what is in this area too. How did I do it last time? This is so hard for me!";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
+		world.gidget.setEnergy(100);
 		
-		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [], {});
-		
+		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
+			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "rgb(0,0,0)", [], {});  shrub.labeled = false;
+		}
+		new GIDGET.Thing(world, "goop", 8, 8, "rgb(0,0,0)", [], {});
+				
 		world.addGoal("scanned gidget");
-		world.addGoal("scanned rock");
+		world.addGoal("scanned goop");
 
 		return world;
 	
@@ -44,64 +49,43 @@ GIDGET.levels = {
 
 		var code = 
 			"scan gidget\n" +
-			"scan rocks";
+			"scan goops";
 	
 		var mission = "I think I am getting better at this! I wonder what is in this area?";
 					
 		var world = new GIDGET.World(10, 10, 1, 8, code, mission);
+		world.gidget.setEnergy(100);
 		
-		new GIDGET.Thing(world, "rock", 8, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 5, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 2, 5, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 8, 3, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 5, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 2, 5, "rgb(0,0,0)", [], {});
 		
 		world.addGoal("scanned gidget");
-		world.addGoal("scanned three rocks");
+		world.addGoal("scanned three goops");
 
 		return world;
 	
 	},
 
-	// *******************************************************
-	
-	learnScan3: function() {
-
-		var code = 
-			"scan gidget\n" +
-			"scan rocks";
-	
-		var mission = "I think I am getting better at this! I wonder what is in this area?";
-					
-		var world = new GIDGET.World(10, 10, 1, 8, code, mission);
-		
-		new GIDGET.Thing(world, "rock", 8, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 5, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 2, 5, "rgb(0,0,0)", [], {});
-		
-		world.addGoal("scanned gidget");
-		world.addGoal("scanned three rocks");
-
-		return world;
-	
-	},
-	
 	// *******************************************************
 	
 	learnGoto: function() {
 
 		var code = 
-			"scan rocks\n" +
-			"scan ship\n" +
-			"goto ship";
+			"scan goops\n" +
+			"scan bucket\n" +
+			"goto bucket";
 	
-		var mission = "I have strayed too far from my ship (transport). I need to get back to it but I don't remember the way!";
+		var mission = "I have strayed too far from my bucket. I need to get back to it but I don't remember the way!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
+		world.gidget.setEnergy(100);
 		
-		new GIDGET.Thing(world, "rock", 2, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 2, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 
 		return world;
 	
@@ -109,70 +93,50 @@ GIDGET.levels = {
 	
 	// *******************************************************
 	
+	/*
 	learnGrab: function() {
 
 		var code = 
-			"scan rock\n" +
-			"goto rock\n" +
-			"grab rock";	
-		var mission = "I need to get the dummy to the ship so we can take it to the (mock) hospital! Ohhh...I think I'm close, but I can't figure out how to do it right...";
+			"scan goop\n" +
+			"goto goop\n" +
+			"grab goop";	
+			
+		var mission = "I need to start cleaning up all this goop! Ohhh...I think I'm close, but I can't figure out how to do it right...";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
+		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("grabbed rock");
-
-		
+		world.addGoal("grabbed goop");
 
 		return world;
 	
 	},		
-
-	// *******************************************************
-	
-	learnGrab: function() {
-
-		var code = 
-			"scan rock\n" +
-			"goto rock\n" +
-			"grab rock";	
-		var mission = "Oh! I forgot that I have arms and hands! Hmm...I can't seem to remember how to use them correctly.";
-					
-		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
-		
-		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
-		
-		world.addGoal("grabbed rock");
-
-		
-
-		return world;
-	
-	},		
+	*/
 		
 	// *******************************************************
 	
 	learnGrab2: function() {
 
 		var code = 
-			"scan dummy\n" +
-			"goto dummy\n" +
-			"grab dummy\n" +
-			"scan ship\n" +
-			"goto ship";
+			"scan goop\n" +
+			"goto goop\n" +
+			"grab goop\n" +
+			"scan bucket\n" +
+			"goto bucket";
 	
-		var mission = "I need to get the dummy to the ship so we can take it to the (mock) hospital! Ohhh...I think I'm close, but I can't figure out how to do it right...";
+		var mission = "I think I figured out how to collect the goop, but now I need to start moving it to where it need to go! Ohhh...I think I'm close, but I can't figure out how to do it right...";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
+		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "dummy", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("gidget on ship");
-		world.addGoal("dummy on ship");
+		world.addGoal("gidget on bucket");
+		world.addGoal("goop on bucket");
 		
 
 		return world;
@@ -183,31 +147,31 @@ GIDGET.levels = {
 	learnDrop: function() {
 
 		var code = 
-			"scan trash\n" +
-			"goto trash\n" +
-			"grab trash\n" +
-			"scan trashcan\n" +
-			"goto trashcan\n" +
-			"drop trash\n" +
-			"scan dummy\n" +
-			"goto dummy\n" +
-			"grab dummy\n" +
-			"scan ship\n" +
-			"goto ship\n" +
-			"drop dummy";
+			"scan rock\n" +
+			"goto rock\n" +
+			"grab rock\n" +
+			"scan crate\n" +
+			"goto crate\n" +
+			"drop rock\n" +
+			"scan goop\n" +
+			"goto goop\n" +
+			"grab goop\n" +
+			"scan bucket\n" +
+			"goto bucket\n" +
+			"drop goop";
 	
-		var mission = "There's another dummy in need of rescue, but I should also throw away the trash here! I almost got it, but I keep forgetting how!";
+		var mission = "There's more goop and debris here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
-		world.gidget.setEnergy(150);
+		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "dummy", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "trash", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "trashcan", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "crate", 7, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("trash on trashcan");
-		world.addGoal("dummy on ship");
+		world.addGoal("rock on crate");
+		world.addGoal("goop on bucket");
 		
 
 		return world;
@@ -220,27 +184,27 @@ GIDGET.levels = {
 
 		var code = 
 			"scan trash, goto it, grab it\n" +
-			"scan waste, goto it, grab it\n" +
-			"scan trashcan, goto it\n" +
-			"drop trash, drop waste\n" +
-			"scan dummy, goto it, grab it\n" +
-			"scan ship, goto it\n" +
-			"drop dummy";
+			"scan rubble, goto it, grab it\n" +
+			"scan crate, goto it\n" +
+			"drop trash, drop rubble\n" +
+			"scan goop, goto it, grab it\n" +
+			"scan bucket, goto it\n" +
+			"drop goop";
 	
-		var mission = "There's another dummy in need of rescue, but there's even more trash here I should get rid of first!";
+		var mission = "There's more goop and debris here. I should clean it up so that the crews can work on decontaminating this area. I think I remember how to do it with less commands, but can't get it quite right!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
-		world.gidget.setEnergy(200);
+		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "dummy", 1, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "trash", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "waste", 9, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "trashcan", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rubble", 9, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "crate", 7, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("trash on trashcan");
-		world.addGoal("waste on trashcan");
-		world.addGoal("dummy on ship");
+		world.addGoal("rubble on crate");
+		world.addGoal("trash on crate");
+		world.addGoal("goop on bucket");
 		
 
 		return world;
@@ -252,18 +216,20 @@ GIDGET.levels = {
 	learnAnalyze: function() {
 
 		var code = 
-			"scan rock\n" +
-			"goto rock\n" +
-			"analyze rock";
+			"scan goop\n" +
+			"goto goop\n" +
+			"analyze goop";
 			
-		var mission = "There's something interesting about that rock over there...how can I check it?";
+		var mission = "There's something different about that goop over there...how can I check it?";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
+		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [ 'red' ], {});
+		new GIDGET.Thing(world, "goop", 8, 8, "rgb(0,0,0)", [ 'glowing' ], {});
+		
 
 		
-		world.addGoal("analyzed rock");
+		world.addGoal("analyzed goop");
 
 
 		return world;
@@ -274,24 +240,24 @@ GIDGET.levels = {
 	learnConditional: function() {
 
 		var code = 
-			"scan rock\n" +
-			"goto rock, analyze it, if it is red, grab it\n";
+			"scan goop\n" +
+			"goto goop, analyze it, if it is glowing, grab it\n";
 			
-		var mission = "Whoops, I dropped the red rock I picked up in the last round into this pile of other rocks! I can't figure out how to find it amongst all these other rocks!";
+		var mission = "Whoops, I dropped the glowing goop I picked up in the last round! I can't figure out how to find it amongst all these other samples!";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "rock", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 5, 6, "rgb(0,0,0)", [ 'red' ], {});
-		new GIDGET.Thing(world, "rock", 7, 8, "rgb(0,0,0)", [] , {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 9, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 7, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 3, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 5, 6, "rgb(0,0,0)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 7, 8, "rgb(0,0,0)", [] , {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("rock on gidget is red");
+		world.addGoal("grabbed goop is glowing");
 
 		return world;
 	
@@ -302,26 +268,26 @@ GIDGET.levels = {
 	learnConditionalCompound: function() {
 
 		var code = 
-			"scan dummys\n" +
-			"goto dummy, analyze it, if it is hurt, grab it\n" +
-			"scan ship, goto it\n" +
-			"drop dummys";
+			"scan goops\n" +
+			"goto goops, analyze it, if it is glowing, grab it\n" +
+			"scan bucket, goto it\n" +
+			"drop goops";
 			
-		var mission = "There's a lot of hurt dummys here! Help me pick them out and take them to the ship so that they can be treated! This is so important, but I can't seem to figure it out.";
+		var mission = "There are a lot of glowing goops here! Help me pick them out and take them to the bucket so that they can be neutralized quickly! This is so important, but I cannot seem to figure it out.";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "dummy", 1, 8, "rgb(0,0,0)", [ 'hurt' ], {});
-		new GIDGET.Thing(world, "dummy", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "dummy", 9, 9, "rgb(0,0,0)", [ 'hurt' ], {});
-		new GIDGET.Thing(world, "dummy", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "dummy", 1, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "dummy", 5, 6, "rgb(0,0,0)", [ 'hurt' ], {});
-		new GIDGET.Thing(world, "dummy", 7, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "ship", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 9, 9, "rgb(0,0,0)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 7, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 3, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 5, 6, "rgb(0,0,0)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 7, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("three dummys on ship are hurt");
+		world.addGoal("three goops on bucket are glowing");
 
 		return world;
 	
@@ -336,19 +302,19 @@ GIDGET.levels = {
 		
 		var code = 
 			"scan rock, goto it, analyze it, if it is red, grab it\n" +
-			"scan ship, goto it\n" +
+			"scan crate, goto it\n" +
 			"drop rock";
 			
-		var mission = "There's something interesting about that rock over there...lets get the red one back to the ship!";
+		var mission = "There's something interesting about that rock over there...lets get the red one back to the crate!";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
-		world.gidget.setEnergy(120);
+		world.gidget.setEnergy(130);
 		
 		new GIDGET.Thing(world, "rock", 3, 8, "rgb(0,0,0)", [ 'green' ], {});
 		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [ 'red' ], {});
-		new GIDGET.Thing(world, "ship", 1, 3, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "crate", 1, 3, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("rock on ship is red");
+		world.addGoal("rock on crate is red");
 
 
 		return world;
@@ -360,27 +326,26 @@ GIDGET.levels = {
 	useObjectEnergize: function() {
 
 		var code = 
-			"scan rocks\n" +
-			"scan ship\n" +
+			"scan goops\n" +
+			"scan bucket\n" +
 			"scan battery\n" +
-			"goto rocks, grab it\n" +
+			"goto goops, grab it\n" +
 			"goto battery, analyze it\n" +
 			"ask battery to energize gidget\n" +
-			"goto ship\n" +
-			"drop rocks";
+			"goto bucket\n" +
+			"drop goops";
 		
 		var mission = "It looks like I'm running low on power to complete the task. How can I use the resources to recharge myself?";
 		
-
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);	
-		world.gidget.setEnergy(90);
+		world.gidget.setEnergy(105);
 
-		world.addGoal("two rocks on ship");
+		world.addGoal("two goops on bucket");
 
-		new GIDGET.Thing(world, "ship", 9, 9, "rgb(250,0,255)", {}, {});
-		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", { color: 'white'}, {});
-		new GIDGET.Thing(world, "rock", 0, 9, "rgb(0,255,0)", { color: 'green'}, {});
-		new GIDGET.Thing(world, "battery", 2, 9, "yellow", {}, 
+		new GIDGET.Thing(world, "bucket", 9, 8, "rgb(250,0,255)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 1, "rgb(250,255,255)", [], {});
+		new GIDGET.Thing(world, "goop", 0, 9, "rgb(0,255,0)", [], {});
+		new GIDGET.Thing(world, "battery", 2, 9, "yellow", [], 
 			{ 
 			energize : new GIDGET.Action([ "beneficiary" ],
 				"raise beneficiary energy 100"
@@ -397,40 +362,39 @@ GIDGET.levels = {
 	navigateWalls: function() {
 
 		var code = 
-			"scan rocks\n" +
-			"goto rocks, analyze it, if it is white, grab it\n" + // avoid spikes is redundant here
-			"scan ship, goto it\n" +
-			"drop rocks";
+			"scan goops\n" +
+			"goto goops, analyze it, if it is glowing, grab it\n" +
+			"scan bucket, goto it\n" +
+			"drop goops";
 	
-		var mission = "There's something blocking my path to the red rock! I need to navigate around it.";
-	
+		var mission = "There's something blocking my path to the goop! I need to navigate around it.";
 			
-		var world = new GIDGET.World(10, 10, 3, 5, code, mission);
+		var world = new GIDGET.World(10, 10, 6, 5, code, mission);
+		world.gidget.setEnergy(100);
 
-		world.addGoal("rock on ship is red");
+		world.addGoal("goop on bucket is glowing");
 
-		new GIDGET.Thing(world, "ship", 1, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 1, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 7, 4, "rgb(255,255,255)", [ 'glowing' ], {});
 
 		var wall;
-		wall = new GIDGET.Thing(world, "wall", 3, 1, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 2, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 4, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 6, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 7, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 8, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall = new GIDGET.Thing(world, "wall", 6, 1, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 2, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 4, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 8, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(200,200,200)", [], {});
+		wall.setLevel(2); wall.labeled = false;
 
-		new GIDGET.Thing(world, "rock", 4, 4, "rgb(255,255,255)", [ 'red' ], {});
-		
 		return world;
 	
 	},
@@ -439,77 +403,89 @@ GIDGET.levels = {
 	learnAvoidPassive: function() {
 
 		var code = 
-			"scan rocks\n" +
-			"scan blackholes\n" +
-			"goto rocks, analyze it, if it is red, grab it\n" +
-			"scan ship, goto it\n" +
-			"drop rocks";
+			"scan goop\n" +
+			"scan bgoop\n" +
+			"goto goop, analyze it, if it is glowing, grab it\n" +
+			"scan bucket, goto it avoid bgoop\n" +
+			"drop goop";
 	
-		var mission = "There's something blocking my path to the red rock! I need to navigate around it.";
+		var mission = "There's new kind of goops here which are keeping me from getting the goop! I need to navigate around them.";
 	
 			
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
+		world.gidget.setEnergy(120);
 
-		world.addGoal("rock on ship is red");
+		world.addGoal("goop on bucket is glowing");
 
-		new GIDGET.Thing(world, "ship", 1, 9, "rgb(0,0,0)", [], {});
-		var b1 = new GIDGET.Thing(world, "blackhole", 5, 9, "rgb(200,200,200)", [], {});
+		new GIDGET.Thing(world, "bucket", 1, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 6, 4, "rgb(255,255,255)", [ 'glowing' ], {});
+		var b1 = new GIDGET.Thing(world, "bgoop", 5, 9, "rgb(200,200,200)", [], {});
 		/*
-		var b2 = new GIDGET.Thing(world, "blackhole", 1, 8, "rgb(200,200,200)", [], {});
-		var b3 = new GIDGET.Thing(world, "blackhole", 2, 8, "rgb(200,200,200)", [], {});
-		var b4 = new GIDGET.Thing(world, "blackhole", 2, 9, "rgb(200,200,200)", [], {});
+		var b2 = new GIDGET.Thing(world, "bgoop", 1, 8, "rgb(200,200,200)", [], {});
+		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "rgb(200,200,200)", [], {});
+		var b4 = new GIDGET.Thing(world, "bgoop", 2, 9, "rgb(200,200,200)", [], {});
 		*/
 
 		
 		b1.setCode(
-			"when gidget on blackhole, grab rocks\n"
+			"when gidget on bgoop, grab goops\n"
 		);
+		/*
+		b2.setCode(
+			"when gidget on bgoop, grab goops\n"
+		);
+		b3.setCode(
+			"when gidget on bgoop, grab goops\n"
+		);
+		b4.setCode(
+			"when gidget on bgoop, grab goops\n"
+		);
+		*/
 		
 
 		var wall;
 		wall = new GIDGET.Thing(world, "wall", 5, 1, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 2, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 4, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 6, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 7, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(200,200,200)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 
-		new GIDGET.Thing(world, "rock", 6, 4, "rgb(255,255,255)", [ 'red' ], {});
+		
 		
 		return world;
 	
 	},
-		// *******************************************************
 	
 	// *******************************************************
 	
 	learnAvoidActive: function() {
 
 		var code = 
-			"scan rocks\n" +
+			"scan goop\n" +
 			"scan rats\n" +
-			"goto rocks avoid rat, grab it\n";
+			"goto goop avoid rat, grab it\n";
 	
 		var mission = "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!";
 	
 		var world = new GIDGET.World(10, 10, 0, 0, code, mission);
-		world.gidget.setEnergy(103);
+		world.gidget.setEnergy(110);
 		
-		world.addGoal("grabbed three rocks");
+		world.addGoal("grabbed three goops");
 		
-		new GIDGET.Thing(world, "rock", 6, 6, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 6, 9, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 6, 6, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 6, 9, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 9, "rgb(250,0,0)", [], {});
 		var rat = new GIDGET.Thing(world, "rat", 8, 8, "#ccc", [], {});
 		
 		rat.setCode(
@@ -528,24 +504,25 @@ GIDGET.levels = {
 	// *******************************************************
 	// *********** O L D - L E V E L S ***********************
 	// *******************************************************
-	
-	returnToShip: function() {
+
+	xxxxxxxxxxxxxxxxxxxxxx: function() {
 
 		var code = 
-			"scan ship\n" +
-			"goto ship";
+			"scan bucket\n" +
+			"goto bucket";
 	
-		var mission = "I have to figure out how to get back to my ship. Something is wrong and I can't seem to get it right.";
+		var mission = "I have to figure out how to get back to my bucket. Something is wrong and I can't seem to get it right.";
 	
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
 		
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 		
-		new GIDGET.Thing(world, "ship", 8, 8, "brown", [], {});
+		new GIDGET.Thing(world, "bucket", 8, 8, "brown", [], {});
 
 		return world;
 	
 	},
+
 	
 	// *******************************************************
 
@@ -574,16 +551,16 @@ GIDGET.levels = {
 	beTired: function() {
 
 		var code = 
-			"scan ship\n" +
-			"goto ship\n";
+			"scan bucket\n" +
+			"goto bucket\n";
 	
 
 		var world = new GIDGET.World(10, 10, 1, 1, code);
 		world.gidget.setEnergy(30);
 		
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 		
-		new GIDGET.Thing(world, "ship", 8, 8, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 8, 8, 1, "rgb(0,0,0)", [], {});
 		
 		return world;
 	
@@ -599,18 +576,18 @@ GIDGET.levels = {
 			"goto rocks, analyze it, if it is red, grab it\n" +
 			"goto blackhole\n" +
 			"drop rock\n" +
-			"scan ship, goto it";
+			"scan bucket, goto it";
 	
-		var mission = "One of these rocks is glowing red and could be dangerous! I'm supposed to bring it back to the ship for analysis. I can't seem to figure out how to get it there.";
+		var mission = "One of these rocks is glowing red and could be dangerous! I'm supposed to bring it back to the bucket for analysis. I can't seem to figure out how to get it there.";
 		
 	
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
 		world.gidget.setEnergy(1000);
 		
 		world.addGoal("rock on blackhole is red");
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 
-		new GIDGET.Thing(world, "ship", 2, 8, 1, "rgb(100,100,100)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 8, 1, "rgb(100,100,100)", [], {});
 		new GIDGET.Thing(world, "blackhole", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 5, 7, "rgb(250,0,0)", [ 'red' ], {});
 		new GIDGET.Thing(world, "rock", 8, 2, "rgb(200,200,200)", [ 'gray' ], {});
@@ -626,16 +603,16 @@ GIDGET.levels = {
 		var code = 
 			"scan rocks\n" +
 			"goto rocks, analyze it, if it is white, grab it\n" +
-			"scan ship, goto it\n" +
+			"scan bucket, goto it\n" +
 			"drop rocks";
 	
 			
 		var world = new GIDGET.World(10, 10, 2, 8, code);
 		world.gidget.setEnergy(200);
 		
-		world.addGoal("rocks on ship are white");
+		world.addGoal("rocks on bucket are white");
 
-		new GIDGET.Thing(world, "ship", 2, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 5, 7, "rgb(250,0,0)", [ 'red' ], {});
 		new GIDGET.Thing(world, "rock", 8, 2, "rgb(200,200,200)", [ 'gray' ], {});
 		new GIDGET.Thing(world, "rock", 4, 4, "rgb(255,255,255)", [ 'white' ], {});
@@ -653,16 +630,16 @@ GIDGET.levels = {
 			"scan rocks\n" +
 			"scan spikes\n" +
 			"goto rocks avoid spikes, analyze it, if it is white, grab it\n" + // avoid spikes is redundant here
-			"scan ship, goto it\n" +
+			"scan bucket, goto it\n" +
 			"drop rocks";
 	
 		
 			
 		var world = new GIDGET.World(10, 10, 2, 8, code);
 
-		world.addGoal("rock on ship is white");
+		world.addGoal("rock on bucket is white");
 
-		new GIDGET.Thing(world, "ship", 2, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 
 		var spike;
 		spike = new GIDGET.Thing(world, "spike", 3, 1, "rgb(200,200,200)", [], {});
@@ -890,22 +867,22 @@ GIDGET.levels = {
 	
 	// *******************************************************
 
-	carToShip: function() {
+	carTobucket: function() {
 
 		var code = 
 			"scan car\n" +
-			"scan ship\n" +
+			"scan bucket\n" +
 			"goto car, analyze it, if it isn't working, name it broken\n" +
 			"goto car\n" +
-			"ask car to drive gidget ship"
+			"ask car to drive gidget bucket"
 		;
 	
 
 		var world = new GIDGET.World(10, 10, 1, 1, code);
 		world.gidget.setEnergy(200);
 
-		world.addGoal("gidget on ship");
-		world.addGoal("car on ship");
+		world.addGoal("gidget on bucket");
+		world.addGoal("car on bucket");
 	
 		new GIDGET.Thing(world, "car", 3, 3, "yellow", [ 'working' ], 
 			{ 
@@ -923,7 +900,7 @@ GIDGET.levels = {
 
 		new GIDGET.Thing(world, "car", 5, 5, "yellow", [], {});
 
-		new GIDGET.Thing(world, "ship", 8, 8, "brown", [], {});
+		new GIDGET.Thing(world, "bucket", 8, 8, "brown", [], {});
 		
 		return world;
 	
@@ -934,7 +911,7 @@ GIDGET.levels = {
 	sequenceWalls: function() {
 
 		var code = 
-			"scan ship\n" +
+			"scan bucket\n" +
 			"scan button\n" +
 			"goto button, analyze it\n" +
 			"ask button to raise\n" +	
@@ -942,16 +919,16 @@ GIDGET.levels = {
 			"goto rocks, grab it\n" +
 			"goto button\n" +
 			"ask button to lower\n" +
-			"goto ship\n" +
+			"goto bucket\n" +
 			"drop rocks";
 	
 
 		var world = new GIDGET.World(10, 10, 2, 8, code);
 		world.gidget.setEnergy(1000);
 
-		world.addGoal("rock on ship");
+		world.addGoal("rock on bucket");
 
-		new GIDGET.Thing(world, "ship", 2, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 9, 5, "gray", [], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [], 			// Buttons should not be GRABable
 			{ 
@@ -968,37 +945,37 @@ GIDGET.levels = {
 		
 		var wall;
 		
-		wall = new GIDGET.Thing(world, "wall1", 3, 0, "rgb(255,255,255)", [], {}); 
-		wall = new GIDGET.Thing(world, "wall1", 3, 1, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 2, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 3, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 4, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 5, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 6, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 7, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 8, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 9, "rgb(255,255,255)", [], {});
+		wall = new GIDGET.Thing(world, "wall1", 3, 0, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 1, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 2, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 3, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 4, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 5, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 6, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 7, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 8, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 9, "rgb(255,255,255)", [], {}); wall.labeled = false;
 
 		wall = new GIDGET.Thing(world, "wall2", 8, 0, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 1, "rgb(255,255,255)", [], {}); 
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 2, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 3, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 4, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 5, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 6, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 7, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 8, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 9, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		
 		return world;
 	
@@ -1293,16 +1270,16 @@ GIDGET.levels = {
 			"goto blender, analyze it\n" +
 			"ask blender to combine first rock second rock\n" +
 			"analyze diamond, grab it\n" +
-			"scan ship, goto it"; 
+			"scan bucket, goto it"; 
 	
 
 		var world = new GIDGET.World(10, 10, 2, 8, code);
 		world.gidget.setEnergy(1000);
 		
 		world.addGoal("grabbed diamond");
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 		
-		new GIDGET.Thing(world, "ship", 1, 1, "rgb(250,255,255)", [], {});
+		new GIDGET.Thing(world, "bucket", 1, 1, "rgb(250,255,255)", [], {});
 		new GIDGET.Thing(world, "rock", 2, 2, "rgb(250,255,255)", [ 'white'], {});
 		new GIDGET.Thing(world, "rock", 9, 5, "rgb(250,255,255)", [ 'white'], {});
 		new GIDGET.Thing(world, "rock", 4, 7, "rgb(250,0,0)", [ 'red'], {});
@@ -1324,21 +1301,21 @@ GIDGET.levels = {
 
 		var code = 
 			"scan rocks\n" +
-			"scan ship\n" +
+			"scan bucket\n" +
 			"scan battery\n" +
 			"goto rocks, grab it\n" +
 			"goto battery, analyze it\n" +
 			"ask battery to energize gidget\n" +
-			"goto ship\n" +
+			"goto bucket\n" +
 			"drop";
 	
 
 		var world = new GIDGET.World(10, 10, 2, 8, code);	
 		world.gidget.setEnergy(106);
 
-		world.addGoal("two rocks on ship");
+		world.addGoal("two rocks on bucket");
 
-		new GIDGET.Thing(world, "ship", 9, 9, "rgb(250,0,255)", {}, {});
+		new GIDGET.Thing(world, "bucket", 9, 9, "rgb(250,0,255)", {}, {});
 		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", { color: 'white'}, {});
 		new GIDGET.Thing(world, "rock", 0, 9, "rgb(0,255,0)", { color: 'green'}, {});
 		new GIDGET.Thing(world, "battery", 5, 5, "yellow", {}, 
@@ -1358,7 +1335,7 @@ GIDGET.levels = {
 	releaseGulls_Bug: function() { 
 
 		var code = 
-			"scan ship\n" +
+			"scan bucket\n" +
 			"scan button\n" +
 			"goto button, analyze it\n" +
 			"ask button to raise\n" +	
@@ -1366,7 +1343,7 @@ GIDGET.levels = {
 			"goto rocks, grab it\n" +
 			"goto button\n" +
 			"ask button to lower\n" +	
-			"goto ship\n" +
+			"goto bucket\n" +
 			"drop rocks";
 	
 		var mission = "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!";
@@ -1375,12 +1352,12 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 0, 1, code, mission);
 		world.gidget.setEnergy(1000);
 
-		world.addGoal("rock on ship");
+		world.addGoal("rock on bucket");
 		
 		var gull = new GIDGET.Thing(world, "gull", 0, 9, "yellow", [], {});
 		var gull2 = new GIDGET.Thing(world, "gull", 9, 0, "yellow", [], {});
 		
-		new GIDGET.Thing(world, "ship", 2, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 9, 1, "gray", [], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [], 			// Buttons should not be GRABable
 			{ 
@@ -1456,18 +1433,18 @@ GIDGET.levels = {
 	stripe: function() {
 	
 		var code = 
-			"scan ship\n" +
+			"scan bucket\n" +
 			"scan rocks\n" +
 			"goto rocks, grab it\n" +
-			"goto ship\n" +
+			"goto bucket\n" +
 			"drop rocks";
 		
 		var world = new GIDGET.World(10, 10, 1, 0, code);
 		world.gidget.setEnergy(250);
 		
-		world.addGoal("rock on ship");
+		world.addGoal("rock on bucket");
 
-		new GIDGET.Thing(world, "ship", 7, 0, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 7, 0, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 0, 7, "gray", [], {});
 		
 		var wall;
@@ -1520,11 +1497,11 @@ GIDGET.levels = {
 
 		var code = 
 			"scan rocks\n" +
-			"scan ship\n" +
+			"scan bucket\n" +
 			"scan blackholes\n" +
 			"goto rocks, grab it\n" +
 			"goto blackholes, drop rock\n" +
-			"goto ship";
+			"goto bucket";
 	
 		
 		var world = new GIDGET.World(10, 10, 2, 8, code);
@@ -1534,7 +1511,7 @@ GIDGET.levels = {
 
 		new GIDGET.Thing(world, "blackhole", 0, 0, "rgb(0,0,0)", { }, {});
 		new GIDGET.Thing(world, "blackhole", 9, 9, "rgb(0,0,0)", { }, {});
-		new GIDGET.Thing(world, "ship", 9, 9, "rgb(250,0,255)", {}, {});
+		new GIDGET.Thing(world, "bucket", 9, 9, "rgb(250,0,255)", {}, {});
 		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", {}, {});
 		new GIDGET.Thing(world, "rock", 0, 9, "rgb(0,255,0)", {}, {});
 
@@ -1555,21 +1532,21 @@ GIDGET.levels = {
 			"scan diamond\n" +
 			"goto rocks avoid gull, grab it\n" +
 			"goto diamond, grab it\n" +
-			"scan ship, goto it";
+			"scan bucket, goto it";
 	
 		var world = new GIDGET.World(10, 10, 7, 4, code);
 		world.gidget.setEnergy(500);
 
 		world.addGoal("grabbed three rocks");
 		world.addGoal("diamond on gidget");
-		world.addGoal("gidget on ship");
+		world.addGoal("gidget on bucket");
 
 		var gull = new GIDGET.Thing(world, "gull", 1, 4, "yellow", [], {});
 
 		new GIDGET.Thing(world, "rock", 0, 0, "gray", [], {});
 		new GIDGET.Thing(world, "rock", 9, 0, "gray", [], {});
 		new GIDGET.Thing(world, "rock", 0, 9, "gray", [], {});
-		new GIDGET.Thing(world, "ship", 9, 9, "gray", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 9, "gray", [], {});
 		new GIDGET.Thing(world, "diamond", 5, 5, "rgb(255,0,0)", [], {});
 
 		var wall;
