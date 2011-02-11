@@ -81,7 +81,7 @@ $().ready(function() {
 
 	if(localStorage.getItem('currentLevel') === null) {
 	
-		localStorage.setItem('currentLevel', 'getRedRock');
+		localStorage.setItem('currentLevel', 'learnScan');
 		
 		$('#content').fadeTo(0, 0.0);
 		
