@@ -134,7 +134,7 @@ GIDGET.ui = {
 		
 			var classes = 'sourceToken';
 			
-			if(string.match(/scan|analyze|goto|ask|to|grab|drop|it|if|is|on/))
+			if(string.match(/scan|analyze|goto|ask|to|grab|drop|it|if|is|are|on/))
 				classes = classes + ' keyword';		
 				
 			if(first) {

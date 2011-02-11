@@ -7,7 +7,9 @@ GIDGET.levels = {
 		var code = 
 			"scan gidget";
 	
-		var mission = "Ouch, I think that fall scrambled some of my circuits. I have to report on what is in this area but I can't seem to figure out how to do that.";
+		var mission = "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!<br /><br />" +
+		"I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!\n<br /><br />" +
+		"I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.";
 					
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
 		world.gidget.setEnergy(100);
@@ -32,9 +34,9 @@ GIDGET.levels = {
 		world.gidget.setEnergy(100);
 		
 		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
-			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "rgb(0,0,0)", [], {});  shrub.labeled = false;
+			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "green", [], {});  shrub.labeled = false;
 		}
-		new GIDGET.Thing(world, "bucket", 8, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 8, 8, "DarkSlateGray", [], {});
 				
 		world.addGoal("scanned gidget");
 		world.addGoal("scanned bucket");
@@ -56,9 +58,9 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 1, 8, code, mission);
 		world.gidget.setEnergy(100);
 		
-		new GIDGET.Thing(world, "goop", 8, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 5, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 2, 5, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 8, 3, "green", [], {});
+		new GIDGET.Thing(world, "goop", 5, 2, "green", [], {});
+		new GIDGET.Thing(world, "goop", 2, 5, "green", [], {});
 		
 		world.addGoal("scanned gidget");
 		world.addGoal("scanned three goops");
@@ -75,12 +77,12 @@ GIDGET.levels = {
 			"scan goop\n" +
 			"analyze goop";
 			
-		var mission = "There's something different about this goop...how can I check it?";
+		var mission = "Okay! My scanner seems to be working. Now it's time to check my 'analyzer' - it allows me to see special attributes and actions of objects which can access through my memory banks. <br /><br />I tried it on this goop, but I am not getting any results!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 5, 5, "rgb(0,0,0)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 5, 5, "green", [ 'glowing' ], {});
 		
 
 		
@@ -104,9 +106,9 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
 		world.gidget.setEnergy(100);
 		
-		new GIDGET.Thing(world, "goop", 2, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 2, 9, "green", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
 		world.addGoal("gidget on bucket");
 
@@ -155,8 +157,8 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
 		world.addGoal("gidget on bucket");
 		world.addGoal("goop on bucket");
@@ -170,12 +172,12 @@ GIDGET.levels = {
 	learnDrop: function() {
 
 		var code = 
-			"scan rock\n" +
-			"goto rock\n" +
-			"grab rock\n" +
+			"scan kitten\n" +
+			"goto kitten\n" +
+			"grab kitten\n" +
 			"scan crate\n" +
 			"goto crate\n" +
-			"drop rock\n" +
+			"drop kitten\n" +
 			"scan goop\n" +
 			"goto goop\n" +
 			"grab goop\n" +
@@ -183,17 +185,17 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop goop";
 	
-		var mission = "There's more goop and debris here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!";
+		var mission = "There's more goop and animals here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "crate", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
+		new GIDGET.Thing(world, "kitten", 4, 1, "orange", [], {});
+		new GIDGET.Thing(world, "crate", 7, 7, "Chocolate", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
-		world.addGoal("rock on crate");
+		world.addGoal("kitten on crate");
 		world.addGoal("goop on bucket");
 		
 
@@ -206,27 +208,27 @@ GIDGET.levels = {
 	learnCompounds: function() {
 
 		var code = 
-			"scan trash, goto it, grab it\n" +
-			"scan rubble, goto it, grab it\n" +
+			"scan puppy, goto it, grab it\n" +
+			"scan piglet, goto it, grab it\n" +
 			"scan crate, goto it\n" +
-			"drop trash, drop rubble\n" +
+			"drop piglet, drop puppy\n" +
 			"scan goop, goto it, grab it\n" +
 			"scan bucket, goto it\n" +
 			"drop goop";
 	
-		var mission = "There's more goop and debris here. I should clean it up so that the crews can work on decontaminating this area. I think I remember how to do it with less commands, but can't get it quite right!";
+		var mission = "There's more goop and animals here. I should clean up the goop and rescue the animals . I think I remember how to do it with less commands, but can't get it quite right!";
 					
 		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "trash", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rubble", 9, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "crate", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
+		new GIDGET.Thing(world, "piglet", 4, 1, "orange", [], {});
+		new GIDGET.Thing(world, "puppy", 9, 9, "orange", [], {});
+		new GIDGET.Thing(world, "crate", 7, 7, "Chocolate", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
-		world.addGoal("rubble on crate");
-		world.addGoal("trash on crate");
+		world.addGoal("piglet on crate");
+		world.addGoal("puppy on crate");
 		world.addGoal("goop on bucket");
 		
 
@@ -234,32 +236,56 @@ GIDGET.levels = {
 	
 	},
 		
+	// *******************************************************
+
+		lowEnergy: function() {
+
+
+		// STATE CRITICAL ENERGY
+		
+		var code = 
+			"scan dog, goto it, analyze it, if it is infected, grab it\n" +
+			"scan crate, goto it\n" +
+			"drop dog";
+			
+		var mission = "There might be something wrong with that dog over there...let's makes sure it's okay!";
+					
+		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
+		world.gidget.setEnergy(115);
+		
+		new GIDGET.Thing(world, "dog", 8, 8, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "crate", 1, 3, "Chocolate", [], {});
+		
+		world.addGoal("dog on crate is infected");
+
+
+		return world;
 	
+	},	
 	// *******************************************************
 		
 	learnConditional: function() {
 
 		var code = 
-			"scan goops\n" +
-			"goto goops, analyze it, if it is glowing, grab it\n" +
-			"scan bucket, goto it\n" +
-			"drop goop";
+			"scan cats\n" +
+			"goto cats, analyze it, if it is infected, grab it\n" +
+			"scan crate, goto it\n" +
+			"drop cats";
 			
-		var mission = "Whoops, I dropped the glowing goop I picked up in the last round! I can't figure out how to find it amongst all these other samples!";
+		var mission = "Oh no! I'm detecting one of these these cats are infected by the goop. I'll have to separate it from the rest!";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
-		//new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 9, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 1, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 5, 6, "rgb(0,0,0)", [ 'glowing' ], {});
-		new GIDGET.Thing(world, "goop", 7, 8, "rgb(0,0,0)", [] , {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "cat", 1, 8, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 9, 9, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 7, 7, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 1, 3, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 5, 6, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "cat", 7, 8, "green", [] , {});
+		new GIDGET.Thing(world, "crate", 9, 6, "Chocolate", [], {});
 		
-		world.addGoal("goop on bucket is glowing");
+		world.addGoal("cat on crate is infected");
 
 		return world;
 	
@@ -270,59 +296,32 @@ GIDGET.levels = {
 	learnConditionalCompound: function() {
 
 		var code = 
-			"scan rocks\n" +
-			"goto rocks, analyze it, if it is contaminated, grab it\n" +
+			"scan birds\n" +
+			"goto birds, analyze it, if it is infected, grab it\n" +
 			"scan crate, goto it\n" +
-			"drop rocks";
+			"drop birds";
 			
-		var mission = "There are a lot of contaminated rocks here! Help me pick them out and take them to the bucket so that they can be neutralized quickly! This is so important, but I cannot seem to figure it out.";
+		var mission = "Oh no! I'm detecting many of these birds are infected by the goop. I'll have to separate them from the rest!";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "rock", 8, 1, "rgb(0,0,0)", [ 'contaminated' ], {});
-		new GIDGET.Thing(world, "rock", 1, 4, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 9, "rgb(0,0,0)", [ 'contaminated' ], {});
-		new GIDGET.Thing(world, "rock", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 3, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 6, 5, "rgb(0,0,0)", [ 'contaminated' ], {});
-		new GIDGET.Thing(world, "rock", 8, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "crate", 6, 9, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bird", 8, 1, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "bird", 1, 4, "orange", [], {});
+		new GIDGET.Thing(world, "bird", 9, 9, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "bird", 7, 7, "orange", [], {});
+		new GIDGET.Thing(world, "bird", 3, 1, "orange", [], {});
+		new GIDGET.Thing(world, "bird", 6, 5, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "bird", 8, 7, "orange", [], {});
+		new GIDGET.Thing(world, "crate", 6, 9, "Chocolate", [], {});
 		
-		world.addGoal("three rocks on crate are contaminated");
+		world.addGoal("three birds on crate are infected");
 
 
 		return world;
 	
 	},	
-				
-	// *******************************************************
-
-		lowEnergy: function() {
-
-
-		// STATE CRITICAL ENERGY
-		
-		var code = 
-			"scan rock, goto it, analyze it, if it is red, grab it\n" +
-			"scan crate, goto it\n" +
-			"drop rock";
 			
-		var mission = "There's something interesting about that rock over there...lets get the red one back to the crate!";
-					
-		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
-		world.gidget.setEnergy(130);
-		
-		new GIDGET.Thing(world, "rock", 3, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [ 'contaminated' ], {});
-		new GIDGET.Thing(world, "crate", 1, 3, "rgb(0,0,0)", [], {});
-		
-		world.addGoal("rock on crate is contaminated");
-
-
-		return world;
-	
-	},
 	
 	
 	// *******************************************************
@@ -346,8 +345,8 @@ GIDGET.levels = {
 		world.addGoal("two goops on bucket");
 
 		new GIDGET.Thing(world, "bucket", 9, 8, "rgb(250,0,255)", [], {});
-		new GIDGET.Thing(world, "goop", 1, 1, "rgb(250,255,255)", [], {});
-		new GIDGET.Thing(world, "goop", 0, 9, "rgb(0,255,0)", [], {});
+		new GIDGET.Thing(world, "goop", 1, 1, "green", [], {});
+		new GIDGET.Thing(world, "goop", 0, 9, "green", [], {});
 		new GIDGET.Thing(world, "battery", 2, 9, "yellow", [], 
 			{ 
 			energize : new GIDGET.Action([ "beneficiary" ],
@@ -378,24 +377,24 @@ GIDGET.levels = {
 		world.addGoal("goop on bucket is glowing");
 
 		new GIDGET.Thing(world, "bucket", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 7, 4, "rgb(255,255,255)", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 7, 4, "green", [ 'glowing' ], {});
 
 		var wall;
-		wall = new GIDGET.Thing(world, "wall", 6, 1, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 1, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 2, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 2, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 4, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 4, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 6, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 8, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 8, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 7, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 
 		return world;
@@ -421,12 +420,12 @@ GIDGET.levels = {
 		world.addGoal("goop on bucket is glowing");
 
 		new GIDGET.Thing(world, "bucket", 1, 9, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 6, 4, "rgb(255,255,255)", [ 'glowing' ], {});
-		var b1 = new GIDGET.Thing(world, "bgoop", 5, 9, "rgb(200,200,200)", [], {});
+		new GIDGET.Thing(world, "goop", 6, 4, "green", [ 'glowing' ], {});
+		var b1 = new GIDGET.Thing(world, "bgoop", 5, 9, "blue", [], {});
 		/*
-		var b2 = new GIDGET.Thing(world, "bgoop", 1, 8, "rgb(200,200,200)", [], {});
-		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "rgb(200,200,200)", [], {});
-		var b4 = new GIDGET.Thing(world, "bgoop", 2, 9, "rgb(200,200,200)", [], {});
+		var b2 = new GIDGET.Thing(world, "bgoop", 1, 8, "blue", [], {});
+		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "blue", [], {});
+		var b4 = new GIDGET.Thing(world, "bgoop", 2, 9, "blue", [], {});
 		*/
 
 		
@@ -447,21 +446,21 @@ GIDGET.levels = {
 		
 
 		var wall;
-		wall = new GIDGET.Thing(world, "wall", 5, 1, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 1, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 2, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 2, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 4, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 4, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 6, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 6, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 7, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 8, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(200,200,200)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 
 		
@@ -477,7 +476,7 @@ GIDGET.levels = {
 		var code = 
 			"scan goop\n" +
 			"scan rats\n" +
-			"goto goop avoid rat, grab it\n";
+			"goto goop, grab it\n";
 	
 		var mission = "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!";
 	
@@ -486,15 +485,15 @@ GIDGET.levels = {
 		
 		world.addGoal("grabbed three goops");
 		
-		new GIDGET.Thing(world, "goop", 6, 6, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 6, 9, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 1, 9, "rgb(250,0,0)", [], {});
-		var rat = new GIDGET.Thing(world, "rat", 8, 8, "#ccc", [], {});
+		new GIDGET.Thing(world, "goop", 6, 6, "green", [], {});
+		new GIDGET.Thing(world, "goop", 6, 9, "green", [], {});
+		new GIDGET.Thing(world, "goop", 1, 9, "green", [], {});
+		var rat = new GIDGET.Thing(world, "rat", 8, 8, "gray", [], {});
 		
 		rat.setCode(
+			"when gidget on rat, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
+			"goto gidget\n"
 		);
 		
 		rat.setSpeed(3);
@@ -508,78 +507,78 @@ GIDGET.levels = {
 	learnAvoidActive2: function() { 
 
 		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid rat, grab it\n" +
+			"scan birds\n" +
+			"scan rats\n" +
+			"goto birds avoid rat, grab it\n" +
 			"scan crate, goto it avoid rat\n" +
-			"drop rocks";
+			"drop birds";
 	
 		var world = new GIDGET.World(10, 10, 5, 4, code);
 		world.gidget.setEnergy(160);
 
-		world.addGoal("two rocks on crate");
+		world.addGoal("two birds on crate");
 
-		new GIDGET.Thing(world, "crate", 2, 2, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 1, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "crate", 2, 2, "Chocolate", [], {});
+		new GIDGET.Thing(world, "bird", 9, 1, "orange", [], {});
+		new GIDGET.Thing(world, "bird", 1, 9, "orange", [], {});
 		var rat = new GIDGET.Thing(world, "rat", 8, 8, "yellow", [], {});
 		
-		wall = new GIDGET.Thing(world, "wall", 0, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 0, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 1, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 2, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 2, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 3, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 3, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 4, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 4, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 7, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 7, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 8, 7, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 8, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 		
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 1, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 2, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 3, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 4, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 7, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 8, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 
 
-		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 1, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 2, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 3, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 4, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 5, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 6, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 7, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
+		wall = new GIDGET.Thing(world, "wall", 8, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 		
 		rat.setCode(
+			"when gidget on rat, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
+			"goto gidget\n"
 		);
 		
 		rat.setSpeed(3);
@@ -648,7 +647,6 @@ GIDGET.levels = {
 		world.addGoal("goop on bucket");
 
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 9, 5, "gray", [], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
@@ -662,8 +660,19 @@ GIDGET.levels = {
 			}
 		);
 		
-		var wall;
+		new GIDGET.Thing(world, "goop", 9, 0, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 1, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 2, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 3, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 4, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 5, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 6, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 7, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 8, "green", [], {});
+		new GIDGET.Thing(world, "goop", 9, 9, "green", [], {});
 		
+		
+		var wall;
 		wall = new GIDGET.Thing(world, "wall1", 3, 0, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
@@ -707,7 +716,7 @@ GIDGET.levels = {
 		world.addGoal("rock on bucket");
 
 		new GIDGET.Thing(world, "bucket", 7, 0, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 0, 7, "gray", [], {});
+		new GIDGET.Thing(world, "rock", 0, 7, "brown", [], {});
 		
 		var wall;
 		
@@ -781,7 +790,7 @@ GIDGET.levels = {
 		var rat2 = new GIDGET.Thing(world, "rat", 9, 0, "yellow", [], {});
 		
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 1, "gray", [], {});
+		new GIDGET.Thing(world, "rock", 9, 1, "brown", [], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
