@@ -24,7 +24,7 @@ GIDGET.levels = {
 
 		var code = 
 			"scan gidget\n" +
-			"scan goop";
+			"scan bucket";
 	
 		var mission = "I have to report on what is in this area too. How did I do it last time? This is so hard for me!";
 					
@@ -34,10 +34,10 @@ GIDGET.levels = {
 		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
 			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "rgb(0,0,0)", [], {});  shrub.labeled = false;
 		}
-		new GIDGET.Thing(world, "goop", 8, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 8, 8, "rgb(0,0,0)", [], {});
 				
 		world.addGoal("scanned gidget");
-		world.addGoal("scanned goop");
+		world.addGoal("scanned bucket");
 
 		return world;
 	
@@ -66,7 +66,30 @@ GIDGET.levels = {
 		return world;
 	
 	},
+	
+	// *******************************************************
+		
+	learnAnalyze: function() {
 
+		var code = 
+			"scan goop\n" +
+			"analyze goop";
+			
+		var mission = "There's something different about this goop...how can I check it?";
+					
+		var world = new GIDGET.World(10, 10, 5, 5, code, mission);
+		world.gidget.setEnergy(500);
+		
+		new GIDGET.Thing(world, "goop", 5, 5, "rgb(0,0,0)", [ 'glowing' ], {});
+		
+
+		
+		world.addGoal("analyzed goop");
+
+
+		return world;
+	
+	},		
 	// *******************************************************
 	
 	learnGoto: function() {
@@ -211,37 +234,16 @@ GIDGET.levels = {
 	
 	},
 		
-	// *******************************************************
-		
-	learnAnalyze: function() {
-
-		var code = 
-			"scan goop\n" +
-			"goto goop\n" +
-			"analyze goop";
-			
-		var mission = "There's something different about that goop over there...how can I check it?";
-					
-		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
-		world.gidget.setEnergy(500);
-		
-		new GIDGET.Thing(world, "goop", 8, 8, "rgb(0,0,0)", [ 'glowing' ], {});
-		
-
-		
-		world.addGoal("analyzed goop");
-
-
-		return world;
 	
-	},			
 	// *******************************************************
 		
 	learnConditional: function() {
 
 		var code = 
-			"scan goop\n" +
-			"goto goop, analyze it, if it is glowing, grab it\n";
+			"scan goops\n" +
+			"goto goops, analyze it, if it is glowing, grab it\n" +
+			"scan bucket, goto it\n" +
+			"drop goop";
 			
 		var mission = "Whoops, I dropped the glowing goop I picked up in the last round! I can't figure out how to find it amongst all these other samples!";
 					
@@ -249,7 +251,7 @@ GIDGET.levels = {
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
+		//new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 9, 9, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 7, 7, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 1, 3, "rgb(0,0,0)", [], {});
@@ -257,7 +259,7 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "goop", 7, 8, "rgb(0,0,0)", [] , {});
 		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("grabbed goop is glowing");
+		world.addGoal("goop on bucket is glowing");
 
 		return world;
 	
@@ -268,26 +270,27 @@ GIDGET.levels = {
 	learnConditionalCompound: function() {
 
 		var code = 
-			"scan goops\n" +
-			"goto goops, analyze it, if it is glowing, grab it\n" +
-			"scan bucket, goto it\n" +
-			"drop goops";
+			"scan rocks\n" +
+			"goto rocks, analyze it, if it is contaminated, grab it\n" +
+			"scan crate, goto it\n" +
+			"drop rocks";
 			
-		var mission = "There are a lot of glowing goops here! Help me pick them out and take them to the bucket so that they can be neutralized quickly! This is so important, but I cannot seem to figure it out.";
+		var mission = "There are a lot of contaminated rocks here! Help me pick them out and take them to the bucket so that they can be neutralized quickly! This is so important, but I cannot seem to figure it out.";
 					
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(500);
 		
-		new GIDGET.Thing(world, "goop", 1, 8, "rgb(0,0,0)", [ 'glowing' ], {});
-		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 9, 9, "rgb(0,0,0)", [ 'glowing' ], {});
-		new GIDGET.Thing(world, "goop", 7, 7, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 1, 3, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 5, 6, "rgb(0,0,0)", [ 'glowing' ], {});
-		new GIDGET.Thing(world, "goop", 7, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 8, 1, "rgb(0,0,0)", [ 'contaminated' ], {});
+		new GIDGET.Thing(world, "rock", 1, 4, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 9, 9, "rgb(0,0,0)", [ 'contaminated' ], {});
+		new GIDGET.Thing(world, "rock", 7, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 3, 1, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 6, 5, "rgb(0,0,0)", [ 'contaminated' ], {});
+		new GIDGET.Thing(world, "rock", 8, 7, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "crate", 6, 9, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("three goops on bucket are glowing");
+		world.addGoal("three rocks on crate are contaminated");
+
 
 		return world;
 	
@@ -310,11 +313,11 @@ GIDGET.levels = {
 		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
 		world.gidget.setEnergy(130);
 		
-		new GIDGET.Thing(world, "rock", 3, 8, "rgb(0,0,0)", [ 'green' ], {});
-		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [ 'red' ], {});
+		new GIDGET.Thing(world, "rock", 3, 8, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 8, 8, "rgb(0,0,0)", [ 'contaminated' ], {});
 		new GIDGET.Thing(world, "crate", 1, 3, "rgb(0,0,0)", [], {});
 		
-		world.addGoal("rock on crate is red");
+		world.addGoal("rock on crate is contaminated");
 
 
 		return world;
@@ -500,437 +503,153 @@ GIDGET.levels = {
 		
 	},
 
-
-	// *******************************************************
-	// *********** O L D - L E V E L S ***********************
-	// *******************************************************
-
-	xxxxxxxxxxxxxxxxxxxxxx: function() {
-
-		var code = 
-			"scan bucket\n" +
-			"goto bucket";
-	
-		var mission = "I have to figure out how to get back to my bucket. Something is wrong and I can't seem to get it right.";
-	
-		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
-		
-		world.addGoal("gidget on bucket");
-		
-		new GIDGET.Thing(world, "bucket", 8, 8, "brown", [], {});
-
-		return world;
-	
-	},
-
-	
-	// *******************************************************
-
-	analyzeDiamond: function() {
-
-		var code = 
-			"scan diamond\n" +
-			"goto diamond\n" +
-			"analyze diamond\n";
-	
-	
-		var mission = "There have been reports of fake gems in the area. I have to make sure that anything I find is genuine... if only I could remember how to do it!";
-
-		var world = new GIDGET.World(10, 10, 1, 1, code, mission);
-		
-		world.addGoal("analyzed diamond");
-
-		new GIDGET.Thing(world, "diamond", 2, 2, "rgb(0,0,0)", [], {});
-		
-		return world;
-	
-	},
-	
-	// *******************************************************
-
-	beTired: function() {
-
-		var code = 
-			"scan bucket\n" +
-			"goto bucket\n";
-	
-
-		var world = new GIDGET.World(10, 10, 1, 1, code);
-		world.gidget.setEnergy(30);
-		
-		world.addGoal("gidget on bucket");
-		
-		new GIDGET.Thing(world, "bucket", 8, 8, 1, "rgb(0,0,0)", [], {});
-		
-		return world;
-	
-	},
-	
 	// *******************************************************
 	
-	getRedRock: function() {
-
-		var code = 
-			"scan blackholes\n" +
-			"scan rocks\n" +
-			"goto rocks, analyze it, if it is red, grab it\n" +
-			"goto blackhole\n" +
-			"drop rock\n" +
-			"scan bucket, goto it";
-	
-		var mission = "One of these rocks is glowing red and could be dangerous! I'm supposed to bring it back to the bucket for analysis. I can't seem to figure out how to get it there.";
-		
-	
-		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
-		world.gidget.setEnergy(1000);
-		
-		world.addGoal("rock on blackhole is red");
-		world.addGoal("gidget on bucket");
-
-		new GIDGET.Thing(world, "bucket", 2, 8, 1, "rgb(100,100,100)", [], {});
-		new GIDGET.Thing(world, "blackhole", 2, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 5, 7, "rgb(250,0,0)", [ 'red' ], {});
-		new GIDGET.Thing(world, "rock", 8, 2, "rgb(200,200,200)", [ 'gray' ], {});
-		
-		return world;
-	
-	},
-	
-	// *******************************************************
-		
-	getWhiteRock: function() {
+	learnAvoidActive2: function() { 
 
 		var code = 
 			"scan rocks\n" +
-			"goto rocks, analyze it, if it is white, grab it\n" +
-			"scan bucket, goto it\n" +
+			"scan gulls\n" +
+			"goto rocks avoid rat, grab it\n" +
+			"scan crate, goto it avoid rat\n" +
 			"drop rocks";
 	
-			
-		var world = new GIDGET.World(10, 10, 2, 8, code);
-		world.gidget.setEnergy(200);
+		var world = new GIDGET.World(10, 10, 5, 4, code);
+		world.gidget.setEnergy(160);
+
+		world.addGoal("two rocks on crate");
+
+		new GIDGET.Thing(world, "crate", 2, 2, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 9, 1, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
+		var rat = new GIDGET.Thing(world, "rat", 8, 8, "yellow", [], {});
 		
-		world.addGoal("rocks on bucket are white");
-
-		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 5, 7, "rgb(250,0,0)", [ 'red' ], {});
-		new GIDGET.Thing(world, "rock", 8, 2, "rgb(200,200,200)", [ 'gray' ], {});
-		new GIDGET.Thing(world, "rock", 4, 4, "rgb(255,255,255)", [ 'white' ], {});
-		
-		return world;
-	
-	},
-	
-	
-	// *******************************************************
-
-	avoidSpikes: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan spikes\n" +
-			"goto rocks avoid spikes, analyze it, if it is white, grab it\n" + // avoid spikes is redundant here
-			"scan bucket, goto it\n" +
-			"drop rocks";
-	
-		
-			
-		var world = new GIDGET.World(10, 10, 2, 8, code);
-
-		world.addGoal("rock on bucket is white");
-
-		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
-
-		var spike;
-		spike = new GIDGET.Thing(world, "spike", 3, 1, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 2, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 3, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 4, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 6, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 7, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 3, 8, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-		spike = new GIDGET.Thing(world, "spike", 4, 5, "rgb(200,200,200)", [], {});
-		spike.setLevel(2);
-
-		new GIDGET.Thing(world, "rock", 4, 4, "rgb(255,255,255)", [ 'white' ], {});
-		
-		return world;
-	
-	},
-
-	// *******************************************************
-
-	maze: function() {
-
-		var code = "scan rock\n" +
-				   "goto banana, grab rock";
-			
-			
-		var world = new GIDGET.World(10, 10, 0, 0, code);
-		world.gidget.setEnergy(1000);
-		
-		world.addGoal("gidget on rock");
-
-
-		new GIDGET.Thing(world, "rock", 2, 7, "rgb(251,231,128)", [], {});
-/*
-		..........
-		..xxx.xxx.
-		..x...x.x.
-		..x.x.x.x.
-		..x.x.x.x.
-		.xxxx...xx
-		.x....xx.
-		.........
-		.........
-		.........
-*/
-		var wall;
-
-		//wall = new GIDGET.Thing(world, "wall", 0, 9, "rgb(50,50,50)", [], {});
-		//wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 1, 2, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 4, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 6, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 8, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 2, 2, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 6, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 8, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 3, 2, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 4, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 6, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 8, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 4, 2, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 4, "rgb(50,50,50)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 6, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 8, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 5, 1, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 2, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 4, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 9, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 6, 1, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(50,50,50)", [], {});		
-		wall.setLevel(2);
-
-		return world;
-	
-	},
-	
-	// *******************************************************
-	
-	superMaze: function() {
-
-		var code = "scan rock\n" +
-				   "goto rock, grab rock";
-			
-
-		var world = new GIDGET.World(10, 10, 0, 0, code);
-		world.gidget.setEnergy(135);
-
-		world.addGoal("rock on gidget");
-
-		new GIDGET.Thing(world, "rock", 9, 9, "rgb(251,231,128)", [], {});
-
-		var wall;
-
-
-		wall = new GIDGET.Thing(world, "wall", 0, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 1, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
-
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 9, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
-
-		wall = new GIDGET.Thing(world, "wall", 0, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
+		wall = new GIDGET.Thing(world, "wall", 0, 7, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 2, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 3, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 4, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 7, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 8, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
+		wall.setLevel(2); wall.labeled = false;
 		
-		wall = new GIDGET.Thing(world, "wall", 1, 8, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 9, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 9, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 9, 8, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
+		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
 
+
+		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		
+		rat.setCode(
+			"scan gidget\n" +
+			"goto gidget\n" +
+			"set gidget energy 0"
+		);
+		
+		rat.setSpeed(3);
+		
 		return world;
-	
+		
 	},
 	
+	
 	// *******************************************************
-
-	carTobucket: function() {
+	
+	learnBlending: function() {
 
 		var code = 
-			"scan car\n" +
-			"scan bucket\n" +
-			"goto car, analyze it, if it isn't working, name it broken\n" +
-			"goto car\n" +
-			"ask car to drive gidget bucket"
-		;
+			"scan rocks\n" +
+			"scan blender\n" +
+			"goto rock, analyze it, if it is contaminated, grab it\n" +
+			"goto blender, analyze it\n" +
+			"ask blender to combine first rock second rock\n" +
+			"analyze rgoop, grab it\n" +
+			"scan bucket, goto it\n" +
+			"drop rgoop"; 
 	
 
-		var world = new GIDGET.World(10, 10, 1, 1, code);
-		world.gidget.setEnergy(200);
-
-		world.addGoal("gidget on bucket");
-		world.addGoal("car on bucket");
-	
-		new GIDGET.Thing(world, "car", 3, 3, "yellow", [ 'working' ], 
+		var world = new GIDGET.World(10, 10, 2, 8, code);
+		world.gidget.setEnergy(1000);
+		
+		world.addGoal("rgoop on bucket");
+		
+		new GIDGET.Thing(world, "bucket", 1, 1, "rgb(250,255,255)", [], {});
+		new GIDGET.Thing(world, "rock", 2, 2, "rgb(250,255,255)", [ 'contaminated'], {});
+		new GIDGET.Thing(world, "rock", 9, 5, "rgb(250,255,255)", [ 'contaminated'], {});
+		new GIDGET.Thing(world, "rock", 4, 7, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "blender", 8, 8, "yellow", {}, 
 			{ 
-			drive : new GIDGET.Action([ "passenger", "destination" ],
-				"scan passenger\n" +
-				"goto passenger\n" +			
-				"analyze passenger\n" +
-				"grab passenger\n" +
-				"scan destination\n" +
-				"goto destination\n" +
-				"drop passenger"
+			combine : new GIDGET.Action([ "item1" , "item2" ], 
+				"if item1 is contaminated and item2 is contaminated, remove item1, remove item2, add rgoop"		
 				)
 			}
 		);
-
-		new GIDGET.Thing(world, "car", 5, 5, "yellow", [], {});
-
-		new GIDGET.Thing(world, "bucket", 8, 8, "brown", [], {});
 		
 		return world;
-	
+		
 	},
 	
 	// *******************************************************
 	
-	sequenceWalls: function() {
+	learnSequence: function() {
 
 		var code = 
 			"scan bucket\n" +
 			"scan button\n" +
 			"goto button, analyze it\n" +
 			"ask button to raise\n" +	
-			"scan rocks\n" +
-			"goto rocks, grab it\n" +
+			"scan goops\n" +
+			"goto goops, grab it\n" +
 			"goto button\n" +
 			"ask button to lower\n" +
 			"goto bucket\n" +
-			"drop rocks";
+			"drop goops";
 	
 
 		var world = new GIDGET.World(10, 10, 2, 8, code);
 		world.gidget.setEnergy(1000);
 
-		world.addGoal("rock on bucket");
+		world.addGoal("goop on bucket");
 
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 5, "gray", [], {});
-		new GIDGET.Thing(world, "button", 5, 8, "red", [], 			// Buttons should not be GRABable
+		new GIDGET.Thing(world, "goop", 9, 5, "gray", [], {});
+		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
 				"raise wall1 height\n" +
@@ -945,37 +664,27 @@ GIDGET.levels = {
 		
 		var wall;
 		
-		wall = new GIDGET.Thing(world, "wall1", 3, 0, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 1, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 2, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 3, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 4, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 5, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 6, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 7, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 8, "rgb(255,255,255)", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 9, "rgb(255,255,255)", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 0, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 4, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 5, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 6, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 7, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 8, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 9, "black", [], {}); wall.labeled = false;
 
-		wall = new GIDGET.Thing(world, "wall2", 8, 0, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 1, "rgb(255,255,255)", [], {}); 
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 2, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 3, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 4, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 5, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 6, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 7, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 8, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 9, "rgb(255,255,255)", [], {});
-		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 7, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 8, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 9, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		
 		return world;
 	
@@ -983,356 +692,70 @@ GIDGET.levels = {
 	
 	// *******************************************************
 	
-	avoidGulls: function() {
-
+	learnSequence2: function() {
+	
 		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid gull, grab it\n";
-	
-		var world = new GIDGET.World(10, 10, 0, 0, code);
-		world.gidget.setEnergy(103);
-		
-		world.addGoal("grabbed three rocks");
-		
-		new GIDGET.Thing(world, "rock", 6, 6, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 6, 9, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
-		var gull = new GIDGET.Thing(world, "gull", 8, 8, "yellow", [], {});
-		
-		gull.setCode(
-			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
-		);
-		
-		gull.setSpeed(3);
-		
-		return world;
-		
-	},
-
-	// *******************************************************
-
-	avoidFastGulls: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid gull, grab it\n";
-	
-		var world = new GIDGET.World(10, 10, 0, 0, code);
-
-		world.addGoal("grabbed three rocks");
-
-		new GIDGET.Thing(world, "rock", 9, 0, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 9, 9, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 0, 9, "rgb(250,0,0)", [], {});
-
-		var gull = new GIDGET.Thing(world, "gull", 8, 8, "yellow", [], {});
-		
-		gull.setCode(
-			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
-		);
-		
-		gull.setSpeed(1.5);
-		
-		return world;
-		
-	},
-	
-	// *******************************************************
-	
-	getTwoRocksGulls: function() { 
-
-		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid gull, grab it\n";
-	
-		var world = new GIDGET.World(10, 10, 5, 4, code);
-		world.gidget.setEnergy(140);
-
-		world.addGoal("grabbed two rocks");
-
-		new GIDGET.Thing(world, "rock", 9, 1, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
-		var gull = new GIDGET.Thing(world, "gull", 8, 8, "yellow", [], {});
-		
-		wall = new GIDGET.Thing(world, "wall", 0, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 7, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
-
-		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		
-		gull.setCode(
-			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
-		);
-		
-		gull.setSpeed(3);
-		
-		return world;
-		
-	},
-	
-	// *******************************************************
-
-	getTwoRocksGull_Bug: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid gull, grab it\n";
-	
-		var world = new GIDGET.World(10, 10, 0, 0, code);
-
-		world.addGoal("grabbed two rocks");
-
-		new GIDGET.Thing(world, "rock", 6, 6, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
-		var gull = new GIDGET.Thing(world, "gull", 8, 8, "yellow", [], {});
-		
-		
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 9, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
-
-		wall = new GIDGET.Thing(world, "wall", 0, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		
-		gull.setCode(
-			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
-		);
-		
-		gull.setSpeed(3);
-		
-		return world;
-		
-	},
-	
-	// *******************************************************
-
-	getTwoRocksGull2_Bug: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"goto rocks avoid gull, grab it\n";
-	
-		var world = new GIDGET.World(10, 10, 5, 4, code);
-
-		world.addGoal("grabbed two rocks");
-
-		new GIDGET.Thing(world, "rock", 1, 9, "rgb(250,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 6, 6, "rgb(250,0,0)", [], {});
-		
-		var gull = new GIDGET.Thing(world, "gull", 8, 8, "yellow", [], {});
-		
-		
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 1, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(0,0,0)", [], {});
-		wall.setLevel(2);
-		
-		gull.setCode(
-			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
-		);
-		
-		gull.setSpeed(3);
-		
-		return world;
-		
-	},
-
-	// *******************************************************
-	
-	blender: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan blender\n" +
-			"goto rock, analyze it, if it is white, grab it\n" +
-			"goto blender, analyze it\n" +
-			"ask blender to combine first rock second rock\n" +
-			"analyze diamond, grab it\n" +
-			"scan bucket, goto it"; 
-	
-
-		var world = new GIDGET.World(10, 10, 2, 8, code);
-		world.gidget.setEnergy(1000);
-		
-		world.addGoal("grabbed diamond");
-		world.addGoal("gidget on bucket");
-		
-		new GIDGET.Thing(world, "bucket", 1, 1, "rgb(250,255,255)", [], {});
-		new GIDGET.Thing(world, "rock", 2, 2, "rgb(250,255,255)", [ 'white'], {});
-		new GIDGET.Thing(world, "rock", 9, 5, "rgb(250,255,255)", [ 'white'], {});
-		new GIDGET.Thing(world, "rock", 4, 7, "rgb(250,0,0)", [ 'red'], {});
-		new GIDGET.Thing(world, "blender", 8, 8, "yellow", {}, 
-			{ 
-			combine : new GIDGET.Action([ "item1" , "item2" ], 
-				"if item1 is white and item2 is white, remove item1, remove item2, add diamond"		
-				)
-			}
-		);
-		
-		return world;
-		
-	},
-	
-	// *******************************************************
-		
-	energize: function() {
-
-		var code = 
-			"scan rocks\n" +
 			"scan bucket\n" +
-			"scan battery\n" +
+			"scan rocks\n" +
 			"goto rocks, grab it\n" +
-			"goto battery, analyze it\n" +
-			"ask battery to energize gidget\n" +
 			"goto bucket\n" +
-			"drop";
-	
-
-		var world = new GIDGET.World(10, 10, 2, 8, code);	
-		world.gidget.setEnergy(106);
-
-		world.addGoal("two rocks on bucket");
-
-		new GIDGET.Thing(world, "bucket", 9, 9, "rgb(250,0,255)", {}, {});
-		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", { color: 'white'}, {});
-		new GIDGET.Thing(world, "rock", 0, 9, "rgb(0,255,0)", { color: 'green'}, {});
-		new GIDGET.Thing(world, "battery", 5, 5, "yellow", {}, 
-			{ 
-			energize : new GIDGET.Action([ "beneficiary" ],
-				"raise beneficiary energy 100"	// recharged to full capacity!
-				)
-			}
-		);
+			"drop rocks";
 		
+		var world = new GIDGET.World(10, 10, 1, 0, code);
+		world.gidget.setEnergy(250);
+		
+		world.addGoal("rock on bucket");
+
+		new GIDGET.Thing(world, "bucket", 7, 0, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "rock", 0, 7, "gray", [], {});
+		
+		var wall;
+		
+		wall = new GIDGET.Thing(world, "wall", 0, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 1, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 2, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 4, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 8, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+
+		wall = new GIDGET.Thing(world, "wall", 4, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 5, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 9, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		
+		wall = new GIDGET.Thing(world, "wall", 6, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 7, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 8, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+
+		wall = new GIDGET.Thing(world, "wall", 9, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+
+		wall = new GIDGET.Thing(world, "wall", 1, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 3, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 4, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 6, 9, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		
+		wall = new GIDGET.Thing(world, "wall", 0, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall", 2, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+
+		wall = new GIDGET.Thing(world, "wall", 0, 9, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
+
+
 		return world;
-		
-	},	
 	
+	},
+
+
 	// *******************************************************
 	
-	releaseGulls_Bug: function() { 
+	learnAll: function() { 
 
 		var code = 
 			"scan bucket\n" +
@@ -1354,12 +777,12 @@ GIDGET.levels = {
 
 		world.addGoal("rock on bucket");
 		
-		var gull = new GIDGET.Thing(world, "gull", 0, 9, "yellow", [], {});
-		var gull2 = new GIDGET.Thing(world, "gull", 9, 0, "yellow", [], {});
+		var rat = new GIDGET.Thing(world, "rat", 0, 9, "yellow", [], {});
+		var rat2 = new GIDGET.Thing(world, "rat", 9, 0, "yellow", [], {});
 		
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 9, 1, "gray", [], {});
-		new GIDGET.Thing(world, "button", 5, 8, "red", [], 			// Buttons should not be GRABable
+		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
 				"raise wall1 height\n" +
@@ -1374,233 +797,56 @@ GIDGET.levels = {
 		
 		var wall;
 		
-		wall = new GIDGET.Thing(world, "wall2", 0, 7, "rgb(255,255,255)", [], {}); 
-		wall.setLevel(2);
-		/*wall = new GIDGET.Thing(world, "wall2", 1, 7, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 2, 7, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 2, 8, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 2, 9, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall = new GIDGET.Thing(world, "wall2", 0, 7, "black", [], {}); 
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 1, 7, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 2, 7, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 2, 8, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 2, 9, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
 		
-		wall = new GIDGET.Thing(world, "wall2", 7, 0, "rgb(255,255,255)", [], {}); 
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 7, 1, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 7, 2, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 8, 2, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall2", 9, 2, "rgb(255,255,255)", [], {});
-		wall.setLevel(2);
+		wall = new GIDGET.Thing(world, "wall2", 7, 0, "black", [], {}); 
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 7, 1, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 7, 2, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 8, 2, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall2", 9, 2, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
 		
 		
-		wall = new GIDGET.Thing(world, "wall1", 1, 1, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 1, 2, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 1, 3, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 2, 3, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 2, 1, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 1, "rgb(255,255,255)", [], {});
-		wall = new GIDGET.Thing(world, "wall1", 3, 2, "rgb(255,255,255)", [], {});
-		*/wall = new GIDGET.Thing(world, "wall1", 3, 3, "rgb(255,255,255)", [], {});
+		wall = new GIDGET.Thing(world, "wall1", 1, 1, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 1, 2, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 1, 3, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 2, 3, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 2, 1, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
 		
 
 		
-		gull.setCode(
-			"when gidget on gull, set gidget energy 0\n" +
-			"scan gidget\n" +
-			"goto gidget\n"
-		);
-		
-		gull.setSpeed(3);
-		
-		gull2.setCode(
-			"when gidget on gull, set gidget energy 0\n" +
-			"scan gidget\n" +
-			"goto gidget\n"
-		);
-		
-		gull2.setSpeed(5);
-		
-		return world;
-	
-	},
-
-// *******************************************************
-	
-	stripe: function() {
-	
-		var code = 
-			"scan bucket\n" +
-			"scan rocks\n" +
-			"goto rocks, grab it\n" +
-			"goto bucket\n" +
-			"drop rocks";
-		
-		var world = new GIDGET.World(10, 10, 1, 0, code);
-		world.gidget.setEnergy(250);
-		
-		world.addGoal("rock on bucket");
-
-		new GIDGET.Thing(world, "bucket", 7, 0, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "rock", 0, 7, "gray", [], {});
-		
-		var wall;
-		
-		wall = new GIDGET.Thing(world, "wall", 0, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 4, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 9, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 6, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 9, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 1, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 9, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 0, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 7, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 0, 9, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-
-		return world;
-	
-	},
-
-
-	// *******************************************************
-		
-	fillHoles: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan bucket\n" +
-			"scan blackholes\n" +
-			"goto rocks, grab it\n" +
-			"goto blackholes, drop rock\n" +
-			"goto bucket";
-	
-		
-		var world = new GIDGET.World(10, 10, 2, 8, code);
-		world.gidget.setEnergy(155);
-
-		world.addGoal("rock on blackhole");
-
-		new GIDGET.Thing(world, "blackhole", 0, 0, "rgb(0,0,0)", { }, {});
-		new GIDGET.Thing(world, "blackhole", 9, 9, "rgb(0,0,0)", { }, {});
-		new GIDGET.Thing(world, "bucket", 9, 9, "rgb(250,0,255)", {}, {});
-		new GIDGET.Thing(world, "rock", 1, 1, "rgb(250,255,255)", {}, {});
-		new GIDGET.Thing(world, "rock", 0, 9, "rgb(0,255,0)", {}, {});
-
-
-
-		
-		return world;
-		
-	},	
-	
-	// *******************************************************
-		
-	pacMan: function() {
-
-		var code = 
-			"scan rocks\n" +
-			"scan gulls\n" +
-			"scan diamond\n" +
-			"goto rocks avoid gull, grab it\n" +
-			"goto diamond, grab it\n" +
-			"scan bucket, goto it";
-	
-		var world = new GIDGET.World(10, 10, 7, 4, code);
-		world.gidget.setEnergy(500);
-
-		world.addGoal("grabbed three rocks");
-		world.addGoal("diamond on gidget");
-		world.addGoal("gidget on bucket");
-
-		var gull = new GIDGET.Thing(world, "gull", 1, 4, "yellow", [], {});
-
-		new GIDGET.Thing(world, "rock", 0, 0, "gray", [], {});
-		new GIDGET.Thing(world, "rock", 9, 0, "gray", [], {});
-		new GIDGET.Thing(world, "rock", 0, 9, "gray", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 9, "gray", [], {});
-		new GIDGET.Thing(world, "diamond", 5, 5, "rgb(255,0,0)", [], {});
-
-		var wall;
-
-		wall = new GIDGET.Thing(world, "wall", 1, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 1, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-
-		wall = new GIDGET.Thing(world, "wall", 4, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 8, 3, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 4, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 5, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 6, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 1, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		wall = new GIDGET.Thing(world, "wall", 1, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 2, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 3, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 4, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 5, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 6, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 7, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		wall = new GIDGET.Thing(world, "wall", 8, 8, "rgb(255,255,255)", [], {}); wall.setLevel(2);
-		
-		gull.setCode(
+		rat.setCode(
 			"scan gidget\n" +
 			"goto gidget\n" +
 			"set gidget energy 0"
 		);
-		gull.setSpeed(3);
+		rat.setSpeed(3);
 		
+		rat2.setCode(
+			"scan gidget\n" +
+			"goto gidget\n" +
+			"set gidget energy 0"
+		);
+		rat2.setSpeed(5);
 		
 		return world;
-		
-	},	
+	
+	},
 	
 };
