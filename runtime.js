@@ -247,6 +247,15 @@ GIDGET.Runtime = function(thing, world) {
 
 	};
 
+	this.Say = function(runtime, message) {
+
+		this.runtime = runtime;
+		this.kind = 'Say';
+		this.message = message;
+		this.execute = function() {};
+
+	};
+
 	this.addDecision = function(message, action, state) { this.decisions.push(new this.Decision(this, message, action, state)); }
 				
 	this.hasRecentResults = function() { return this.resultsStack.length > 0 && this.resultsStack[0].length > 0; };
@@ -1372,6 +1381,24 @@ GIDGET.runtime = {
 				runtime.addDecision(
 					"Alright, $focused(I stopped focusing).",
 					new runtime.PopFocus(runtime));
+	
+				runtime.pc++;
+								
+			}
+		};
+	},
+
+	Step_SAY: function(ast, representativeToken, message) {
+		return {
+			ast: ast,
+			representativeToken: representativeToken,
+			message: message,
+			toString: function() { return "say " + this.message; },
+			execute: function(runtime) {
+	
+				runtime.addDecision(
+					message,
+					new runtime.Say(runtime, message));
 	
 				runtime.pc++;
 								

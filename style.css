@@ -181,6 +181,13 @@ textarea {
 	border-radius: 	1em;
 }
 
+#thingThought {
+	position:		absolute;
+	visibility: 	hidden;
+	width:			15em;
+	z-index: 		2;
+}
+
 #energy {
 	font-size:		x-large;
 	color:			white;
