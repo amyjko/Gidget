@@ -134,7 +134,8 @@ GIDGET.ui = {
 		
 			var classes = 'sourceToken';
 			
-			if(string.match(/scan|analyze|goto|ask|to|grab|drop|it|if|is|are|on/))
+
+			if(string.match(/scan|say|analyze|goto|ask|to|grab|drop|it|if|is|are|on/))
 				classes = classes + ' keyword';		
 				
 			if(first) {
@@ -328,8 +329,10 @@ GIDGET.ui = {
 		this.updateRuntimeUserInterface();
 	
 		// It may be the case that there is no code.	
+/*
 		if(this.world.gidget.runtime.isExecuting())
 			this.step(false, true);
+*/
 
 	},
 
@@ -437,13 +440,15 @@ GIDGET.ui = {
 			
 			}
 
-			// If ther eare none left, get some more by stepping the world once.
+			// If ther are none left, get some more by stepping the world once.
 			while(this.world.isExecuting() && countDecisionsRemaining(this) === 0)
 				this.decisionsRemaining = this.world.step();
 
 			// Reset the animation loop.
 			GIDGET.ui.world.resetThingDeltas();		
 			this.percentRemaining = 100;
+
+			var somethingSaid = false;
 
 			// Explain each active thing's next decision before executing it.
 			for(index = 0; index < this.decisionsRemaining.length; index++) {
@@ -468,10 +473,25 @@ GIDGET.ui = {
 					
 					}
 					
+					// If this is a speak, add a speech bubble
+					if(decision.action.kind === 'Say') {
+					
+						$('#thingThought').html(decision.action.message);
+						$('#thingThought').css('visibility', 'visible');
+						var top = runtime.thing.row * (this.getCellSize() + 1) + $('#thingThought').height() + $('#grid').position().top;
+						var left = runtime.thing.column * this.getCellSize() + $('#grid').position().left - $('#thingThought').width() / 2;
+						$('#thingThought').css('top', "" + top + "px");
+						$('#thingThought').css('left', "" + left + "px");
+					
+					}
+					else {
+						$('#thingThought').css('visibility', 'hidden');
+					}
+					
 				}
 			
 			}
-			
+						
 			// If we're playing, invoke another step.
 			if(play === true && this.world.isExecuting())
 				setTimeout(GIDGET.ui.stepContinue, GIDGET.ui.stepSpeedInMilliseconds);
@@ -914,6 +934,8 @@ GIDGET.ui = {
 	
 	},
 
+	getCellSize: function() { return $('#grid').width() / this.world.grid[0].length; },
+
 	drawGrid: function() {
 	
 		var grid = this.world.grid;
@@ -926,7 +948,7 @@ GIDGET.ui = {
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.lineWidth = 1;
 		
-		var cellSize = canvas.width / grid[0].length;
+		var cellSize = this.getCellSize();
 		var things, thing;
 		var i, x, y;
 

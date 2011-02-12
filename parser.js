@@ -4,6 +4,7 @@ GIDGET Grammar
 
 PROGRAM 	:: { COMMAND UNKNOWN }*
 UNKNOWN 	:: token* eol
+SPEAK		:: say token*
 COMMAND 	:: NAME | IF | SCAN | GOTO | ANALYZE | TELL | GRAB | DROP | MODIFY | ADD | REMOVE | UNKNOWN
 NAME		:: name QUERY STRING [FOCUS]
 SCAN 		:: scan QUERY [FOCUS]
@@ -280,6 +281,9 @@ GIDGET.parser = {
 
 		if(tokenStream.nextIs('if') || tokenStream.nextIs('when')) {
 			return this.parseIf(tokenStream);
+		}
+		else if(tokenStream.nextIs('say')) {
+			return this.parseSpeak(tokenStream);		
 		}
 		else if(tokenStream.nextIs('scan')) {
 			return this.parseScan(tokenStream);		
@@ -850,6 +854,34 @@ GIDGET.parser = {
 		modify.focus = this.parseFocus(tokenStream);
 
 		return modify;
+
+	},
+	
+	// SAY :: say token*
+	parseSpeak: function(tokenStream) {
+
+		var ast = {
+			type: 'say',
+			keyword: undefined,
+			message: undefined,
+			
+			serialize: function() {
+
+				return [ new GIDGET.runtime.Step_SAY(this, this.keyword, this.message) ];
+			
+			}
+		}
+	
+		// eat the keyword
+		ast.keyword = tokenStream.eat();
+
+		var message = "";
+		while(!tokenStream.eol())
+			message = message + tokenStream.eat().text + " ";
+		
+		ast.message = message;
+
+		return ast;
 
 	},
 	

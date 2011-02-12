@@ -858,4 +858,24 @@ GIDGET.levels = {
 	
 	},
 	
+	testSpeak: function() { 
+
+		var code = "scan rat";	
+		var mission = "I have a new friend.";
+	
+		var world = new GIDGET.World(10, 10, 0, 1, code, mission);
+
+		world.addGoal("scanned rat");
+		
+		var rat = new GIDGET.Thing(world, "rat", 0, 9, "yellow", [], {});
+				
+		rat.setCode(
+			"say I am your friend, gidget! But I still want to eat you."
+		);
+				
+		return world;
+	
+	},
+	
+	
 };
