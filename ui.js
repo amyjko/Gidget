@@ -472,10 +472,8 @@ GIDGET.ui = {
 						this.visualizeDecision(decision, animate);
 					
 					}
-					
 					// If this is a speak, add a speech bubble
-					if(decision.action.kind === 'Say') {
-					
+					if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
 						$('#thingThought').html(decision.action.message);
 						$('#thingThought').css('visibility', 'visible');
 						var top = runtime.thing.row * (this.getCellSize() + 1) + $('#thingThought').height() + $('#grid').position().top;
