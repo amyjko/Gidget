@@ -1512,25 +1512,38 @@ GIDGET.runtime = {
 							script = action.script;
 							argumentNames = action.arguments;
 	
-							runtime.addDecision("Yay! " + object.name + " knows how to " + this.action.text + ". I'm going to tell it to do it.");
-							
-							var actualArguments = {};
-	
-							var argIndex = 0;
-							for(argIndex = 0; argIndex < argumentNames.length; argIndex++) {								
-							
-								console.log("\tMapping " + arguments[argIndex].name + " to " + argumentNames[argIndex]);
-								actualArguments[argumentNames[argIndex]] = arguments[argIndex];
+							// If the user hasn't supplied the expected number of arguments, then fail
+							if(argumentNames.length !== arguments.length) {
+
+								runtime.addDecision("Oh no... <b>" + object.name + "</b> knows how to <b>" + this.action.text + "</b>, but it wanted me to give it <b>" + argumentNames.length + "</b> names. I gave it <b>" + arguments.length + "</b> names. I don't know what to do! I guess I'll just skip this step.", undefined, "sad");
+								
+								runtime.pc += this.offset;
+								return;
 							
 							}
+							else {
 	
-							// Start the object on the script we found.
-							object.runtime.start(script, false, actualArguments);
-							
-							// Push it on the asked list.
-							runtime.asked.push(object);
-
-							// Don't increment; keep executing this step its done.
+								runtime.addDecision("Yay! " + object.name + " knows how to " + this.action.text + ". I'm going to tell it to do it.");
+								
+								var actualArguments = {};
+		
+								var argIndex = 0;
+								for(argIndex = 0; argIndex < argumentNames.length; argIndex++) {								
+								
+									console.log("\tMapping " + arguments[argIndex].name + " to " + argumentNames[argIndex]);
+									actualArguments[argumentNames[argIndex]] = arguments[argIndex];
+								
+								}
+		
+								// Start the object on the script we found.
+								object.runtime.start(script, false, actualArguments);
+								
+								// Push it on the asked list.
+								runtime.asked.push(object);
+	
+								// Don't increment; keep executing this step its done.
+								
+							}
 		
 						}
 						else {
