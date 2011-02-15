@@ -227,11 +227,12 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 	
 	};
 	
-	// The world is executing while Gidget is executing.
+	// The world is executing while Gidget has steps that he's executing. The runtime is
+	// executing while a thing is executing the goal or is not executing a goal and still has energy.
 	this.isExecuting = function() {
 	
 		return isDef(this.gidget) && isDef(this.gidget.runtime) && isDef(this.gidget.runtime.steps) && this.gidget.runtime.isExecuting();
-	
+
 	};
 	
 	// Steps all objects in the world one step, gathering all of their decisions into a list of lists.
