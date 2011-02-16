@@ -47,6 +47,18 @@ $().ready(function() {
 	
 	});
 	
+	$('#code').click(function() {
+	
+		console.log("Bkldjfl");
+		if($('#code').attr('contentEditable') === 'false') {
+
+			$('#code').animate({ opacity: 0.25 }, 200, function() { $('#code').css('opacity', 1.0); });		
+			GIDGET.ui.setThought(GIDGET.text.editingDisabled(), 200);
+		
+		}
+	
+	});
+	
 	function animate() {
 		GIDGET.ui.percentRemaining -= 10;
 		if(GIDGET.ui.percentRemaining < 0) {

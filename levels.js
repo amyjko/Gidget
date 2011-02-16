@@ -10,11 +10,16 @@ GIDGET.levels = {
 		var mission = "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!<br /><br />" +
 		"I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!\n<br /><br />" +
 		"I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.";
-					
+
+
 		var world = new GIDGET.World(10, 10, 2, 8, code, mission);
 		world.gidget.setEnergy(100);
 		
 		world.addGoal("scanned gidget");
+
+		world.addMissionText("sad", "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!");
+		world.addMissionText("default", "I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!");
+		world.addMissionText("sad", "I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.");
 
 		return world;
 	
