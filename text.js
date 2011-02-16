@@ -7,168 +7,221 @@ GIDGET.text = {
 
 	if_true: function() {
 
+		if (GIDGET.experiment.isControl())
+			return "$results(the recent results) are not empty. Going to next step.";
+			
 		return "I'm looking at $results(the recent results) and they weren't empty, so I'll go to the next step.";
 	
 	},
 	
 	if_false: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "$results(recent results) empty, so skipping to next part.";
+			
 		return "I'm looking at the $results(recent results) and they were empty, so I'm going to skip the next part.";
 	
 	},
 	
 	if_popResults: function() {
-
+		if (GIDGET.experiment.isControl())
+			return "Removing $results(the recent results) before continuing.";
+			
 		return "Before I move on, I'm going to get rid of $results(the recent results), now that I'm done with them.";
 	
 	},
 		
 	is_positive: function(name, index, keyword, tag) {
-	
+		
 		return "The $results@" + index + "(" + name + ") " + keyword + " " + tag + ".";
 	
 	},
 
 	is_negative: function(name, index, keyword, tag) {
-	
+			
 		return "The $results@" + index + "(" + name + ") " + keyword + " not " + tag + ".";
 	
 	},
 	
 	is_popResults: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Finished with $results(these results).";
+			
 		return "I'm done with $results(these results). Toss em out!";
 	
 	},
 	
 	is_newResults: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Adding $results(the new results) to list.";
+			
 		return "Now I'll add $results(the new results) to my list.";
 	
 	},
 		
 	unknown_clearFocus: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Cleared focus.";
+			
 		return "I guess I'm going to stop focusing on everything.";
 	
 	},
 
 	unknown_clearResults: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Cleared results.";
+			
 		return "I'm going to forget all of my results too.";
 	
 	},	
 	
 	unknown_nextStep: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Executing next step.";
+			
 		return "I'm going to just go to the next step";
 	
 	},
 
 	scan_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "$scanned@0(" + name + ") " + " and added.";
+			
 		return "I scanned " + "$scanned@0(" + name + ") " + ". Let me add it to my list!";
 	
 	},
 
 	name_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Renaming $results@0(" + name + ")" + ".";
+			
 		return "I renamed $results@0(" + name + ")" + ".";
 	
 	},
 
 	go_step: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Incremented to destination, $results@0(" + name + ").";
+		
 		return "I'm going one step closer to $results@0(" + name + ")!";
 	
 	},
 
 	go_arrive: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Arrived at destination, $results@0(" + name + ").";
+		
 		return "I made it to $results@0(the " + name + ")! On to the next step.";
 	
 	},
 
 	go_noPath: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "No valid path. Aborting goto.";
+			
 		return "There's no way to get to $results@0(" + name + "). I guess I'm going to skip the rest of this goto.";
 	
 	},
 
 	go_finished: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Finished goto.";
+			
 		return "There's $results(nothing left to go to), so I'm going to skip the rest of this goto.";
 	
 	},
 
 	analyze_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "$analyzed@0(" + name + ") analyzed.";
+		
 		return "I analyzed $analyzed@0(" + name + "). Now I can make it do things! Let me add it to my list.";
 	
 	},
 
 	grab_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "$grabbed@0(" + name + ") grabbed.";
+		
 		return "Grabbed $grabbed@0(" + name + "). I'll add it to my list!";
-	
+		
 	},
 
 	drop_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Dropped $results@0(" + name + ").";
+			
 		return "Dropped $results@0(" + name + "). Let me remove it from my list.";
 	
 	},
 
 	focus_success: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Focusing on $results@0(next result), " + name;
+			
 		return "Okay, I'm just going to focus on the $results@0(next result), " + name;
 	
 	},
 
 	focus_failure: function() {
-	
-		return "I'm suppose to focus on the next result, but $results(there isn't one) :(";
+		if (GIDGET.experiment.isControl())
+			return "Failed to focus on $results(there isn't one)";
+			
+		return "I'm supposed to focus on the next result, but $results(there isn't one) :(";
 	
 	},
 
 	unfocus_success: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Finished focusing.";
+			
 		return "Alright, $focused(I stopped focusing).";
 	
 	},
 
 	ask_waiting: function(name, action) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Waiting for " + name + "to finish execution.";
+			
 		return "Wee! I'm waiting for $thing(" + name + ") to finish " + action + "ing.";
 	
 	},
 
 	ask_finished: function(name) {
-	
+		if (GIDGET.experiment.isControl())
+			return name+ "execution completed.";
+			
 		return "$thing(" + name + ") is done. I'm going to continue now.";
 	
 	},
 
 	ask_noObject: function() {
-	
+		if (GIDGET.experiment.isControl())
+			return "Invalid ask syntax.";
+			
 		return "I couldn't find anything to ask by that name to ask.";
 	
 	},
 
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Invalid ask syntax";
+			
 		return "Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.";
 	
 	},
 		
 	ask_begin: function(name, action) {
-	
+		if (GIDGET.experiment.isControl())
+			return action + " executing.";
+			
 		return "Yay! " + name + " knows how to " + action + ". I'm going to tell it to do it.";
 	
 	},
 	
 	ask_unknownAction: function(name, action) {
-	
+		if (GIDGET.experiment.isControl())
+			return "Invalid ask command.";
+			
 		return "I told " + name + " to " + action + " but it didn't know how! I don't know what to do!";
 	
 	},
