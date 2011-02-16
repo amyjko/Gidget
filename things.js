@@ -86,6 +86,8 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 
 	// Remember the mission so it can be placed in the UI.	
 	this.mission = isDef(mission) ? mission : "I don't know what I'm supposed to do here. No one gave me a mission :(";
+	
+	this.missionText = [];
 
 	// Remember the goal
 	this.goals = [];
@@ -103,6 +105,13 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 			this.grid[row][col] = [];
 		}
 	}
+
+	// Add a paragraph of text and an associated emotional state for it.
+	this.addMissionText = function(state, text) {
+
+		this.missionText.push({ text: text, state: state });
+	
+	};
 
 	this.addGoal = function(goal) {
 	
