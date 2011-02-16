@@ -20,6 +20,10 @@ GIDGET.ui = {
 	
 	getImage: function(name, state) {
 	
+		// Set Gidget's image for Control Condition
+		if ((name === "gidget") && (GIDGET.experiment.isControl()))
+			state = "control";
+	
 		var label = name + "." + state;
 	
 		// If this has already been checked, return what's there.
@@ -355,6 +359,9 @@ GIDGET.ui = {
 	},
 
 	createThoughtHTML: function(message) { 
+		
+		if (GIDGET.experiment.isControl())
+			this.world.gidget.runtime.state = "control";
 	
 		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' /></td><td>" + message + "</td></tr></table>";
 
@@ -471,6 +478,7 @@ GIDGET.ui = {
 
 				if(this.allGoalsAchieved === true) {
 					this.world.gidget.runtime.state = "default";
+						
 					this.setThought("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>", 5);
 				}
 				else {
