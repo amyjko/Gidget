@@ -395,6 +395,17 @@ GIDGET.text = {
 	
 	},
 	
+	editingDisabled: function() {
+	
+		return "If you change my commands while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b>" + this.finishExecutingButtonLabel() + "</b> button.";
+	
+	},
+	
+	finishExecutingButtonLabel: function() {
+	
+		return "the end";
+	
+	},
 
 	placeholder: function() {}
 
