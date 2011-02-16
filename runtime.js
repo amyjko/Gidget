@@ -393,7 +393,6 @@ GIDGET.Runtime = function(thing, world) {
 		
 		// Parse markup of this format: $OBJECT[INDEX](text)
 		// Keep finding the index of the next $ until there are no more.
-		console.log("Message = " + message);
 		var indexOfDollar = message.indexOf('$');
 		var left, right = message, reference, index, text;
 		while(indexOfDollar >= 0) {
