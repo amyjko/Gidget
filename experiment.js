@@ -1,6 +1,6 @@
 GIDGET.experiment = {
 
-	condition: "control"	// control, male, female
+	condition: "control",	// control, male, female
 	
 	isControl: function() {
 	
