@@ -35,6 +35,7 @@ var SCENES = {
 			ctx.fillStyle = 'rgb(0,0,0)';
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			
+			
 			for(i = 0; i < this.sprites.length; i++) {
 			
 				sprite = this.sprites[i].sprite;
