@@ -98,6 +98,25 @@ $().ready(function() {
 		alert("Cleared local storage.");
 	
 	});
+
+	
+	$('#setCondControl').click(function() {
+	
+		GIDGET.experiment.condition = "control";
+
+	});
+	
+	$('#setCondMale').click(function() {
+	
+		GIDGET.experiment.condition = "male";
+
+	});
+	
+	$('#setCondFemale').click(function() {
+	
+		GIDGET.experiment.condition = "female";
+
+	});
 	
 
 	$('#gotoNextLevel').click(function() {
