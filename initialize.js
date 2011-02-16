@@ -1,4 +1,24 @@
+function supportsCanvas() {
+
+	return !!document.createElement('canvas').getContext;
+
+}
+
+function supportsLocalStorage() {
+
+	try {
+		return 'localStorage' in window && window['localStorage'] !== null;
+	} catch(e){
+		return false;
+	}
+
+}
+
 $().ready(function() {
+
+	// Check for both canvas and local storage support before continuing.
+	if(!supportsCanvas() || !supportsLocalStorage())
+		window.location.href = "unsupported.html";
 
 	Storage.prototype.setObject = function(key, value) {
 	    this.setItem(key, JSON.stringify(value));
