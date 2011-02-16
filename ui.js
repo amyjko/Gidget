@@ -65,7 +65,7 @@ GIDGET.ui = {
 
 	startOver: function() {
 	
-		this.setLevel(this.level);
+		this.setLevel(localStorage.currentLevel);
 	
 	},
 
