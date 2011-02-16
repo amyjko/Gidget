@@ -209,6 +209,140 @@ GIDGET.text = {
 	
 	},
 		
+	parser_unrecognizedCommand: function(token) {
+	
+		return "" + token + " isn't one of the commands I know.";
+	
+	},
+
+	parser_noCommandAfterComma: function() {
+	
+		return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
+	
+	},
+		
+	parser_missingThingToName: function() {
+	
+		return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
+	
+	},
+		
+	parser_missingName: function() {
+	
+		return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
+	
+	},
+		
+	parser_missingThingToScan: function() {
+	
+		return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToGoto: function() {
+	
+		return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAvoid: function() {
+	
+		return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAnalyze: function() {
+	
+		return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
+	
+	},
+
+	parser_missingThingToAsk: function() {
+	
+		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?"
+;
+	
+	},
+
+	parser_missingTo: function() {
+	
+		return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
+	
+	},
+
+	parser_missingAction: function() {
+	
+		return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
+	
+	},
+
+	parser_missingThingToGrab: function() {
+	
+		return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
+	
+	},
+
+	parser_missingThingToDrop: function() {
+	
+		return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
+	
+	},
+		
+	parser_missingPredicate: function() {
+	
+		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+	
+	},
+		
+	parser_missingConditionalComma: function() {
+	
+		return "I only know what to do when there's a comma after the test of an if.";
+	
+	},
+		
+	parser_missingThingToModify: function(keyword) {
+	
+		return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAdd: function() {
+	
+		return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
+	
+	},
+				
+	parser_missingThingToRemove: function() {
+	
+		return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
+	
+	},
+		
+	parser_missingAndPredicate: function() {
+	
+		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+	
+	},
+	
+	parser_missingTag: function() {
+	
+		return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
+	
+	},
+	
+	parser_missingQueryName: function() {
+	
+		return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
+	
+	},
+	
+	parser_missingOn: function() {
+	
+		return "I know I'm suppose to find something on somethign else, but I don't know what something else. Can you tell me?";
+	
+	},
+	
+
 	placeholder: function() {}
 
 };

@@ -320,7 +320,7 @@ GIDGET.parser = {
 		var token = tokenStream.peek();
 		
 		// If there was no recognizable command keyword, eat (and ignore) all the tokens up until the newline
-		return new this.Unknown(tokenStream.eatLine(), "" + token + " isn't one of the commands I know.");
+		return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_unrecognizedCommand(token));
 	
 	},
 
@@ -357,7 +357,7 @@ GIDGET.parser = {
 
 		// If the next token is not a string (but a comma or newline), return an unknown.
 		if(!tokenStream.nextIsString()) {
-			return new this.Unknown(tokenStream.eatLine(), "I saw a comma, but I thought there would be a command after it, but there wasn't.");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_noCommandAfterComma());
 		}
 
 		// eat the name to query
@@ -410,7 +410,7 @@ GIDGET.parser = {
 
 		// If this is the end of the line, explain that to name something, we need a query.
 		if(tokenStream.eol())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToName());
 
 		// eat the name to query
 		name.query = this.parseQuery(tokenStream, name, []);
@@ -421,7 +421,7 @@ GIDGET.parser = {
 
 		// Is the next thing is not a string, then explain.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingName());
 
 		// eat the name to query
 		name.name = tokenStream.eat();
@@ -459,7 +459,7 @@ GIDGET.parser = {
 
 		// If the next thing is not the start of a query, eat the line.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to scan something, but I don't know what. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToScan());
 
 		// eat the name to query
 		scan.query = this.parseQuery(tokenStream, scan, [ 'reachable', 'level' ] );
@@ -500,7 +500,7 @@ GIDGET.parser = {
 		go.keyword = tokenStream.eat();
 
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to goto something, but I don't know what. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToGoto());
 
 		// eat the query
 		go.query = this.parseQuery(tokenStream, go, [ 'scanned' ]);
@@ -517,7 +517,7 @@ GIDGET.parser = {
 
 			// There must be a string to avoid.			
 			if(!tokenStream.nextIsString())
-				return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?");
+				return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToAvoid());
 
 			// Otherwise, eat the thing to avoid.
 			go.avoid = tokenStream.eat();
@@ -555,7 +555,7 @@ GIDGET.parser = {
 
 		// If this is the end of the line, just return the broad scan
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to analyze something, but I don't know what. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToAnalyze());
 
 		// eat the name to query
 		analyze.query = this.parseQuery(tokenStream, analyze, [ 'over', 'level' ]);
@@ -624,7 +624,7 @@ GIDGET.parser = {
 		ask.keyword = tokenStream.eat();
 
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToAsk());
 
 		// eat query
 		ask.query = this.parseQuery(tokenStream, ask, [ 'over', 'analyzed' ]);
@@ -635,14 +635,14 @@ GIDGET.parser = {
 
 		// eat 'to'
 		if(!tokenStream.nextIs('to'))
-			return new this.Unknown(tokenStream.eatLine(), "When I ask something to do something, I have to tell it 'to', but I didn't find that here.");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingTo());
 
 		// eat 'to'
 		tokenStream.eat();
 
 		// There must be an action next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingAction());
 
 		// eat action name.
 		ask.action = tokenStream.eat();
@@ -690,7 +690,7 @@ GIDGET.parser = {
 
 		// There must be a query next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to grab something, but I don't know what. Can you tell me?");		
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToGrab());		
 
 		// Eat the query.
 		grab.query = this.parseQuery(tokenStream, grab, ['over']);
@@ -730,7 +730,7 @@ GIDGET.parser = {
 
 		// There must be a query next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?");		
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToDrop());		
 
 		// Eat the query		
 		drop.query = this.parseQuery(tokenStream, drop, ['grabbed']);
@@ -783,7 +783,7 @@ GIDGET.parser = {
 
 		// There must be a predicate next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to check something, but I don't know to check. Can you tell me?");		
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingPredicate());		
 
 		// Eat the predicate.
 		conditional.predicate = this.parsePredicate(tokenStream);
@@ -792,9 +792,9 @@ GIDGET.parser = {
 		if(conditional.predicate.type === 'unknown')
 			return conditional.predicate;
 
-		// There must be a predicate next.
+		// There must be a comma then a command.
 		if(!tokenStream.nextIsComma())
-			return new this.Unknown(tokenStream.eatLine(), "I only know what to do when there's a comma after the test of an if.");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingConditionalComma());
 
 		// Eat comma
 		tokenStream.eat();
@@ -830,7 +830,7 @@ GIDGET.parser = {
 
 		// Try to parse a query
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to " + modify.keyword.text + " something, but I don't know what. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToModify(modify.keyword.text));
 		
 		// No implicit constraints on the query
 		modify.query = this.parseQuery(tokenStream, modify);
@@ -911,7 +911,7 @@ GIDGET.parser = {
 
 		// Try to parse a query
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to add something, but I don't know what. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToAdd());
 		
 		// No implicit constraints on the query
 		ast.name = tokenStream.eat();
@@ -945,7 +945,7 @@ GIDGET.parser = {
 
 		// There must be a query next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?");		
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingThingToRemove());		
 
 		// Eat the query		
 		ast.query = this.parseQuery(tokenStream, ast, ['over']);
@@ -1001,7 +1001,7 @@ GIDGET.parser = {
 
 		// There must be a predicate next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm supposed to check something, but I don't know to check. Can you tell me?");		
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingAndPredicate());		
 
 		// Eat the predicate.		
 		and.right = this.parsePredicate(tokenStream);
@@ -1052,7 +1052,7 @@ GIDGET.parser = {
 
 		// There must be a tag next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingTag());
 
 		// Eat the tag.		
 		predicate.tag = tokenStream.eat();
@@ -1108,7 +1108,7 @@ GIDGET.parser = {
 
 		// There must be a name next.
 		if(!tokenStream.nextIsString())
-			return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?");
+			return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingQueryName());
 
 		// Eat the query name.
 		query.name = tokenStream.eat();
@@ -1120,7 +1120,7 @@ GIDGET.parser = {
 			tokenStream.eat();
 
 			if(!tokenStream.nextIsString())
-				return new this.Unknown(tokenStream.eatLine(), "I know I'm suppose to find something on somethign else, but I don't know what something else. Can you tell me?");
+				return new this.Unknown(tokenStream.eatLine(), GIDGET.text.parser_missingOn());
 			
 			query.on = this.parseQuery(tokenStream, parent);
 			
