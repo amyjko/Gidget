@@ -1,10 +1,6 @@
 GIDGET.experiment = {
 
-<<<<<<< HEAD
 	condition: "control"	// control, male, female
-
-=======
-	condition: "control",	// control, male, female
 	
 	isControl: function() {
 	
@@ -41,6 +37,5 @@ GIDGET.experiment = {
 		return false;
 	
 	},
-	
->>>>>>> 54cfee88ed4698aece5a0a48a5ae33f8f35c6222
+
 };
