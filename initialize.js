@@ -13,15 +13,25 @@ $().ready(function() {
 	for(var level in GIDGET.levels) {
 		
 		if(GIDGET.levels.hasOwnProperty(level)) {
-			$('#levels').
-				append("<option>" + levelCount + ". " + level + "</option>").click(function() {
+			if (localStorage.currentLevel === level) {
+				$('#levels').
+				append("<option selected=\"selected\">" + levelCount + ". " + level + "</option>").click(function() {
 				
 					var world = ($(this).val()).replace(/[0-9]+.\s/g,'');
 					if(GIDGET.levels.hasOwnProperty(world))
 						GIDGET.ui.setLevel(world);
 
 				});
-			
+			}
+			else {	
+			$('#levels').
+				append("<option>" + levelCount + ". " + level + "</option>").click(function() {
+				
+					var world = ($(this).val()).replace(/[0-9]+.\s/g,'');
+					if(GIDGET.levels.hasOwnProperty(world))
+						GIDGET.ui.setLevel(world);
+				});
+			}			
 		}
 		
 		levelCount++;
@@ -76,11 +86,41 @@ $().ready(function() {
 		alert("Cleared local storage.");
 	
 	});
+	
+
+	$('#gotoNextLevel').click(function() {
+		
+		var found = false;
+		var nextLevel = undefined;
+		for(var level in GIDGET.levels) {
+			if(GIDGET.levels.hasOwnProperty(level)) {
+				if(found) {
+					nextLevel = level;
+					break;
+				}
+				else if(level === localStorage.currentLevel) {
+					found = true;
+				}
+			}
+		}
+
+		if(isDef(nextLevel)) {
+		
+			GIDGET.ui.setLevel(nextLevel);
+		
+		}
+		else {
+		
+			alert("There aren't any more levels!");
+		
+		}
+	});
 
 	var test = localStorage;
 
+	// Start afresh and play intro movie is there is no record of play
 	if(localStorage.getItem('currentLevel') === null) {
-	
+
 		localStorage.setItem('currentLevel', 'learnScan');
 		
 		$('#content').fadeTo(0, 0.0);

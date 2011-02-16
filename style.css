@@ -303,3 +303,12 @@ table {
 	top:			4em;
 	left:			50%;
 }
+
+#debug p{
+
+	color: white;
+	font-family: 	"Verdana";
+	text-align: 	left;
+	font-size: 		small;
+	
+}
