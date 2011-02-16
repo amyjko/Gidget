@@ -393,6 +393,7 @@ GIDGET.Runtime = function(thing, world) {
 		
 		// Parse markup of this format: $OBJECT[INDEX](text)
 		// Keep finding the index of the next $ until there are no more.
+		console.log("Message = " + message);
 		var indexOfDollar = message.indexOf('$');
 		var left, right = message, reference, index, text;
 		while(indexOfDollar >= 0) {
@@ -474,20 +475,20 @@ GIDGET.runtime = {
 				if(results.length > 0) {
 				
 					runtime.addDecision(
-						"I'm looking at $results(the recent results) and they weren't empty, so I'll go to the next step.",
+						GIDGET.text.if_true(),
 						new runtime.IncrementPC(runtime, 1));
 
 				}
 				else {
 
 					runtime.addDecision(
-						"I'm looking at the $results(recent results) and they were empty, so I'm going to skip the next part.",
+						GIDGET.text.if_false(),
 						new runtime.IncrementPC(runtime, this.offset));
 					
 				}
 
 				runtime.addDecision(
-					"Before I move on, I'm going to get rid of the recent results, now that I'm done with them.",
+					GIDGET.text.if_popResults(),
 					new runtime.PopResults(runtime));
 
 			}
@@ -535,34 +536,28 @@ GIDGET.runtime = {
 
 					if((positive && hasTag) || (!positive && !hasTag)) {
 					
-						runtime.addDecision(
-							"The $results@" + i + "(" + results[i].name + ") " + this.keyword.text + " " + this.name.text + ".");
+						runtime.addDecision(GIDGET.text.is_positive(results[i].name, i, this.keyword.text, this.name.text));
+							
 						newResults.push(results[i]);
 						
 					}
 					else {
 						allTrue = false;
-						runtime.addDecision(
-							"The $results@" + i + "(" + results[i].name + ") " + this.keyword.text + " not " + this.name.text + ".");
+						runtime.addDecision(GIDGET.text.is_negative(results[i].name, i, this.keyword.text, this.name.text));
 						
 					}
 				
 				}
 				
 				runtime.addDecision(
-					"I'm done with these results. Toss em out!", 
+					GIDGET.text.is_popResults(), 
 					new runtime.PopResults(runtime));
 
 				runtime.addDecision(
-					"Now I'll add $results(the new results) to my list.", 
+					GIDGET.text.is_newResults(), 
 					new runtime.PushResults(runtime, allTrue ? newResults : []));
 
 				runtime.pc++;
-/*
-				runtime.addDecision(
-					"On to the next step!", 
-					new runtime.IncrementPC(runtime, 1));
-*/
 		
 			}
 		};
@@ -593,20 +588,24 @@ GIDGET.runtime = {
 					string = string + this.tokens[i].text + " ";
 
 				runtime.addDecision(
-					this.message, 
+					this.message,
 					undefined, 
 					"sad");
 
 				// Clear the results and focus stacks
-				runtime.addDecision("I guess I'm going to stop focusing on everything.", 
-					new runtime.ClearFocus(runtime), "sad");
+				runtime.addDecision(
+					GIDGET.text.unknown_clearFocus(), 
+					new runtime.ClearFocus(runtime),
+					"sad");
 
-				runtime.addDecision("I'm going to forget all of my results too.", 
-					new runtime.ClearResults(runtime), "sad");
+				runtime.addDecision(GIDGET.text.unknown_clearResults(), 
+					new runtime.ClearResults(runtime),
+					"sad");
 
 				runtime.addDecision(
-					"I'm going to just go to the next step",
-					new runtime.IncrementPC(runtime, 1), "sad");
+					GIDGET.text.unknown_nextStep(),
+					new runtime.IncrementPC(runtime, 1), 
+					"sad");
 				
 			}
 		};
@@ -624,7 +623,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
-						"I scanned " + "$scanned@0(" + runtime.peekResult().name + ") " + ". Let me add it to my list!",
+						GIDGET.text.scan_success(runtime.peekResult().name),
 						new runtime.PushScanned(runtime, runtime.peekResult()));
 						
 					runtime.pc++;
@@ -665,7 +664,7 @@ GIDGET.runtime = {
 					var result = runtime.peekResult();
 					
 					result.name = this.name.text;
-					runtime.addDecision("I renamed $results@0(" + this.name.text + ")" + ".");
+					runtime.addDecision(GIDGET.text.name_success(this.name.text));
 
 					runtime.pc++;
 									
@@ -862,7 +861,7 @@ GIDGET.runtime = {
 
 						if(rowIncrement !== 0 || columnIncrement !== 0)
 							runtime.addDecision(
-								"I'm going one step closer to $results@0(" + thing.name + ")!",
+								GIDGET.text.go_step(thing.name),
 								new runtime.Move(runtime, rowIncrement, columnIncrement, done));
 
 						// We're at it! Execute the command on it, if there is one, otherwise, go to the next thing.
@@ -870,7 +869,7 @@ GIDGET.runtime = {
 	
 							runtime.path = undefined;
 							runtime.addDecision(
-								"I made it to $results@0(the " + thing.name + ")! On to the next step.",
+								GIDGET.text.go_arrive(thing.name),
 								new runtime.IncrementPC(runtime, 1));
 						
 						}
@@ -881,7 +880,7 @@ GIDGET.runtime = {
 					
 						runtime.path = undefined;
 						runtime.addDecision(
-							"There's no way to get to $results@0(" + thing.name + "). I guess I'm going to skip the rest of this goto.",
+							GIDGET.text.go_noPath(thing.name),
 							new runtime.IncrementPC(runtime, this.offset));
 					
 					}
@@ -890,7 +889,7 @@ GIDGET.runtime = {
 				else {
 
 					runtime.addDecision(
-						"There's $results(nothing left to go to), so I'm going to skip the rest of this goto.",
+						GIDGET.text.go_finished(),
 						new runtime.IncrementPC(runtime, this.offset));
 
 				}
@@ -911,7 +910,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
-						"I analyzed $analyzed@0(" + runtime.peekResult().name + "). Now I can make it do things! Let me add it to my list.",
+						GIDGET.text.analyze_success(runtime.peekResult().name),
 						new runtime.PushAnalyzed(runtime, runtime.peekResult()));
 						
 /*
@@ -983,7 +982,7 @@ GIDGET.runtime = {
 
 				if(runtime.hasRecentResults()) {
 					runtime.addDecision(
-						"Grabbed $grabbed@0(" + runtime.peekResult().name + "). I'll add it to my list!",
+						GIDGET.text.grab_success(runtime.peekResult().name),
 						new runtime.PushGrabbed(runtime, runtime.peekResult()));
 						
 					runtime.pc++;
@@ -1008,7 +1007,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 
 					runtime.addDecision(
-						"Dropped $results@0(" + runtime.peekResult().name + "). Let me remove it from my list.",
+						GIDGET.text.drop_success(runtime.peekResult().name),
 						new runtime.PopGrabbed(runtime, runtime.peekResult()));		
 
 					runtime.pc++;
@@ -1304,36 +1303,21 @@ GIDGET.runtime = {
 				
 				}
 				
-				var purposeText = "";
-				switch(this.parentAST.type) {
-					case "name": purposeText = "to <b>name</b>"; break;
-					case "scan": purposeText = "to <b>scan</b>"; break;
-					case "goto": purposeText = "to <b>go to</b>"; break;
-					case "analyze": purposeText = "to <b>analyze</b>"; break;
-					case "ask": purposeText = "to <b>ask</b>"; break;
-					case "grab": purposeText = "to <b>grab</b>"; break;
-					case "drop": purposeText = "to <b>drop</b>"; break;
-					case "modify": purposeText = "to <b>modify</b>"; break;
-					case "remove": purposeText = "to <b>remove</b>"; break;
-					case "is": purposeText = isDef(this.parentAST) && isDef(this.parentAST.keyword) ? "that <b>" + this.parentAST.keyword.text + " " + this.parentAST.tag.text + "</b>" : "that were at the <b>same place</b>"; break;
-					case "query": purposeText = "that were at the <b>same place</b>"; break;
-					default: purposeText = "";
-				}
+				var description = GIDGET.text.query(this.parentAST, nameToMatch.text, scope);
 				
-				var result = nameToMatch.text === 'it' ? "I remembered what I'm <b>focused</b> on" : "I looked for <b>" + nameToMatch.text + "</b> " + purposeText;
-				var i;
 				if(scope.length > 0) {
 					
-					result = result + " and found ";
-					for(i = 0; i < scope.length; i++)
-						result = result + " $results@" + i + "(" + scope[i].name + ")" + (scope.length === 1 ? "" : i === scope.length - 1 ? "" : i === scope.length - 2 ? " and " : ",");
-					runtime.addDecision(result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results!",
+					runtime.addDecision(
+						description,
 						new runtime.PushResults(runtime, scope, this));
+
 				}
 				else {
+					
 					runtime.addDecision(
-						result + ", but didn't find anything.",
+						description,
 						new runtime.PushResults(runtime, scope));
+						
 				}
 				
 				// Next instruction
@@ -1355,13 +1339,13 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 
 					runtime.addDecision(
-						"Okay, I'm just going to focus on the $results@0(next result), " + runtime.peekResult().name,
+						GIDGET.text.focus_success(runtime.peekResult().name),
 						new runtime.PushFocus(runtime, runtime.peekResult()));
 
 				}
 				else {
 
-					runtime.addDecision("I'm suppose to focus on the next result, but $results(there isn't one) :(");
+					runtime.addDecision(GIDGET.text.focus_failure(), undefined, "sad");
 					
 				}
 	
@@ -1379,7 +1363,7 @@ GIDGET.runtime = {
 			execute: function(runtime) {
 	
 				runtime.addDecision(
-					"Alright, $focused(I stopped focusing).",
+					GIDGET.text.unfocus_success(),
 					new runtime.PopFocus(runtime));
 	
 				runtime.pc++;
@@ -1456,13 +1440,13 @@ GIDGET.runtime = {
 					// If it's done, Gidget waits.				
 					if(runtime.peekAsked().runtime.isExecuting()) {
 					
-						runtime.addDecision("Wee! I'm waiting for $thing(" + runtime.peekAsked().name + ") to finish " + this.action.text + "ing.");
+						runtime.addDecision(GIDGET.text.ask_waiting(runtime.peekAsked().name, this.action.text));
 					
 					}
 					// If it's done, pop the object and continue.
 					else {
 
-						runtime.addDecision("$thing(" + runtime.peekAsked().name + ") is done. I'm going to continue now.");
+						runtime.addDecision(GIDGET.text.ask_finished(runtime.peekAsked().name));
 						runtime.popAsked();
 						runtime.pc++;
 					
@@ -1499,7 +1483,7 @@ GIDGET.runtime = {
 						// If we didn't find an object, we're in trouble.
 						if(!isDef(object)) {
 
-							runtime.addDecision("I couldn't find anything to ask by that name.");
+							runtime.addDecision(GIDGET.text.ask_noObject());
 
 							runtime.pc += this.offset;
 							return;						
@@ -1515,7 +1499,10 @@ GIDGET.runtime = {
 							// If the user hasn't supplied the expected number of arguments, then fail
 							if(argumentNames.length !== arguments.length) {
 
-								runtime.addDecision("Oh no... <b>" + object.name + "</b> knows how to <b>" + this.action.text + "</b>, but it wanted me to give it <b>" + argumentNames.length + "</b> names. I gave it <b>" + arguments.length + "</b> names. I don't know what to do! I guess I'll just skip this step.", undefined, "sad");
+								runtime.addDecision(
+									GIDGET.text.ask_missingArguments(object.name, this.action.text, argumentNames.length, arguments.length), 
+									undefined, 
+									"sad");
 								
 								runtime.pc += this.offset;
 								return;
@@ -1523,14 +1510,14 @@ GIDGET.runtime = {
 							}
 							else {
 	
-								runtime.addDecision("Yay! " + object.name + " knows how to " + this.action.text + ". I'm going to tell it to do it.");
+								runtime.addDecision(GIDGET.text.ask_begin(object.name, this.action.text));
 								
 								var actualArguments = {};
 		
 								var argIndex = 0;
 								for(argIndex = 0; argIndex < argumentNames.length; argIndex++) {								
 								
-									console.log("\tMapping " + arguments[argIndex].name + " to " + argumentNames[argIndex]);
+									// Map given argument to argument name
 									actualArguments[argumentNames[argIndex]] = arguments[argIndex];
 								
 								}
@@ -1548,7 +1535,7 @@ GIDGET.runtime = {
 						}
 						else {
 						
-							runtime.addDecision("I told " + object.name + " to " + this.action.text + " but it didn't know how! I don't know what to do!");
+							runtime.addDecision(GIDGET.text.ask_unknownAction(object.name, this.action.text));
 							runtime.pc += this.offset;
 	
 						}
