@@ -163,7 +163,7 @@ GIDGET.text = {
 		
 	ask_begin: function(name, action) {
 	
-		return "Yay! " + name + " knows how to " + text + ". I'm going to tell it to do it.";
+		return "Yay! " + name + " knows how to " + action + ". I'm going to tell it to do it.";
 	
 	},
 	
