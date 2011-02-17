@@ -11,6 +11,13 @@ p {
 	color: 			white;
 }
 
+a {
+	color:			gray;
+	font-weight: 	bold;
+	text-decoration: none;
+
+}
+
 #content {
 	margin-left:	auto;
 	margin-right:	auto;
