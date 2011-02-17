@@ -94,6 +94,7 @@ $().ready(function() {
 	setTimeout(animate);
 	
 	$('.popup').hide();
+	$('.introBox').hide();
 	
 	$(document).keyup(function(e) {
 	
@@ -119,6 +120,13 @@ $().ready(function() {
 	
 	});
 
+	
+	$('#playIntro').click(function() {
+		$('#intro').toggle();
+		var intro = GIDGET.createIntroduction();
+		intro.play($('#introCanvas')[0], function() { $('#intro').toggle(); });
+
+	});
 	
 	$('#setCondControl').click(function() {
 	

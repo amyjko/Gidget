@@ -311,6 +311,20 @@ table {
 	left:			50%;
 }
 
+.introBox {
+	border:			solid 1px white;
+	border-radius: 	2px;
+	background-color: black;
+	
+	padding:		10px;
+	position: 		fixed;
+	top:			1em;
+
+	width:			640px;
+	margin-left:	-330px;
+	left:			50%;
+}
+
 #debug p{
 
 	color: white;
