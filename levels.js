@@ -87,7 +87,7 @@ GIDGET.levels = {
 			"scan gidget\n" +
 			"scan goops";
 		
-		var world = new GIDGET.World([10,10], [1,8], [], code);
+		var world = new GIDGET.World([10,10], [1,8], ["stone","gray"], code);
 			
 		// ---- G O A L S --------
 		
@@ -597,12 +597,12 @@ GIDGET.levels = {
 		// ----- G - C O D E -----
 			var code = 
 			"scan goop\n" +
-			"scan bgoop\n" +
+			"scan crack\n" +
 			"goto goop, analyze it, if it is glowing, grab it\n" +
-			"scan bucket, goto it avoid bgoop\n" +
+			"scan bucket, goto it avoid crack\n" +
 			"drop goop";
 	
-		var world = new GIDGET.World([10,10], [5,5], [], code);
+		var world = new GIDGET.World([10,10], [5,5], ["brick","burlywood"], code);
 		world.gidget.setEnergy(120);
 			
 		// ---- G O A L S --------
@@ -622,7 +622,7 @@ GIDGET.levels = {
 		
 		new GIDGET.Thing(world, "bucket", 1, 9, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 6, 4, "green", [ 'glowing' ], {});
-		var b1 = new GIDGET.Thing(world, "bgoop", 5, 9, "blue", [], {});
+		var b1 = new GIDGET.Thing(world, "crack", 5, 9, "black", [], {});
 		/*
 		var b2 = new GIDGET.Thing(world, "bgoop", 1, 8, "blue", [], {});
 		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "blue", [], {});
@@ -630,7 +630,7 @@ GIDGET.levels = {
 		*/
 		
 		b1.setCode(
-			"when gidget on bgoop, grab goops\n"
+			"when gidget on crack, grab goops\n"
 		);
 		/*
 		b2.setCode(
@@ -679,7 +679,7 @@ GIDGET.levels = {
 			"scan rats\n" +
 			"goto goop, grab it\n";
 
-		var world = new GIDGET.World([10,10], [0,0], [], code);
+		var world = new GIDGET.World([10,10], [0,0], ["stone","gray"], code);
 		world.gidget.setEnergy(110);
 			
 		// ---- G O A L S --------
@@ -708,7 +708,7 @@ GIDGET.levels = {
 			"goto gidget\n"
 		);
 		
-		rat.setSpeed(3);
+		rat.setSpeed(4);
 		
 		// -----------------------
 
@@ -729,7 +729,7 @@ GIDGET.levels = {
 			"scan crate, goto it avoid rat\n" +
 			"drop birds";
 
-		var world = new GIDGET.World([10,10], [5,4], [], code);
+		var world = new GIDGET.World([10,10], [5,4], ["stone","gray"], code);
 		world.gidget.setEnergy(160);
 			
 		// ---- G O A L S --------
@@ -834,7 +834,7 @@ GIDGET.levels = {
 			"scan bucket, goto it\n" +
 			"drop rgoop"; 
 	
-		var world = new GIDGET.World([10,10], [2,8], [], code);
+		var world = new GIDGET.World([10,10], [2,8], ["stone","gray"], code);
 		world.gidget.setEnergy(1000);
 	
 		// ---- G O A L S --------
@@ -888,7 +888,7 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop goops";
 		
-		var world = new GIDGET.World([10,10], [2,8], [], code);
+		var world = new GIDGET.World([10,10], [2,8], ["stone","gray"], code);
 		world.gidget.setEnergy(1000);
 			
 		// ---- G O A L S --------
@@ -906,7 +906,7 @@ GIDGET.levels = {
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", ["stone","gray"], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
@@ -973,7 +973,7 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop rocks";
 		
-		var world = new GIDGET.World([10,10], [1,0], [], code);
+		var world = new GIDGET.World([10,10], [1,0], ["stone","gray"], code);
 		world.gidget.setEnergy(250);
 			
 		// ---- G O A L S --------
@@ -1056,7 +1056,7 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop rocks";
 		
-		var world = new GIDGET.World([10,10], [0,1], [], code);
+		var world = new GIDGET.World([10,10], [0,1], ["stone","gray"], code);
 		world.gidget.setEnergy(1000);
 			
 		// ---- G O A L S --------
@@ -1071,8 +1071,6 @@ GIDGET.levels = {
 		else {
 			world.addMissionText("sad", "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!");
 		}
-		
-		
 		
 		// ----- T H I N G S -----
 		
@@ -1127,16 +1125,16 @@ GIDGET.levels = {
 		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
 		
 		rat.setCode(
+			"when gidget on rat, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
+			"goto gidget\n"
 		);
 		rat.setSpeed(3);
 		
 		rat2.setCode(
+			"when gidget on rat, set gidget energy 0\n" +
 			"scan gidget\n" +
-			"goto gidget\n" +
-			"set gidget energy 0"
+			"goto gidget\n"
 		);
 		rat2.setSpeed(5);
 
