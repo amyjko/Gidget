@@ -37,5 +37,17 @@ GIDGET.experiment = {
 		return false;
 	
 	},
+	
+	loadExpCondition: function() {
+		
+		// Set the current experimental state from localStorage
+		this.condition = localStorage.getItem('expCondition').replace(/['"]/g,'');		
+	},
+	
+	saveExpCondition: function() {
+		
+		// Save the current experimental state to localStorage
+		localStorage.setObject('expCondition', this.condition);	
+	},
 
 };

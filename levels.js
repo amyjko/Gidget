@@ -6,21 +6,21 @@ GIDGET.levels = {
 
 		var code = 
 			"scan gidget";
-	
-		var mission = "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!<br /><br />" +
-		"I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!\n<br /><br />" +
-		"I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.";
 
-
-		var world = new GIDGET.World([10,10], [2,8], [], code, mission);
-		world.gidget.setEnergy(100);
+		var world = new GIDGET.World([10,10], [2,8], [], code);
 		
 		world.addGoal("scanned gidget");
 
-		world.addMissionText("sad", "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!");
-		world.addMissionText("default", "I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!");
-		world.addMissionText("sad", "I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.");
 
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("sad", "Hark!");
+			world.addMissionText("sad", "Be wary, travelers!");
+		}		
+		else {
+			world.addMissionText("sad", "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!");
+			world.addMissionText("default", "I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!");
+			world.addMissionText("sad", "I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.");
+		}
 		return world;
 	
 	},
@@ -35,8 +35,8 @@ GIDGET.levels = {
 	
 		var mission = "I have to report on what is in this area too. How did I do it last time? This is so hard for me!";
 					
-		var world = new GIDGET.World([10,10], [1,1], [], code, mission);
-		world.gidget.setEnergy(100);
+		var world = new GIDGET.World([10,10], [1,1], [], code);
+
 		
 		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
 			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "green", [], {});  shrub.labeled = false;
@@ -60,8 +60,7 @@ GIDGET.levels = {
 	
 		var mission = "I think I am getting better at this! I wonder what is in this area?";
 					
-		var world = new GIDGET.World([10,10], [1,8], [], code, mission);
-		world.gidget.setEnergy(100);
+		var world = new GIDGET.World([10,10], [1,8], [], code);
 		
 		new GIDGET.Thing(world, "goop", 8, 3, "green", [], {});
 		new GIDGET.Thing(world, "goop", 5, 2, "green", [], {});
@@ -84,8 +83,7 @@ GIDGET.levels = {
 			
 		var mission = "Okay! My scanner seems to be working. Now it's time to check my 'analyzer' - it allows me to see special attributes and actions of objects which can access through my memory banks. <br /><br />I tried it on this goop, but I am not getting any results!";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
-		world.gidget.setEnergy(500);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		
 		new GIDGET.Thing(world, "goop", 5, 5, "green", [ 'glowing' ], {});
 		
@@ -108,8 +106,8 @@ GIDGET.levels = {
 	
 		var mission = "I have strayed too far from my bucket. I need to get back to it but I don't remember the way!";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
-		world.gidget.setEnergy(100);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
+
 		
 		new GIDGET.Thing(world, "goop", 2, 9, "green", [], {});
 		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
@@ -133,7 +131,7 @@ GIDGET.levels = {
 			
 		var mission = "I need to start cleaning up all this goop! Ohhh...I think I'm close, but I can't figure out how to do it right...";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "goop", 4, 1, "rgb(0,0,0)", [], {});
@@ -159,7 +157,7 @@ GIDGET.levels = {
 	
 		var mission = "I think I figured out how to collect the goop, but now I need to start moving it to where it need to go! Ohhh...I think I'm close, but I can't figure out how to do it right...";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
@@ -192,7 +190,7 @@ GIDGET.levels = {
 	
 		var mission = "There's more goop and animals here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
@@ -223,7 +221,7 @@ GIDGET.levels = {
 	
 		var mission = "There's more goop and animals here. I should clean up the goop and rescue the animals . I think I remember how to do it with less commands, but can't get it quite right!";
 					
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
@@ -255,7 +253,7 @@ GIDGET.levels = {
 			
 		var mission = "There might be something wrong with that dog over there...let's makes sure it's okay!";
 					
-		var world = new GIDGET.World([10,10], [1,1], [], code, mission);
+		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(115);
 		
 		new GIDGET.Thing(world, "dog", 8, 8, "orange", [ 'infected' ], {});
@@ -279,7 +277,7 @@ GIDGET.levels = {
 			
 		var mission = "Oh no! I'm detecting one of these these cats are infected by the goop. I'll have to separate it from the rest!";
 					
-		var world = new GIDGET.World([10,10], [1,1], [], code, mission);
+		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "cat", 1, 8, "orange", [], {});
@@ -308,7 +306,7 @@ GIDGET.levels = {
 			
 		var mission = "Oh no! I'm detecting many of these birds are infected by the goop. I'll have to separate them from the rest!";
 					
-		var world = new GIDGET.World([10,10], [1,1], [], code, mission);
+		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(500);
 		
 		new GIDGET.Thing(world, "bird", 8, 1, "orange", [ 'infected' ], {});
@@ -344,7 +342,7 @@ GIDGET.levels = {
 		
 		var mission = "It looks like I'm running low on power to complete the task. How can I use the resources to recharge myself?";
 		
-		var world = new GIDGET.World([10,10], [2,8], ["grass", "green"], code, mission);	
+		var world = new GIDGET.World([10,10], [2,8], ["grass", "green"], code);	
 		world.gidget.setEnergy(105);
 
 		world.addGoal("two goops on bucket");
@@ -376,8 +374,7 @@ GIDGET.levels = {
 	
 		var mission = "There's something blocking my path to the goop! I need to navigate around it.";
 			
-		var world = new GIDGET.World([10,10], [6,5], [], code, mission);
-		world.gidget.setEnergy(100);
+		var world = new GIDGET.World([10,10], [6,5], [], code);
 
 		world.addGoal("goop on bucket is glowing");
 
@@ -419,7 +416,7 @@ GIDGET.levels = {
 		var mission = "There's new kind of goops here which are keeping me from getting the goop! I need to navigate around them.";
 	
 			
-		var world = new GIDGET.World([10,10], [5,5], [], code, mission);
+		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(120);
 
 		world.addGoal("goop on bucket is glowing");
@@ -485,7 +482,7 @@ GIDGET.levels = {
 	
 		var mission = "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!";
 	
-		var world = new GIDGET.World([10,10], [0,0], [], code, mission);
+		var world = new GIDGET.World([10,10], [0,0], [], code);
 		world.gidget.setEnergy(110);
 		
 		world.addGoal("grabbed three goops");
@@ -786,7 +783,7 @@ GIDGET.levels = {
 		var mission = "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!";
 	
 
-		var world = new GIDGET.World([10,10], [0,1], [], code, mission);
+		var world = new GIDGET.World([10,10], [0,1], [], code);
 		world.gidget.setEnergy(1000);
 
 		world.addGoal("rock on bucket");
@@ -868,7 +865,7 @@ GIDGET.levels = {
 		var code = "scan rat";	
 		var mission = "I have a new friend.";
 	
-		var world = new GIDGET.World([10,10], [0,1], [], code, mission);
+		var world = new GIDGET.World([10,10], [0,1], [], code);
 
 		world.addGoal("scanned rat");
 		

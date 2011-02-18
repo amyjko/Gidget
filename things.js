@@ -84,13 +84,14 @@ GIDGET.Action = function(arguments, script) {
 // *******************************************************
 
 
-GIDGET.World = function(gridSize, gidgetPos, groundAtt, code, mission) {
+GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 	
-	// Grid (World) size & Gidget's initial positioning
+	// Grid (World) size & Gidget's initial positioning + starting energy
 	var rowCount = isDef(gridSize[0]) ? gridSize[0] : 10;
 	var colCount = isDef(gridSize[1]) ? gridSize[1] : rowCount;
 	var gidgetRow = gidgetPos[0];
 	var gidgetCol = gidgetPos[1];
+	var gidgetEnergy = isDef(gidgetPos[2]) ? gidgetPos[2] : 100;
 	
 	// Default ground & grid border color;
 	this.grnd = isDef(groundAtt[0]) ? groundAtt[0] : "dirt";
@@ -100,8 +101,8 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code, mission) {
 	// Remember the initial code
 	this.code = code;
 
-	// Remember the mission so it can be placed in the UI.	
-	this.mission = isDef(mission) ? mission : "I don't know what I'm supposed to do here. No one gave me a mission :(";
+	// DEPRECATED - Remember the mission so it can be placed in the UI.	
+	//this.mission = isDef(mission) ? mission : "I don't know what I'm supposed to do here. No one gave me a mission :(";
 	
 	this.missionText = [];
 
@@ -234,6 +235,7 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code, mission) {
 
 	// Add gidget. Every world has a gidget in it.
 	this.gidget = new GIDGET.Thing(this, "gidget", gidgetRow, gidgetCol, "rgb(50,50,50)", {}, {});
+	this.gidget.setEnergy(gidgetEnergy);
 	
 	// This is the function that causes each thing in the world to step one step, in order.
 	// It takes the code passed to the world and assigns it to Gidget.

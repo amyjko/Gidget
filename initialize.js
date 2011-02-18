@@ -131,18 +131,21 @@ $().ready(function() {
 	$('#setCondControl').click(function() {
 	
 		GIDGET.experiment.condition = "control";
+		GIDGET.experiment.saveExpCondition();
 
 	});
 	
 	$('#setCondMale').click(function() {
 	
 		GIDGET.experiment.condition = "male";
+		GIDGET.experiment.saveExpCondition();
 
 	});
 	
 	$('#setCondFemale').click(function() {
 	
 		GIDGET.experiment.condition = "female";
+		GIDGET.experiment.saveExpCondition();
 
 	});
 	
@@ -195,6 +198,10 @@ $().ready(function() {
 			
 	}
 
+	if(localStorage.getItem('expCondition') !== null)
+		GIDGET.experiment.loadExpCondition();
+
+	
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
 
