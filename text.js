@@ -204,7 +204,7 @@ GIDGET.text = {
 
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
 		if (GIDGET.experiment.isControl())
-			return "Invalid ask syntax";
+			return "Invalid <b>ask</b> syntax";
 			
 		return "Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.";
 	
@@ -312,8 +312,7 @@ GIDGET.text = {
 
 	parser_missingThingToAsk: function() {
 	
-		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?"
-;
+		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
 	
 	},
 
@@ -391,7 +390,7 @@ GIDGET.text = {
 	
 	parser_missingOn: function() {
 	
-		return "I know I'm suppose to find something on somethign else, but I don't know what something else. Can you tell me?";
+		return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
 	
 	},
 	
@@ -405,6 +404,147 @@ GIDGET.text = {
 	
 		return "the end";
 	
+	},
+
+	memory_analyzed: function(iName, iActions, iTags) {
+	
+		var tags = "<p>It has no special characteristics.</p>";
+		var tagCount = 0;
+		for(var tag in iTags) {
+			if(iTags.hasOwnProperty(tag)) {
+				tagCount++;
+			}
+		}
+
+		if(tagCount > 0) {
+			tags = "<p>It is ";
+			var index = tagCount;
+			for(var tag in iTags) {
+				if(iTags.hasOwnProperty(tag)) {
+					// If this is the last one and there was one, just include the name.
+					if(tagCount > 2 && index !== tagCount) tags = tags + ", ";
+					// If there was more than one and this is the last one, prefix an 'and'
+					if(tagCount >= 2 && index === 1) tags = tags + " and ";
+					// Add the tag name.
+					tags = tags + "<b>" + tag + "</b>";
+					index--;	
+				}
+			}
+			tags += "</p>";
+		}
+
+		var actions;
+		if (GIDGET.experiment.isControl())
+			actions = "<p>It has no special functions.</p>";	
+		else
+			actions = "<p>There is nothing I can <b>ask</b> it to do.</p>";
+		
+		var actionCount = 0;
+		for(var action in iActions)
+			if(iActions.hasOwnProperty(action))
+				actionCount++;
+				
+		if(actionCount > 0) {
+			actions = "";
+			for(var action in iActions) {
+				if(iActions.hasOwnProperty(action)) {
+				
+					var arguments = iActions[action].arguments;
+					var argString = "";
+					if(arguments.length === 0) {
+						if (GIDGET.experiment.isControl())
+							argString = ". It does not need any additional arguments.";
+						else
+							argString = ". I don't have to give it anything.";
+					}
+					else {
+						if (GIDGET.experiment.isControl())
+							argString = "it takes ";
+						else
+							argString = "if I give it ";
+						
+						for(var index = 0; index < arguments.length; index++) {
+							if(arguments.length > 2 && index != 0) argString = argString + ", ";
+							if(arguments.length >= 2 && index === arguments.length - 1) argString = argString + " and ";
+							argString = argString + "<b>" + arguments[index] + "</b>";
+						}
+						//argString = argString + ".";
+					
+					}
+					if (GIDGET.experiment.isControl())
+						actions = "It can be <b>asked</b> to " + action + "</b>" + argString;	
+					else
+						actions = "I can <b>ask</b> it to <b>" + action + "</b>" + argString;
+					
+				}
+			}
+		}
+	
+		if (GIDGET.experiment.isControl())
+			return "PLACEHOLDER (memory_analyzed): <b>" + iName + "</b> " + tags + actions;
+			
+		return "I know all about <b>" + iName + "</b> because I <b>analyzed</b> it! " + tags + actions;
+	
+	},
+		
+	memory_unanalyzed: function(name) {
+		if (GIDGET.experiment.isControl())
+			return "PLACEHOLDER (memory_unanalyzed): " + name;
+			
+		return "I don't know anything about <b>" + name + "</b> because I haven't <b>analyzed</b> it yet.";
+	
+	},
+	
+	memory_unfocus: function() {
+		if (GIDGET.experiment.isControl())
+			return "PLACEHOLDER (memory_unfocus): ";
+		
+		return "Now where was I?";
+	},
+
+	noEnergy: function(){
+		
+		if (GIDGET.experiment.isControl())
+			return "ERROR: No energy.";
+			
+		return "I ... can't... go ... any ... further...";
+		
+	},
+
+	goal_checkSuccess: function() {
+		
+		if (GIDGET.experiment.isControl())
+			return "There were results for this goal, so I succeeded!";	
+		
+		return "There were results for this goal, so I succeeded!";
+
+	},
+	
+	goal_checkFailure: function(){
+		
+		if (GIDGET.experiment.isControl())
+			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
+			
+		return "There were <b>no results</b> for this goal, so I didn't accomplish this goal!";
+		
+	},
+	
+	goal_finalSuccess: function() {
+		
+		if (GIDGET.experiment.isControl())
+			return "Completed <span class='runtimeReference'>all of your goals</span>.";	
+		
+		return "I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>";
+
+	},
+	
+	goal_finalFailure: function(){
+		
+		if (GIDGET.experiment.isControl())
+			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
+			
+		return "I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(";
+		
 	},
 
 	placeholder: function() {}

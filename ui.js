@@ -360,6 +360,7 @@ GIDGET.ui = {
 
 	createThoughtHTML: function(message) { 
 		
+		// Control Image Hack
 		if (GIDGET.experiment.isControl())
 			this.world.gidget.runtime.state = "control";
 	
@@ -477,13 +478,12 @@ GIDGET.ui = {
 				this.highlightToken(undefined);
 
 				if(this.allGoalsAchieved === true) {
-					this.world.gidget.runtime.state = "default";
-						
-					this.setThought("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>", 5);
+					this.world.gidget.runtime.state = "happy";			
+					this.setThought(GIDGET.text.goal_finalSuccess(), 5);	
 				}
 				else {
 					this.world.gidget.runtime.state = "sad";
-					this.setThought("I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(", 5);
+					this.setThought(GIDGET.text.goal_finalFailure(), 5);
 				}
 				
 				return;
@@ -514,7 +514,8 @@ GIDGET.ui = {
 				if(this.world.gidget.runtime.hasRecentResults()) {
 				
 					$('#goals .success:eq(' + this.goalNumberBeingExecuted + ')').show();
-					this.setThought("There were results for this goal, so I succeeded!");
+					this.world.gidget.runtime.state = "happy";
+					this.setThought(GIDGET.text.goal_checkSuccess(), 5);
 				
 				}
 				// If there aren't results, the goal wasn't achieved.
@@ -523,7 +524,8 @@ GIDGET.ui = {
 	
 					$('#goals .failure:eq(' + this.goalNumberBeingExecuted + ')').show();
 					this.allGoalsAchieved = true;
-					this.setThought("There were <b>no results</b> for this goal, so I didn't accomplish this goal!");
+					this.world.gidget.runtime.state = "sad";
+					this.setThought(GIDGET.text.goal_checkFailure(), 5);
 				
 				}
 				
@@ -633,8 +635,8 @@ GIDGET.ui = {
 		// Gidget didn't make it to the end of his program with any energy left, so we 
 		// don't test the goals.
 		if(this.world.gidget.energy <= 0) {
-		
-			this.setThought("I ... can't... go ... any ... further...", 1000);
+			
+			this.setThought(GIDGET.text.noEnergy(), 1000);
 		
 		}
 		// Execute each goal.
@@ -933,69 +935,11 @@ GIDGET.ui = {
 			if(this.world.gidget.runtime.analyzed[index] === thing)
 				analyzed = true;
 		
-		if(analyzed) {
+		if(analyzed)
+			this.setThought(GIDGET.text.memory_analyzed(thing.name, thing.actions, thing.tags), 50);
+		else
+			this.setThought(GIDGET.text.memory_unanalyzed(thing.name), 50);
 		
-			var tags = "It has no special characteristics";
-			var tagCount = 0;
-			for(var tag in thing.tags) {
-				if(thing.tags.hasOwnProperty(tag)) {
-					tagCount++;
-				}
-			}
-
-			if(tagCount > 0) {
-				tags = "It is ";
-				var index = tagCount;
-				for(var tag in thing.tags) {
-					if(thing.tags.hasOwnProperty(tag)) {
-						// If this is the last one and there was one, just include the name.
-						if(tagCount > 2 && index !== tagCount) tags = tags + ", ";
-						// If there was more than one and this is the last one, prefix an 'and'
-						if(tagCount >= 2 && index === 1) tags = tags + " and ";
-						// Add the tag name.
-						tags = tags + "<b>" + tag + "</b>";
-						index--;	
-					}
-				}
-			}
-
-			var actions = "<p>There is nothing I can <b>ask</b> it to do.";
-			var actionCount = 0;
-			for(var action in thing.actions)
-				if(thing.actions.hasOwnProperty(action))
-					actionCount++;
-					
-			if(actionCount > 0) {
-				actions = "";
-				for(var action in thing.actions) {
-					if(thing.actions.hasOwnProperty(action)) {
-					
-						var arguments = thing.actions[action].arguments;
-						var argString = "";
-						if(arguments.length === 0) argString = ". I don't have to give it anything.";
-						else {
-							argString = " if I give it ";
-							for(var index = 0; index < arguments.length; index++) {
-								if(arguments.length > 2 && index != 0) argString = argString + ", ";
-								if(arguments.length >= 2 && index === arguments.length - 1) argString = argString + " and ";
-								argString = argString + "<b>" + arguments[index] + "</b>";
-							}
-							argString = argString + ".";
-						
-						}
-						actions = actions + "<p>I can <b>ask</b> it to <b>" + action + "</b>" + argString;
-					}
-				}
-			}
-		
-			this.setThought("I know all about <b>" + thing.name + "</b> because I <b>analyzed</b> it! " + tags + ". " + actions, 50);
-			
-		}
-		else {
-			this.setThought("I don't know anything about <b>" + thing.name + "</b> because I haven't <b>analyzed</b> it yet.", 50);
-		}
-		
-	
 	},
 	
 	unhighlightHoveredThing: function() {
@@ -1003,7 +947,7 @@ GIDGET.ui = {
 		this.hoveredThing = undefined;
 		this.drawGrid();
 		
-		this.setThought("Now where was I?", 50);		
+		this.setThought(GIDGET.text.memory_unfocus(), 50);
 	
 	},
 
