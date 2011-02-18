@@ -1041,7 +1041,7 @@ GIDGET.ui = {
 		var ctx = canvas.getContext('2d');
 		var row, col;
 		
-		ctx.fillStyle = 'rgb(124,57,10)';
+		ctx.fillStyle = this.world.grndColor;
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.lineWidth = 1;
 		

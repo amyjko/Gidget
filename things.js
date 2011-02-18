@@ -79,8 +79,24 @@ GIDGET.Action = function(arguments, script) {
 
 };
 
-GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission) {
+// *******************************************************
+// *** W O R L D - C O N S T R U C T O R *****************
+// *******************************************************
 
+
+GIDGET.World = function(gridSize, gidgetPos, groundAtt, code, mission) {
+	
+	// Grid (World) size & Gidget's initial positioning
+	var rowCount = isDef(gridSize[0]) ? gridSize[0] : 10;
+	var colCount = isDef(gridSize[1]) ? gridSize[1] : rowCount;
+	var gidgetRow = gidgetPos[0];
+	var gidgetCol = gidgetPos[1];
+	
+	// Default ground & grid border color;
+	this.grnd = isDef(groundAtt[0]) ? groundAtt[0] : "dirt";
+	this.grndColor = isDef(groundAtt[1]) ? groundAtt[1] : "rgb(124,57,10)";
+
+	
 	// Remember the initial code
 	this.code = code;
 
@@ -105,6 +121,7 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 			this.grid[row][col] = [];
 		}
 	}
+
 
 	// Add a paragraph of text and an associated emotional state for it.
 	this.addMissionText = function(state, text) {
@@ -207,8 +224,8 @@ GIDGET.World = function(rowCount, colCount, gidgetRow, gidgetCol, code, mission)
 	// Add a bunch of ground things.
 	for(row = 0; row < rowCount; row++) {
 		for(col = 0; col < colCount; col++) {
-		
-			var ground = new GIDGET.Thing(this, "ground", row, col, "rgb(164,77,30)", {}, {});
+			
+			var ground = new GIDGET.Thing(this, this.grnd, row, col, this.grndColor, {}, {}); // Brown: rgb(164,77,30)
 			ground.setLevel(0);
 			ground.setLabeled(false);
 			
