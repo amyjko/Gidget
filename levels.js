@@ -4,23 +4,34 @@ GIDGET.levels = {
 
 	learnScan: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan gidget";
 
-		var world = new GIDGET.World([10,10], [2,8], [], code);
+		var world = new GIDGET.World([10,10], [2,8], ["grass", "olivedrab"], code);
+			
+		// ---- G O A L S --------
 		
 		world.addGoal("scanned gidget");
-
-
+		
+		// ---- M I S S I O N ----
+		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("sad", "Hark!");
-			world.addMissionText("sad", "Be wary, travelers!");
+			world.addMissionText("control", "Hark!");
+			world.addMissionText("control", "This be a test of control gidget!");
 		}		
 		else {
 			world.addMissionText("sad", "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!");
 			world.addMissionText("default", "I'll do my best with the damaged algorithm generator, but I might need your help to fix mistakes!");
 			world.addMissionText("sad", "I should check to see if other systems are damaged! First, My 'scanner' puts the location of objects on the map into my memory banks. I can't seem to make it work correctly.");
-		}
+		}		
+		
+		// ----- T H I N G S -----
+		
+		
+		// -----------------------
+											
 		return world;
 	
 	},
@@ -29,22 +40,38 @@ GIDGET.levels = {
 	
 	learnScan2: function() {
 
+		// ----- G - C O D E -----
+
 		var code = 
 			"scan gidget\n" +
 			"scan bucket";
 	
-		var mission = "I have to report on what is in this area too. How did I do it last time? This is so hard for me!";
-					
-		var world = new GIDGET.World([10,10], [1,1], [], code);
-
+		var world = new GIDGET.World([10,10], [1,1], ["grass", "olivedrab"], code);
 		
-		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
-			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "green", [], {});  shrub.labeled = false;
-		}
-		new GIDGET.Thing(world, "bucket", 8, 8, "DarkSlateGray", [], {});
-				
+		// ---- G O A L S --------
+					
 		world.addGoal("scanned gidget");
 		world.addGoal("scanned bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "I have to report on what is in this area too. How did I do it last time? This is so hard for me!");
+		}
+
+
+		// ----- T H I N G S -----
+		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
+			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "green", [], {});
+			shrub.labeled = false;
+		}
+
+		new GIDGET.Thing(world, "bucket", 8, 8, "DarkSlateGray", [], {});
+		
+		// -----------------------
 
 		return world;
 	
@@ -54,21 +81,36 @@ GIDGET.levels = {
 	
 	learnScan3: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan gidget\n" +
 			"scan goops";
-	
-		var mission = "I think I am getting better at this! I wonder what is in this area?";
-					
+		
 		var world = new GIDGET.World([10,10], [1,8], [], code);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("scanned gidget");
+		world.addGoal("scanned three goops");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "I think I am getting better at this! I wonder what is in this area?");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 8, 3, "green", [], {});
 		new GIDGET.Thing(world, "goop", 5, 2, "green", [], {});
 		new GIDGET.Thing(world, "goop", 2, 5, "green", [], {});
 		
-		world.addGoal("scanned gidget");
-		world.addGoal("scanned three goops");
-
+		// -----------------------
+	
 		return world;
 	
 	},
@@ -77,44 +119,71 @@ GIDGET.levels = {
 		
 	learnAnalyze: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan goop\n" +
 			"analyze goop";
-			
-		var mission = "Okay! My scanner seems to be working. Now it's time to check my 'analyzer' - it allows me to see special attributes and actions of objects which can access through my memory banks. <br /><br />I tried it on this goop, but I am not getting any results!";
-					
+		
 		var world = new GIDGET.World([10,10], [5,5], [], code);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("analyzed goop");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "Okay! My scanner seems to be working.");
+			world.addMissionText("sad","Now it's time to check my 'analyzer' - it allows me to see special attributes and actions of objects which can access through my memory banks."); 
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 5, 5, "green", [ 'glowing' ], {});
 		
-
-		
-		world.addGoal("analyzed goop");
-
-
+		// -----------------------
+								
 		return world;
 	
 	},		
 	// *******************************************************
 	
 	learnGoto: function() {
-
+	
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan goops\n" +
 			"scan bucket\n" +
 			"goto bucket";
-	
-		var mission = "I have strayed too far from my bucket. I need to get back to it but I don't remember the way!";
-					
+		
 		var world = new GIDGET.World([10,10], [5,5], [], code);
-
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("gidget on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "I have strayed too far from my bucket. I need to get back to it but I don't remember the way!");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 2, 9, "green", [], {});
 		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
 		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
-		
-		world.addGoal("gidget on bucket");
-
+				
+		// -----------------------
+						
 		return world;
 	
 	},		
@@ -148,25 +217,41 @@ GIDGET.levels = {
 	
 	learnGrab2: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan goop\n" +
 			"goto goop\n" +
 			"grab goop\n" +
 			"scan bucket\n" +
 			"goto bucket";
-	
-		var mission = "I think I figured out how to collect the goop, but now I need to start moving it to where it need to go! Ohhh...I think I'm close, but I can't figure out how to do it right...";
-					
+		
 		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
-		
-		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
-		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
+			
+		// ---- G O A L S --------
 		
 		world.addGoal("gidget on bucket");
 		world.addGoal("goop on bucket");
 		
-
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "I think I figured out how to collect the goop, but now I need to start moving it to where it need to go! Ohhh...I think I'm close, but I can't figure out how to do it right...");
+		}
+		
+		
+		
+		// ----- T H I N G S -----
+		
+		new GIDGET.Thing(world, "goop", 4, 1, "green", [], {});
+		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
+		
+		// -----------------------
+						
 		return world;
 	
 	},		
@@ -174,6 +259,8 @@ GIDGET.levels = {
 	
 	learnDrop: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan kitten\n" +
 			"goto kitten\n" +
@@ -188,19 +275,31 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop goop";
 	
-		var mission = "There's more goop and animals here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!";
-					
 		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("kitten on crate");
+		world.addGoal("goop on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There's more goop and animals here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!");
+		}
+			
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
 		new GIDGET.Thing(world, "kitten", 4, 1, "orange", [], {});
 		new GIDGET.Thing(world, "crate", 7, 7, "Chocolate", [], {});
 		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
-		world.addGoal("kitten on crate");
-		world.addGoal("goop on bucket");
-		
+		// -----------------------	
 
 		return world;
 	
@@ -210,6 +309,8 @@ GIDGET.levels = {
 	
 	learnCompounds: function() {
 
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan puppy, goto it, grab it\n" +
 			"scan piglet, goto it, grab it\n" +
@@ -218,11 +319,26 @@ GIDGET.levels = {
 			"scan goop, goto it, grab it\n" +
 			"scan bucket, goto it\n" +
 			"drop goop";
-	
-		var mission = "There's more goop and animals here. I should clean up the goop and rescue the animals . I think I remember how to do it with less commands, but can't get it quite right!";
-					
+		
 		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("piglet on crate");
+		world.addGoal("puppy on crate");
+		world.addGoal("goop on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There's more goop and animals here. I should clean up the goop and rescue the animals . I think I remember how to do it with less commands, but can't get it quite right!");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 1, 8, "green", [], {});
 		new GIDGET.Thing(world, "piglet", 4, 1, "orange", [], {});
@@ -230,11 +346,8 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "crate", 7, 7, "Chocolate", [], {});
 		new GIDGET.Thing(world, "bucket", 9, 6, "DarkSlateGray", [], {});
 		
-		world.addGoal("piglet on crate");
-		world.addGoal("puppy on crate");
-		world.addGoal("goop on bucket");
-		
-
+		// -----------------------
+						
 		return world;
 	
 	},
@@ -243,24 +356,37 @@ GIDGET.levels = {
 
 	lowEnergy: function() {
 
-
-		// STATE CRITICAL ENERGY
-		
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan dog, goto it, analyze it, if it is infected, grab it\n" +
 			"scan crate, goto it\n" +
 			"drop dog";
-			
-		var mission = "There might be something wrong with that dog over there...let's makes sure it's okay!";
-					
+		
 		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(115);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("dog on crate is infected");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There might be something wrong with that dog over there...let's makes sure it's okay!");
+		}
+		
+		
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "dog", 8, 8, "orange", [ 'infected' ], {});
 		new GIDGET.Thing(world, "crate", 1, 3, "Chocolate", [], {});
 		
-		world.addGoal("dog on crate is infected");
-
+		// -----------------------
 
 		return world;
 	
@@ -269,16 +395,31 @@ GIDGET.levels = {
 		
 	learnConditional: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan cats\n" +
 			"goto cats, analyze it, if it is infected, grab it\n" +
 			"scan crate, goto it\n" +
 			"drop cats";
-			
-		var mission = "Oh no! I'm detecting one of these these cats are infected by the goop. I'll have to separate it from the rest!";
-					
+		
 		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("cat on crate is infected");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "Oh no! I'm detecting one of these these cats are infected by the goop. I'll have to separate it from the rest!");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "cat", 1, 8, "orange", [], {});
 		new GIDGET.Thing(world, "cat", 9, 9, "orange", [], {});
@@ -288,8 +429,8 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "cat", 7, 8, "green", [] , {});
 		new GIDGET.Thing(world, "crate", 9, 6, "Chocolate", [], {});
 		
-		world.addGoal("cat on crate is infected");
-
+		// -----------------------
+								
 		return world;
 	
 	},	
@@ -298,16 +439,31 @@ GIDGET.levels = {
 		
 	learnConditionalCompound: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan birds\n" +
 			"goto birds, analyze it, if it is infected, grab it\n" +
 			"scan crate, goto it\n" +
 			"drop birds";
-			
-		var mission = "Oh no! I'm detecting many of these birds are infected by the goop. I'll have to separate them from the rest!";
-					
+		
 		var world = new GIDGET.World([10,10], [1,1], [], code);
 		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("three birds on crate are infected");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "Oh no! I'm detecting many of these birds are infected by the goop. I'll have to separate them from the rest!");
+		}
+				
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "bird", 8, 1, "orange", [ 'infected' ], {});
 		new GIDGET.Thing(world, "bird", 1, 4, "orange", [], {});
@@ -318,8 +474,7 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "bird", 8, 7, "orange", [], {});
 		new GIDGET.Thing(world, "crate", 6, 9, "Chocolate", [], {});
 		
-		world.addGoal("three birds on crate are infected");
-
+		// -----------------------
 
 		return world;
 	
@@ -330,6 +485,8 @@ GIDGET.levels = {
 	// *******************************************************
 	useObjectEnergize: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan goops\n" +
 			"scan bucket\n" +
@@ -340,13 +497,26 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop goops";
 		
-		var mission = "It looks like I'm running low on power to complete the task. How can I use the resources to recharge myself?";
-		
-		var world = new GIDGET.World([10,10], [2,8], ["grass", "green"], code);	
+		var world = new GIDGET.World([10,10], [2,8], ["grass", "olivedrab"], code);	
 		world.gidget.setEnergy(105);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("two goops on bucket");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "It looks like I'm running low on power to complete the task. How can I use the resources to recharge myself?");
+		}
+		
+		
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "bucket", 9, 8, "rgb(250,0,255)", [], {});
 		new GIDGET.Thing(world, "goop", 1, 1, "green", [], {});
 		new GIDGET.Thing(world, "goop", 0, 9, "green", [], {});
@@ -358,6 +528,8 @@ GIDGET.levels = {
 			}
 		);
 		
+		// -----------------------
+
 		return world;
 		
 	},	
@@ -366,18 +538,32 @@ GIDGET.levels = {
 	
 	navigateWalls: function() {
 
-		var code = 
+		// ----- G - C O D E -----
+			var code = 
 			"scan goops\n" +
 			"goto goops, analyze it, if it is glowing, grab it\n" +
 			"scan bucket, goto it\n" +
 			"drop goops";
-	
-		var mission = "There's something blocking my path to the goop! I need to navigate around it.";
-			
+		
 		var world = new GIDGET.World([10,10], [6,5], [], code);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("goop on bucket is glowing");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There's something blocking my path to the goop! I need to navigate around it.");
+		}
+		
+		
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "bucket", 1, 8, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 7, 4, "green", [ 'glowing' ], {});
 
@@ -398,6 +584,8 @@ GIDGET.levels = {
 		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 7, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
+		
+		// -----------------------
 
 		return world;
 	
@@ -406,21 +594,32 @@ GIDGET.levels = {
 	
 	learnAvoidPassive: function() {
 
-		var code = 
+		// ----- G - C O D E -----
+			var code = 
 			"scan goop\n" +
 			"scan bgoop\n" +
 			"goto goop, analyze it, if it is glowing, grab it\n" +
 			"scan bucket, goto it avoid bgoop\n" +
 			"drop goop";
 	
-		var mission = "There's new kind of goops here which are keeping me from getting the goop! I need to navigate around them.";
-	
-			
 		var world = new GIDGET.World([10,10], [5,5], [], code);
 		world.gidget.setEnergy(120);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("goop on bucket is glowing");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There's new kind of goops here which are keeping me from getting the goop! I need to navigate around them.");
+		}
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "bucket", 1, 9, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 6, 4, "green", [ 'glowing' ], {});
 		var b1 = new GIDGET.Thing(world, "bgoop", 5, 9, "blue", [], {});
@@ -429,7 +628,6 @@ GIDGET.levels = {
 		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "blue", [], {});
 		var b4 = new GIDGET.Thing(world, "bgoop", 2, 9, "blue", [], {});
 		*/
-
 		
 		b1.setCode(
 			"when gidget on bgoop, grab goops\n"
@@ -445,7 +643,6 @@ GIDGET.levels = {
 			"when gidget on bgoop, grab goops\n"
 		);
 		*/
-		
 
 		var wall;
 		wall = new GIDGET.Thing(world, "wall", 5, 1, "black", [], {});
@@ -464,8 +661,8 @@ GIDGET.levels = {
 		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 6, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-
 		
+		// -----------------------
 		
 		return world;
 	
@@ -475,17 +672,30 @@ GIDGET.levels = {
 	
 	learnAvoidActive: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan goop\n" +
 			"scan rats\n" +
 			"goto goop, grab it\n";
-	
-		var mission = "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!";
-	
+
 		var world = new GIDGET.World([10,10], [0,0], [], code);
 		world.gidget.setEnergy(110);
+			
+		// ---- G O A L S --------
 		
 		world.addGoal("grabbed three goops");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 6, 6, "green", [], {});
 		new GIDGET.Thing(world, "goop", 6, 9, "green", [], {});
@@ -500,6 +710,8 @@ GIDGET.levels = {
 		
 		rat.setSpeed(3);
 		
+		// -----------------------
+
 		return world;
 		
 	},
@@ -508,18 +720,33 @@ GIDGET.levels = {
 	
 	learnAvoidActive2: function() { 
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan birds\n" +
 			"scan rats\n" +
 			"goto birds avoid rat, grab it\n" +
 			"scan crate, goto it avoid rat\n" +
 			"drop birds";
-		
+
 		var world = new GIDGET.World([10,10], [5,4], [], code);
 		world.gidget.setEnergy(160);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("two birds on crate");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "");
+		}
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "crate", 2, 2, "Chocolate", [], {});
 		new GIDGET.Thing(world, "bird", 9, 1, "orange", [], {});
 		new GIDGET.Thing(world, "bird", 1, 9, "orange", [], {});
@@ -559,7 +786,6 @@ GIDGET.levels = {
 		wall = new GIDGET.Thing(world, "wall", 8, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 
-
 		wall = new GIDGET.Thing(world, "wall", 1, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 2, 5, "black", [], {});
@@ -584,6 +810,8 @@ GIDGET.levels = {
 		);
 		
 		rat.setSpeed(3);
+
+		// -----------------------
 		
 		return world;
 		
@@ -594,6 +822,8 @@ GIDGET.levels = {
 	
 	learnBlending: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan rocks\n" +
 			"scan blender\n" +
@@ -604,11 +834,23 @@ GIDGET.levels = {
 			"scan bucket, goto it\n" +
 			"drop rgoop"; 
 	
-
 		var world = new GIDGET.World([10,10], [2,8], [], code);
 		world.gidget.setEnergy(1000);
+	
+		// ---- G O A L S --------
 		
 		world.addGoal("rgoop on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "");
+		}
+		
+		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "bucket", 1, 1, "rgb(250,255,255)", [], {});
 		new GIDGET.Thing(world, "rock", 2, 2, "rgb(250,255,255)", [ 'contaminated'], {});
@@ -622,6 +864,8 @@ GIDGET.levels = {
 			}
 		);
 		
+		// -----------------------
+
 		return world;
 		
 	},
@@ -630,6 +874,8 @@ GIDGET.levels = {
 	
 	learnSequence: function() {
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan bucket\n" +
 			"scan button\n" +
@@ -641,13 +887,25 @@ GIDGET.levels = {
 			"ask button to lower\n" +
 			"goto bucket\n" +
 			"drop goops";
-	
-
+		
 		var world = new GIDGET.World([10,10], [2,8], [], code);
 		world.gidget.setEnergy(1000);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("goop on bucket");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "");
+		}
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
@@ -673,7 +931,6 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "goop", 9, 8, "green", [], {});
 		new GIDGET.Thing(world, "goop", 9, 9, "green", [], {});
 		
-		
 		var wall;
 		wall = new GIDGET.Thing(world, "wall1", 3, 0, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
@@ -696,7 +953,9 @@ GIDGET.levels = {
 		wall = new GIDGET.Thing(world, "wall2", 8, 7, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 8, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 9, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		
+
+		// -----------------------	
+
 		return world;
 	
 	},
@@ -704,7 +963,9 @@ GIDGET.levels = {
 	// *******************************************************
 	
 	learnSequence2: function() {
-	
+
+		// ----- G - C O D E -----
+		
 		var code = 
 			"scan bucket\n" +
 			"scan rocks\n" +
@@ -714,14 +975,26 @@ GIDGET.levels = {
 		
 		var world = new GIDGET.World([10,10], [1,0], [], code);
 		world.gidget.setEnergy(250);
+			
+		// ---- G O A L S --------
 		
 		world.addGoal("rock on bucket");
-
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "");
+		}
+		
+		// ----- T H I N G S -----
+		
 		new GIDGET.Thing(world, "bucket", 7, 0, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "rock", 0, 7, "brown", [], {});
 		
 		var wall;
-		
 		wall = new GIDGET.Thing(world, "wall", 0, 0, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 1, 1, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall", 2, 2, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
@@ -758,7 +1031,8 @@ GIDGET.levels = {
 
 		wall = new GIDGET.Thing(world, "wall", 0, 9, "rgb(255,255,255)", [], {}); wall.setLevel(2); wall.labeled = false;
 
-
+		// -----------------------		
+	
 		return world;
 	
 	},
@@ -768,6 +1042,8 @@ GIDGET.levels = {
 	
 	learnAll: function() { 
 
+		// ----- G - C O D E -----
+	
 		var code = 
 			"scan bucket\n" +
 			"scan button\n" +
@@ -779,14 +1055,26 @@ GIDGET.levels = {
 			"ask button to lower\n" +	
 			"goto bucket\n" +
 			"drop rocks";
-	
-		var mission = "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!";
-	
-
+		
 		var world = new GIDGET.World([10,10], [0,1], [], code);
 		world.gidget.setEnergy(1000);
-
+			
+		// ---- G O A L S --------
+		
 		world.addGoal("rock on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!");
+		}
+		
+		
+		
+		// ----- T H I N G S -----
 		
 		var rat = new GIDGET.Thing(world, "rat", 0, 9, "yellow", [], {});
 		var rat2 = new GIDGET.Thing(world, "rat", 9, 0, "yellow", [], {});
@@ -807,7 +1095,6 @@ GIDGET.levels = {
 		);
 		
 		var wall;
-		
 		wall = new GIDGET.Thing(world, "wall2", 0, 7, "black", [], {}); 
 		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 1, 7, "black", [], {});
@@ -829,8 +1116,7 @@ GIDGET.levels = {
 		wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 9, 2, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		
-		
+			
 		wall = new GIDGET.Thing(world, "wall1", 1, 1, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 1, 2, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 1, 3, "black", [], {}); wall.labeled = false;
@@ -839,8 +1125,6 @@ GIDGET.levels = {
 		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
-		
-
 		
 		rat.setCode(
 			"scan gidget\n" +
@@ -855,26 +1139,47 @@ GIDGET.levels = {
 			"set gidget energy 0"
 		);
 		rat2.setSpeed(5);
-		
+
+		// -----------------------	
+
 		return world;
 	
 	},
-	
+
+	// *******************************************************
+		
 	testSpeak: function() { 
 
-		var code = "scan rat";	
-		var mission = "I have a new friend.";
+		// ----- G - C O D E -----
 	
+		var code = "scan rat";	
+		
 		var world = new GIDGET.World([10,10], [0,1], [], code);
-
+		
+		// ---- G O A L S --------
+		
 		world.addGoal("scanned rat");
 		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "Looks like I have a new friend!");
+		}
+		
+
+		// ----- T H I N G S -----
+		
 		var rat = new GIDGET.Thing(world, "rat", 0, 9, "yellow", [], {});
-				
+		
 		rat.setCode(
 			"say I am your friend, gidget! But I still want to eat you."
 		);
-				
+		
+		// -----------------------
+		
 		return world;
 	
 	},
