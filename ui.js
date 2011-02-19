@@ -258,7 +258,7 @@ GIDGET.ui = {
 		else {
 		
 			this.world.gidget.runtime.state = this.world.missionText[this.currentMissionText].state;
-			this.setThought(this.world.missionText[this.currentMissionText].text, 0);
+			this.visualizeDecision(this.world.missionText[this.currentMissionText].text, false);
 		
 		}
 	
@@ -480,11 +480,11 @@ GIDGET.ui = {
 
 				if(this.allGoalsAchieved === true) {
 					this.world.gidget.runtime.state = "happy";			
-					this.setThought(GIDGET.text.goal_finalSuccess(), 5);	
+					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
 				}
 				else {
 					this.world.gidget.runtime.state = "sad";
-					this.setThought(GIDGET.text.goal_finalFailure(), 5);
+					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
 				}
 				
 				// In case we're playing, return without invoking another step.
@@ -503,7 +503,7 @@ GIDGET.ui = {
 					this.updateRuntimeUserInterface(decisions[index].action);
 					
 					// Highlight the runtime UI to show what changed.
-					this.visualizeDecision(decisions[index], animate);
+					this.visualizeDecision(decisions[index].thought, animate);
 					
 				}
 
@@ -517,7 +517,7 @@ GIDGET.ui = {
 				
 					$('#goals .success:eq(' + this.goalNumberBeingExecuted + ')').show();
 					this.world.gidget.runtime.state = "happy";
-					this.setThought(GIDGET.text.goal_checkSuccess(), 5);
+					this.visualizeDecision(GIDGET.text.goal_checkSuccess(), true);
 				
 				}
 				// If there aren't results, the goal wasn't achieved.
@@ -527,7 +527,7 @@ GIDGET.ui = {
 					$('#goals .failure:eq(' + this.goalNumberBeingExecuted + ')').show();
 					this.allGoalsAchieved = true;
 					this.world.gidget.runtime.state = "sad";
-					this.setThought(GIDGET.text.goal_checkFailure(), 5);
+					this.visualizeDecision(GIDGET.text.goal_checkFailure(), true);
 				
 				}
 				
@@ -593,7 +593,7 @@ GIDGET.ui = {
 							this.updateRuntimeUserInterface(decision.action);
 							
 							// Highlight the runtime UI to show what changed.
-							this.visualizeDecision(decision, animate);
+							this.visualizeDecision(decision.thought, animate);
 						
 						}
 						// If this is a speak, add a speech bubble
@@ -641,7 +641,7 @@ GIDGET.ui = {
 		// don't test the goals.
 		if(this.world.gidget.energy <= 0) {
 			
-			this.setThought(GIDGET.text.noEnergy(), 1000);
+			this.visualizeDecision(GIDGET.text.noEnergy(), true);
 		
 		}
 		// Execute each goal.
@@ -668,19 +668,18 @@ GIDGET.ui = {
 
 	// This takes a Thing's decision and converts the spans of text and references
 	// into text and user interface highlights. Currently, this is only written for Gidget.
-	visualizeDecision: function(decision, animate) {
-	
-		var runtime = decision.runtime;
+	visualizeDecision: function(text, animate) {
 	
 		// Go through the decisions references and highlight the desired references, 
 		// constructing the html to display in the thought bubble.
 		var span, text, reference, index;
 		var thought = "";
-		for(span = 0; span < decision.spans.length; span++) {
+		var spans = this.parseThought(text);
+		for(span = 0; span < spans.length; span++) {
 
-			text = decision.spans[span].text;
-			reference = decision.spans[span].reference;
-			index = parseInt(decision.spans[span].index);
+			text = spans[span].text;
+			reference = spans[span].reference;
+			index = parseInt(spans[span].index);
 			index = isNaN(index) ? undefined : index;
 
 			// If there's a reference, make a span to represent it.
@@ -702,6 +701,77 @@ GIDGET.ui = {
 
 		this.log(thought);
 
+	},
+
+	parseThought: function(message) {
+	
+		var spans = [];
+	
+		// Parse markup of this format: $OBJECT[INDEX](text)
+		// Keep finding the index of the next $ until there are no more.
+		var indexOfDollar = message.indexOf('$');
+		var left, right = message, reference, index, text;
+		while(indexOfDollar >= 0) {
+		
+			// Split into left and right, skipping the dollar sign
+			left = right.substring(0, indexOfDollar);
+			right = right.substring(indexOfDollar + 1, message.length);
+		
+			// Add a span for the text on the left.
+			spans.push({ reference: undefined, index: undefined, text: left });
+			
+			// Parse the right part until reaching the )
+			reference = "";
+			while(right.length > 0 && right.charAt(0).match(/^[a-zA-Z]$/)) {
+			
+				reference = reference + right.charAt(0);
+				right = right.substring(1, right.length);
+			
+			}
+			
+			// Is there an index?
+			index = "";
+			if(right.charAt(0) === '@') {
+			
+				right = right.substring(1, right.length);
+				while(right.length > 0 && right.charAt(0).match(/^[0-9]$/)) {
+				
+					index = index + right.charAt(0);
+					right = right.substring(1, right.length);
+					
+				}
+			
+			}
+			
+			// Next there should be a left parenthesis, indicating what text should be highlighted to refer to the referent.
+			if(right.length > 0)
+				right = right.substring(1, right.length);
+			
+			text = "";
+			while(right.length > 0 && right.charAt(0) !== ')') {
+
+				text = text + right.charAt(0);	
+				right = right.substring(1, right.length);
+			
+			}
+
+			// Eat the closing parenthesis.		
+			if(right.length > 0)
+				right = right.substring(1, right.length);
+
+			// Add a span to represent the reference.
+			spans.push({ reference: reference, index: index, text: text });
+		
+			// Find the next dollar sign.
+			indexOfDollar = right.indexOf('$');
+			
+		}
+		
+		// Add a span for the remaining text.
+		spans.push({ reference: undefined, index: undefined, text: right });
+		
+		return spans;
+	
 	},
 
 	updateRuntimeUserInterface: function(action) {
@@ -941,9 +1011,9 @@ GIDGET.ui = {
 				analyzed = true;
 		
 		if(analyzed)
-			this.setThought(GIDGET.text.memory_analyzed(thing.name, thing.actions, thing.tags), 50);
+			this.visualizeDecision(GIDGET.text.memory_analyzed(thing.name, thing.actions, thing.tags), true);
 		else
-			this.setThought(GIDGET.text.memory_unanalyzed(thing.name), 50);
+			this.visualizeDecision(GIDGET.text.memory_unanalyzed(thing.name), true);
 		
 	},
 	
@@ -952,7 +1022,7 @@ GIDGET.ui = {
 		this.hoveredThing = undefined;
 		this.drawGrid();
 		
-		this.setThought(GIDGET.text.memory_unfocus(), 50);
+		this.visualizeDecision(GIDGET.text.memory_unfocus(), true);
 	
 	},
 

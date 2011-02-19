@@ -514,9 +514,9 @@ GIDGET.text = {
 	goal_checkSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return "There were results for this goal, so I succeeded!";	
+			return "There were $results(results) for this goal, so I succeeded!";	
 		
-		return "There were results for this goal, so I succeeded!";
+		return "There were $results(results) for this goal, so I succeeded!";
 
 	},
 	
@@ -525,7 +525,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
 			
-		return "There were <b>no results</b> for this goal, so I didn't accomplish this goal!";
+		return "There were $results(no results) for this goal, so I didn't accomplish this goal!";
 		
 	},
 	

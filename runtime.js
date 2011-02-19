@@ -378,10 +378,9 @@ GIDGET.Runtime = function(thing, world) {
 		this.action = action;
 		
 		this.state = isDef(state) ? state : 'default';
-		
-		// This will store the list of parsed references.
-		this.spans = [];
-		
+
+		this.thought = message;
+						
 		this.execute = function() {
 		
 			if(isDef(action))
@@ -390,70 +389,7 @@ GIDGET.Runtime = function(thing, world) {
 			this.runtime.state = this.state;
 		
 		};
-		
-		// Parse markup of this format: $OBJECT[INDEX](text)
-		// Keep finding the index of the next $ until there are no more.
-		var indexOfDollar = message.indexOf('$');
-		var left, right = message, reference, index, text;
-		while(indexOfDollar >= 0) {
-		
-			// Split into left and right, skipping the dollar sign
-			left = right.substring(0, indexOfDollar);
-			right = right.substring(indexOfDollar + 1, message.length);
-		
-			// Add a span for the text on the left.
-			this.spans.push({ reference: undefined, index: undefined, text: left });
 			
-			// Parse the right part until reaching the )
-			reference = "";
-			while(right.length > 0 && right.charAt(0).match(/^[a-zA-Z]$/)) {
-			
-				reference = reference + right.charAt(0);
-				right = right.substring(1, right.length);
-			
-			}
-			
-			// Is there an index?
-			index = "";
-			if(right.charAt(0) === '@') {
-			
-				right = right.substring(1, right.length);
-				while(right.length > 0 && right.charAt(0).match(/^[0-9]$/)) {
-				
-					index = index + right.charAt(0);
-					right = right.substring(1, right.length);
-					
-				}
-			
-			}
-			
-			// Next there should be a left parenthesis, indicating what text should be highlighted to refer to the referent.
-			if(right.length > 0)
-				right = right.substring(1, right.length);
-			
-			text = "";
-			while(right.length > 0 && right.charAt(0) !== ')') {
-
-				text = text + right.charAt(0);	
-				right = right.substring(1, right.length);
-			
-			}
-
-			// Eat the closing parenthesis.		
-			if(right.length > 0)
-				right = right.substring(1, right.length);
-
-			// Add a span to represent the reference.
-			this.spans.push({ reference: reference, index: index, text: text });
-		
-			// Find the next dollar sign.
-			indexOfDollar = right.indexOf('$');
-			
-		}
-		
-		// Add a span for the remaining text.
-		this.spans.push({ reference: undefined, index: undefined, text: right });	
-	
 	};
 	
 };
