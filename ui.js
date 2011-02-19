@@ -76,8 +76,6 @@ GIDGET.ui = {
 	quit: function() {
 	
 		var level = localStorage.getItem('currentLevel');
-	
-		var levelMetadata = localStorage.getItem('levelMetadata');
 
 		$('#quitResults').html("<p>Saving your achievements...").show();
 

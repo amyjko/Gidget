@@ -46,7 +46,7 @@
 			
 			<td id='centerPanel'>
 
-				<h2>World <button id='quit' onclick='GIDGET.ui.quit();'>I quit, give me my code!</button></h2>
+				<h2>World <button id='quit' onclick='$("#quitConfirm").show();'>I quit, give me my code!</button></h2>
 				<div class='thoughtBubble' id='thingThought'></div>
 				<canvas id="grid" width="300" height="300"></canvas>
 
@@ -103,6 +103,16 @@
 
 
 	<div class='popup' id='quitResults'></div>
+
+	<div class='popup' id='quitConfirm'>
+		<p>Are you sure you want to quit? You'll get your MTurk code but you <b>won't be able to continue playing the game.</b></p>
+		
+		<p style='text-align:right'>
+		<button onclick='$("#quitConfirm").hide()'>I don't want to quit!</button>
+		<button onclick='$("#quitConfirm").hide(); GIDGET.ui.quit()'>Yes, I give up.</button>
+		</p>
+	
+	</div>
 		
 	<div class='popup' id='debug'>
 		<h2>Debug Menu</h2>
