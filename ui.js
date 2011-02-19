@@ -79,15 +79,17 @@ GIDGET.ui = {
 	
 		var levelMetadata = localStorage.getItem('levelMetadata');
 
+		$('#quitResults').html("<p>Saving your achievements...").show();
+
 		$.ajax({
 			type: "POST",
-			url: "finished.php",
-			data: "levelMetadata=" + levelMetadata,
+			url: "submit.php",
+			data: "data=" + levelMetadata,
 			success: function(msg) {
-				alert('finished! ' + msg);
+				$('#quitResults').html("<p>Successfully submitted your results!</p>").show();
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				alert("I couldn't send the game data:<p>" + errorThrown);
+				$('#quitResults').html("<p>Results could not be saved: " + errorThrown + ". but here's an MTurk code anyway").show();
 			}
 		});
 	
@@ -113,16 +115,16 @@ GIDGET.ui = {
 		if(!levelData.hasOwnProperty(this.getCurrentLevel())) {
 		
 			levelData[this.getCurrentLevel()] = {
-				passed: false, 
-				startTime: (new Date()).getTime(), 
-				endTime: undefined,
+				passed: 'false', 
+				startTime: "" + (new Date()).getTime(), 
+				endTime: "",
 				versions: [] 
 			};
 		
 		}
 		
 		// Add the current version to the list of versions.
-		levelData[this.getCurrentLevel()].versions.push({ time: (new Date).getTime(), version: currentCode });
+		levelData[this.getCurrentLevel()].versions.push({ time: "" + (new Date).getTime(), version: currentCode });
 		
 		// Stringify the current versions object
 		localStorage.setObject('levelMetadata', levelData);		
@@ -269,8 +271,8 @@ GIDGET.ui = {
 		// Remember that this level was passed, what time, and the final code.
 		this.saveCurrentLevelCode();
 		var levelData = localStorage.getObject('levelMetadata');
-		levelData[this.getCurrentLevel()].passed = true;
-		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
+		levelData[this.getCurrentLevel()].passed = "true";
+		levelData[this.getCurrentLevel()].endTime = "" + (new Date()).getTime();
 		localStorage.setObject('levelMetadata', levelData);
 
 		// Now find the next level.		
