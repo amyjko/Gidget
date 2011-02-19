@@ -95,9 +95,10 @@ GIDGET.ui = {
 		var password = randomPassword(10);
 
 		var payload = {
+			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
-			levelMetadata: localStorage.getItem('levelMetadata'), 
-			code: password
+			code: password,
+			levelMetadata: localStorage.getItem('levelMetadata')
 		}
 		
 		payload = JSON.stringify(payload);

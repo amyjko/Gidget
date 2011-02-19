@@ -69,7 +69,6 @@ $().ready(function() {
 	
 	$('#code').click(function() {
 	
-		console.log("Bkldjfl");
 		if($('#code').attr('contentEditable') === 'false') {
 
 			$('#code').animate({ opacity: 0.25 }, 200, function() { $('#code').css('opacity', 1.0); });		
