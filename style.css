@@ -76,20 +76,20 @@ a {
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	2px;
 	color: 			white;
-	background-color: rgb(42,33,28);
+	background-color: black;
 	font-family: 	"Courier New";
 	font-size: 		small;
 	padding: 		1em;
 }
 
 #code[contentEditable="false"] {
-	background-color: rgb(42,33,28);
+/* 	background-color: rgb(42,33,28); */
 	overflow-x: 	auto;
 	word-wrap: break-word;
 }
 
 #code[contentEditable="true"] {
-	background-color: black;
+/* 	background-color: black; */
 	color:			white;
 	overflow-x: 	auto;
 }

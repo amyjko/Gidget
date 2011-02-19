@@ -57,15 +57,19 @@ $().ready(function() {
 		levelCount++;
 	}
 	
-	// When mouse leaves editor, format the code.
-	$('#code').mouseout(function() {
-	
+	$('#code').
+	focusout(function() {
+		$(this).css('backgroundColor', 'black');
+		
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
 
 		GIDGET.ui.saveCurrentLevelCode();
-	
-	});
+
+	}).
+	focusin(function() {
+		$(this).css('backgroundColor', 'rgb(25,25,25)');
+	});	
 	
 	$('#code').click(function() {
 	
