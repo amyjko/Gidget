@@ -81,15 +81,50 @@ GIDGET.ui = {
 
 		$('#quitResults').html("<p>Saving your achievements...").show();
 
+		function randomPassword(length) {
+		   chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		   pass = "";
+		   for(x=0;x<length;x++)
+		   {
+		     i = Math.floor(Math.random() * 62);
+		     pass += chars.charAt(i);
+		   }
+		   return pass;
+		}
+
+		var password = randomPassword(10);
+
+		function disable(failed) {
+		
+			var message = failed ? "Your results could not be saved :(" : "Successfully saved your results!";
+
+			$('#content').hide();
+			
+			$('#quitResults').html(
+				"<p>" + message + "</p>" + 
+				"<p>Your MTurk completion code is <b>" + password + "</b>. Please enter it back on the MTurk HIT page.</p>" + 
+				"<p>From this point on, the game will be disabled."
+			).show();
+		
+		}
+
+		var payload = {
+			currentLevel: localStorage.getItem('currentLevel'),
+			levelMetadata: localStorage.getItem('levelMetadata'), 
+			code: password
+		}
+		
+		payload = JSON.stringify(payload);
+	
 		$.ajax({
 			type: "POST",
 			url: "submit.php",
-			data: "data=" + levelMetadata,
+			data: "data=" + payload,
 			success: function(msg) {
-				$('#quitResults').html("<p>Successfully submitted your results!</p>").show();
+				disable(false);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				$('#quitResults').html("<p>Results could not be saved: " + errorThrown + ". but here's an MTurk code anyway").show();
+				disable(true);
 			}
 		});
 	
