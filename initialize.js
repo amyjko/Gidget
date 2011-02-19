@@ -205,5 +205,11 @@ $().ready(function() {
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
 
+
+	if(localStorage.getItem('quit') !== null) {
+	
+		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
+	
+	}
 	
 });

@@ -45,7 +45,8 @@ var SCENES = {
 				// If this is visible, draw the sprite.
 				if(begin < time && time < end) {
 	
-					ctx.drawImage(sprite.image, sprite.x, sprite.y, sprite.width, sprite.height);	
+					if(sprite.width > 0 && sprite.height > 0)
+						ctx.drawImage(sprite.image, sprite.x, sprite.y, sprite.width, sprite.height);	
 				
 				}
 			

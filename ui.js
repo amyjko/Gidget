@@ -94,20 +94,6 @@ GIDGET.ui = {
 
 		var password = randomPassword(10);
 
-		function disable(failed) {
-		
-			var message = failed ? "Your results could not be saved :(" : "Successfully saved your results!";
-
-			$('#content').hide();
-			
-			$('#quitResults').html(
-				"<p>" + message + "</p>" + 
-				"<p>Your MTurk completion code is <b>" + password + "</b>. Please enter it back on the MTurk HIT page.</p>" + 
-				"<p>From this point on, the game will be disabled."
-			).show();
-		
-		}
-
 		var payload = {
 			currentLevel: localStorage.getItem('currentLevel'),
 			levelMetadata: localStorage.getItem('levelMetadata'), 
@@ -116,20 +102,34 @@ GIDGET.ui = {
 		
 		payload = JSON.stringify(payload);
 	
+		localStorage.setItem("quit", password);
+
 		$.ajax({
 			type: "POST",
 			url: "submit.php",
 			data: "data=" + payload,
 			success: function(msg) {
-				disable(false);
+				GIDGET.ui.disable("Successfully saved your results!");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				disable(true);
+				GIDGET.ui.disable("Your results could not be saved :(");
 			}
 		});
-	
+			
 	},
 	
+	disable: function(message) {
+
+		$('#content').hide();
+		
+		$('#quitResults').html(
+			"<p>" + message + "</p>" + 
+			"<p>Your MTurk completion code is <b>" + localStorage.getItem('quit') + "</b>. Please enter it back on the MTurk HIT page.</p>" + 
+			"<p>From this point on, the game will be disabled."
+		).show();
+	
+	},
+
 	getCurrentLevel: function() {
 	
 		return localStorage.getItem('currentLevel');
