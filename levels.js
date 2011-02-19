@@ -9,7 +9,7 @@ GIDGET.levels = {
 		var code = 
 			"scan gidget";
 
-		var world = new GIDGET.World([10,10], [2,8], ["grass", "olivedrab"], code);
+		var world = new GIDGET.World([10,10], [2,8], ["grass", "olivedrab", 1], code);
 			
 		// ---- G O A L S --------
 		
@@ -560,8 +560,6 @@ GIDGET.levels = {
 			world.addMissionText("sad", "There's something blocking my path to the goop! I need to navigate around it.");
 		}
 		
-		
-		
 		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "bucket", 1, 8, "rgb(0,0,0)", [], {});
@@ -677,7 +675,7 @@ GIDGET.levels = {
 		var code = 
 			"scan goop\n" +
 			"scan rats\n" +
-			"goto goop, grab it\n";
+			"goto goop avoid rat, grab it\n";
 
 		var world = new GIDGET.World([10,10], [0,0], ["stone","gray"], code);
 		world.gidget.setEnergy(110);

@@ -29,8 +29,8 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 
 		ctx.save();
 
-		var padding = 2;
-
+		var padding = world.grndBorder;
+		
 		// Draw shadow
 		if(this.level > 1) {
 		
@@ -93,9 +93,10 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 	var gidgetCol = gidgetPos[1];
 	var gidgetEnergy = isDef(gidgetPos[2]) ? gidgetPos[2] : 100;
 	
-	// Default ground & grid border color;
+	// Ground Attributed: image/name, color, and border width
 	this.grnd = isDef(groundAtt[0]) ? groundAtt[0] : "dirt";
 	this.grndColor = isDef(groundAtt[1]) ? groundAtt[1] : "rgb(124,57,10)";
+	this.grndBorder = isDef(groundAtt[2]) ? groundAtt[2] : 2;
 
 	
 	// Remember the initial code
