@@ -442,17 +442,13 @@ GIDGET.ui = {
 			GIDGET.ui.step(false, false);
 
 		this.executeGoals();
-		this.updateRuntimeUserInterface();	
+		
+		while(this.goalNumberBeingExecuted <= this.world.goals.length)
+			GIDGET.ui.step(false, false);
 
 	},
 
 	playToEnd: function() {
-
-		// Start the world.
-/*
-		if(!this.world.isExecuting())
-			this.start();
-*/
 
 		// Call step repeatedly until done.
 		setTimeout(GIDGET.ui.stepContinue, this.stepSpeedInMilliseconds);
