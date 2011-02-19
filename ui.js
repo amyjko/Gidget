@@ -486,6 +486,9 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "sad";
 					this.setThought(GIDGET.text.goal_finalFailure(), 5);
 				}
+				
+				// In case we're playing, return without invoking another step.
+				return;
 
 			}
 			// If this goal isn't done executing yet, step it.
@@ -534,8 +537,9 @@ GIDGET.ui = {
 				// Move on to the next goal.			
 				this.goalNumberBeingExecuted++;
 			
-				// Start the next goal.
-				this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
+				// Start the next goal, if there is one.
+				if(this.goalNumberBeingExecuted < this.world.goals.length)
+					this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
 
 			}
 		

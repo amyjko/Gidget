@@ -61,6 +61,9 @@ GIDGET.parser = {
 
 	TokenStream: function(code) {
 	
+		if(!isDef(code))
+			console.error("Somehow, the code sent to this token stream is not a string.");
+	
 		this.tokens = [];
 		
 		this.hasMore = function() { return this.tokens.length > 0; };
