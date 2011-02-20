@@ -32,6 +32,7 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 		var padding = world.grndBorder;
 		
 		// Draw shadow
+/*
 		if(this.level > 1) {
 		
 			var offset = (this.level - 1) * 10;
@@ -39,6 +40,7 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 			ctx.fillRect(this.column * size + 1 + offset + padding, this.row * size + 1 + offset + padding, size - padding * 2, size - padding * 2);
 		
 		}		
+*/
 		
 		var image = GIDGET.ui.getImage(this.name, this.runtime.state);
 		if(!isDef(image)) image = GIDGET.ui.getImage('unknown', 'default');
@@ -51,12 +53,15 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 		
 		}
 
+		// Compute a level offset, so that things that are a certain height go above their cell.
+		var levelOffset = this.level > 1 ? (this.level - 1) * size : 0;
+		
 		if(isDef(image) && image.width > 0 && image.height > 0) {
-			ctx.drawImage(image, this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset, size - padding * 2, size - padding * 2);
+			ctx.drawImage(image, this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset - levelOffset, size - padding * 2, size - padding * 2 + levelOffset);
 		}
 		else {			
 			ctx.fillStyle = this.color;		
-			ctx.fillRect(this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset, size - padding * 2, size - padding * 2);
+			ctx.fillRect(this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset - levelOffset, size - padding * 2, size - padding * 2 + levelOffset);
 		}
 		
 		ctx.restore();
