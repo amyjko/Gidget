@@ -810,13 +810,13 @@ GIDGET.runtime = {
 						}
 					
 					}
-					// Otherwise, just stop. There's no way.
+					// We keep going until there's a path.
 					else {
 					
 						runtime.path = undefined;
 						runtime.addDecision(
 							GIDGET.text.go_noPath(thing.name),
-							new runtime.IncrementPC(runtime, this.offset));
+							new runtime.IncrementPC(runtime, 0));
 					
 					}
 				
