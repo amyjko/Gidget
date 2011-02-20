@@ -1261,6 +1261,6 @@ GIDGET.levels = {
 
 		return world;
 	
-	},	
+	}
 	
 };
