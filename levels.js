@@ -545,7 +545,7 @@ GIDGET.levels = {
 			"scan bucket, goto it\n" +
 			"drop goops";
 		
-		var world = new GIDGET.World([10,10], [6,5], [], code);
+		var world = new GIDGET.World([10,10], [6,5], ["grass", "olivedrab", 0], code);
 			
 		// ---- G O A L S --------
 		
@@ -566,21 +566,21 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "goop", 7, 4, "green", [ 'glowing' ], {});
 
 		var wall;
-		wall = new GIDGET.Thing(world, "wall", 6, 1, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 1, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 2, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 2, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 3, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 4, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 4, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 6, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 6, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 7, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 7, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 6, 8, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 6, 8, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall", 7, 5, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 7, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 		
 		// -----------------------
@@ -1244,14 +1244,14 @@ GIDGET.levels = {
 		wall = new GIDGET.Thing(world, "wall1", 3, 6, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 7, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 3, 8, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 9, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 9, "black", [], {}); wall.labeled = false;
 
-		wall = new GIDGET.Thing(world, "wall2", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 7, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 8, "black", [], {}); wall.setLevel(2); wall.labeled = false;

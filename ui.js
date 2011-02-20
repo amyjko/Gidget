@@ -393,6 +393,29 @@ GIDGET.ui = {
 */
 
 	},
+	
+	createLearnerHTML: function(message) {	
+		
+		var image;
+		switch (GIDGET.experiment.condition) {
+			case "control": 
+		 		image = "unknown";
+		 		break;
+		 	case "female":
+		 		image = "female";
+		 		break;
+		 	case "male":
+		 		image = "male";
+		 		break;
+		 	default:
+		 		image = "female";
+		 		break;
+		}
+		
+		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' /></td><td>" + message + "</td></tr></table>";	
+		
+	},
+
 
 	createThoughtHTML: function(message) { 
 		
@@ -403,22 +426,30 @@ GIDGET.ui = {
 		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' /></td><td>" + message + "</td></tr></table>";
 
 	},
+	
 
-	setThought: function(message, delay) {
+	setThought: function(message, time, target) {
 	
-		var html = this.createThoughtHTML(message);
+		var html;
+		var delay = isDef(time) ? time : 0;
+		var who = isDef(target) ? target : "gidget";
+		
+		if (who === "gidget")
+			html = this.createThoughtHTML(message);
+		else
+			html = this.createLearnerHTML(message);
 	
-		if(!isDef(delay) || delay === 0) {
-			$('#thought').html(html);
+		if(delay === 0) {
+			$('#'+who+"Thought").html(html);
 		}
 		else {
 	
-			$('#thought').animate({
+			$('#'+who+"Thought").animate({
 				opacity: 0.0
 			}, delay, 
 				function() {
-					$('#thought').html(html);
-					$('#thought').animate({ opacity: 1.0 }, delay);
+					$('#'+who+"Thought").html(html);
+					$('#'+who+"Thought").animate({ opacity: 1.0 }, delay);
 				}
 			);
 			

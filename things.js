@@ -41,11 +41,12 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 		
 		}		
 */
-		
-		var image = GIDGET.ui.getImage(this.name, this.runtime.state);
-		if(!isDef(image)) image = GIDGET.ui.getImage('unknown', 'default');
-
 		var animateRowOffset = 0, animateColumnOffset = 0;
+		
+		var image= GIDGET.ui.getImage(this.name, this.runtime.state);
+		if(!isDef(image)) image = GIDGET.ui.getImage('unknown', 'default');
+		
+		
 		if(GIDGET.ui.percentRemaining > 0) {
 		
 			if(this.rowDelta !== 0) animateRowOffset = -(GIDGET.ui.percentRemaining / 100.0) * size * this.rowDelta;
@@ -55,11 +56,12 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 
 		// Compute a level offset, so that things that are a certain height go above their cell.
 		var levelOffset = this.level > 1 ? (this.level - 1) * size : 0;
-		
+
 		if(isDef(image) && image.width > 0 && image.height > 0) {
 			ctx.drawImage(image, this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset - levelOffset, size - padding * 2, size - padding * 2 + levelOffset);
 		}
-		else {			
+		else {
+				
 			ctx.fillStyle = this.color;		
 			ctx.fillRect(this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset - levelOffset, size - padding * 2, size - padding * 2 + levelOffset);
 		}
@@ -74,6 +76,11 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 	this.runtime = new GIDGET.Runtime(this, world);
 
 }
+
+// *******************************************************
+// *** A C T I O N - C O N S T R U C T O R ***************
+// *******************************************************
+
 
 GIDGET.Action = function(arguments, script) {
 

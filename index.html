@@ -49,14 +49,10 @@
 				<h2>World <button id='quit' onclick='$("#quitConfirm").show();'>I quit, give me my code!</button></h2>
 				<div class='thoughtBubble' id='thingThought'></div>
 				<canvas id="grid" width="300" height="300"></canvas>
-
-				<div id='controls'>
-					<button id='play' onclick='GIDGET.ui.playToEnd();'>play</button>
-					<button id='step' onclick='GIDGET.ui.step(false, true);'>next step</button>
-					<button id='line' onclick='GIDGET.ui.runToNextLine();'>next line</button>
-					<button id='end' onclick='GIDGET.ui.runToEnd();'>the end</button>
-				</div>
-				<div id='thought' class='thoughtBubble'></div>
+				
+				<h2>Communication</h2>
+				<div id='learnerThought' class='thoughtBubble'></div>
+				<div id='gidgetThought' class='thoughtBubble'></div>
 			</td>
 
 			<td id='rightPanel'>

@@ -215,4 +215,12 @@ $().ready(function() {
 	
 	}
 	
+	// Populate Learner Communication Box
+	GIDGET.ui.setThought("(Ask Gidget to):\n<br />" +
+		"<button id='step' onclick='GIDGET.ui.step(false, true);'>&nbsp;&rsaquo;&nbsp;</button>\n" +
+		"<button id='line' onclick='GIDGET.ui.runToNextLine();'>&nbsp;&#8805;&nbsp;</button>\n"+
+		"<button id='play' onclick='GIDGET.ui.playToEnd();'>&nbsp;&raquo;&nbsp;</button>\n" +
+		"<button id='end' onclick='GIDGET.ui.runToEnd();'>&nbsp;&raquo;&Dagger;&nbsp;</button>\n"
+		,0, "learner");
+	
 });
