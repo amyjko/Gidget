@@ -96,7 +96,7 @@ GIDGET.ui = {
 			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
 			code: password,
-			levelMetadata: localStorage.getItem('levelMetadata')
+			levelMetadata: localStorage.getObject('levelMetadata')
 		}
 		
 		payload = JSON.stringify(payload);
@@ -149,16 +149,16 @@ GIDGET.ui = {
 		if(!levelData.hasOwnProperty(this.getCurrentLevel())) {
 		
 			levelData[this.getCurrentLevel()] = {
-				passed: 'false', 
-				startTime: "" + (new Date()).getTime(), 
-				endTime: "",
+				passed: false, 
+				startTime: (new Date()).getTime(), 
+				endTime: undefined,
 				versions: [] 
 			};
 		
 		}
 		
 		// Add the current version to the list of versions.
-		levelData[this.getCurrentLevel()].versions.push({ time: "" + (new Date).getTime(), version: currentCode });
+		levelData[this.getCurrentLevel()].versions.push({ time: (new Date).getTime(), version: currentCode });
 		
 		// Stringify the current versions object
 		localStorage.setObject('levelMetadata', levelData);		
@@ -305,8 +305,8 @@ GIDGET.ui = {
 		// Remember that this level was passed, what time, and the final code.
 		this.saveCurrentLevelCode();
 		var levelData = localStorage.getObject('levelMetadata');
-		levelData[this.getCurrentLevel()].passed = "true";
-		levelData[this.getCurrentLevel()].endTime = "" + (new Date()).getTime();
+		levelData[this.getCurrentLevel()].passed = true;
+		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
 		localStorage.setObject('levelMetadata', levelData);
 
 		// Now find the next level.		
@@ -541,7 +541,7 @@ GIDGET.ui = {
 				}
 
 				this.enableExecutionButtons(true);
-				
+
 				// In case we're playing, return without invoking another step.
 				return;
 

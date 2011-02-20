@@ -532,7 +532,7 @@ GIDGET.text = {
 	goal_finalSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return "Completed <span class='runtimeReference'>all of your goals</span>.";	
+			return "Completed <span class='runtimeReference'>all of your goals</span>. <div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level</button>";	
 		
 		return "I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>";
 
