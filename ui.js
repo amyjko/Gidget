@@ -434,6 +434,8 @@ GIDGET.ui = {
 
 	runToEnd: function() {
 
+		this.enableExecutionButtons(false);
+
 		// Start the world.
 		if(!this.world.isExecuting())
 			this.start();
@@ -446,16 +448,33 @@ GIDGET.ui = {
 		while(this.goalNumberBeingExecuted <= this.world.goals.length)
 			GIDGET.ui.step(false, false);
 
+		this.enableExecutionButtons(true);
+
 	},
 
 	playToEnd: function() {
+
+		this.enableExecutionButtons(false);
 
 		// Call step repeatedly until done.
 		setTimeout(GIDGET.ui.stepContinue, this.stepSpeedInMilliseconds);
 	
 	},
 	
+	enableExecutionButtons: function(enabled) {
+
+		var setting = !enabled;
+
+		$('#play').attr('disabled', setting);
+		$('#step').attr('disabled', setting);
+		$('#line').attr('disabled', setting);
+		$('#end').attr('disabled', setting);
+
+	},
+	
 	runToNextLine: function() {
+
+		this.enableExecutionButtons(false);
 	
 		// Start the world.
 		if(!this.world.isExecuting())
@@ -468,6 +487,8 @@ GIDGET.ui = {
 			
 		if(this.world.isExecuting())
 			GIDGET.ui.step(false, false);
+			
+		this.enableExecutionButtons(true);
 
 	},
 	
@@ -518,6 +539,8 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
 				}
+
+				this.enableExecutionButtons(true);
 				
 				// In case we're playing, return without invoking another step.
 				return;
