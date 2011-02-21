@@ -212,6 +212,7 @@ textarea {
 	font-family:	Arial;
 	font-size:		9pt;
 	border:			4px solid rgba(255,255,255,0.0);
+	cursor: 		help;
 }
 
 .bracket {
@@ -332,4 +333,58 @@ table {
 	text-align: 	left;
 	font-size: 		small;
 	
+}
+
+
+/* I know of a better way to implement this, but took the simple route for preliminary testing */
+a.rollover {
+	cursor: pointer;
+	display: inline-block;
+	width: 40px;
+	height: 42px;
+	background: url("media/gui/comm-plus.png");
+}
+
+a.rollover:hover {
+	background-position: -40px 0;
+	cursor: pointer;
+}
+
+a.rollover2 {
+	cursor: pointer;
+	display: inline-block;
+	width: 40px;
+	height: 42px;
+	background: url("media/gui/comm-plusdots.png");
+}
+
+a.rollover2:hover {
+	background-position: -40px 0;
+	cursor: pointer;
+}
+
+a.rollover3 {
+	cursor: pointer;
+	display: inline-block;
+	width: 40px;
+	height: 42px;
+	background: url("media/gui/comm-arrow.png");
+}
+
+a.rollover3:hover {
+	background-position: -40px 0;
+	cursor: pointer;
+}
+
+a.rollover4 {
+	cursor: pointer;
+	display: inline-block;
+	width: 40px;
+	height: 42px;
+	background: url("media/gui/comm-arrowwall.png");
+}
+
+a.rollover4:hover {
+	background-position: -40px 0;
+	cursor: pointer;
 }
