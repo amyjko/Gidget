@@ -12,7 +12,7 @@ GIDGET.text = {
 	if_true: function() {
 
 		if (GIDGET.experiment.isControl())
-			return "$results(the recent results) are not empty. Going to next step.";
+			return "$results(The recent results) are not empty. Going to next step.";
 			
 		return "I'm looking at $results(the recent results) and they weren't empty, so I'll go to the next step.";
 	
@@ -20,7 +20,7 @@ GIDGET.text = {
 	
 	if_false: function() {
 		if (GIDGET.experiment.isControl())
-			return "$results(recent results) empty, so skipping to next part.";
+			return "$results(The recent results) are empty, so jumping to next part.";
 			
 		return "I'm looking at the $results(recent results) and they were empty, so I'm going to skip the next part.";
 	
@@ -48,7 +48,7 @@ GIDGET.text = {
 	
 	is_popResults: function() {
 		if (GIDGET.experiment.isControl())
-			return "Finished with $results(these results).";
+			return "Finished with $results(these results). Removing from list.";
 			
 		return "I'll remove $results(these results) since I'm done with it!";
 	
@@ -136,7 +136,7 @@ GIDGET.text = {
 
 	analyze_success: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "$analyzed@0(" + name + ") analyzed.";
+			return "$analyzed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") analyzed.";
 		
 		return "I <b>analyzed</b> the $analyzed@0(" + name + "). I'll add it to my analyzed list where you can see more information about it!";
 	
@@ -144,7 +144,7 @@ GIDGET.text = {
 
 	grab_success: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "$grabbed@0(" + name + ") grabbed.";
+			return "$grabbed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") grabbed. Added to list.";
 		
 		return "Grabbed $grabbed@0(" + name + "). I'll add it to my list!";
 		
@@ -152,7 +152,7 @@ GIDGET.text = {
 
 	drop_success: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "Dropped $results@0(" + name + ").";
+			return "Dropped $results@0(" + name + "). Removing from list.";
 			
 		return "Dropped $results@0(" + name + "). Let me remove it from my list.";
 	
@@ -168,7 +168,7 @@ GIDGET.text = {
 
 	focus_failure: function() {
 		if (GIDGET.experiment.isControl())
-			return "Failed to focus on $results(there isn't one)";
+			return "Nothing more to focus on.";
 			
 		return "I'm supposed to focus on the next result, but $results(there isn't one) :(";
 	
@@ -192,9 +192,9 @@ GIDGET.text = {
 
 	ask_finished: function(name) {
 		if (GIDGET.experiment.isControl())
-			return name+ "execution completed.";
+			return name.charAt(0).toUpperCase() + name.slice(1) + "execution completed.";
 			
-		return "$thing(" + name + ") is done. I'm going to continue now.";
+		return "$thing(" + name.charAt(0).toUpperCase() + name.slice(1) + ") is done. I'm going to continue now.";
 	
 	},
 
@@ -216,7 +216,7 @@ GIDGET.text = {
 		
 	ask_begin: function(name, action) {
 		if (GIDGET.experiment.isControl())
-			return action + " executing.";
+			return action.charAt(0).toUpperCase() + name.slice(1) + " executing.";
 			
 		return "Yay! " + name + " knows how to " + action + ". I'm going to tell it to do it.";
 	
@@ -296,6 +296,9 @@ GIDGET.text = {
 	
 	editingDisabled: function() {
 	
+		if (GIDGET.experiment.isControl())
+			return "ERROR: Cannot modify code during program execution.";
+	
 		return "If you change my commands while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b>" + this.finishExecutingButtonLabel() + "</b> button.";
 	
 	},
@@ -309,7 +312,7 @@ GIDGET.text = {
 	noEnergy: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return "ERROR: No energy.";
+			return "ERROR: Energy depleted.";
 			
 		return "I ... can't... go ... any ... further...";
 		
@@ -395,7 +398,7 @@ GIDGET.text = {
 		}
 	
 		if (GIDGET.experiment.isControl())
-			return "PLACEHOLDER (memory_analyzed): <b>" + iName + "</b> " + tags + actions;
+			return "Attributes of <b>" + iName + "</b> are now known. " + tags + actions;
 			
 		return "I know all about <b>" + iName + "</b> because I <b>analyzed</b> it! " + tags + actions;
 	
@@ -403,7 +406,7 @@ GIDGET.text = {
 		
 	memory_unanalyzed: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "PLACEHOLDER (memory_unanalyzed): " + name;
+			return "ERROR: '" + name + "' has not been analyzed. Attributes unknown.";
 			
 		return "I don't know anything about <b>" + name + "</b> because I haven't <b>analyzed</b> it yet.";
 	
@@ -411,7 +414,7 @@ GIDGET.text = {
 	
 	memory_unfocus: function() {
 		if (GIDGET.experiment.isControl())
-			return "PLACEHOLDER (memory_unfocus): ";
+			return "Now returning back to program execution.";
 		
 		return "Now where was I?";
 	},
