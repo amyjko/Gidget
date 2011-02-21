@@ -216,11 +216,18 @@ $().ready(function() {
 	}
 	
 	// Populate Learner Communication Box
+	/*
 	GIDGET.ui.setThought("(Ask Gidget to):\n<br />" +
 		"<button id='step' onclick='GIDGET.ui.step(false, true);'>&nbsp;&rsaquo;&nbsp;</button>\n" +
 		"<button id='line' onclick='GIDGET.ui.runToNextLine();'>&nbsp;&#8805;&nbsp;</button>\n"+
 		"<button id='play' onclick='GIDGET.ui.playToEnd();'>&nbsp;&raquo;&nbsp;</button>\n" +
 		"<button id='end' onclick='GIDGET.ui.runToEnd();'>&nbsp;&raquo;&Dagger;&nbsp;</button>\n"
 		,0, "learner");
-	
+	*/
+	GIDGET.ui.setThought("" +
+		"<img src='media/gui-comm-plus.png' height='40' width='40' id='step' onclick='GIDGET.ui.step(false, true);' />\n" +
+		"<img src='media/gui-comm-plus-dots.png' height='40' width='40' id='step' onclick='GIDGET.ui.runToNextLine();' />\n" +
+		"<img src='media/gui-comm-arrow-single.png' height='40' width='40' id='step' onclick='GIDGET.ui.playToEnd();' />\n" +
+		"<img src='media/gui-comm-arrow-wall.png' height='40' width='40' id='step' onclick='GIDGET.ui.runToEnd();' />\n"
+		,0, "learner");
 });
