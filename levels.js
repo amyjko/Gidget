@@ -9,7 +9,7 @@ GIDGET.levels = {
 		var code = 
 			"scan gidget";
 
-		var world = new GIDGET.World([10,10], [2,8], ["grass", "olivedrab", 1], code);
+		var world = new GIDGET.World([4], [1,2], ["grass", "olivedrab", 1], code);
 			
 		// ---- G O A L S --------
 		
@@ -46,7 +46,7 @@ GIDGET.levels = {
 			"scan gidget\n" +
 			"scan bucket";
 	
-		var world = new GIDGET.World([10,10], [1,1], ["grass", "olivedrab"], code);
+		var world = new GIDGET.World([7], [1,1], ["grass", "olivedrab"], code);
 		
 		// ---- G O A L S --------
 					
@@ -64,12 +64,12 @@ GIDGET.levels = {
 
 
 		// ----- T H I N G S -----
-		for (var i = 0; i < ((Math.floor( Math.random()* (10-3) ) ) + 3); i++){
-			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*9), Math.floor(Math.random()*9), "green", [], {});
+		for (var i = 0; i < ((Math.floor( Math.random()* (7-3) ) ) + 3); i++){
+			var shrub = new GIDGET.Thing(world, "shrub", Math.floor(Math.random()*7), Math.floor(Math.random()*7), "green", [], {});
 			shrub.labeled = false;
 		}
 
-		new GIDGET.Thing(world, "bucket", 8, 8, "DarkSlateGray", [], {});
+		new GIDGET.Thing(world, "bucket", 6, 6, "DarkSlateGray", [], {});
 		
 		// -----------------------
 
@@ -87,7 +87,7 @@ GIDGET.levels = {
 			"scan gidget\n" +
 			"scan goops";
 		
-		var world = new GIDGET.World([10,10], [1,8], ["stone","gray"], code);
+		var world = new GIDGET.World([8], [1,6], ["stone","gray"], code);
 			
 		// ---- G O A L S --------
 		
@@ -105,9 +105,9 @@ GIDGET.levels = {
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "goop", 8, 3, "green", [], {});
-		new GIDGET.Thing(world, "goop", 5, 2, "green", [], {});
-		new GIDGET.Thing(world, "goop", 2, 5, "green", [], {});
+		new GIDGET.Thing(world, "goop", 6, 3, "green", [], {});
+		new GIDGET.Thing(world, "goop", 5, 7, "green", [], {});
+		new GIDGET.Thing(world, "goop", 1, 1, "green", [], {});
 		
 		// -----------------------
 	
@@ -125,7 +125,7 @@ GIDGET.levels = {
 			"scan goop\n" +
 			"analyze goop";
 		
-		var world = new GIDGET.World([10,10], [5,5], [], code);
+		var world = new GIDGET.World([4,4], [2,2], [], code);
 			
 		// ---- G O A L S --------
 		
@@ -143,7 +143,7 @@ GIDGET.levels = {
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "goop", 5, 5, "green", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "goop", 2, 2, "green", [ 'glowing' ], {});
 		
 		// -----------------------
 								
@@ -545,7 +545,7 @@ GIDGET.levels = {
 			"scan bucket, goto it\n" +
 			"drop goops";
 		
-		var world = new GIDGET.World([10,10], [6,5], ["grass", "olivedrab", 0], code);
+		var world = new GIDGET.World([7,7], [4,4], ["grass", "olivedrab", 1], code);
 			
 		// ---- G O A L S --------
 		
@@ -562,25 +562,29 @@ GIDGET.levels = {
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "bucket", 1, 8, "rgb(0,0,0)", [], {});
-		new GIDGET.Thing(world, "goop", 7, 4, "green", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "bucket", 1, 6, "rgb(0,0,0)", [], {});
+		new GIDGET.Thing(world, "goop", 5, 5, "green", [ 'glowing' ], {});
 
 		var wall;
-		wall = new GIDGET.Thing(world, "tree01", 6, 1, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 1, 5, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 2, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 1, 4, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 3, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 2, 0, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 4, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 2, 1, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 6, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 4, 1, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 7, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 4, 2, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 6, 8, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 4, 3, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "tree01", 7, 5, "black", [], {});
+		wall = new GIDGET.Thing(world, "tree01", 4, 5, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 4, 6, "black", [], {});
+		wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 5, 4, "black", [], {});
 		wall.setLevel(2); wall.labeled = false;
 		
 		// -----------------------
@@ -600,7 +604,7 @@ GIDGET.levels = {
 			"scan bucket, goto it avoid crack\n" +
 			"drop goop";
 	
-		var world = new GIDGET.World([10,10], [5,5], ["brick","burlywood"], code);
+		var world = new GIDGET.World([10,10], [5,5], ["brick","burlywood", 1], code);
 		world.gidget.setEnergy(120);
 			
 		// ---- G O A L S --------
@@ -1150,7 +1154,7 @@ GIDGET.levels = {
 	
 		var code = "scan rat";	
 		
-		var world = new GIDGET.World([10,10], [0,1], [], code);
+		var world = new GIDGET.World([5], [0,1], [], code);
 		
 		// ---- G O A L S --------
 		
@@ -1168,7 +1172,7 @@ GIDGET.levels = {
 
 		// ----- T H I N G S -----
 		
-		var rat = new GIDGET.Thing(world, "rat", 0, 9, "yellow", [], {});
+		var rat = new GIDGET.Thing(world, "rat", 3, 3, "yellow", [], {});
 		
 		rat.setCode(
 			"say I am your friend, gidget! But I still want to eat you."
