@@ -344,7 +344,7 @@ GIDGET.text = {
 					index--;	
 				}
 			}
-			tags += "</p>";
+			tags += ".</p>";
 		}
 
 		var actions;
