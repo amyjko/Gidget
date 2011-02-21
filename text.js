@@ -46,7 +46,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Finished with $results(these results).";
 			
-		return "I'm done with $results(these results). Toss em out!";
+		return "I'll remove $results(these results) since I'm done with it!";
 	
 	},
 	
@@ -84,9 +84,9 @@ GIDGET.text = {
 
 	scan_success: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "$scanned@0(" + name + ") " + " and added.";
+			return "$scanned@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") " + " added to the scan list.";
 			
-		return "I scanned " + "$scanned@0(" + name + ") " + ". Let me add it to my list!";
+		return "I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "$scanned@0(" + name + ")" + ". I'll add it to my scanned list!";
 	
 	},
 
@@ -102,7 +102,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Incremented to destination, $results@0(" + name + ").";
 		
-		return "I'm going one step closer to $results@0(" + name + ")!";
+		return "I'm going one step closer to the $results@0(" + name + ")!";
 	
 	},
 
@@ -110,7 +110,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Arrived at destination, $results@0(" + name + ").";
 		
-		return "I made it to $results@0(the " + name + ")! On to the next step.";
+		return "I made it to $results@0(the " + name + ")!";
 	
 	},
 
@@ -134,7 +134,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "$analyzed@0(" + name + ") analyzed.";
 		
-		return "I analyzed $analyzed@0(" + name + "). Now I can make it do things! Let me add it to my list.";
+		return "I <b>analyzed</b> the $analyzed@0(" + name + "). I'll add it to my analyzed list where you can see more information about it!";
 	
 	},
 
@@ -158,7 +158,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Focusing on $results@0(next result), " + name;
 			
-		return "Okay, I'm just going to focus on the $results@0(next result), " + name;
+		return "Okay, I'm going to concentrate on this $results@0(individual " + name + ") and add it to my focus list.";
 	
 	},
 
@@ -228,7 +228,7 @@ GIDGET.text = {
 	
 	query: function(ast, name, scope) {
 	
-		var purposeText = "";
+		var result, purposeText = "";
 		switch(ast.type) {
 			case "name": purposeText = "to <b>name</b>"; break;
 			case "scan": purposeText = "to <b>scan</b>"; break;
@@ -239,27 +239,78 @@ GIDGET.text = {
 			case "drop": purposeText = "to <b>drop</b>"; break;
 			case "modify": purposeText = "to <b>modify</b>"; break;
 			case "remove": purposeText = "to <b>remove</b>"; break;
-			case "is": purposeText = isDef(ast) && isDef(ast.keyword) ? "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>" : "that were at the <b>same place</b>"; break;
 			case "query": purposeText = "that were at the <b>same place</b>"; break;
 			default: purposeText = "";
 		}
 		
-		var result = name === 'it' ? "I remembered what I'm <b>focused</b> on" : "I looked for <b>" + name + "</b> " + purposeText;
+		if (ast.type == "is") {
+			if (GIDGET.experiment.isControl())
+				purposeText = isDef(ast) && isDef(ast.keyword) ? "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>" : "that were at Gidget's <b>location</b>";
+			else
+				purposeText = isDef(ast) && isDef(ast.keyword) ? "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>" : "that were at <b>my location</b>";
+		}
+		
+		
+		
+		if (GIDGET.experiment.isControl())
+			result = name === 'it' ? "<b>Focusing</b> on" : ast.type === "is" ? "Looked for any <b>" + name + "s</b> " + purposeText : "Looked for <b>" + name + "</b> " + purposeText;
+		else
+			result = name === 'it' ? "I'm currently <b>focused</b> on" : ast.type === "is" ? "I looked for any <b>" + name + "s</b> " + purposeText : "I looked for <b>" + name + "</b> " + purposeText;
+		
 		var i;
 		if(scope.length > 0) {
+			result += name === 'it' ? " " : " and detected ";
+			result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
+			result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
 			
-			result = result + " and found ";
+			/*
 			for(i = 0; i < scope.length; i++)
 				result = result + " $results@" + i + "(" + scope[i].name + ")" + (scope.length === 1 ? "" : i === scope.length - 1 ? "" : i === scope.length - 2 ? " and " : ",");
-			return result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results!";
-
+			*/
+				
+			if (GIDGET.experiment.isControl())
+				return result + ". Added " + (scope.length === 1 ? "it" : "them") + " to the results list.";
+			else
+				return result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results list!";
 		}
 		else {
-			
 			return result + ", but didn't find anything.";
-			
 		}
-	
+
+		
+		/*
+		if (GIDGET.experiment.isControl()) {
+			result = name === 'it' ? "<b>Focusing</b> on" : ast.type === "is" ? "Looked for any <b>" + name + "s</b> " + purposeText : "Looked for <b>" + name + "</b> " + purposeText;
+			var i;
+			if(scope.length > 0) {
+				result += name === 'it' ? " " : " and detected ";
+				result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
+				result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
+
+				return result + ". Adding " + (scope.length === 1 ? "it" : "them") + " to the results list!";
+			}
+			else {
+				return result + ", but didn't find anything.";
+			}
+		}			
+		else {			
+			result = name === 'it' ? "I'm currently <b>focused</b> on" : ast.type === "is" ? "I looked for any <b>" + name + "s</b> " + purposeText : "I looked for <b>" + name + "</b> " + purposeText;
+			var i;
+			if(scope.length > 0) {
+				result += name === 'it' ? " " : " and detected ";
+				result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
+				result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
+			
+				
+				
+				return result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results list!";
+			}
+			else {
+				return result + ", but didn't find anything.";
+			}
+		}
+		*/
+
 	},
 		
 	parser_unrecognizedCommand: function(token) {
@@ -514,9 +565,9 @@ GIDGET.text = {
 	goal_checkSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return "There were $results(results) for this goal, so I succeeded!";	
+			return "$results(Results) detected, goal satisfied.";	
 		
-		return "There were $results(results) for this goal, so I succeeded!";
+		return "There were $results(results) for this goal, so I succeeded!"
 
 	},
 	
@@ -532,7 +583,7 @@ GIDGET.text = {
 	goal_finalSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return "Completed <span class='runtimeReference'>all of your goals</span>. <div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level</button>";	
+			return "<span class='runtimeReference'>All goals</span> satisfied. <div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level</button>";	
 		
 		return "I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>";
 
@@ -541,7 +592,7 @@ GIDGET.text = {
 	goal_finalFailure: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
+			return "ERROR: <span class='runtimeReference'>Some goals</span> failed.";
 			
 		return "I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(";
 		

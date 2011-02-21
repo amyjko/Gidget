@@ -554,7 +554,7 @@ GIDGET.runtime = {
 			offset: undefined,
 			toString: function() { return "scan " + this.offset; },
 			execute: function(runtime) {
-
+				console.error(this.offset);
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
@@ -562,6 +562,7 @@ GIDGET.runtime = {
 						new runtime.PushScanned(runtime, runtime.peekResult()));
 						
 					runtime.pc++;
+					
 /*
 					runtime.addDecision(
 						"Next step!",
