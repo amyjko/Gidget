@@ -5,6 +5,10 @@
 
 GIDGET.text = {
 
+// *******************************************************
+// *** R U N T I M E - M E S S A G E S *******************
+// *******************************************************
+
 	if_true: function() {
 
 		if (GIDGET.experiment.isControl())
@@ -243,13 +247,18 @@ GIDGET.text = {
 			default: purposeText = "";
 		}
 		
+		// "is" is the only ast.type that is checked separately from the switch statement above
 		if (ast.type == "is") {
-			if (GIDGET.experiment.isControl())
-				purposeText = isDef(ast) && isDef(ast.keyword) ? "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>" : "that were at Gidget's <b>location</b>";
-			else
-				purposeText = isDef(ast) && isDef(ast.keyword) ? "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>" : "that were at <b>my location</b>";
-		}
 		
+			if (isDef(ast) && isDef(ast.keyword))
+				purposeText = "that <b>" + ast.keyword.text + " " + ast.tag.text + "</b>";
+			else {
+				if (GIDGET.experiment.isControl())
+					purposeText = "that were at Gidget's <b>location</b>";
+				else
+					purposeText = "that were at <b>my location</b>";
+			}
+		}
 		
 		
 		if (GIDGET.experiment.isControl())
@@ -261,7 +270,7 @@ GIDGET.text = {
 		if(scope.length > 0) {
 			result += name === 'it' ? " " : " and detected ";
 			result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
-			result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
+			result += " $results@(" + name + (scope.length > 1 && name.charAt(name.length - 1) !== 's' ? "s" : "") + ")";
 			
 			/*
 			for(i = 0; i < scope.length; i++)
@@ -277,173 +286,13 @@ GIDGET.text = {
 			return result + ", but didn't find anything.";
 		}
 
-		
-		/*
-		if (GIDGET.experiment.isControl()) {
-			result = name === 'it' ? "<b>Focusing</b> on" : ast.type === "is" ? "Looked for any <b>" + name + "s</b> " + purposeText : "Looked for <b>" + name + "</b> " + purposeText;
-			var i;
-			if(scope.length > 0) {
-				result += name === 'it' ? " " : " and detected ";
-				result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
-				result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
-
-				return result + ". Adding " + (scope.length === 1 ? "it" : "them") + " to the results list!";
-			}
-			else {
-				return result + ", but didn't find anything.";
-			}
-		}			
-		else {			
-			result = name === 'it' ? "I'm currently <b>focused</b> on" : ast.type === "is" ? "I looked for any <b>" + name + "s</b> " + purposeText : "I looked for <b>" + name + "</b> " + purposeText;
-			var i;
-			if(scope.length > 0) {
-				result += name === 'it' ? " " : " and detected ";
-				result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
-				result += " $results@(" + name + (scope.length > 1 ? "s" : "") + ")";
-			
-				
-				
-				return result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results list!";
-			}
-			else {
-				return result + ", but didn't find anything.";
-			}
-		}
-		*/
-
-	},
-		
-	parser_unrecognizedCommand: function(token) {
-	
-		return "" + token + " isn't one of the commands I know.";
-	
 	},
 
-	parser_noCommandAfterComma: function() {
-	
-		return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
-	
-	},
-		
-	parser_missingThingToName: function() {
-	
-		return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
-	
-	},
-		
-	parser_missingName: function() {
-	
-		return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
-	
-	},
-		
-	parser_missingThingToScan: function() {
-	
-		return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
-	
-	},
-		
-	parser_missingThingToGoto: function() {
-	
-		return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
-	
-	},
-		
-	parser_missingThingToAvoid: function() {
-	
-		return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
-	
-	},
-		
-	parser_missingThingToAnalyze: function() {
-	
-		return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
-	
-	},
 
-	parser_missingThingToAsk: function() {
-	
-		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
-	
-	},
 
-	parser_missingTo: function() {
-	
-		return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
-	
-	},
-
-	parser_missingAction: function() {
-	
-		return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
-	
-	},
-
-	parser_missingThingToGrab: function() {
-	
-		return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
-	
-	},
-
-	parser_missingThingToDrop: function() {
-	
-		return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
-	
-	},
-		
-	parser_missingPredicate: function() {
-	
-		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
-	
-	},
-		
-	parser_missingConditionalComma: function() {
-	
-		return "I only know what to do when there's a comma after the test of an if.";
-	
-	},
-		
-	parser_missingThingToModify: function(keyword) {
-	
-		return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
-	
-	},
-		
-	parser_missingThingToAdd: function() {
-	
-		return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
-	
-	},
-				
-	parser_missingThingToRemove: function() {
-	
-		return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
-	
-	},
-		
-	parser_missingAndPredicate: function() {
-	
-		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
-	
-	},
-	
-	parser_missingTag: function() {
-	
-		return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
-	
-	},
-	
-	parser_missingQueryName: function() {
-	
-		return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
-	
-	},
-	
-	parser_missingOn: function() {
-	
-		return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
-	
-	},
+// *******************************************************
+// *** U S E R - I N T E R F A C E  - G E N E R A L ******
+// *******************************************************
 	
 	editingDisabled: function() {
 	
@@ -456,6 +305,20 @@ GIDGET.text = {
 		return "the end";
 	
 	},
+
+	noEnergy: function(){
+		
+		if (GIDGET.experiment.isControl())
+			return "ERROR: No energy.";
+			
+		return "I ... can't... go ... any ... further...";
+		
+	},
+
+// *******************************************************
+// *** U S E R - I N T E R F A C E  - M E M - L I S T ****
+// *******************************************************
+
 
 	memory_analyzed: function(iName, iActions, iTags) {
 	
@@ -553,14 +416,11 @@ GIDGET.text = {
 		return "Now where was I?";
 	},
 
-	noEnergy: function(){
-		
-		if (GIDGET.experiment.isControl())
-			return "ERROR: No energy.";
-			
-		return "I ... can't... go ... any ... further...";
-		
-	},
+
+// *******************************************************
+// *** U S E R - I N T E R F A C E  - G O A L S **********
+// *******************************************************
+
 
 	goal_checkSuccess: function() {
 		
@@ -597,6 +457,216 @@ GIDGET.text = {
 		return "I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(";
 		
 	},
+
+
+// *******************************************************
+// *** P A R S E R - E R R O R - M E S S A G E S *********
+// *******************************************************
+
+		
+	parser_unrecognizedCommand: function(token) {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command.";
+	
+		return "" + token + " isn't one of the commands I know.";
+	
+	},
+
+	parser_noCommandAfterComma: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing command after comma.";
+		
+		return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
+	
+	},
+		
+	parser_missingThingToName: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNATX ERROR: Missing thing to name. State thing to name.";
+		
+		return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
+	
+	},
+		
+	parser_missingName: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing new name. State new name.";
+		
+		return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
+	
+	},
+		
+	parser_missingThingToScan: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to scan. State thing to scan.";
+		
+		return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToGoto: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to goto. State thing to goto.";
+		
+		return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAvoid: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to avoid. State thing to avoid.";
+		
+		return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAnalyze: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to analyze. State thing to analyze.";
+		
+		return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
+	
+	},
+
+	parser_missingThingToAsk: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to ask. State thing to ask.";
+		
+		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
+	
+	},
+
+	parser_missingTo: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between ask command and thing.";
+		
+		return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
+	
+	},
+
+	parser_missingAction: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing action. State action for thing to do.";
+		
+		return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
+	
+	},
+
+	parser_missingThingToGrab: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to grab. State thing to grab.";
+		
+		return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
+	
+	},
+
+	parser_missingThingToDrop: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to drop. State thing to drop.";
+		
+		return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
+	
+	},
+		
+	parser_missingPredicate: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: ";
+		
+		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+	
+	},
+		
+	parser_missingConditionalComma: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: ";
+		
+		return "I only know what to do when there's a comma after the test of an if.";
+	
+	},
+		
+	parser_missingThingToModify: function(keyword) {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: ";
+		
+		return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
+	
+	},
+		
+	parser_missingThingToAdd: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to add from map. State thing to add.";
+		
+		return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
+	
+	},
+				
+	parser_missingThingToRemove: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to remove from map. State thing to remove.";
+		
+		return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
+	
+	},
+		
+	parser_missingAndPredicate: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to check. State thing to check.";
+		
+		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+	
+	},
+	
+	parser_missingTag: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing tag of thing to check. State the tag to check.";
+		
+		return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
+	
+	},
+	
+	parser_missingQueryName: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to find. State the thing to check.";
+		
+		return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
+	
+	},
+	
+	parser_missingOn: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "SYNTAX ERROR: Missing name of thing to check on other thing. State the thing to check.";
+		
+		return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
+	
+	},
+
+
+// *******************************************************
+// *******************************************************
+// *******************************************************
+
 
 	placeholder: function() {}
 
