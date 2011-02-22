@@ -420,6 +420,7 @@ button.comm1,button.comm2,button.comm3,button.comm4,button.comm5{
 	text-align:		left;
 	border-radius:	1em;
 	-moz-border-radius: 1em;
+	font-weight: bold;
 }
 
 button.comm1{
@@ -519,4 +520,8 @@ button.comm5{
 
 .white {
 	color: white;
+}
+
+.smallfont{
+	font-size: small;
 }
