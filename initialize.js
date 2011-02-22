@@ -208,7 +208,25 @@ $().ready(function() {
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
 
+	// Set the code to the most recent stored version of the code, restoring the user's work.
+	if(localStorage.getItem('levelMetadata') !== null) {
+	
+		var levelMetadata = localStorage.getObject('levelMetadata');
+		if(levelMetadata.hasOwnProperty(localStorage.currentLevel)) {
+		
+			var versions = levelMetadata[localStorage.currentLevel].versions;
+			if(versions.length > 0) {
+			
+				var code = versions[versions.length - 1].version;
+				$('#code').html(GIDGET.ui.gidgetCodeToHTML(code));
+			
+			}
+		
+		}	
+	
+	}
 
+	// If we've written quit to local storage, the user has already quit, so we disable the UI.
 	if(localStorage.getItem('quit') !== null) {
 	
 		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
