@@ -1,5 +1,4 @@
 body {
-	font-family:	Verdana;
 	background: 	black;
 	color: 			white;
 	padding:		1em;
@@ -68,6 +67,11 @@ a {
 	padding:		.25em;
 	margin-top:		.5em;
 	text-align: 	center;
+}
+
+.codeContainer {
+	font-family: 	"Courier New";
+	font-size: 		small;
 }
 
 #code {
@@ -170,7 +174,8 @@ textarea {
 }
 
 .runtimeInfoContainer {
-	font-family:	Monaco;
+	font-family: 	Arial;
+	text-transform: lowercase;
 	font-size:		small;
 	width:			20em;
 	min-height:		4em;

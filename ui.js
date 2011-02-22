@@ -888,6 +888,7 @@ GIDGET.ui = {
 				thingList.append(thingToHTML(array[i]));
 
 			thingList.append($("<span class='bracket'>]</span>"));
+			
 			thingList.append($("<br style='height:0em;clear:both'>"));
 
 			return thingList;
@@ -900,7 +901,20 @@ GIDGET.ui = {
 		
 			var list = $("<div></div>");
 			for(var i = 0; i < listOfLists.length; i++) {
-				list.append(thingListToHTML(listOfLists[i]));
+								
+				var thingList = thingListToHTML(listOfLists[i]);
+
+				if(listOfLists[i].hasOwnProperty('query') && isDef(listOfLists[i].query)) {
+				
+					if(listOfLists[i].query.hasOwnProperty('ast') && listOfLists[i].query.hasOwnProperty('parentAST')) {
+						var html = GIDGET.ui.gidgetCodeToHTML(listOfLists[i].query.parentAST.keyword.text + " " + listOfLists[i].query.ast.name.text);
+						thingList.prepend($('<div>from </div>').append($(html).addClass('codeContainer').css('display', 'inline')));
+					}
+					
+				}
+				
+				list.append(thingList);
+				
 			}
 			
 			return list;

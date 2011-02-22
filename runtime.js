@@ -73,7 +73,12 @@ GIDGET.Runtime = function(thing, world) {
 	this.popAsked = function() { return this.asked.shift(); };	
 	this.peekAsked = function() { return this.asked.length > 0 ? this.asked[0] : undefined; }
 			
-	this.pushResults = function(results) { this.resultsStack.unshift(results); };
+	this.pushResults = function(results, query) { 
+	
+		results.query = query;
+		this.resultsStack.unshift(results); 
+		
+	};
 	this.popResults = function() { return this.resultsStack.shift(); };
 
 	this.popResult = function() { 
@@ -113,7 +118,7 @@ GIDGET.Runtime = function(thing, world) {
 		this.kind = 'PushResults';
 		this.results = results;
 		this.query = query;
-		this.execute = function() { this.runtime.pushResults(this.results); };
+		this.execute = function() { this.runtime.pushResults(this.results, this.query); };
 
 	};
 
@@ -554,7 +559,7 @@ GIDGET.runtime = {
 			offset: undefined,
 			toString: function() { return "scan " + this.offset; },
 			execute: function(runtime) {
-				console.error(this.offset);
+
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
