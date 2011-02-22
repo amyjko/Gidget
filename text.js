@@ -666,6 +666,15 @@ GIDGET.text = {
 	},
 
 
+	aboutToStartGoals: function() {
+	
+		if (GIDGET.experiment.isControl())
+			return "Execution complete. Begin executing goals.";
+		
+		return "I finished executing my commands! Let's see if I accomplished all of my goals.";
+	
+	},
+
 // *******************************************************
 // *******************************************************
 // *******************************************************

@@ -550,8 +550,25 @@ GIDGET.ui = {
 		// If we're not displaying mission text, but we are executing a goal, step through the goal
 		else if(isDef(this.goalNumberBeingExecuted)) {
 
+			// We just finished executing the normal code, but have yet to start the first goal.
+			if(this.goalNumberBeingExecuted < 0) {
+			
+				// Initialize the current goal.
+				this.goalNumberBeingExecuted = 0;
+				
+				// Start by assuming all goals are achieved; when one is not, mark it false.
+				this.allGoalsAchieved = true;
+				
+				// Start the initial goal.
+				this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
+	
+				// Step once.
+				this.step();
+
+			
+			}
 			// We've tested all goals. Time for final feedback.
-			if(this.goalNumberBeingExecuted >= this.world.goals.length) {
+			else if(this.goalNumberBeingExecuted >= this.world.goals.length) {
 			
 				// Stop executing goals!
 				this.goalNumberBeingExecuted = undefined;
@@ -736,17 +753,9 @@ GIDGET.ui = {
 			// Remove the highlighting on the normal code
 			this.highlightToken(undefined);
 
-			// Initialize the current goal.
-			this.goalNumberBeingExecuted = 0;
-			
-			// Start by assuming all goals are achieved; when one is not, mark it false.
-			this.allGoalsAchieved = true;
-			
-			// Start the initial goal.
-			this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
+			this.goalNumberBeingExecuted = -1;
 
-			// Step once.
-			this.step();
+			this.visualizeDecision(GIDGET.text.aboutToStartGoals(), true);
 			
 		}
 	
@@ -906,7 +915,7 @@ GIDGET.ui = {
 
 				if(listOfLists[i].hasOwnProperty('query') && isDef(listOfLists[i].query)) {
 				
-					if(listOfLists[i].query.hasOwnProperty('ast') && listOfLists[i].query.hasOwnProperty('parentAST')) {
+					if(listOfLists[i].query.hasOwnProperty('ast') && listOfLists[i].query.hasOwnProperty('parentAST') && listOfLists[i].query.parentAST.hasOwnProperty('keyword') && isDef(listOfLists[i].query.parentAST.keyword)) {
 						var html = GIDGET.ui.gidgetCodeToHTML(listOfLists[i].query.parentAST.keyword.text + " " + listOfLists[i].query.ast.name.text);
 						thingList.prepend($('<div>from </div>').append($(html).addClass('codeContainer').css('display', 'inline')));
 					}
