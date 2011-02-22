@@ -238,7 +238,7 @@ $().ready(function() {
 	// Populate Learner Communication Box
 	 // Version 1
 	GIDGET.ui.setThought("\n" +
-		"<button id='step' class='comm1' onclick='GIDGET.ui.step(false, true);' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
+		"<button id='step' class='comm1' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
 		"<button id='line' class='comm2' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
 		"<button id='play' class='comm3' onclick='GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
 		"<button id='end'  class='comm4' onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
