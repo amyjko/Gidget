@@ -24,13 +24,18 @@
 
 <body>
 
+	<table id='titleBar'>
+		<tr>
+			<td>Gidget Viewer</td>
+			<td><button id='quit' onclick='$("#quitConfirm").show();' class='align-right'>quit</button></td>
+		</tr>
+	</table>
 	<table id='content' width='100%' height='100%'>
-
 		<tr>
 			<td id='leftPanel'>
 
-				<h2>Commands <button id='reset' onclick='GIDGET.ui.startOver();'>start over</button>
-</h2>
+				<h2 style="display: inline-block;">Commands</h2><span id='commandReset'><button id='reset' onclick='GIDGET.ui.startOver();'>start over</button></span>
+
 
 				<div>
 
@@ -46,9 +51,9 @@
 			
 			<td id='centerPanel'>
 
-				<h2>World <button id='quit' onclick='$("#quitConfirm").show();'>I quit, give me my code!</button></h2>
+				<h2>World</h2>
 				<div class='thoughtBubble' id='thingThought'></div>
-				<canvas id="grid" width="300" height="300"></canvas>
+				<canvas id='grid' width='300' height='300'></canvas>
 				
 				<h2>Communication</h2>
 				<div id='learnerThought' class='thoughtBubble'></div>
@@ -93,7 +98,7 @@
 		
 		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
 -->
-		<canvas id="introCanvas" width="640" height="480"></canvas>
+		<canvas id='introCanvas' width='640' height='480'></canvas>
 
 	</div>
 

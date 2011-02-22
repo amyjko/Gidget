@@ -1,6 +1,6 @@
 body {
-	background: 	black;
-	color: 			white;
+	background: 	#cec;
+	color: 			black;
 	padding:		1em;
 	margin:			0em;
 }
@@ -18,16 +18,23 @@ a {
 }
 
 #content {
+	color:			black;
+	background:		azure;
 	margin-left:	auto;
 	margin-right:	auto;
 	width:			60em;
 	height:			auto;
-	background:		black;
-	border:			1px solid gray;
-	border-radius:  .25em;
 	padding:		1em;
 	padding-top:	0em;
 	padding-right:	0em;
+
+	border:			1px solid gray;
+	border-bottom-right-radius: 1em;
+	border-bottom-left-radius: 	1em;
+
+	-moz-box-shadow:	10px 10px 10px #888;
+	-webkit-box-shadow:	10px 10px 10px #888;
+	box-shadow:			10px 10px 10px #888;
 }
 
 #content td {
@@ -59,8 +66,17 @@ a {
 	padding-right:	0em;
 	padding-bottom:	1em;
 	border:			2px solid rgb(200,200,200);
-	border-radius: 	2px;
+	border-radius: 	.5em;
+	
+	border-bottom-right-radius: 1em;
+	border-top-left-radius: 	1em;
+	
+	color:			black;
+	background-color: snow;
+	/*
 	background-color: rgb(42,33,28);
+	color:			white;
+	*/
 }
 
 #controls {
@@ -79,11 +95,16 @@ a {
 	height:			18.5em;
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	2px;
-	color: 			white;
-	background-color: black;
 	font-family: 	"Courier New";
 	font-size: 		small;
 	padding: 		1em;
+
+	border-bottom-right-radius: 1em;
+	border-top-left-radius: 	1em;
+		
+	color: 			black;
+	font-weight: 	bold;
+	background-color: HoneyDew;
 }
 
 #code[contentEditable="false"] {
@@ -94,15 +115,17 @@ a {
 
 #code[contentEditable="true"] {
 /* 	background-color: black; */
-	color:			white;
+	color:			black;
 	overflow-x: 	auto;
 }
 
 #goalBox {
 	width:100%;
-	background-color:rgb(42,33,28);
 	padding:.2em;
 	padding-left:0em;
+
+	/*background-color:rgb(42,33,28);*/
+	background-color: #fcc;
 }
 
 #goalLine {
@@ -111,20 +134,32 @@ a {
 	padding-top:.25em;
 	padding-bottom:.25em;
 	padding-right:.25em;
-	background-color: rgb(76,74,65);
+	background-color: #fcc;
+	/*background-color: rgb(76,74,65);*/
 }
 
 #goals {
 	padding:		.75em;
-	color:			white;
+	margin-right: 	.75em;
 	border:			2px solid rgb(200,200,200);
-	border-radius: 	2px;
+	border-radius: 	.5em;
+	/*
+	color:			white;
 	background-color:rgb(42,33,28);
+	*/
+	
+	border-bottom-right-radius: 1em;
+	border-top-left-radius: 	1em;
+	
+	color:			black;
+	background-color: snow;
 }
 
 .goal {
 	font-family: 	"Courier New";
 	font-size:		small;
+	color: 			black;
+	font-weight:	bold;
 }
 
 .success {
@@ -191,6 +226,10 @@ textarea {
 	font-family: 	"Verdana";
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	1em;
+	
+	-moz-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	box-shadow: 5px 5px 5px #888;
 }
 
 #thingThought {
@@ -223,7 +262,7 @@ textarea {
 .bracket {
 	float:			left;
 	font-size:		2.75em;
-	color:			white;
+	color:			black;
 	font-family:	Arial;
 }
 
@@ -254,7 +293,8 @@ textarea {
 }
 
 .sourceLine.runtimeReference {
-	background-color: rgb(100,0,0);
+	/* background-color: rgb(100,0,0);*/
+	background-color: #fcc;
 }
 
 .sourceToken.keyword {
@@ -270,7 +310,7 @@ textarea {
 	position:		absolute;
 	background:		rgb(42,33,28);
 	border:			2px solid rgb(200,200,200);
-	border-radius: 	2px;
+	border-radius: 	.25em;
 	text-align:		right;
 	z-index:		50;
 	padding: 		1em;
@@ -304,18 +344,6 @@ table {
 	margin: 0em;
 }
 
-.popup {
-	border:			solid 1px white;
-	border-radius: 	2px;
-	background-color: black;
-	padding:		1em;
-	padding-top:	0em;
-	position: 		fixed;
-	width:			20em;
-	margin-left:	-10em;
-	top:			4em;
-	left:			50%;
-}
 
 .introBox {
 	border:			solid 1px white;
@@ -331,65 +359,138 @@ table {
 	left:			50%;
 }
 
-#debug p{
 
-	color: white;
+.popup {
+	border:			solid 2px black;
+	border-radius: 	.75em;
+
+	padding:		1em;
+	padding-top:	0em;
+	position: 		fixed;
+	width:			20em;
+	margin-left:	-10em;
+	top:			4em;
+	left:			50%;
+	
+	-moz-box-shadow:	10px 10px 10px #888;
+	-webkit-box-shadow: 10px 10px 10px #888;
+	box-shadow:			10px 10px 10px #888;
+}
+
+#quitConfirm {
+	background:		aliceblue;
+}
+
+#quitConfirm p {
+	color:			black;
+	font-family: 	"Verdana";
+	text-align: 	left;
+	font-size: 		larger;
+}
+
+#debug {
+	background:		#ccf;
+}
+
+#debug p {
+	color:			black;
 	font-family: 	"Verdana";
 	text-align: 	left;
 	font-size: 		small;
+}
+
+
+button.comm1,button.comm2,button.comm3,button.comm4,button.comm5{
+	color:#333;
+	text-align: left;
+}
+
+button.comm1{
+	background-color:#fcc;
+}
+
+button.comm2{
+	background-color:#cec;
+}
+
+button.comm3{
+	background-color:#ccf;
+}
+
+button.comm4{
+	background-color:#ecf;
+}
+
+
+button.comm5{
+	background-color:#ddd;
+}
+
+/*
+#quit {
+	background-color:	#fcc;
+	color:				black;
+	border:				1px solid;
+	border-color:		#999 #666 #666 #999;
+	text-align:			left;
+	border-radius: 		1em;
+}
+*/
+
+#reset {
+	background-color:	HoneyDew;
+	color:				black;
+	border:				2px solid rgb(200,200,200);
+	text-align:			left;
 	
+	border-top-left-radius: .5em;
+	border-top-right-radius: 1em;
+}
+
+#commandReset {
+
+	position: relative;
+	top: 9px;
+	left: 125px;
+
 }
 
 
-/* I know of a better way to implement this, but took the simple route for preliminary testing */
-a.rollover {
-	cursor: pointer;
-	display: inline-block;
-	width: 40px;
-	height: 42px;
-	background: url("media/gui/comm-plus.png");
+#titleBar {
+	color: black;
+	margin-left:	auto;
+	margin-right:	auto;
+	width:			60em;
+	height:			25px;
+	background:		#ccf;
+	padding:		.5em 1em .5em 1em;
+	
+	border:			1px solid gray;
+	border-top-right-radius:	.5em;
+	border-top-left-radius:		.5em;
+	
+	-moz-box-shadow:	10px 10px 10px #888;
+	-webkit-box-shadow:	10px 10px 10px #888;
+	box-shadow:			10px 10px 10px #888;
 }
 
-a.rollover:hover {
-	background-position: -40px 0;
-	cursor: pointer;
+#titleBar td {
+	font-family: Verdana;
+	font-size: large;
 }
 
-a.rollover2 {
-	cursor: pointer;
-	display: inline-block;
-	width: 40px;
-	height: 42px;
-	background: url("media/gui/comm-plusdots.png");
+.align-right {
+	float:right;
 }
 
-a.rollover2:hover {
-	background-position: -40px 0;
-	cursor: pointer;
+.align-left {
+	float:left;
 }
 
-a.rollover3 {
-	cursor: pointer;
-	display: inline-block;
-	width: 40px;
-	height: 42px;
-	background: url("media/gui/comm-arrow.png");
+.black {
+	color: black;
 }
 
-a.rollover3:hover {
-	background-position: -40px 0;
-	cursor: pointer;
-}
-
-a.rollover4 {
-	cursor: pointer;
-	display: inline-block;
-	width: 40px;
-	height: 42px;
-	background: url("media/gui/comm-arrowwall.png");
-}
-
-a.rollover4:hover {
-	background-position: -40px 0;
-	cursor: pointer;
+.white {
+	color: white;
 }

@@ -59,7 +59,8 @@ $().ready(function() {
 	
 	$('#code').
 	focusout(function() {
-		$(this).css('backgroundColor', 'black');
+		// Controls gCode background color on focusOut (should be same as in the CSS file)
+		$(this).css('backgroundColor', 'HoneyDew');
 		
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
@@ -68,7 +69,8 @@ $().ready(function() {
 
 	}).
 	focusin(function() {
-		$(this).css('backgroundColor', 'rgb(25,25,25)');
+		// Controls gCode background color on focusOut
+		$(this).css('backgroundColor', 'white'); // was rgb(25,25,25) for dark background
 	});	
 	
 	$('#code').click(function() {
@@ -234,14 +236,14 @@ $().ready(function() {
 	}
 	
 	// Populate Learner Communication Box
-	/* // Version 1
-	GIDGET.ui.setThought("(Ask Gidget to):\n<br />" +
-		"<button id='step' onclick='GIDGET.ui.step(false, true);'>&nbsp;&rsaquo;&nbsp;</button>\n" +
-		"<button id='line' onclick='GIDGET.ui.runToNextLine();'>&nbsp;&#8805;&nbsp;</button>\n"+
-		"<button id='play' onclick='GIDGET.ui.playToEnd();'>&nbsp;&raquo;&nbsp;</button>\n" +
-		"<button id='end' onclick='GIDGET.ui.runToEnd();'>&nbsp;&raquo;&Dagger;&nbsp;</button>\n"
+	 // Version 1
+	GIDGET.ui.setThought("\n" +
+		"<button id='step' class='comm1' onclick='GIDGET.ui.step(false, true);'>step</button>\n" +
+		"<button id='line' class='comm2' onclick='GIDGET.ui.runToNextLine();'>line</button>\n"+
+		"<button id='play' class='comm3' onclick='GIDGET.ui.playToEnd();'>play</button>\n" +
+		"<button id='end'  class='comm4' onclick='GIDGET.ui.runToEnd();'>end</button>\n"
 		,0, "learner");
-	
+	/*
 	// Version 2
 	GIDGET.ui.setThought("" +
 		"<img src='media/gui-comm-plus.png' height='40' width='40' id='step' onclick='GIDGET.ui.step(false, true);' />\n" +
@@ -249,12 +251,13 @@ $().ready(function() {
 		"<img src='media/gui-comm-arrow-single.png' height='40' width='40' id='step' onclick='GIDGET.ui.playToEnd();' />\n" +
 		"<img src='media/gui-comm-arrow-wall.png' height='40' width='40' id='step' onclick='GIDGET.ui.runToEnd();' />\n"
 		,0, "learner");
-	*/
+	
 		GIDGET.ui.setThought("" +
 		"<span><a class='rollover' title='step' onclick='GIDGET.ui.step(false, true);' alt='take one step within the code.'></a>\n" +
 		"<a class='rollover2' title='lineStep' onclick='GIDGET.ui.runToNextLine();' alt='execute one line within the code.'></a>\n" +
 		"<a class='rollover3' title='play' onclick='GIDGET.ui.playToEnd();' alt='execute steps one-by-one until end of code.'></a>\n" +
 		"<a class='rollover4' title='playEnd' onclick='GIDGET.ui.runToEnd();' alt='jump to end of code execution.'></a>\n </span>" 
 		,0, "learner");
-		// style='background: url(\"media/gui/comm-arrow.png\")' 
+		// style='background: url(\"media/gui/comm-arrow.png\")'
+		*/
 });
