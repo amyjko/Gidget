@@ -100,6 +100,7 @@ a {
 	padding: 		1em;
 
 	border-bottom-right-radius: 1em;
+	border-bottom-left-radius:	.5em;
 	border-top-left-radius: 	1em;
 		
 	color: 			black;
@@ -130,10 +131,10 @@ a {
 
 #goalLine {
 	color:rgb(201,170,55);
-	padding-left:.3em;
-	padding-top:.25em;
-	padding-bottom:.25em;
-	padding-right:.25em;
+	padding-left:	.3em;
+	padding-top:	.25em;
+	padding-bottom:	.25em;
+	padding-right:	.25em;
 	background-color: #fcc;
 	/*background-color: rgb(76,74,65);*/
 }
@@ -227,9 +228,9 @@ textarea {
 	border:			2px solid rgb(200,200,200);
 	border-radius: 	1em;
 	
-	-moz-box-shadow: 5px 5px 5px #888;
+	-moz-box-shadow:	5px 5px 5px #888;
 	-webkit-box-shadow: 5px 5px 5px #888;
-	box-shadow: 5px 5px 5px #888;
+	box-shadow:			5px 5px 5px #888;
 }
 
 #thingThought {
@@ -241,7 +242,7 @@ textarea {
 
 #energy {
 	font-size:		x-large;
-	color:			white;
+	color:			black;
 }
 
 .thing {
@@ -401,8 +402,9 @@ table {
 
 
 button.comm1,button.comm2,button.comm3,button.comm4,button.comm5{
-	color:#333;
-	text-align: left;
+	color:			#333;
+	text-align:		left;
+	border-radius:	1em;
 }
 
 button.comm1{
@@ -428,14 +430,18 @@ button.comm5{
 
 /*
 #quit {
-	background-color:	#fcc;
-	color:				black;
-	border:				1px solid;
-	border-color:		#999 #666 #666 #999;
-	text-align:			left;
-	border-radius: 		1em;
+	background:		#fcc;
+	color:			#333;
+	text-align:		left;
+	border-radius:	1em;
 }
 */
+
+#commandReset {
+	position:	relative;
+	top:		-292px;
+	left:	220px;
+}
 
 #reset {
 	background-color:	HoneyDew;
@@ -447,12 +453,12 @@ button.comm5{
 	border-top-right-radius: 1em;
 }
 
-#commandReset {
+#reset:hover {
+	background: lightgray;
+}
 
-	position: relative;
-	top: 9px;
-	left: 125px;
-
+#reset:active {
+	background: #fcc;
 }
 
 

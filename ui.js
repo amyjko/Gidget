@@ -412,7 +412,7 @@ GIDGET.ui = {
 		 		break;
 		}
 		
-		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' /></td><td>" + message + "</td></tr></table>";	
+		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' /></td><td>" + message + "</td></tr></table>";	
 		
 	},
 
@@ -423,7 +423,7 @@ GIDGET.ui = {
 		if (GIDGET.experiment.isControl())
 			this.world.gidget.runtime.state = "control";
 	
-		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' /></td><td>" + message + "</td></tr></table>";
+		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' /></td><td>" + message + "</td></tr></table>";
 
 	},
 	
@@ -868,7 +868,7 @@ GIDGET.ui = {
 		
 			var name = thing.name;
 				
-			var thingBox = $('<div class="thingBox"></div>');
+			var thingBox = $('<div class="thingBox" title="This is a '+ name +'."></div>');
 			var thingImage = $("<img src='media/" + (GIDGET.ui.hasImage(name, thing.runtime.state) ? name : "unknown") + "." + thing.runtime.state + ".png' class='thing' />");
 			var thingLabel = $("<div class='thingLabel'>" + name + "</div>");
 			thingBox.data('thing', thing);
@@ -1079,7 +1079,7 @@ GIDGET.ui = {
 			else if(runtime.thing.energy < 20)
 				$('#energy').css('color', 'gold');
 			else
-				$('#energy').css('color', '#00FF00');
+				$('#energy').css('color', 'green'); //bright green: #00FF00
 			
 			// Add mouse over events for things
 			$('.thingBox').mouseenter(function() {
