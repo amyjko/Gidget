@@ -1035,7 +1035,8 @@ GIDGET.ui = {
 			$('#grabbed').empty();
 	
 			$('#results').append(listOfThingListsToHTML(runtime.resultsStack));
-			$('#focused').append(thingListToHTML(runtime.focused));
+			if(runtime.focused.length > 0)
+				$('#focused').append(thingToHTML(runtime.focused[0]));//thingListToHTML(runtime.focused));
 			$('#scanned').append(thingListToHTML(runtime.scanned));
 			$('#analyzed').append(thingListToHTML(runtime.analyzed));
 			$('#grabbed').append(thingListToHTML(runtime.grabbed));
