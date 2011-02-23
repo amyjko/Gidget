@@ -83,21 +83,7 @@ $().ready(function() {
 		}
 	
 	});
-	
-	function animate() {
-		GIDGET.ui.percentRemaining -= 10;
-		if(GIDGET.ui.percentRemaining < 0) {
-			GIDGET.ui.world.resetThingDeltas();		
-			GIDGET.ui.percentRemaining = 0;
-			GIDGET.ui.drawGrid();		
-		}
-		else if(GIDGET.ui.percentRemaining > 0) {
-			GIDGET.ui.drawGrid();		
-		}
-		setTimeout(animate, 25);
-	}
-	setTimeout(animate);
-	
+		
 	$('.popup').hide();
 	$('.introBox').hide();
 	
