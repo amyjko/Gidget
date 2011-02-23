@@ -396,6 +396,8 @@ table {
 
 
 .popup {
+	background:		#ccf;	/* Color 9 */
+
 	border:			solid 2px black;
 	border-radius: 	.75em;
 	-moz-border-radius: .75em;
@@ -421,7 +423,7 @@ table {
 }
 
 #debug {
-	background:		#ccf;	/* Color 9 */
+
 }
 
 #debug p {
