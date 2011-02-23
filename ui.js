@@ -152,13 +152,18 @@ GIDGET.ui = {
 				passed: false, 
 				startTime: (new Date()).getTime(), 
 				endTime: undefined,
-				versions: [] 
+				versions: [],
+				stepLog: []
 			};
 		
 		}
 		
 		// Add the current version to the list of versions.
 		levelData[this.getCurrentLevel()].versions.push({ time: (new Date).getTime(), version: currentCode });
+		
+		// Add all steps logged to the store and empty the store in memory.
+		levelData[this.getCurrentLevel()].stepLog = levelData[this.getCurrentLevel()].stepLog.concat(this.stepLog);
+		this.stepLog = [];
 		
 		// Stringify the current versions object
 		localStorage.setObject('levelMetadata', levelData);		
@@ -457,6 +462,25 @@ GIDGET.ui = {
 	
 	},
 
+
+	// Used to temporarily store the list of commands logged for this level.
+	// These are saved when the levelMetadata is saved.
+	stepLog: [],
+	
+	logStep: function(kind) {
+	
+		// Save the kind of command, when it happened, and for which level.
+		this.stepLog.push({ 
+			kind: kind, 
+			time: (new Date()).getTime() 
+		});
+	},
+
+	stepOnce: function() {
+		this.logStep("step");
+		GIDGET.ui.step(false, true);
+	},
+
 	stepContinue: function() { 
 	
 		GIDGET.ui.step(true, false);
@@ -464,7 +488,9 @@ GIDGET.ui = {
 	},
 
 	runToEnd: function() {
-
+		
+		this.logStep("end");
+		
 		this.enableExecutionButtons(false);
 
 		// Start the world.
@@ -484,7 +510,9 @@ GIDGET.ui = {
 	},
 
 	playToEnd: function() {
-
+		
+		this.logStep("play");
+		
 		this.enableExecutionButtons(false);
 
 		// Call step repeatedly until done.
@@ -504,7 +532,9 @@ GIDGET.ui = {
 	},
 	
 	runToNextLine: function() {
-
+		
+		this.logStep("line");
+		
 		this.enableExecutionButtons(false);
 	
 		// Start the world.
@@ -523,7 +553,10 @@ GIDGET.ui = {
 
 	},
 	
+	// This variable is used throughout the UI to animate transitions between steps.
 	percentRemaining: 100,
+	
+	// This variable is used to indicate whether scan is being animated, so it can be drawn.
 	animatingScanned: undefined,
 
 	// A hash table of lists of decisions, indexed by thing. These are the decisions
@@ -550,8 +583,24 @@ GIDGET.ui = {
 		// If we're not displaying mission text, but we are executing a goal, step through the goal
 		else if(isDef(this.goalNumberBeingExecuted)) {
 
+			// We just finished executing the normal code, but have yet to start the first goal.
+			if(this.goalNumberBeingExecuted < 0) {
+
+				// Initialize the current goal.
+				this.goalNumberBeingExecuted = 0;
+
+				// Start by assuming all goals are achieved; when one is not, mark it false.
+				this.allGoalsAchieved = true;
+				
+				// Start the initial goal.
+				this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
+	
+				// Step once.
+				this.step();
+
+			}
 			// We've tested all goals. Time for final feedback.
-			if(this.goalNumberBeingExecuted >= this.world.goals.length) {
+			else if(this.goalNumberBeingExecuted >= this.world.goals.length) {
 			
 				// Stop executing goals!
 				this.goalNumberBeingExecuted = undefined;
@@ -736,17 +785,9 @@ GIDGET.ui = {
 			// Remove the highlighting on the normal code
 			this.highlightToken(undefined);
 
-			// Initialize the current goal.
-			this.goalNumberBeingExecuted = 0;
-			
-			// Start by assuming all goals are achieved; when one is not, mark it false.
-			this.allGoalsAchieved = true;
-			
-			// Start the initial goal.
-			this.world.gidget.runtime.start(this.world.goals[this.goalNumberBeingExecuted], true, {});
+			this.goalNumberBeingExecuted = -1;
 
-			// Step once.
-			this.step();
+			this.visualizeDecision(GIDGET.text.aboutToStartGoals(), true);
 			
 		}
 	
@@ -906,7 +947,7 @@ GIDGET.ui = {
 
 				if(listOfLists[i].hasOwnProperty('query') && isDef(listOfLists[i].query)) {
 				
-					if(listOfLists[i].query.hasOwnProperty('ast') && listOfLists[i].query.hasOwnProperty('parentAST')) {
+					if(listOfLists[i].query.hasOwnProperty('ast') && listOfLists[i].query.hasOwnProperty('parentAST') && listOfLists[i].query.parentAST.hasOwnProperty('keyword') && isDef(listOfLists[i].query.parentAST.keyword)) {
 						var html = GIDGET.ui.gidgetCodeToHTML(listOfLists[i].query.parentAST.keyword.text + " " + listOfLists[i].query.ast.name.text);
 						thingList.prepend($('<div>from </div>').append($(html).addClass('codeContainer').css('display', 'inline')));
 					}

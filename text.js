@@ -317,6 +317,14 @@ GIDGET.text = {
 		return "I ... can't... go ... any ... further...";
 		
 	},
+	
+	aboutToStartGoals: function() {
+
+		if (GIDGET.experiment.isControl())
+			return "Execution complete. Begin executing goals.";
+
+  		return "I finished executing my commands! Let's see if I accomplished all of my goals.";
+	},
 
 // *******************************************************
 // *** U S E R - I N T E R F A C E  - M E M - L I S T ****
@@ -664,7 +672,7 @@ GIDGET.text = {
 		return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
 	
 	},
-
+	
 
 // *******************************************************
 // *******************************************************

@@ -54,7 +54,7 @@
 		
 		
 		foreach ( $entries as $id => $data )
-			echo "'$id' : $data";
+			echo "'$id' : $data,\n";
 	
 	?>
 	
@@ -80,10 +80,27 @@
 		return count;
 	
 	}
+	
+	function countSteps(row, kind) {
 
+		var count = 0;
+		for(var level in row.levelMetadata) {
+			if(row.levelMetadata.hasOwnProperty(level)) {
+				var data = row.levelMetadata[level];
+				
+				for(var i = 0; i < data.stepLog.length; i++) {
+					if(data.stepLog[i].kind === kind)
+						count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	
 	$(document).ready(function() {
 	
-		$('#results').append("id, condition, currentLevel, mturkcode, levelsCompleted\n");		
+		$('#results').append("id, condition, currentLevel, mturkcode, levelsCompleted,steps,lineSteps,plays,ends,\n"); 		
 	
 		var id, row;
 		for(id in results) {
@@ -96,6 +113,10 @@
 				add(row.currentLevel);
 				add(row.code);
 				add(levelsCompleted(row));
+				add(countSteps(row, "step"));
+				add(countSteps(row, "line"));
+				add(countSteps(row, "play"));
+				add(countSteps(row, "end"));
 				line();
 			
 			}
