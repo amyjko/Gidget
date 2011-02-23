@@ -139,8 +139,6 @@ GIDGET.ui = {
 	
 		var currentCode = this.htmlToGidgetCode($('#code').html());
 	
-		console.log("Saving " + currentCode);
-	
 		var levelData = localStorage.getObject('levelMetadata');
 		
 		// Create an empty object literal to store level versions.
