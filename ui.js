@@ -287,6 +287,8 @@ GIDGET.ui = {
 		this.showNextMissionText();
 		
 		this.reset();
+		
+		this.saveCurrentLevelCode();
 	
 	},
 
@@ -612,8 +614,16 @@ GIDGET.ui = {
 				this.highlightToken(undefined);
 
 				if(this.allGoalsAchieved === true) {
+
 					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
+					
+					// Remember that the user passed the level and when
+					var levelData = localStorage.getObject('levelMetadata');
+					levelData[this.getCurrentLevel()].passed = true;
+					levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
+					localStorage.setObject('levelMetadata', levelData);					
+					
 				}
 				else {
 					this.world.gidget.runtime.state = "sad";
