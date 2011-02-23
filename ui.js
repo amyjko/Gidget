@@ -537,24 +537,52 @@ GIDGET.ui = {
 
 	},
 	
+	// Runs to the next line, starting execution if it hasn't been started yet.
 	runToNextLine: function() {
 		
 		this.logStep("line");
 		
 		this.enableExecutionButtons(false);
-	
-		// Start the world.
-		if(!this.world.isExecuting())
-			this.start();
 
-		var currentLine = this.world.gidget.runtime.getCurrentLine();
+		// If there is no current line, then run until there is one, running through all of the mission text.
+		if(isDef(this.currentMissionText)) {
 
-		while(this.world.isExecuting() && this.world.gidget.runtime.getCurrentLine() === currentLine)
-			GIDGET.ui.step(false, false);
-			
-		if(this.world.isExecuting())
-			GIDGET.ui.step(false, false);
-			
+			while(isDef(this.currentMissionText))
+				GIDGET.ui.step(false, false);
+
+			// Run the first step				
+			GIDGET.ui.step(false, false);				
+		
+		}
+		// If we're executing goals, step to the next goal
+		else if(isDef(this.goalNumberBeingExecuted)) {
+		
+			var goal = this.goalNumberBeingExecuted;
+			while(this.goalNumberBeingExecuted === goal)
+				GIDGET.ui.step(false, false);
+
+			// Show the results
+			if(this.goalNumberBeingExecuted >= this.world.goals.length)
+				GIDGET.ui.step(false, false);
+				
+		}
+		// Otherwise, step to the next line
+		else {
+
+			// Start the world if it's not started		
+			if(!this.world.isExecuting()) {
+				GIDGET.ui.step(false, false);
+			}
+			else {	
+		
+				var currentLine = this.world.gidget.runtime.getCurrentLine();
+				while(this.world.isExecuting() && this.world.gidget.runtime.getCurrentLine() === currentLine)
+					GIDGET.ui.step(false, false);
+					
+			}
+		
+		}
+					
 		this.enableExecutionButtons(true);
 
 	},
