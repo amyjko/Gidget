@@ -236,28 +236,12 @@ $().ready(function() {
 	}
 	
 	// Populate Learner Communication Box
-	 // Version 1
+
 	GIDGET.ui.setThought("<span class='smallfont'>(Ask Gidget to):</span><br />\n" +
 		"<button id='step' class='comm1' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
 		"<button id='line' class='comm2' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
 		"<button id='play' class='comm3' onclick='GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
 		"<button id='end'  class='comm4' onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
 		,0, "learner");
-	/*
-	// Version 2
-	GIDGET.ui.setThought("" +
-		"<img src='media/gui-comm-plus.png' height='40' width='40' id='step' onclick='GIDGET.ui.step(false, true);' />\n" +
-		"<img src='media/gui-comm-plus-dots.png' height='40' width='40' id='step' onclick='GIDGET.ui.runToNextLine();' />\n" +
-		"<img src='media/gui-comm-arrow-single.png' height='40' width='40' id='step' onclick='GIDGET.ui.playToEnd();' />\n" +
-		"<img src='media/gui-comm-arrow-wall.png' height='40' width='40' id='step' onclick='GIDGET.ui.runToEnd();' />\n"
-		,0, "learner");
-	
-		GIDGET.ui.setThought("" +
-		"<span><a class='rollover' title='step' onclick='GIDGET.ui.step(false, true);' alt='take one step within the code.'></a>\n" +
-		"<a class='rollover2' title='lineStep' onclick='GIDGET.ui.runToNextLine();' alt='execute one line within the code.'></a>\n" +
-		"<a class='rollover3' title='play' onclick='GIDGET.ui.playToEnd();' alt='execute steps one-by-one until end of code.'></a>\n" +
-		"<a class='rollover4' title='playEnd' onclick='GIDGET.ui.runToEnd();' alt='jump to end of code execution.'></a>\n </span>" 
-		,0, "learner");
-		// style='background: url(\"media/gui/comm-arrow.png\")'
-		*/
+
 });

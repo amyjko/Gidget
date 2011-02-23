@@ -87,6 +87,8 @@ GIDGET.text = {
 	},
 
 	scan_success: function(name) {
+		scan.play();
+		
 		if (GIDGET.experiment.isControl())
 			return "$scanned@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") " + " added to the scan list.";
 			
@@ -103,6 +105,8 @@ GIDGET.text = {
 	},
 
 	go_step: function(name) {
+		goto.play();
+	
 		if (GIDGET.experiment.isControl())
 			return "Incremented to destination, $results@0(" + name + ").";
 		
@@ -135,6 +139,8 @@ GIDGET.text = {
 	},
 
 	analyze_success: function(name) {
+		analyze.play();
+		
 		if (GIDGET.experiment.isControl())
 			return "$analyzed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") analyzed.";
 		
@@ -143,6 +149,8 @@ GIDGET.text = {
 	},
 
 	grab_success: function(name) {
+		grab.play();
+		
 		if (GIDGET.experiment.isControl())
 			return "$grabbed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") grabbed. Added to list.";
 		
@@ -151,6 +159,8 @@ GIDGET.text = {
 	},
 
 	drop_success: function(name) {
+		drop.play();
+	
 		if (GIDGET.experiment.isControl())
 			return "Dropped $results@0(" + name + "). Removing from list.";
 			
