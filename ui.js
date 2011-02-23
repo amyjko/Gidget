@@ -139,6 +139,8 @@ GIDGET.ui = {
 	
 		var currentCode = this.htmlToGidgetCode($('#code').html());
 	
+		console.log("Saving " + currentCode);
+	
 		var levelData = localStorage.getObject('levelMetadata');
 		
 		// Create an empty object literal to store level versions.
@@ -263,6 +265,10 @@ GIDGET.ui = {
 			code = code + line + "\n";
 		
 		}
+	
+		// Remove the trailing newline
+		if(code.length > 0)
+			code = code.substr(0, code.length - 1);
 	
 		return code;
 	
