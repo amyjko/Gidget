@@ -25,31 +25,33 @@
 
 <body>
 
-	<table id='titleBar'>
-		<tr>
-			<td>Gidget Viewer</td>
-			<td><p>total bonus <span id='bonus'>0.00</span></p></td>
-			<td><p><span id='passed'></span> levels passed</p></td>
-			<td><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' class='align-right' title="Pressing this will prompt you if you want to quit the program and receive your MTurk code.">Quit & receive MTurk code</button></td>
-		</tr>
-	</table>
-	<table id='content' width='100%' height='100%'>
-		<tr>
-			<td id='leftPanel'>
-				<h2 class='inline-block' title="This is the area where you can view and modify Gidget's instructional code.">code</h2>
+
+	<div>
+		<div id='titleBar'>
+			<span>Gidget Viewer</span>
+			<span id="titleRight">
+				<span><span id='passed'></span> levels passed | </span>
+				<span>total bonus <span id='bonus'>0.00</span> | </span>
+				<span><button id='quit' style="" onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title="Pressing this will prompt you if you want to quit the program and receive your MTurk code.">Quit & receive MTurk code</button></span>
+			</span>
+		</div>
+		<div id='content'>
+			
+			<!-- LEFT PANEL -->
+			<div id='leftPanel'>
+				<h2 title="This is the area where you can view and modify Gidget's instructional code.">code</h2>
 				<div>
 					<div id='code' class='codeContainer' contentEditable='true' title="This is the area where you can view and modify Gidget's instructional code."></div>
-					<span id='commandReset' title="Pressing this will reset the code to its original state and restart the level."><button id='reset' onclick='GIDGET.ui.startOver();'>start over</button></span>
+					<span id='commandReset' title="Pressing this will reset the code to its original state and restart the level."><button id='reset' onclick='GIDGET.ui.startOver();'>reset level</button></span>
 					<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 				</div>			
-				
+					
 				<h2 title="This is the area where you can see the set goals required to complete the level.">Goals</h2>
 				<div id='goals' title="This is the area where you can see the set goals required to complete the level."></div>
-
-			</td>
+			</div>
 			
-			<td id='centerPanel'>
-
+			<!-- CENTER PANEL -->
+			<div id='centerPanel'>
 				<h2 title="This is the area where you can see Gidget out in the field.">World</h2>
 				<div class='thoughtBubble' id='thingThought'></div>
 				<canvas id='grid' width='300' height='300' title="This is the area where you can see Gidget out in the field."></canvas>
@@ -57,46 +59,37 @@
 				<h2 title="This is the area where you can ask Gidget to execute code and see Gidget's responses.">Communication</h2>
 				<div id='learnerThought' class='thoughtBubble' title="This is the area where you can ask Gidget to execute code."></div>
 				<div id='gidgetThought' class='thoughtBubble' title="This is the area where Gidget you can read Gidget's responses to his code execution."></div>
-			</td>
-
-			<td id='rightPanel'>
-
+			</div>
+			
+			<!-- RIGHT PANEL -->
+			<div id='rightPanel'>
 				<h2 title="This is the area where you can see Gidget's energy level and memory banks.">Gidget</h2>
 
 				<div id='memory' title="This is the area where you can see Gidget's energy level and memory banks.">
-						
 					<h2 title="This is Gidget's current energy. Gidget cannot continue if it gets to zero."><span id='energy'></span></h2>
-													
 					<h3 title="This shows currently 'scanned' objects in Gidget's memory banks.">Scanned</h3>
-					<div class='runtimeInfoContainer' id='scanned' title="This shows currently 'scanned' objects in Gidget's memory banks."></div>	
-				
+					<div class='runtimeInfoContainer' id='scanned' title="This shows currently 'scanned' objects in Gidget's memory banks."></div>			
 					<h3 title="This shows currently 'analyzed' objects in Gidget's memory banks.">Analyzed</h3>
 					<div class='runtimeInfoContainer' id='analyzed' title="This shows currently 'analyzed' objects in Gidget's memory banks."></div>	
-				
 					<h3 title="This shows objects that are currently 'grabbed' by Gidget.">Grabbed</h3>
 					<div class='runtimeInfoContainer' id='grabbed' title="This shows objects that are currently 'grabbed' by Gidget."></div>		
-	
 					<h3 title="This shows objects that Gidget is currently 'focused' on.">Focus</h3>
 					<div class='runtimeInfoContainer' id='focused' title="This shows objects that Gidget is currently 'focused' on."></div>
 	
 					<h3 title="This shows objects that Gidget is currently examining.">Results</h3>
-					<div class='runtimeInfoContainer' id='results' title="This shows objects that Gidget is currently examining."></div>
-					
-				</div>
+					<div class='runtimeInfoContainer' id='results' title="This shows objects that Gidget is currently examining."></div					</div>
+			</div>
+		</div><div style="clear: both;"></div>
+	</div>
 
-			</td>
-
-		</tr>
-		
-	</table>
-	
 	<div class='introBox' id='intro'>
-	
+
 <!--
 		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
 		
 		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
 -->
+
 		<canvas id='introCanvas' width='640' height='480'></canvas>
 
 	</div>
@@ -113,11 +106,11 @@
 	</div>
 
 	<div class='popup' id='quitConfirm'>
-		<p>Are you sure you want to quit? You'll get your MTurk code but you <b>won't be able to continue playing the game.</b></p>
-		
-		<p style='text-align:right'>
-		<button onclick='$("#quitConfirm").hide()'>I don't want to quit!</button>
-		<button onclick='$("#quitConfirm").hide(); GIDGET.ui.quit()'>Yes, I give up.</button>
+		<h2>Quit & Receive MTurk Code</h2>
+		<p>Are you sure you want to quit?</p><p>You will receive your MTurk code but you <b>will not be able to return</b> to play the game.</p>
+		<p class='align-right'>
+			<button onclick='$("#quitConfirm").hide()'>No, I don't want to quit!</button>
+			<button onclick='$("#quitConfirm").hide(); GIDGET.ui.quit()'>Yes, I give up.</button>
 		</p>
 	
 	</div>
@@ -129,7 +122,9 @@
 		<p>Experimental Options: </p>
 		<p><button id='setCondControl'>control</button> <button id='setCondMale'>male &#9794;</button> <button id='setCondFemale'>female &#9792;</button></p>
 	</div>
-	
+
+
+
 </body>
 
 </html>

@@ -225,10 +225,10 @@ $().ready(function() {
 	// Populate Learner Communication Box
 
 	GIDGET.ui.setThought("<span class='smallfont'>(Ask Gidget to):</span><br />\n" +
-		"<button id='step' class='comm1' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
-		"<button id='line' class='comm2' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
-		"<button id='play' class='comm3' onclick='GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
-		"<button id='end'  class='comm4' onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
+		"<button id='step' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
+		"<button id='line' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
+		"<button id='play' onclick='GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
+		"<button id='end'  onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
 		,0, "learner");
 
 	GIDGET.ui.updateBonus();
