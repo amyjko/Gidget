@@ -719,7 +719,7 @@ GIDGET.ui = {
 				else {
 	
 					$('#goals .failure:eq(' + this.goalNumberBeingExecuted + ')').show();
-					this.allGoalsAchieved = true;
+					this.allGoalsAchieved = false;
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_checkFailure(), true);
 				
