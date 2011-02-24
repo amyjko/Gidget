@@ -140,7 +140,7 @@ GIDGET.ui = {
 	
 	disable: function(message) {
 
-		$('#content').hide();
+		$('#container').hide();
 		
 		$('#quitResults').html(
 			"<p>" + message + "</p>" + 
