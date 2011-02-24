@@ -670,12 +670,8 @@ GIDGET.ui = {
 
 					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
-					
-					// Remember that the user passed the level and when
-					var levelData = localStorage.getObject('levelMetadata');
-					levelData[this.getCurrentLevel()].passed = true;
-					levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
-					localStorage.setObject('levelMetadata', levelData);					
+
+					this.rememberLevelPassed();					
 					
 				}
 				else {
@@ -891,6 +887,26 @@ GIDGET.ui = {
 
 		this.log(thought);
 
+	},
+
+	rememberLevelPassed: function() {
+	
+		// Remember that the user passed the level and when
+		var levelData = localStorage.getObject('levelMetadata');
+		levelData[this.getCurrentLevel()].passed = true;
+		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
+		localStorage.setObject('levelMetadata', levelData);					
+
+		this.updateBonus();
+	
+	},
+	
+	updateBonus: function() {
+	
+		levelsPassed = this.getNumberOfLevelsPassed();
+		$('#bonus').html("$" + (levelsPassed * GIDGET.experiment.bonusPerLevel).toFixed(2));
+		$('#passed').html(levelsPassed);
+	
 	},
 
 	parseThought: function(message) {

@@ -231,4 +231,6 @@ $().ready(function() {
 		"<button id='end'  class='comm4' onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
 		,0, "learner");
 
+	GIDGET.ui.updateBonus();
+
 });
