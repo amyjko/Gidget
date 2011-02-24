@@ -205,25 +205,18 @@ $().ready(function() {
 		
 			var versions = levelMetadata[localStorage.currentLevel].versions;
 			if(versions.length > 0) {
-			
 				var code = versions[versions.length - 1].version;
 				$('#code').html(GIDGET.ui.gidgetCodeToHTML(code));
-			
 			}
-		
 		}	
-	
 	}
 
 	// If we've written quit to local storage, the user has already quit, so we disable the UI.
 	if(localStorage.getItem('quit') !== null) {
-	
 		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
-	
 	}
 	
 	// Populate Learner Communication Box
-
 	GIDGET.ui.setThought("<span class='smallfont'>(Ask Gidget to):</span><br />\n" +
 		"<button id='step' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
 		"<button id='line' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
@@ -232,5 +225,8 @@ $().ready(function() {
 		,0, "learner");
 
 	GIDGET.ui.updateBonus();
+	
+	// Pre-load sound effects
+	GIDGET.sfx.load();
 
 });

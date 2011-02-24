@@ -12,6 +12,8 @@ GIDGET.ui = {
 
 	images: {},
 	
+	stepState: undefined,
+	
 	hasImage: function(name, state) {
 	
 		return this.images.hasOwnProperty(name + "." + state) && this.images[name + "." + state] !== false;
@@ -493,7 +495,8 @@ GIDGET.ui = {
 	stepLog: [],
 	
 	logStep: function(kind) {
-	
+		this.stepState = kind;
+		
 		// Save the kind of command, when it happened, and for which level.
 		this.stepLog.push({ 
 			kind: kind, 
