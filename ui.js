@@ -72,6 +72,25 @@ GIDGET.ui = {
 		this.setLevel(localStorage.currentLevel);
 	
 	},
+	
+	getNumberOfLevelsPassed: function() {
+
+		if(localStorage.getItem('levelMetadata') === null)
+			return 0;
+			
+		var levelMetadata = localStorage.getObject('levelMetadata');
+
+		var count = 0;
+		for(var level in levelMetadata) {
+			if(levelMetadata.hasOwnProperty(level)) {
+				var data = levelMetadata[level];
+				if(data.passed === true)
+					count++;			
+			}
+		}
+		return count;
+	
+	},
 
 	quit: function() {
 	
