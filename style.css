@@ -460,3 +460,27 @@ table {
 .smallfont{
 	font-size: small;
 }
+
+
+.tooltip {
+	background-color: white; /* Color 6 */
+    position:	absolute;
+    z-index:	999;
+    left: 		-9999px;
+    padding:	1em;
+    border:		1px solid #fff;
+    width:		14em;
+    border:			2px solid rgb(200,200,200);
+	border-radius: 	.5em;
+	-moz-border-radius: .5em;
+    
+}
+
+.tooltip p {
+    background-color:	white;
+    color:		black;
+    font-family:"Arial";
+    margin:		0;
+    padding:	0;
+   
+}

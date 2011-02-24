@@ -24,60 +24,58 @@
 </head>
 
 <body>
-
-
 	<div id='container'>
 		<div id='titleBar'>
 			<span>Gidget Viewer</span>
 			<span id="titleRight">
 				<span><span id='passed'></span> levels passed | </span>
 				<span>total bonus <span id='bonus'>0.00</span> | </span>
-				<span><button id='quit' style="" onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title="Pressing this will prompt you if you want to quit the program and receive your MTurk code.">Quit & receive MTurk code</button></span>
+				<span title="Pressing this will prompt you if you want to quit the program and receive your MTurk code."><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();'>Quit & receive MTurk code</button></span>
 			</span>
 		</div>
 		<div id='content'>
 			
 			<!-- LEFT PANEL -->
 			<div id='leftPanel'>
-				<h2 title="This is the area where you can view and modify Gidget's instructional code.">code</h2>
+				<h2 title="Instructional code where you can view and modify Gidget's instructional code.">code</h2>
 				<div>
-					<div id='code' class='codeContainer' contentEditable='true' title="This is the area where you can view and modify Gidget's instructional code."></div>
-					<span id='commandReset' title="Pressing this will reset the code to its original state and restart the level."><button id='reset' onclick='GIDGET.ui.startOver();'>reset level</button></span>
+					<div id='code' class='codeContainer' contentEditable='true'></div>
+					<span id='commandReset'><button id='reset' onclick='GIDGET.ui.startOver();' title="Pressing this will reset the code to its original state and restart the level.">reset level</button></span>
 					<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 				</div>			
 					
 				<h2 title="This is the area where you can see the set goals required to complete the level.">Goals</h2>
-				<div id='goals' title="This is the area where you can see the set goals required to complete the level."></div>
+				<div id='goals'></div>
 			</div>
 			
 			<!-- CENTER PANEL -->
 			<div id='centerPanel'>
 				<h2 title="This is the area where you can see Gidget out in the field.">World</h2>
 				<div class='thoughtBubble' id='thingThought'></div>
-				<canvas id='grid' width='300' height='300' title="This is the area where you can see Gidget out in the field."></canvas>
+				<canvas id='grid' width='300' height='300' title="This is Gidget's world! You can give him commands by editing the code in the left panel, and communicate with him in the panels below!"></canvas>
 				
 				<h2 title="This is the area where you can ask Gidget to execute code and see Gidget's responses.">Communication</h2>
-				<div id='learnerThought' class='thoughtBubble' title="This is the area where you can ask Gidget to execute code."></div>
-				<div id='gidgetThought' class='thoughtBubble' title="This is the area where Gidget you can read Gidget's responses to his code execution."></div>
+				<div id='learnerThought' class='thoughtBubble'></div>
+				<div id='gidgetThought' class='thoughtBubble'></div>
 			</div>
 			
 			<!-- RIGHT PANEL -->
 			<div id='rightPanel'>
 				<h2 title="This is the area where you can see Gidget's energy level and memory banks.">Gidget</h2>
 
-				<div id='memory' title="This is the area where you can see Gidget's energy level and memory banks.">
+				<div id='memory'>
 					<h2 title="This is Gidget's current energy. Gidget cannot continue if it gets to zero."><span id='energy'></span></h2>
 					<h3 title="This shows currently 'scanned' objects in Gidget's memory banks.">Scanned</h3>
-					<div class='runtimeInfoContainer' id='scanned' title="This shows currently 'scanned' objects in Gidget's memory banks."></div>			
+					<div class='runtimeInfoContainer' id='scanned'></div>			
 					<h3 title="This shows currently 'analyzed' objects in Gidget's memory banks.">Analyzed</h3>
-					<div class='runtimeInfoContainer' id='analyzed' title="This shows currently 'analyzed' objects in Gidget's memory banks."></div>	
+					<div class='runtimeInfoContainer' id='analyzed'></div>	
 					<h3 title="This shows objects that are currently 'grabbed' by Gidget.">Grabbed</h3>
-					<div class='runtimeInfoContainer' id='grabbed' title="This shows objects that are currently 'grabbed' by Gidget."></div>		
+					<div class='runtimeInfoContainer' id='grabbed'></div>		
 					<h3 title="This shows objects that Gidget is currently 'focused' on.">Focus</h3>
-					<div class='runtimeInfoContainer' id='focused' title="This shows objects that Gidget is currently 'focused' on."></div>
+					<div class='runtimeInfoContainer' id='focused'></div>
 	
 					<h3 title="This shows objects that Gidget is currently examining.">Results</h3>
-					<div class='runtimeInfoContainer' id='results' title="This shows objects that Gidget is currently examining."></div					</div>
+					<div class='runtimeInfoContainer' id='results'></div					</div>
 			</div>
 		</div><div style="clear: both;"></div>
 	</div>
