@@ -176,14 +176,14 @@ $().ready(function() {
 
 		localStorage.setItem('currentLevel', 'learnScan');
 		
-		$('#content').fadeTo(0, 0.0);
+		$('#container').fadeTo(0, 0.0);
 		
 		$('#intro').toggle();
 		var intro = GIDGET.createIntroduction();
 		intro.play($('#introCanvas')[0], function() { 
 		
 			$('#intro').fadeTo(1000, 0.0, function() { $('#intro').hide(); });
-			$('#content').fadeTo(1000, 1.0);
+			$('#container').fadeTo(1000, 1.0);
 			
 		});
 			
