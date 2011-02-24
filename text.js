@@ -104,6 +104,17 @@ GIDGET.text = {
 	
 	},
 
+	go_dangerousStep: function(name, avoid) {
+
+		goto.play();
+	
+		if (GIDGET.experiment.isControl())
+			return "Incremented to destination, $results@0(" + name + "), but may intersect with " + avoid + ".";
+		
+		return "I'm going one step closer to the $results@0(" + name + "), even though I might touch a " + avoid + "!";
+	
+	},
+
 	go_step: function(name) {
 		goto.play();
 	

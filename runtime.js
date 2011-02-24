@@ -295,8 +295,6 @@ GIDGET.Runtime = function(thing, world) {
 		if(!isDef(executingRule)) {
 			for(i = 0; i < this.rules.length; i++) {
 		
-				console.log("Executing rule " + i);
-		
 				// Remember the old instructions and steps.
 				var ongoingSteps = this.steps;
 				var ongoingPC = this.pc;
@@ -621,13 +619,13 @@ GIDGET.runtime = {
 	},
 
 	// Go to the next object in the query on the stack
-	Step_GO: function(ast, representativeToken, avoid) {
+	Step_GO: function(ast, representativeToken, avoidToken) {
 		return {
 			ast: ast,
 			representativeToken: representativeToken,
-			avoid: avoid,
+			avoid: avoidToken,
 			offset: undefined,
-			toString: function() { return "go " + (isDef(this.avoid) ? this.avoid.text + " " : "") + this.offset; },
+			toString: function() { return "go " + (isDef(this.avoid) ? "avoid " + this.avoid.text + " " : "") + this.offset; },
 			execute: function(runtime) {
 			
 				// If we haven't set the clock, set it.
@@ -652,9 +650,9 @@ GIDGET.runtime = {
 					var thing = runtime.peekResult();
 
 					// Dijkstra's algorithm, adapted to find shortest path from Gidget to target.
-					function findShortestPath(grid, currentRow, currentColumn, goalRow, goalColumn, level, avoid) {
+					function findShortestPath(grid, currentRow, currentColumn, goalRow, goalColumn, level, nameToAvoid, checkWithinOne) {
 
-						function isValid(queue, cells, grid, row, column, level, avoid) {
+						function isValid(queue, cells, grid, row, column, level, theNameToAvoid, withinOne) {
 						
 							// If it's outside the bounds of the world, it's not a good location.
 							if(row < 0) return false;
@@ -673,21 +671,41 @@ GIDGET.runtime = {
 
 							// Have we already checked this? Not valid.							
 							if($.inArray(cells[row][column], queue) < 0) return false;
-							
-							// Avoid operator. If this would take us within 1 unit of a bad thing, then it's not a valid spot.
-							var nearby = [[row-1, column],[row-1,column-1],[row,column-1],[row+1,column-1],[row+1,column],[row+1,column+1],[row,column+1],[row-1,column+1]];
-							var spot;
-							for(spot = 0; spot < nearby.length; spot++) {
-								var r = nearby[spot][0]
-								var c = nearby[spot][1];
-								if(r >= 0 && r < grid.length && c >= 0 && c < grid[0].length) {
-									for(i = 0; i < grid[r][c].length; i++) {
-										var thing = grid[r][c][i]; 
-										if(isDef(thing.name) && thing.name === avoid) {
+
+							// Check for things to avoid.
+							if(isDef(theNameToAvoid)) {
+								
+								// Are we checking within one?
+								if(withinOne) {
+									var nearby = [[row-1, column],[row-1,column-1],[row,column-1],[row+1,column-1],[row+1,column],[row+1,column+1],[row,column+1],[row-1,column+1]];
+									var spot;
+									for(spot = 0; spot < nearby.length; spot++) {
+										var r = nearby[spot][0]
+										var c = nearby[spot][1];
+										// If this is a legal position
+										if(r >= 0 && r < grid.length && c >= 0 && c < grid[0].length) {
+											// Go through all of the things at this position...
+											for(i = 0; i < grid[r][c].length; i++) {
+												// Does the thing have the same name as the thing to avoid?
+												var thing = grid[r][c][i]; 
+												if(isDef(thing.name) && thing.name === theNameToAvoid) {
+													return false;
+												}
+											}
+										}
+									}
+								}
+								// Otherwise, just check for the cell itself
+								else {
+									for(i = 0; i < grid[row][column].length; i++) {
+										// Does the thing have the same name as the thing to avoid?
+										var thing = grid[row][column][i]; 
+										if(isDef(thing.name) && thing.name === theNameToAvoid) {
 											return false;
 										}
 									}
 								}
+								
 							}
 
 							// Otherwise, it's valid.							
@@ -740,13 +758,13 @@ GIDGET.runtime = {
 							var neighbors = [];
 							
 							// Is the cell above a valid, passable, that has not been visited?
-							if(isValid(queue, cells, grid, closestCell.row - 1, closestCell.column, level, avoid))
+							if(isValid(queue, cells, grid, closestCell.row - 1, closestCell.column, level, nameToAvoid, checkWithinOne))
 								neighbors.push(cells[closestCell.row - 1][closestCell.column]);
-							if(isValid(queue, cells, grid, closestCell.row + 1, closestCell.column, level, avoid))
+							if(isValid(queue, cells, grid, closestCell.row + 1, closestCell.column, level, nameToAvoid, checkWithinOne))
 								neighbors.push(cells[closestCell.row + 1][closestCell.column]);
-							if(isValid(queue, cells, grid, closestCell.row, closestCell.column - 1, level, avoid))
+							if(isValid(queue, cells, grid, closestCell.row, closestCell.column - 1, level, nameToAvoid, checkWithinOne))
 								neighbors.push(cells[closestCell.row][closestCell.column - 1]);
-							if(isValid(queue, cells, grid, closestCell.row, closestCell.column + 1, level, avoid))
+							if(isValid(queue, cells, grid, closestCell.row, closestCell.column + 1, level, nameToAvoid, checkWithinOne))
 								neighbors.push(cells[closestCell.row][closestCell.column + 1]);
 							
 							// For each valid neighbor, 
@@ -784,12 +802,23 @@ GIDGET.runtime = {
 					
 					}	
 
-					// Find the shortest path to the target using the above algorithm.
-					var path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, isDef(this.avoid) ? this.avoid.text : undefined);
+					var avoidText = isDef(this.avoid) ? this.avoid.text : undefined;
 
-					// If we were avoiding and there was no path, try not avoiding.
-					if(isDef(this.avoid) && path.length < 1)
-						path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, undefined);
+					// Find the shortest path to the target using the above algorithm, avoid thing things within 1 unit
+					var path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, avoidText, true);
+
+					// If we were avoiding and there was no path, try just avoiding going on top of things.
+					var noPath = false;
+					if(isDef(this.avoid) && path.length <= 1) {
+						noPath = true;
+						path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, avoidText, false);
+					}
+					
+					// If we're avoiding and there was still no path, try not avoiding at all.
+					if(isDef(this.avoid) && path.length <= 1) {
+						noPath = true;
+						path = findShortestPath(runtime.world.grid, runtime.thing.row, runtime.thing.column, thing.row, thing.column, runtime.thing.level, undefined, false);
+					}
 
 					// If there was a path, remember it.
 					if(path.length > 1) {
@@ -798,11 +827,14 @@ GIDGET.runtime = {
 						var rowIncrement = path[1].row - runtime.thing.row;
 						var columnIncrement = path[1].column - runtime.thing.column;
 
-						var done = runtime.thing.row + rowIncrement === thing.row && runtime.thing.column + columnIncrement === thing.column
+						var done = runtime.thing.row + rowIncrement === thing.row && runtime.thing.column + columnIncrement === thing.column;
 
+						// If we're moving somewhere, say so!
 						if(rowIncrement !== 0 || columnIncrement !== 0)
 							runtime.addDecision(
-								GIDGET.text.go_step(thing.name),
+								noPath ? 
+									GIDGET.text.go_dangerousStep(thing.name, this.avoid.text) :
+									GIDGET.text.go_step(thing.name),
 								new runtime.Move(runtime, rowIncrement, columnIncrement, done));
 
 						// We're at it! Execute the command on it, if there is one, otherwise, go to the next thing.

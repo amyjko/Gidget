@@ -625,16 +625,15 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "bucket", 1, 9, "rgb(0,0,0)", [], {});
 		new GIDGET.Thing(world, "goop", 6, 4, "green", [ 'glowing' ], {});
 		var b1 = new GIDGET.Thing(world, "crack", 5, 9, "black", [], {});
-		/*
-		var b2 = new GIDGET.Thing(world, "bgoop", 1, 8, "blue", [], {});
-		var b3 = new GIDGET.Thing(world, "bgoop", 2, 8, "blue", [], {});
-		var b4 = new GIDGET.Thing(world, "bgoop", 2, 9, "blue", [], {});
-		*/
+
+		var b2 = new GIDGET.Thing(world, "crack", 1, 8, "blue", [], {});
+		var b3 = new GIDGET.Thing(world, "crack", 2, 8, "blue", [], {});
+		var b4 = new GIDGET.Thing(world, "crack", 2, 9, "blue", [], {});
+		
 		
 		b1.setCode(
 			"when gidget on crack, grab goops\n"
 		);
-		/*
 		b2.setCode(
 			"when gidget on bgoop, grab goops\n"
 		);
@@ -644,7 +643,7 @@ GIDGET.levels = {
 		b4.setCode(
 			"when gidget on bgoop, grab goops\n"
 		);
-		*/
+		
 
 		var wall;
 		wall = new GIDGET.Thing(world, "wall", 5, 1, "black", [], {});
