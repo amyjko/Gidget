@@ -1,6 +1,6 @@
 GIDGET.experiment = {
 
-	condition: "control",	// control, male, female
+	condition: Math.round(Math.random()) < 1 ? "control" : "male",	// control, male, female
 	
 	isControl: function() {
 	

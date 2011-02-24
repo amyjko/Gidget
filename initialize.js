@@ -189,9 +189,10 @@ $().ready(function() {
 			
 	}
 
+	// If we've already stored the experimental condition for this participant,
+	// load it.
 	if(localStorage.getItem('expCondition') !== null)
 		GIDGET.experiment.loadExpCondition();
-
 	
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
