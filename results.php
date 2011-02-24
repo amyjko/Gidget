@@ -4,6 +4,8 @@
 	<title>Gidget study results</title>
 
 	<script type='text/javascript' src='lib/jquery.js'></script>
+	<script type='text/javascript' src='runtime.js'></script>
+	<script type='text/javascript' src='experiment.js'></script>
 	
 	<script type='text/javascript'>
 	
@@ -100,7 +102,7 @@
 	
 	$(document).ready(function() {
 	
-		$('#results').append("id, condition, currentLevel, mturkcode, levelsCompleted,steps,lineSteps,plays,ends,\n"); 		
+		$('#results').append("id,condition,currentLevel,mturkcode,bonus,levelsCompleted,steps,lineSteps,plays,ends,\n"); 		
 	
 		var id, row;
 		for(id in results) {
@@ -112,6 +114,7 @@
 				add(row.condition);
 				add(row.currentLevel);
 				add(row.code);
+				add((levelsCompleted(row) * GIDGET.experiment.bonusPerLevel).toFixed(2));
 				add(levelsCompleted(row));
 				add(countSteps(row, "step"));
 				add(countSteps(row, "line"));
