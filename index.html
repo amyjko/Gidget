@@ -30,7 +30,7 @@
 			<span id="titleRight">
 				<span><span id='passed'></span> levels passed | </span>
 				<span>total bonus <span id='bonus'>0.00</span> | </span>
-				<span title="Pressing this will prompt you if you want to quit the program and receive your MTurk code."><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();'>Quit & receive MTurk code</button></span>
+				<span title="Pressing this will prompt you if you want to quit the program and receive your MTurk code."><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title='Pressing this button will quit the game and give your MTurk code.'>Quit & receive MTurk code</button></span>
 			</span>
 		</div>
 		<div id='content'>
@@ -99,7 +99,7 @@
 	
 		<p>You will not receive an MTurk code until you've completed at least the first level.</p>
 
-		<button onclick='$("#noCodeYet").hide();'>Okay</button>
+		<button onclick='$("#noCodeYet").hide();' title="test">Okay</button>
 	
 	</div>
 

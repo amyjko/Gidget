@@ -247,35 +247,55 @@ $().ready(function() {
 	
 	//Targets a tag using jQuery and adding a div to it. It extracts the 'title' tag from the code and uses that as its text.
 	function tooltip(target_items, name) {
-		$(target_items).each(function(i) {
-			$("body").append("<div class='"+name+"' id='"+name+i+"'><p>"+$(this).attr('title')+"</p></div>");
+		
+		//Unique identifier for each class ID we're going to generate below.
+		var tagCounter = 0;
+	
+		for(k = 0; k < target_items.length; k++) {
 			
-			var my_tooltip = $("#"+name+i);
+ 			$(target_items[k]).each(function() {
+ 				//Add a new div to hold the tooltip
+				$("body").append("<div class='"+name+"' id='"+name+tagCounter+"'><p>"+$(this).attr('title')+"</p></div>");
+				var my_tooltip = $("#"+name+tagCounter);
+				
+				//Make sure there's a title attribiute we can extract text from
+				if($(this).attr("title") != "" && $(this).attr("title") != "undefined" ) {
+					
+					//Remove the text from the original attribute & make sure our tooltip fits withn the page
+					$(this).removeAttr("title").mouseover(function() {
+						my_tooltip.css({opacity:0.8, display:"none"}).delay(800).fadeIn(400);
+					}).mousemove(function(kmouse) {
+						var border_top = $(window).scrollTop();
+						var border_right = $(window).width();
+						var left_pos, top_pos, offset = 15;
+						
+						if(border_right - (offset * 2) >= my_tooltip.width() + kmouse.pageX) {
+							left_pos = kmouse.pageX+offset;
+						} else {
+							left_pos = border_right-my_tooltip.width()-offset;
+						}
+						if(border_top + (offset *2 )>= kmouse.pageY - my_tooltip.height()) {
+							top_pos = border_top + offset;
+						} else {
+							top_pos = kmouse.pageY-my_tooltip.height()-offset;
+						}
 
-			if($(this).attr("title") != "") { // checks if there is a title
+						my_tooltip.css({left:left_pos, top:top_pos});
 
-				$(this).removeAttr("title").mouseover(function() {
-					my_tooltip.css({opacity:0.8, display:"none"}).fadeIn(400);
-				}).mousemove(function(kmouse) {
-					my_tooltip.css({left:kmouse.pageX+15, top:kmouse.pageY+15});
-				}).mouseout(function(){
-					my_tooltip.fadeOut(400);
-				});
+					}).mouseout(function(){
+						my_tooltip.css({left:"-9999px"});
+					});	
 
-			}
-		});
+				}
+				
+				tagCounter++;
+			});
+		}
 	}
 
 	// State which tags and which style we'd like to apply to.
-	$(document).ready(function() {
-		 tooltip("h2","tooltip");
-		 tooltip("h3","tooltip");
-		 //tooltip("button","tooltip");
-		 //tooltip("canvas","tooltip");
-		 tooltip("span","tooltip");
-	});
-	
-	
+	 tooltip(["button","h2", "h3"],"tooltip");
+
 	
 	// Pre-load sound effects
 	GIDGET.sfx.load();
