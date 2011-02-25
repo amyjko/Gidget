@@ -33,7 +33,7 @@
 */
 
 body {
-	background: 	#snow; /* Color 0 */
+	background: 	white; /* Color 0 */
 	color: 			black;
 	font-family:	"Arial";
 	padding:		1em;
@@ -52,7 +52,7 @@ a {
 }
 
 #titleBar {
-	background:		#034E75; /* Color 1 */
+	background:		#5386c2; /* Color 1 */
 	color: 			white;
 
 	font-size:		medium;
@@ -72,7 +72,7 @@ a {
 }
 
 #content {
-	background:		#E5E6E5; /* Color 2 */
+	background:		#f5f5f5; /* Color 2 */
 	color:			black;
 	margin-left:	auto;
 	margin-right:	auto;
@@ -112,10 +112,10 @@ a {
 }
 
 #memory {
-	background:		#E4F0E0; /* Color 3 */
+	background:		#f0f0f0; /* Color 3 */
 	color:			black;
 	padding: 		1em;
-	border:			2px solid rgb(200,200,200);
+	border:			2px solid #a9a9a9;
 	border-radius: 	.5em;
 	
 	border-bottom-right-radius: 1em;
@@ -135,14 +135,14 @@ a {
 }
 
 #code {
-	background-color: #E4F0E0; /* Color 4*/
+	background-color: #f0f5f0; /* Color 4*/
 	color: 			black;
 	font-family: 	"Courier New";
 	font-weight: 	bold;
 	font-size: 		small;
 	width:			20em;
 	height:			18.5em;
-	border:			2px solid rgb(200,200,200);
+	border:			2px solid #a9a9a9;
 	padding: 		1em;
 
 	border-radius: 		1em 0 1em .5em;
@@ -150,13 +150,11 @@ a {
 }
 
 #code[contentEditable="false"] {
-/* 	background-color: rgb(42,33,28); */
 	overflow-x: 	auto;
 	word-wrap: break-word;
 }
 
 #code[contentEditable="true"] {
-/* 	background-color: black; */
 	color:			black;
 	overflow-x: 	auto;
 }
@@ -178,13 +176,13 @@ a {
 }
 
 #goals {
-	background-color: #E4F0E0; /* Color 3 */
+	background-color: #f0f0f0; /* Color 3 */
 	color:			black;
 	font-family: 	"Courier New";
 	font-weight: 	bold;
 	font-size: 		small;
 	width:			20em;
-	border:			2px solid rgb(200,200,200);
+	border:			2px solid #a9a9a9;
 	padding: 		1em;
 	
 	border-radius:		1em .5em 1em .5em;
@@ -260,7 +258,7 @@ textarea {
 	margin-top:		.5em;
 	min-height:		2em;
 	font-family: 	"Verdana";
-	border:			2px solid rgb(200,200,200);
+	border:			2px solid #a9a9a9;
 	border-radius: 	1em;
 	-moz-border-radius: 1em;
 }
@@ -399,7 +397,7 @@ table {
 
 
 .popup {
-	background:		aliceblue; /* Color 8 */
+	background:		#eff8f0; /* Color 8 */
 	font-family: 	"Arial";
 	border:			solid 2px black;
 	border-radius: 	.75em;
