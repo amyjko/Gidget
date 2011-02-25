@@ -1,5 +1,7 @@
 var SCENES = {
 
+	imagesRemaining: 0,
+
 	Sprite: function(url, x, y, width, height) {
 	
 		this.url = url;
@@ -8,8 +10,12 @@ var SCENES = {
 		this.width = width;
 		this.height = height;
 	
+		SCENES.imagesRemaining++;
+		
 		this.image = new Image();
-		this.image.onload = function () {};
+		this.image.onload = function () {
+			SCENES.imagesRemaining--;
+		};
 		this.image.src = url;
 
 	},
@@ -73,7 +79,24 @@ var SCENES = {
 		
 		};
 		
-		this.step = function(canvas, whenDone) {
+		this.previousWaiting = undefined;
+		
+		this.step = function(canvas, whenProgress, whenLoaded, whenDone) {
+
+			if(SCENES.imagesRemaining > 0) {
+
+				this.previousWaiting = true;
+				whenProgress.call();			
+				return;
+			
+			}
+			
+			if(this.previousWaiting === true) {
+			
+				this.previousWaiting = false;
+				whenLoaded.call();
+			
+			}
 
 			// What scene are we on?
 			var scene = this.scenes[this.currentScene];
@@ -111,12 +134,12 @@ var SCENES = {
 		
 		};
 		
-		this.play = function(canvas, whenDone) {
+		this.play = function(canvas, whenProgress, whenLoaded, whenDone) {
 		
 			this.sceneTimeElapsed = undefined;
 			this.currentScene = 0;
 			var thisMovie = this;
-			this.intervalID = setInterval(function() { thisMovie.step(canvas, whenDone); }, 40);
+			this.intervalID = setInterval(function() { thisMovie.step(canvas, whenProgress, whenLoaded, whenDone); }, 40);
 		
 		};
 	

@@ -16,6 +16,34 @@ function supportsLocalStorage() {
 
 $().ready(function() {
 
+	function playIntro() {
+
+		$('#loadingIntro').show();
+		var intro = GIDGET.createIntroduction();
+		var total = SCENES.imagesRemaining;
+		intro.play($('#introCanvas')[0], 
+			function() {
+			
+				var percent = (100 - Math.round(SCENES.imagesRemaining * 100 / total));
+				$('#loadingIntro .progress').width("" + percent + "%");
+			
+			},
+			function() {
+			
+				$('#loadingIntro').hide();
+				$('#intro').toggle();
+			
+			},
+			function() { 
+		
+				$('#intro').fadeTo(1000, 0.0, function() { $('#intro').hide(); });
+				$('#container').fadeTo(1000, 1.0);
+			
+			}
+		);
+	
+	}
+
 	// Check for both canvas and local storage support before continuing.
 	if(!supportsCanvas() || !supportsLocalStorage())
 		window.location.href = "unsupported.html";
@@ -94,10 +122,8 @@ $().ready(function() {
 			$('#debug').toggle();
 		}
 		else if(e.keyCode == 112) {
-		
-			$('#intro').toggle();
-			var intro = GIDGET.createIntroduction();
-			intro.play($('#introCanvas')[0], function() { $('#intro').toggle(); });
+
+			playIntro();		
 		
 		}
 	
@@ -113,9 +139,8 @@ $().ready(function() {
 
 	
 	$('#playIntro').click(function() {
-		$('#intro').toggle();
-		var intro = GIDGET.createIntroduction();
-		intro.play($('#introCanvas')[0], function() { $('#intro').toggle(); });
+	
+		playIntro();
 
 	});
 	
@@ -177,15 +202,8 @@ $().ready(function() {
 		localStorage.setItem('currentLevel', 'learnScan');
 		
 		$('#container').fadeTo(0, 0.0);
-		
-		$('#intro').toggle();
-		var intro = GIDGET.createIntroduction();
-		intro.play($('#introCanvas')[0], function() { 
-		
-			$('#intro').fadeTo(1000, 0.0, function() { $('#intro').hide(); });
-			$('#container').fadeTo(1000, 1.0);
-			
-		});
+
+		playIntro();		
 			
 	}
 

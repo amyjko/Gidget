@@ -484,3 +484,9 @@ table {
     padding:	0;
    
 }
+
+.progress {
+	margin-top: 1em;
+	background-color: gray;
+	height: 1em;
+}
