@@ -2,7 +2,7 @@ GIDGET.experiment = {
 
 	condition: Math.round(Math.random()) < 1 ? "control" : "male",	// control, male, female
 	
-	bonusPerLevel: 0.15,
+	bonusPerLevel: 0.25,
 	
 	isControl: function() {
 	
