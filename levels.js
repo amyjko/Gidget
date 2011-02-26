@@ -15,6 +15,10 @@ GIDGET.levels = {
 		
 		world.addGoal("scanned gidget");
 		
+		// ---- T I T L E --------
+		
+		world.title = "Scanner testing";
+		
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {

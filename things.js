@@ -110,6 +110,8 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 	this.grndColor = isDef(groundAtt[1]) ? groundAtt[1] : "rgb(124,57,10)";
 	this.grndBorder = isDef(groundAtt[2]) ? groundAtt[2] : 2;
 
+	// Set level name
+	this.title = "";
 	
 	// Remember the initial code
 	this.code = code;

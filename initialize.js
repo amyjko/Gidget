@@ -73,11 +73,10 @@ $().ready(function() {
 			if (localStorage.currentLevel === level) {
 				$('#levels').
 				append("<option selected=\"selected\">" + levelCount + ". " + level + "</option>").click(function() {
-				
+									
 					var world = ($(this).val()).replace(/[0-9]+.\s/g,'');
 					if(GIDGET.levels.hasOwnProperty(world))
 						GIDGET.ui.setLevel(world);
-
 				});
 			}
 			else {	
@@ -217,7 +216,10 @@ $().ready(function() {
 			}
 		}	
 	}
-
+	
+	// Set titlebar with level number and title (if there is one)
+	GIDGET.ui.showLevelInfo();
+	
 	// If we've written quit to local storage, the user has already quit, so we disable the UI.
 	if(localStorage.getItem('quit') !== null) {
 		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
@@ -226,6 +228,7 @@ $().ready(function() {
 	// Populate Learner Communication Box
 	GIDGET.ui.showExecutionControls();
 
+	// Update the bonus pay for MTURK
 	GIDGET.ui.updateBonus();
 	
 	//Targets a tag using jQuery and adding a div to it. It extracts the 'title' tag from the code and uses that as its text.

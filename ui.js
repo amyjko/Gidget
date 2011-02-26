@@ -93,7 +93,23 @@ GIDGET.ui = {
 		return count;
 	
 	},
-
+	
+	showLevelInfo: function() {
+		
+		// Get level number
+		var lvlNumber = 1;
+		for(var level in GIDGET.levels) {	
+			if(GIDGET.levels.hasOwnProperty(level)) {
+				if (localStorage.currentLevel === level) {
+					break;
+				}
+			}
+			lvlNumber++;
+		}	
+		
+		$('#levelTitle').append("Level " + lvlNumber + ". " + this.world.title);
+	},
+	
 	quit: function(message) {
 	
 		var level = localStorage.getItem('currentLevel');
@@ -416,7 +432,7 @@ GIDGET.ui = {
 	},
 
 	start: function() {
-	
+			
 		// This creates a new world, reset to its defaults.
 		this.reset();
 
