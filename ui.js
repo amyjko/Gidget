@@ -94,11 +94,11 @@ GIDGET.ui = {
 	
 	},
 
-	quit: function() {
+	quit: function(message) {
 	
 		var level = localStorage.getItem('currentLevel');
 
-		$('#quitResults').html("<p>Saving your achievements...").show();
+		$('#quitResults').html("<p>" + message + " Saving your achievements...").show();
 
 		function randomPassword(length) {
 		   chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -359,15 +359,15 @@ GIDGET.ui = {
 		if(isDef(nextLevel)) {
 		
 			this.setLevel(nextLevel);
+			this.showExecutionControls();
 		
 		}
 		else {
 		
-			alert("You beat all of the levels!");
+			this.quit("Congratulations! You beat all of the levels.");
 		
 		}
 		
-		this.showExecutionControls();
 	
 	},
 
