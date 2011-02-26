@@ -272,26 +272,28 @@ $().ready(function() {
 					
 					//Remove the text from the original attribute & make sure our tooltip fits withn the page
 					$(this).removeAttr("title").mouseover(function() {
-						my_tooltip.css({opacity:0.8, display:"none"}).delay(800).fadeIn(400);
+						my_tooltip.css({opacity:0.9, display:"none"}).delay(800).fadeIn(400);
 					}).mousemove(function(kmouse) {
 						var border_top = $(window).scrollTop();
 						var border_right = $(window).width();
 						var left_pos, top_pos, offset = 15;
 						
-						if(border_right - (offset * 2) >= my_tooltip.width() + kmouse.pageX) {
+						//Check to make sure X-coordinates fit within browser window & adjust accordingly
+						if(border_right <= my_tooltip.width() + kmouse.pageX)
+							left_pos = kmouse.pageX-offset-my_tooltip.width()-(offset*2);
+						else if(border_right - (offset * 2) > my_tooltip.width() + kmouse.pageX)
 							left_pos = kmouse.pageX+offset;
-						} else {
+						else
 							left_pos = border_right-my_tooltip.width()-offset;
-						}
-						if(border_top + (offset *2 )>= kmouse.pageY - my_tooltip.height()) {
+						//Check to make sure Y-coordinates fit within browser window & adjust accordingly
+						if(border_top + (offset *2 )>= kmouse.pageY - my_tooltip.height())
 							top_pos = border_top + offset;
-						} else {
+						else 
 							top_pos = kmouse.pageY-my_tooltip.height()-offset;
-						}
 
-						my_tooltip.css({left:left_pos, top:top_pos});
+						my_tooltip.css({left: left_pos, top:top_pos});
 
-					}).mouseout(function(){
+					}).mouseout(function() {
 						my_tooltip.css({left:"-9999px"});
 					});	
 
@@ -301,7 +303,7 @@ $().ready(function() {
 		}
 	}
 
-	// State which tags and which style we'd like to apply to.
+	// State which tags we'd like to have tooltips for.
 	 tooltip(["button","h2", "h3"],"tooltip");
 
 	
