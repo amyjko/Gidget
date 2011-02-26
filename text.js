@@ -145,7 +145,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Finished goto.";
 			
-		return "There's $results(nothing left to go to), so I'm going to skip the rest of this goto.";
+		return "There's $results(nothing left to go to), so I'm going on to the next step.";
 	
 	},
 
@@ -180,6 +180,7 @@ GIDGET.text = {
 	},
 
 	focus_success: function(name) {
+		GIDGET.sfx.play("focusIn");
 		if (GIDGET.experiment.isControl())
 			return "Focusing on $results@0(next result), " + name;
 			
@@ -220,6 +221,8 @@ GIDGET.text = {
 	},
 
 	ask_noObject: function() {
+		GIDGET.sfx.play("error");
+		
 		if (GIDGET.experiment.isControl())
 			return "Invalid ask syntax.";
 			
@@ -228,6 +231,8 @@ GIDGET.text = {
 	},
 
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
+		GIDGET.sfx.play("error");
+		
 		if (GIDGET.experiment.isControl())
 			return "Invalid <b>ask</b> syntax";
 			
@@ -244,6 +249,8 @@ GIDGET.text = {
 	},
 	
 	ask_unknownAction: function(name, action) {
+		GIDGET.sfx.play("error");
+		
 		if (GIDGET.experiment.isControl())
 			return "Invalid ask command.";
 			
@@ -316,22 +323,20 @@ GIDGET.text = {
 // *******************************************************
 	
 	editingDisabled: function() {
+		GIDGET.sfx.play("error");
 	
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Cannot modify code during program execution.";
 	
 		return "If you change my commands while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b>" + this.finishExecutingButtonLabel() + "</b> button.";
-	
 	},
 	
 	finishExecutingButtonLabel: function() {
-	
 		return "the end";
-	
 	},
 
 	noEnergy: function(){
-		
+	
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Energy depleted.";
 			
@@ -455,6 +460,7 @@ GIDGET.text = {
 
 
 	goal_checkSuccess: function() {
+		GIDGET.sfx.play("success");
 		
 		if (GIDGET.experiment.isControl())
 			return "$results(Results) detected, goal satisfied.";	
@@ -464,6 +470,7 @@ GIDGET.text = {
 	},
 	
 	goal_checkFailure: function(){
+		GIDGET.sfx.play("error");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
@@ -473,6 +480,7 @@ GIDGET.text = {
 	},
 	
 	goal_finalSuccess: function() {
+		GIDGET.sfx.play("successHigh");
 		
 		if (GIDGET.experiment.isControl())
 			return "<span class='runtimeReference'>All goals</span> satisfied. <div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level</button>";	
@@ -482,6 +490,7 @@ GIDGET.text = {
 	},
 	
 	goal_finalFailure: function(){
+		GIDGET.sfx.play("errorCritical");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>Some goals</span> failed.";

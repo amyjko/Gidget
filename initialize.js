@@ -14,6 +14,15 @@ function supportsLocalStorage() {
 
 }
 
+function hideToolTip() {
+	
+	$('div').each(function(index) {
+		if($(this).attr("class") == "tooltip") {
+			$(this).css({left:"-9999px"});
+		}
+	});
+}
+
 $().ready(function() {
 
 	function playIntro() {
@@ -236,27 +245,27 @@ $().ready(function() {
 	
 	// Populate Learner Communication Box
 	GIDGET.ui.setThought("<span class='smallfont'>(Ask Gidget to):</span><br />\n" +
-		"<button id='step' onclick='GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
-		"<button id='line' onclick='GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
-		"<button id='play' onclick='GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
-		"<button id='end'  onclick='GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
+		"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
+		"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
+		"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
+		"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
 		,0, "learner");
 
 	GIDGET.ui.updateBonus();
 	
 	
+	
+	
 	//Targets a tag using jQuery and adding a div to it. It extracts the 'title' tag from the code and uses that as its text.
 	function tooltip(target_items, name) {
-		
-		//Unique identifier for each class ID we're going to generate below.
-		var tagCounter = 0;
-	
+		var index = 0;
+
 		for(k = 0; k < target_items.length; k++) {
 			
  			$(target_items[k]).each(function() {
  				//Add a new div to hold the tooltip
-				$("body").append("<div class='"+name+"' id='"+name+tagCounter+"'><p>"+$(this).attr('title')+"</p></div>");
-				var my_tooltip = $("#"+name+tagCounter);
+				$("body").append("<div class='"+name+"' id='"+name+index+"'><p>"+$(this).attr('title')+"</p></div>");
+				var my_tooltip = $("#"+name+index);
 				
 				//Make sure there's a title attribiute we can extract text from
 				if($(this).attr("title") != "" && $(this).attr("title") != "undefined" ) {
@@ -287,9 +296,8 @@ $().ready(function() {
 					});	
 
 				}
-				
-				tagCounter++;
 			});
+			index++;
 		}
 	}
 
