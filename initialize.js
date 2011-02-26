@@ -102,6 +102,10 @@ $().ready(function() {
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
 
+		// Enable reset button
+		if (GIDGET.ui.didCodeChange($(this).html()))
+			$('#reset').attr('disabled', false);
+
 		GIDGET.ui.saveCurrentLevelCode();
 
 	}).
@@ -247,27 +251,28 @@ $().ready(function() {
 						var left_pos, top_pos, offset = 15;
 						
 						//Check to make sure X-coordinates fit within browser window & adjust accordingly
-						if(border_right <= my_tooltip.width() + kmouse.pageX)
-							left_pos = kmouse.pageX-offset-my_tooltip.width()-(offset*2);
-						else if(border_right - (offset * 2) > my_tooltip.width() + kmouse.pageX)
-							left_pos = kmouse.pageX+offset;
-						else
-							left_pos = border_right-my_tooltip.width()-offset;
+						if(border_right <= my_tooltip.width() + kmouse.pageX){
+							left_pos = kmouse.pageX-offset-my_tooltip.width()-(offset*2);}
+						else if(border_right - (offset * 2) > my_tooltip.width() + kmouse.pageX){
+							left_pos = kmouse.pageX+offset;}
+						else{
+							left_pos = border_right-my_tooltip.width()-offset;}
 						//Check to make sure Y-coordinates fit within browser window & adjust accordingly
-						if(border_top + (offset *2 )>= kmouse.pageY - my_tooltip.height())
-							top_pos = border_top + offset;
-						else 
+						if(border_top + (offset *2 )>= kmouse.pageY - my_tooltip.height()){
+							top_pos = border_top + offset;}
+						else {
 							top_pos = kmouse.pageY-my_tooltip.height()-offset;
+						}
 
 						my_tooltip.css({left: left_pos, top:top_pos});
 
 					}).mouseout(function() {
 						my_tooltip.css({left:"-9999px"});
 					});	
-
 				}
+				index++;
 			});
-			index++;
+			
 		}
 	}
 

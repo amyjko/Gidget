@@ -306,6 +306,9 @@ GIDGET.ui = {
 
 		// Initialize the Gidget code with the code provided in the level specification.
 		$('#code').html(this.gidgetCodeToHTML(this.world.code));
+		
+		// Initially disable the reset button
+		$('#reset').attr('disabled', true);
 
 		this.currentMissionText = -1;
 
@@ -315,6 +318,12 @@ GIDGET.ui = {
 		
 		this.saveCurrentLevelCode();
 	
+	},
+	
+	// Checks to see if current code has changed from the original code.
+	didCodeChange: function(currentCode) {
+		// String comparison doesn't work correctly without removing all whitespace characters
+		return (this.world.code.replace(/\s/g, "") != this.htmlToGidgetCode(currentCode).replace(/\s/g, ""));
 	},
 
 	showNextMissionText: function() {

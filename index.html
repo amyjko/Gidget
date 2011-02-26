@@ -29,17 +29,18 @@
 			<span id="titleRight">
 				<span><span id='passed'></span> levels passed | </span>
 				<span>total bonus <span id='bonus'>0.00</span> | </span>
-				<span title="Pressing this will prompt you if you want to quit the program and receive your MTurk code."><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title='Pressing this button will quit the game and give your MTurk code.'>Quit & receive MTurk code</button></span>
+				<span><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title='Pressing this button will quit the game and give you your MTurk code.'>Quit & receive MTurk code</button></span>
 			</span>
 		</div>
 		<div id='content'>
 			
 			<!-- LEFT PANEL -->
 			<div id='leftPanel'>
-				<h2 title="Instructional code where you can view and modify Gidget's instructional code.">code</h2>
+				<div>
+					<h2 title="Instructional code where you can view and modify Gidget's instructional code.">code</h2><span id='commandReset'><button id='reset' onclick='GIDGET.ui.startOver();' title="Pressing this will reset the code to its original state and restart the level.">restore original commands</button></span>
+				</div>
 				<div>
 					<div id='code' class='codeContainer' contentEditable='true'></div>
-					<span id='commandReset'><button id='reset' onclick='GIDGET.ui.startOver();' title="Pressing this will reset the code to its original state and restart the level.">reset level</button></span>
 					<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 				</div>			
 					

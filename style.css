@@ -226,6 +226,7 @@ h2 {
 	margin:			0em;
 	margin-bottom:	.5em;
 	margin-top:		1em;
+	display:		inline-block;
 }
 
 h3 {
@@ -427,9 +428,9 @@ table {
 */
 
 #commandReset {
-	position:	relative;
-	top:	-300px;
-	left:	215px;
+	float: right;
+	margin-top: 1em;
+	margin-right: 2em;	
 }
 
 
@@ -458,7 +459,6 @@ table {
 .smallfont{
 	font-size: small;
 }
-
 
 .tooltip {
 	background-color: white; /* Color 6 */
