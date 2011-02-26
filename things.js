@@ -224,8 +224,6 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 
 		thing.row = row;
 		thing.column = col;
-		
-		thing.energy -= 1;
 
 		this.grid[thing.row][thing.column].push(thing);
 	

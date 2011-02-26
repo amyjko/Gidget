@@ -340,8 +340,13 @@ GIDGET.Runtime = function(thing, world) {
 		// Restore the decisions to an empty array.
 		this.decisions = [];
 
-		// TODO: this is very preliminary.
-		this.thing.energy -= 1;
+		// Ask how much energy to deduct.
+		var deduction = step.cost(this);
+		
+		console.log("Deducting " + deduction + " from " + this.thing.name);
+
+		// Deduct the energy.
+		this.thing.energy -= deduction;
 
 		return decisions;
 		
@@ -406,6 +411,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: offset,
 			toString: function() { return "if " + this.offset; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {		
 
 				var results = runtime.peekResults();
@@ -439,6 +445,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			steps: steps,
 			toString: function() { return "when"; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {		
 			
 				// Add the rule to the thing's runtime's cognizant list of rules.
@@ -458,6 +465,7 @@ GIDGET.runtime = {
 			keyword: keyword,
 			name: name,
 			toString: function() { return "" + this.keyword.text + " " + this.name.text; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {		
 				
 				var results = runtime.peekResults();
@@ -518,6 +526,7 @@ GIDGET.runtime = {
 				return 'unknown ' + array + ']'; 
 				
 			},
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				var i;
@@ -556,6 +565,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: undefined,
 			toString: function() { return "scan " + this.offset; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -596,6 +606,7 @@ GIDGET.runtime = {
 			name: name,
 			offset: undefined,
 			toString: function() { return "name " + this.name.text; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -626,6 +637,11 @@ GIDGET.runtime = {
 			avoid: avoidToken,
 			offset: undefined,
 			toString: function() { return "go " + (isDef(this.avoid) ? "avoid " + this.avoid.text + " " : "") + this.offset; },
+			cost: function(runtime) { 
+			
+				return 1 + runtime.grabbed.length; 
+					
+			},
 			execute: function(runtime) {
 			
 				// If we haven't set the clock, set it.
@@ -878,6 +894,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: undefined,
 			toString: function() { return "analyze " + this.offset; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -913,6 +930,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: offset,
 			toString: function() { return "next " + this.offset; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -951,6 +969,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: undefined,
 			toString: function() { return "grab"; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -975,6 +994,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			offset: undefined,
 			toString: function() { return "drop"; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -1003,6 +1023,7 @@ GIDGET.runtime = {
 			property: property,
 			number: number,
 			toString: function() { return "" + this.keyword.text + " " + property.text + " " + (isDef(this.number) ? this.number : ""); },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				var result;
@@ -1045,6 +1066,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			name: name,
 			toString: function() { return "add " + this.name.text; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				var thing = new GIDGET.Thing(runtime.world, name.text, runtime.thing.row, runtime.thing.column, "rgb(250,255,255)", ["white"], {});
@@ -1064,6 +1086,7 @@ GIDGET.runtime = {
 			ast: ast,
 			representativeToken: representativeToken,
 			toString: function() { return "remove"; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				if(runtime.hasRecentResults()) {
@@ -1106,6 +1129,7 @@ GIDGET.runtime = {
 				return 'query ' + (scoped ? "on " : "") + "" + (isDef(this.name) ? this.name.text : '') + ' ' + cons; 				
 				
 			},
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				var scope = [];
@@ -1307,6 +1331,7 @@ GIDGET.runtime = {
 			ast: ast,
 			representativeToken: representativeToken,
 			toString: function() { return "scope"; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 		
 				if(runtime.hasRecentResults()) {
@@ -1333,6 +1358,7 @@ GIDGET.runtime = {
 			ast: ast,
 			representativeToken: representativeToken,
 			toString: function() { return "unscope"; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 	
 				runtime.addDecision(
@@ -1351,6 +1377,7 @@ GIDGET.runtime = {
 			representativeToken: representativeToken,
 			message: message,
 			toString: function() { return "say " + this.message; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 	
 				runtime.addDecision(
@@ -1369,6 +1396,7 @@ GIDGET.runtime = {
 			ast: ast,
 			representativeToken: representativeToken,
 			toString: function() { return "and"; },
+			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
 				var results1 = runtime.popResults();
@@ -1394,6 +1422,7 @@ GIDGET.runtime = {
 			arguments: arguments,
 			offset: undefined,
 			toString: function() { return "ask " + (isDef(this.action) ? this.action.text : "unspecified") + " offset " + this.offset; },
+			cost: function(runtime) { return 1; },
 			execute: function(runtime) {
 
 				var arguments = [];
