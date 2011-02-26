@@ -454,8 +454,14 @@ GIDGET.ui = {
 	},
 	
 	showExecutionControls: function() {
-	
-		GIDGET.ui.setThought("<span class='learnerSpeech'>Gidget, please execute...</span> <br>\n" +
+		
+		var message;	
+		if (GIDGET.experiment.condition)
+			message = "Tell Gidget to:";
+		else
+			message = "Gidget, please execute...";
+		
+		GIDGET.ui.setThought("<span id='learnerSpeech'>"+message+"</span> <br>\n" +
 			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1 step</button>\n" +
 			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1 line</button>\n"+
 			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all steps</button>\n" +
@@ -465,13 +471,29 @@ GIDGET.ui = {
 	},
 	
 	showLevelControls: function() {
-	
+
+		var message;	
+		if (GIDGET.experiment.condition)
+			message = "Tell Gidget to:";
+		else
+			message = "Gidget, let's...";
+			
 		GIDGET.ui.setThought(
-			"<span class='learnerSpeech'>Gidget, let's...</span> <br>" +
+			"<span id='learnerSpeech'>"+message+"</span> <br>" +
 			"<button onclick='GIDGET.ui.nextLevel()'>start the next mission!</button><br>" +
 			"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission!</button><br>", 
 			0, "learner");
 	
+	},
+	
+	modifyStylesForControl: function() {
+		$("body").append("<style type=\"text/css\">\n" +
+			"#gidgetSpeech{font-family: \"Courier New\", Courier, monospace;}\n" +
+			"#learnerSpeech{font-family: \"Courier New\", Courier, monospace;}\n" +
+			"#code{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
+			"#goals{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
+			"#memory{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
+			"</style>\n");
 	},
 	
 	createLearnerHTML: function(message) {	
@@ -479,7 +501,7 @@ GIDGET.ui = {
 		var image;
 		switch (GIDGET.experiment.condition) {
 			case "control": 
-		 		image = "unknown";
+		 		image = "satellite";
 		 		break;
 		 	case "female":
 		 		image = "female";
@@ -492,17 +514,30 @@ GIDGET.ui = {
 		 		break;
 		}
 		
-		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+		if (GIDGET.experiment.isControl()){
+			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 1em 0 .5em;' /></td><td>" + message + "</td></tr></table></div>";	
+		}
+		else {
+			return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+		}
 		
 	},
 
 	createThoughtHTML: function(message) { 
 		
-		// Control Image Hack
-		if (GIDGET.experiment.isControl())
+		// Control Image Hack & Control Font Style Change
+		if (GIDGET.experiment.isControl()){
 			this.world.gidget.runtime.state = "control";
-	
-		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span class='gidgetSpeech'>" + message + "</span></td></tr></table>";
+			this.modifyStylesForControl();
+		}
+			
+		if (GIDGET.experiment.isControl()){
+			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
+		}
+		else {
+			return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
+		}	
+		
 
 	},
 	

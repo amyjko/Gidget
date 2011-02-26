@@ -4,7 +4,7 @@
 	Interface: Arial
 	Speech/Communications: Verdana 
 	Code/Control_Communication: Courier New
-
+		*(#gidgetSpeech overridden in ui.js)
 
 	COLOR DEFINITIONS
 
@@ -23,14 +23,14 @@
 body {
 	background: 	white; /* Color 0 */
 	color: 			black;
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 	padding:		1em;
 	margin:			0em;
 }
 
 p {
 	color: 			white;
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -118,14 +118,14 @@ a {
 }
 
 .codeContainer {
-	font-family: 	"Courier New";
+	font-family: 	"Courier New", Courier, monospace;
 	font-size: 		small;
 }
 
 #code {
 	background-color: #f0f5f0; /* Color 4*/
 	color: 			black;
-	font-family: 	"Courier New";
+	font-family: 	"Courier New", Courier, monospace;
 	font-weight: 	bold;
 	font-size: 		small;
 	width:			20em;
@@ -133,8 +133,8 @@ a {
 	border:			2px solid #a9a9a9;
 	padding: 		1em;
 
-	border-radius: 		1em 0 1em .5em;
-	-moz-border-radius: 1em 0 1em .5em;
+	border-radius: 		1em .5em 1em .5em;
+	-moz-border-radius: 1em .5em 1em .5em;
 }
 
 #code[contentEditable="false"] {
@@ -166,7 +166,7 @@ a {
 #goals {
 	background-color: #f0f0f0; /* Color 3 */
 	color:			black;
-	font-family: 	"Courier New";
+	font-family: 	"Courier New", Courier, monospace;
 	font-weight: 	bold;
 	font-size: 		small;
 	width:			20em;
@@ -178,28 +178,28 @@ a {
 }
 
 .goal {
-	font-family: 	"Courier New";
+	font-family: 	"Courier New", Courier, monospace;
 	font-size:		small;
 	color: 			black;
 	font-weight:	bold;
 }
 
 .success {
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 	font-size:		10pt;
 	margin-left:	1em;
 	color:			green;
 }
 
 .failure {
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 	font-size:		10pt;
 	margin-left:	1em;
 	color:			red;
 }
 
 h1 {
-	font-family: 	"Arial";
+	font-family: 	Arial, Helvetica, sans-serif;
 	text-transform: lowercase;
 	font-size: 		x-large;
 	margin:			0em;
@@ -208,7 +208,7 @@ h1 {
 }
 
 h2 {
-	font-family: 	"Arial";
+	font-family: 	Arial, Helvetica, sans-serif;
 	text-transform: lowercase;
 	font-size: 		large;
 	margin:			0em;
@@ -218,14 +218,14 @@ h2 {
 }
 
 h3 {
-	font-family: 	"Verdana";
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
 	text-transform: lowercase;
 	font-size: 		small;
 	margin:			0em;
 }
 
 textarea {
-	font-family: 	monospace;
+	font-family: 	"Courier New", Courier, monospace;
 	font-size: 		medium;
 	padding:		1em;
 	margin: 		0em;
@@ -240,22 +240,32 @@ textarea {
 	text-align: 	left;
 }
 
-
 .thoughtBubbleThing {
 	background-color: white; /* Color 6 */
 	color:			black;
 	padding:		.25em;
 	margin-top:		.5em;
 	min-height:		2em;
-	font-family: 	"Verdana";
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
 	border:			2px solid #a9a9a9;
 	border-radius: 	1em;
 	-moz-border-radius: 1em;
 }
 
+.thoughtBubbleControl {
+	background-color: #f0f0f0; /* Color 6b */
+	padding:		.25em;
+	margin-top:		.5em;
+	min-height:		2em;
+	font-family: 	"Courier New", Courier, monospace;
+	border:			2px solid #a9a9a9;
+	border-radius: 	.25em;
+	-moz-border-radius: .25em;
+}
+
 .thoughtBubbleThing p {
 	color:				black;
-	font-family: 		"Verdana";
+	font-family: 		Verdana, Arial, Helvetica, sans-serif;
 	font-size:			11pt;
 }
 
@@ -272,15 +282,15 @@ textarea {
 	margin-top:	1em;
 }
 
-.learnerSpeech {
+#learnerSpeech {
 	color:				black;
-	font-family: 		"Verdana";
+	font-family: 		Verdana, Arial, Helvetica, sans-serif;
 	font-size:			small;		
 }
 
-.gidgetSpeech {
+#gidgetSpeech {
 	color:				black;
-	font-family: 		"Verdana";
+	font-family: 		Verdana, Arial, Helvetica, sans-serif;
 	font-size:			11.5pt;	
 }
 
@@ -332,7 +342,7 @@ table {
 }
 
 .thingBox {
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 	font-size:		9pt;
 	float:			left;
 	text-align:		center;
@@ -341,7 +351,7 @@ table {
 }
 
 .bracket {
-	font-family:	"Arial";
+	font-family:	Arial, Helvetica, sans-serif;
 	font-size:		2.75em;
 	color:			black;
 	float:			left;
@@ -401,7 +411,7 @@ table {
 }
 
 #missionText {
-	font-family: 	"Verdana";
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
 	padding-bottom:	1em;
 	text-align: 	left;
 }
@@ -424,8 +434,8 @@ table {
 
 
 .popup {
-	background:		#eff8f0; /* Color 8 */
-	font-family: 	"Arial";
+	background:		#f0f0f0; /* Color 8 */
+	font-family: 	Arial, Helvetica, sans-serif;
 	border:			solid 2px black;
 	border-radius: 	.75em;
 	-moz-border-radius: .75em;
@@ -503,7 +513,7 @@ table {
 .tooltip p {
     background-color:	white;
     color:		black;
-    font-family:"Arial";
+    font-family:Arial, Helvetica, sans-serif;
     margin:		0;
     padding:	0;
    
