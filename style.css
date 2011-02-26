@@ -18,18 +18,6 @@
 	Color 7: Text Highlight
 	Color 8: QUIT & DEBUG Box
 
-	Pastel Palette:
-	#cec, #ccf, azure, snow, honeydew, white, white, #fcc, aliceblue
-
-	I Demand a Pancake Palette:
-	594F4F, 547980, 45ADA8, 9DE0AD, E5FCC2, white, white, *, *, *
-	
-	Japan 9 Palette:
-	1A1F1E, 6CBDB5, C8D6BF, 93CCC6, E3DFBA
-	
-	Interfaced:
-	EBE4DD, 034E75, 6EA3AC, EBE4DD, EBE4DD, EBE4DD, 
-
 */
 
 body {
@@ -161,8 +149,8 @@ a {
 
 #goalBox {
 	background-color: #fcc; /* Color 7 */
-	width:100%;
-	padding:.2em;
+	width:		100%;
+	padding:	.2em;
 	padding-left:0em;
 }
 
@@ -252,7 +240,8 @@ textarea {
 	text-align: 	left;
 }
 
-.thoughtBubble {
+
+.thoughtBubbleThing {
 	background-color: white; /* Color 6 */
 	color:			black;
 	padding:		.25em;
@@ -262,6 +251,66 @@ textarea {
 	border:			2px solid #a9a9a9;
 	border-radius: 	1em;
 	-moz-border-radius: 1em;
+}
+
+.thoughtBubbleThing p {
+	color:				black;
+	font-family: 		"Verdana";
+	font-size:			11pt;
+}
+
+.thoughtBubbleCommunication {
+	background-color:	white; /* Color 6 */
+	padding:			1em 1.5em 1em 1.5em;
+	border:				2px solid #a9a9a9;
+	border-radius: 		1em;
+	-moz-border-radius: 1em;
+	width: 100%;
+}
+
+.thoughtBubbleCommunication button {
+	margin-top:	1em;
+}
+
+.learnerSpeech {
+	color:				black;
+	font-family: 		"Verdana";
+	font-size:			small;		
+}
+
+.gidgetSpeech {
+	color:				black;
+	font-family: 		"Verdana";
+	font-size:			11.5pt;	
+}
+
+img.thoughtFloat{
+	position: relative;
+	left: 34px;
+	top: -2em;
+}
+
+.thoughtTable {
+	margin:		0em;
+	padding:	.5em .5em .5em 0;
+}
+
+.thoughtTable td {
+	text-align: 	left;
+	vertical-align: top;
+	margin:			0em;
+}
+
+.thoughtTable img {
+	padding-right:  1em; 
+	padding-top:	1em;
+}
+
+
+
+table {
+	padding: 0em;
+	margin: 0em;
 }
 
 #thingThought {
@@ -356,29 +405,6 @@ textarea {
 	padding-bottom:	1em;
 	text-align: 	left;
 }
-
-.thoughtBubble p {
-	font-family: 	"Verdana";
-	color:			black;
-}
-
-.thoughtTable td {
-	text-align: 	left;
-	vertical-align: top;
-	color:			black;
-	padding:		.5em;
-	margin:			0em;
-}
-
-.thoughtTable {
-	margin:			0em;
-}
-
-table {
-	padding: 0em;
-	margin: 0em;
-}
-
 
 .introBox {
 	background-color: white;
@@ -487,8 +513,4 @@ table {
 	margin-top: 1em;
 	background-color: gray;
 	height: 1em;
-}
-
-.thoughtBubble button {
-	margin-top:	1em;
 }

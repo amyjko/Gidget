@@ -455,7 +455,7 @@ GIDGET.ui = {
 	
 	showExecutionControls: function() {
 	
-		GIDGET.ui.setThought("<span style='font-size: small'>Ask Gidget to execute...</span> <br>\n" +
+		GIDGET.ui.setThought("<span class='learnerSpeech'>Gidget, please execute...</span> <br>\n" +
 			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1 step</button>\n" +
 			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1 line</button>\n"+
 			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all steps</button>\n" +
@@ -467,9 +467,9 @@ GIDGET.ui = {
 	showLevelControls: function() {
 	
 		GIDGET.ui.setThought(
-			"<span style='font-size: small'>Ask Gidget to...</span> <br>" +
-			"<button onclick='GIDGET.ui.nextLevel()'>start the next mission</button><br>" +
-			"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission</button><br>", 
+			"<span class='learnerSpeech'>Gidget, let's...</span> <br>" +
+			"<button onclick='GIDGET.ui.nextLevel()'>start the next mission!</button><br>" +
+			"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission!</button><br>", 
 			0, "learner");
 	
 	},
@@ -492,7 +492,7 @@ GIDGET.ui = {
 		 		break;
 		}
 		
-		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' /></td><td>" + message + "</td></tr></table>";	
+		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
 		
 	},
 
@@ -502,7 +502,7 @@ GIDGET.ui = {
 		if (GIDGET.experiment.isControl())
 			this.world.gidget.runtime.state = "control";
 	
-		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' /></td><td>" + message + "</td></tr></table>";
+		return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span class='gidgetSpeech'>" + message + "</span></td></tr></table>";
 
 	},
 	
