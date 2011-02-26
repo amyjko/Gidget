@@ -254,7 +254,7 @@ textarea {
 .thoughtBubble {
 	background-color: white; /* Color 6 */
 	color:			black;
-	padding:		1em;
+	padding:		.25em;
 	margin-top:		.5em;
 	min-height:		2em;
 	font-family: 	"Verdana";
@@ -487,4 +487,8 @@ table {
 	margin-top: 1em;
 	background-color: gray;
 	height: 1em;
+}
+
+.thoughtBubble button {
+	margin-top:	1em;
 }

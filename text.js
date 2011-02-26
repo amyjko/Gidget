@@ -483,9 +483,9 @@ GIDGET.text = {
 		GIDGET.sfx.play("successHigh");
 		
 		if (GIDGET.experiment.isControl())
-			return "<span class='runtimeReference'>All goals</span> satisfied. <div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level</button>";	
+			return "<span class='runtimeReference'>All goals</span> satisfied.";	
 		
-		return "I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!<div style='text-align: right'><button onclick='GIDGET.ui.nextLevel()'>next level!</button></div>";
+		return "I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!";
 
 	},
 	

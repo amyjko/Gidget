@@ -176,31 +176,7 @@ $().ready(function() {
 	
 
 	$('#gotoNextLevel').click(function() {
-		
-		var found = false;
-		var nextLevel = undefined;
-		for(var level in GIDGET.levels) {
-			if(GIDGET.levels.hasOwnProperty(level)) {
-				if(found) {
-					nextLevel = level;
-					break;
-				}
-				else if(level === localStorage.currentLevel) {
-					found = true;
-				}
-			}
-		}
-
-		if(isDef(nextLevel)) {
-		
-			GIDGET.ui.setLevel(nextLevel);
-		
-		}
-		else {
-		
-			alert("There aren't any more levels!");
-		
-		}
+		GIDGET.ui.nextLevel();
 	});
 
 	var test = localStorage;
@@ -244,17 +220,9 @@ $().ready(function() {
 	}
 	
 	// Populate Learner Communication Box
-	GIDGET.ui.setThought("<span class='smallfont'>(Ask Gidget to):</span><br />\n" +
-		"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>step</button>\n" +
-		"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>line</button>\n"+
-		"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>play</button>\n" +
-		"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>end</button>\n"
-		,0, "learner");
+	GIDGET.ui.showExecutionControls();
 
 	GIDGET.ui.updateBonus();
-	
-	
-	
 	
 	//Targets a tag using jQuery and adding a div to it. It extracts the 'title' tag from the code and uses that as its text.
 	function tooltip(target_items, name) {

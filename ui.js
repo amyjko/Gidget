@@ -366,6 +366,8 @@ GIDGET.ui = {
 			alert("You beat all of the levels!");
 		
 		}
+		
+		this.showExecutionControls();
 	
 	},
 
@@ -426,6 +428,27 @@ GIDGET.ui = {
 
 	},
 	
+	showExecutionControls: function() {
+	
+		GIDGET.ui.setThought("<span style='font-size: small'>Ask Gidget to execute...</span> <br>\n" +
+			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1 step</button>\n" +
+			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1 line</button>\n"+
+			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all steps</button>\n" +
+			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to the end</button>\n",
+			0, "learner");
+	
+	},
+	
+	showLevelControls: function() {
+	
+		GIDGET.ui.setThought(
+			"<span style='font-size: small'>Ask Gidget to...</span> <br>" +
+			"<button onclick='GIDGET.ui.nextLevel()'>start the next mission</button><br>" +
+			"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission</button><br>", 
+			0, "learner");
+	
+	},
+	
 	createLearnerHTML: function(message) {	
 		
 		var image;
@@ -447,7 +470,6 @@ GIDGET.ui = {
 		return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' /></td><td>" + message + "</td></tr></table>";	
 		
 	},
-
 
 	createThoughtHTML: function(message) { 
 		
@@ -683,6 +705,8 @@ GIDGET.ui = {
 				}
 
 				this.enableExecutionButtons(true);
+				
+				this.showLevelControls();
 
 				// In case we're playing, return without invoking another step.
 				return;
