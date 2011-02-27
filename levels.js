@@ -17,7 +17,7 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.title = "Scanner testing";
+		world.addTitle("Scanner testing");
 		
 		// ---- M I S S I O N ----
 		

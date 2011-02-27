@@ -95,19 +95,9 @@ GIDGET.ui = {
 	},
 	
 	showLevelInfo: function() {
-		
-		// Get level number
-		var lvlNumber = 1;
-		for(var level in GIDGET.levels) {	
-			if(GIDGET.levels.hasOwnProperty(level)) {
-				if (localStorage.currentLevel === level) {
-					break;
-				}
-			}
-			lvlNumber++;
-		}	
-		
-		$('#levelTitle').append("Level " + lvlNumber + ". " + this.world.title);
+		if (!isDef(this.world.levelNumber))
+			this.world.addLevelNumber();
+		$('#levelTitle').html("Level " + this.world.levelNumber + ". " + this.world.levelTitle);
 	},
 	
 	quit: function(message) {
@@ -333,6 +323,9 @@ GIDGET.ui = {
 		this.reset();
 		
 		this.saveCurrentLevelCode();
+		
+		// Set titlebar with level number and title (if there is one)
+		this.showLevelInfo();		
 	
 	},
 	

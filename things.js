@@ -111,7 +111,9 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 	this.grndBorder = isDef(groundAtt[2]) ? groundAtt[2] : 2;
 
 	// Set level name
-	this.title = "";
+	this.levelTitle = "";
+	this.levelNumber;
+	this.numberOfLevels;
 	
 	// Remember the initial code
 	this.code = code;
@@ -138,6 +140,22 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 		}
 	}
 
+	this.addTitle = function (title) {
+		this.levelTitle = isDef(title) ? title : "";
+		this.addLevelNumber();	// Also updates level number
+	}
+
+	this.addLevelNumber = function() {
+		// Get level number
+		var lvlNumber,index = 1;
+		for(var level in GIDGET.levels) {	
+			if(GIDGET.levels.hasOwnProperty(level) && localStorage.currentLevel === level) {
+				this.levelNumber = index;
+			}
+			index++;
+		}
+		this.numberOfLevels = index-1;
+	}
 
 	// Add a paragraph of text and an associated emotional state for it.
 	this.addMissionText = function(state, text) {

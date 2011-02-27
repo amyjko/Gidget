@@ -179,7 +179,12 @@ $().ready(function() {
 	
 
 	$('#gotoNextLevel').click(function() {
-		GIDGET.ui.nextLevel();
+		if (!isDef(GIDGET.ui.world.levelNumber) || !isDef(GIDGET.ui.world.numberOfLevels))
+			GIDGET.ui.world.addLevelNumber();
+		if (GIDGET.ui.world.levelNumber < GIDGET.ui.world.numberOfLevels) 
+			GIDGET.ui.nextLevel();
+		else
+			alert("There are no more levels to go to!");
 	});
 
 	var test = localStorage;
@@ -216,9 +221,6 @@ $().ready(function() {
 			}
 		}	
 	}
-	
-	// Set titlebar with level number and title (if there is one)
-	GIDGET.ui.showLevelInfo();
 	
 	// If we've written quit to local storage, the user has already quit, so we disable the UI.
 	if(localStorage.getItem('quit') !== null) {
