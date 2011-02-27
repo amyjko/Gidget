@@ -22,8 +22,8 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "Hark!");
-			world.addMissionText("control", "This be a test of control gidget!");
+			world.addMissionText("sad", "Hark!");
+			world.addMissionText("sad", "This be a test of control gidget!");
 		}		
 		else {
 			world.addMissionText("sad", "Ouch, I think that fall scrambled some of my circuits! Preliminary diagnostics report that my goal generator is intact, but that my algorithm generator (problem solving chip) is damaged!");
@@ -60,7 +60,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "I have to report on what is in this area too. How did I do it last time? This is so hard for me!");
@@ -101,7 +101,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "I think I am getting better at this! I wonder what is in this area?");
@@ -138,7 +138,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "Okay! My scanner seems to be working.");
@@ -174,7 +174,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "I have strayed too far from my bucket. I need to get back to it but I don't remember the way!");
@@ -241,7 +241,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "I think I figured out how to collect the goop, but now I need to start moving it to where it need to go! Ohhh...I think I'm close, but I can't figure out how to do it right...");
@@ -290,7 +290,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There's more goop and animals here. I should clean it up so that the crews can work on decontaminating this area, but I keep forgetting how!");
@@ -336,7 +336,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There's more goop and animals here. I should clean up the goop and rescue the animals . I think I remember how to do it with less commands, but can't get it quite right!");
@@ -377,7 +377,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There might be something wrong with that dog over there...let's makes sure it's okay!");
@@ -417,7 +417,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "Oh no! I'm detecting one of these these cats are infected by the goop. I'll have to separate it from the rest!");
@@ -461,7 +461,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "Oh no! I'm detecting many of these birds are infected by the goop. I'll have to separate them from the rest!");
@@ -511,7 +511,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "It looks like I'm running low on power to complete the task. How can I use the resources to recharge myself?");
@@ -558,7 +558,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There's something blocking my path to the goop! I need to navigate around it.");
@@ -618,7 +618,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There's new kind of goops here which are keeping me from getting the goop! I need to navigate around them.");
@@ -694,7 +694,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "There's something after me! I have to collect all the rocks and make sure it doesn't grab me first!");
@@ -744,7 +744,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "");
@@ -849,7 +849,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "");
@@ -903,7 +903,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "");
@@ -988,7 +988,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "");
@@ -1071,7 +1071,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "Oh no! It seems like there are phantom gulls that can go through walls to get me! I'm so scared!");
@@ -1166,7 +1166,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "Looks like I have a new friend!");
@@ -1205,8 +1205,7 @@ GIDGET.levels = {
 			"goto bucket\n" +
 			"drop goops";
 		
-		var world = new GIDGET.World([10,10], [1,8], ["grass","green", 1], code);
-		world.gidget.setEnergy(1000);
+		var world = new GIDGET.World([10,10], [1,8, 300], ["grass","green", 1], code);
 			
 		// ---- G O A L S --------
 		
@@ -1215,7 +1214,7 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("control", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
 		}		
 		else {
 			world.addMissionText("sad", "");
@@ -1227,12 +1226,12 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			raise : new GIDGET.Action([],
-				"raise wall1 height\n" +
-				"lower wall2 height"
+				"raise tree01 height\n" +
+				"lower tree02 height"
 				),
 			lower : new GIDGET.Action([],
-				"lower wall1 height\n" +
-				"raise wall2 height"
+				"lower tree01 height\n" +
+				"raise tree02 height"
 				)
 			}
 		);
@@ -1242,27 +1241,27 @@ GIDGET.levels = {
 
 		
 		var wall;
-		wall = new GIDGET.Thing(world, "wall1", 3, 0, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 4, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 5, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 6, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 7, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 8, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 0, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 1, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 2, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 3, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 4, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 5, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 6, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 7, "black", [], {}); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree01", 3, 8, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "tree01", 3, 9, "black", [], {}); wall.labeled = false;
 
-		wall = new GIDGET.Thing(world, "tree01", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "tree02", 8, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 7, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 8, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 8, 9, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 7, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 8, "black", [], {}); wall.setLevel(2); wall.labeled = false;
+		wall = new GIDGET.Thing(world, "tree02", 8, 9, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 
 		// -----------------------	
 

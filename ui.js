@@ -16,17 +16,21 @@ GIDGET.ui = {
 	
 	hasImage: function(name, state) {
 	
+		if (name == "gidget") {
+			return this.images.hasOwnProperty("control." + state) && this.images["control." + state] !== false;
+		}
 		return this.images.hasOwnProperty(name + "." + state) && this.images[name + "." + state] !== false;
 	
 	},
 	
 	getImage: function(name, state) {
-	
+		
 		// Set Gidget's image for Control Condition
+		var label;
 		if ((name === "gidget") && (GIDGET.experiment.isControl()))
-			state = "control";
-	
-		var label = name + "." + state;
+			label = "control." + state;
+		else
+			label = name + "." + state;
 	
 		// If this has already been checked, return what's there.
 		if(this.images.hasOwnProperty(label))
@@ -450,7 +454,7 @@ GIDGET.ui = {
 		
 		var message;	
 		if (GIDGET.experiment.condition)
-			message = "Tell Gidget to:";
+			message = "Tell Gidget to execute:";
 		else
 			message = "Gidget, please execute...";
 		
@@ -464,18 +468,24 @@ GIDGET.ui = {
 	},
 	
 	showLevelControls: function() {
-
 		var message;	
-		if (GIDGET.experiment.condition)
+		if (GIDGET.experiment.isControl())
 			message = "Tell Gidget to:";
 		else
 			message = "Gidget, let's...";
-			
-		GIDGET.ui.setThought(
-			"<span id='learnerSpeech'>"+message+"</span> <br>" +
-			"<button onclick='GIDGET.ui.nextLevel()'>start the next mission!</button><br>" +
-			"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission!</button><br>", 
-			0, "learner");
+		
+		if (this.world.gidget.runtime.state == "sad") {
+			GIDGET.ui.setThought(
+				"<span id='learnerSpeech'>"+message+"</span> <br>" +
+				"<button onclick='GIDGET.ui.showExecutionControls(); this.currentMissionText = -1; this.showNextMissionText();'>retry this mission!</button><br>", 
+				0, "learner");
+		} else {
+			GIDGET.ui.setThought(
+				"<span id='learnerSpeech'>"+message+"</span> <br>" +
+				"<button onclick='GIDGET.ui.nextLevel()'>start the next mission!</button><br>" +
+				"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission!</button><br>", 
+				0, "learner");
+		}
 	
 	},
 	
@@ -493,17 +503,14 @@ GIDGET.ui = {
 		
 		var image;
 		switch (GIDGET.experiment.condition) {
-			case "control": 
+			case "control":
 		 		image = "satellite";
 		 		break;
 		 	case "female":
 		 		image = "female";
 		 		break;
-		 	case "male":
-		 		image = "male";
-		 		break;
 		 	default:
-		 		image = "female";
+		 		image = "male";
 		 		break;
 		}
 		
@@ -518,17 +525,20 @@ GIDGET.ui = {
 
 	createThoughtHTML: function(message) { 
 		
-		// Control Image Hack & Control Font Style Change
+		var gidgetImg;
+		// If control condition, change interface styling
 		if (GIDGET.experiment.isControl()){
-			this.world.gidget.runtime.state = "control";
+			gidgetImg = "media/control.";
 			this.modifyStylesForControl();
+		} else {
+			gidgetImg = "media/gidget.";
 		}
 			
 		if (GIDGET.experiment.isControl()){
-			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
+			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
 		}
 		else {
-			return "<table class='thoughtTable'><tr><td><img src='media/gidget." + this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
+			return "<table class='thoughtTable'><tr><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
 		}	
 		
 
@@ -915,6 +925,8 @@ GIDGET.ui = {
 		// don't test the goals.
 		if(this.world.gidget.energy <= 0) {
 			
+			this.world.gidget.runtime.state = "sad";
+			this.showLevelControls();
 			this.visualizeDecision(GIDGET.text.noEnergy(), true);
 		
 		}
@@ -1067,7 +1079,7 @@ GIDGET.ui = {
 		function thingToHTML(thing) {
 		
 			var name = thing.name;
-				
+
 			var thingBox = $('<div class="thingBox" title="This is a '+ name +'."></div>');
 			var thingImage = $("<img src='media/" + (GIDGET.ui.hasImage(name, thing.runtime.state) ? name : "unknown") + "." + thing.runtime.state + ".png' class='thing' />");
 			var thingLabel = $("<div class='thingLabel'>" + name + "</div>");
