@@ -14,6 +14,7 @@ GIDGET.sfx = {
 
 	// Preload all the sounds before using the play() function.
 	load: function() {
+		// Action Sounds
 		this.analyze 	= new GIDGET.sound("analyze");
 		this.drop 		= new GIDGET.sound("drop");
 		this.grab 		= new GIDGET.sound("grab");
@@ -21,13 +22,17 @@ GIDGET.sfx = {
 		this.scan 		= new GIDGET.sound("scan");
 		this.focusIn 	= new GIDGET.sound("focusIn");
 		
-		this.error 			= new GIDGET.sound("error2");
-		this.errorCritical 	= new GIDGET.sound("error3");
-		this.success 		= new GIDGET.sound("success1");
-		this.successHigh 	= new GIDGET.sound("success2");
+		// Goal Evaluation Sounds
+		this.goal_checkFailure	= new GIDGET.sound("goal_checkFailure");
+		this.goal_finalSuccess 	= new GIDGET.sound("goal_finalSuccess");
+		this.goal_checkSuccess 	= new GIDGET.sound("goal_checkSuccess");
+		this.goal_finalFailure 	= new GIDGET.sound("goal_finalFailure");
 		
+		// Event Sounds
 		this.energyLow		= new GIDGET.sound("lowEnergy");
-		this.parserError	= new GIDGET.sound("sad1");
+		this.error			= new GIDGET.sound("error");
+		this.parserErrorExp	= new GIDGET.sound("parserErrorExp");
+		this.parserErrorCtrl= new GIDGET.sound("parserErrorCtrl");
 		
 	},
 
@@ -47,17 +52,21 @@ GIDGET.sfx = {
 								break;
 				case "focusIn":	this.focusIn.play();
 								break;
-				case "error":	this.error.play();
+				case "goal_checkFailure": this.goal_checkFailure.play();
 								break;
-				case "errorCritical":	this.errorCritical.play();
+				case "goal_finalSuccess": this.goal_finalSuccess.play();
 								break;
-				case "success":	this.success.play();
+				case "goal_checkSuccess": this.goal_checkSuccess.goalPlus();
 								break;
-				case "successHigh":	this.successHigh.play();
+				case "goal_finalFailure": this.goal_finalFailure.play();
 								break;		
 				case "energyLow":	this.energyLow.play();
 								break;
-				case "parserError":	this.parserError.play();
+				case "error":	this.error.play();
+								break;
+				case "parserErrorExp":	this.parserErrorExp.play();
+								break;
+				case "parserErrorCtrl":	this.parserErrorCtrl.play();
 								break;
 				default:		console.error("An invalid sound, "+ command +", was specified to play.");
 								break;

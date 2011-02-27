@@ -461,7 +461,7 @@ GIDGET.text = {
 
 
 	goal_checkSuccess: function() {
-		GIDGET.sfx.play("success");
+		GIDGET.sfx.play("goal_checkSuccess");
 		
 		if (GIDGET.experiment.isControl())
 			return "$results(Results) detected, goal satisfied.";	
@@ -471,7 +471,7 @@ GIDGET.text = {
 	},
 	
 	goal_checkFailure: function(){
-		GIDGET.sfx.play("error");
+		GIDGET.sfx.play("goal_checkFailure");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
@@ -481,7 +481,7 @@ GIDGET.text = {
 	},
 	
 	goal_finalSuccess: function() {
-		GIDGET.sfx.play("successHigh");
+		GIDGET.sfx.play("goal_finalSuccess");
 		
 		if (GIDGET.experiment.isControl())
 			return "<span class='runtimeReference'>All goals</span> satisfied.";	
@@ -491,7 +491,7 @@ GIDGET.text = {
 	},
 	
 	goal_finalFailure: function(){
-		GIDGET.sfx.play("errorCritical");
+		GIDGET.sfx.play("goal_finalFailure");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>Some goals</span> failed.";
@@ -507,223 +507,223 @@ GIDGET.text = {
 
 		
 	parser_unrecognizedCommand: function(token) {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command.";
-	
-		return "" + token + " isn't one of the commands I know.";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "" + token + " isn't one of the commands I know.";
+		}
 	},
 
 	parser_noCommandAfterComma: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing command after comma.";
-		
-		return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
+		}
 	},
 		
 	parser_missingThingToName: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNATX ERROR: Missing thing to name. State thing to name.";
-		
-		return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
+		}
 	},
 		
 	parser_missingName: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing new name. State new name.";
-		
-		return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
+		}
 	},
 		
 	parser_missingThingToScan: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to scan. State thing to scan.";
-		
-		return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
+		}
 	},
 		
 	parser_missingThingToGoto: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to goto. State thing to goto.";
-		
-		return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
+		}
 	},
 		
 	parser_missingThingToAvoid: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to avoid. State thing to avoid.";
-		
-		return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
+		}	
 	},
 		
 	parser_missingThingToAnalyze: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to analyze. State thing to analyze.";
-		
-		return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
+		}
 	},
 
 	parser_missingThingToAsk: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to ask. State thing to ask.";
-		
-		return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
+		}
 	},
 
 	parser_missingTo: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between ask command and thing.";
-		
-		return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
+		}	
 	},
 
 	parser_missingAction: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing action. State action for thing to do.";
-		
-		return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
+		}
 	},
 
 	parser_missingThingToGrab: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to grab. State thing to grab.";
-		
-		return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
+		}
 	},
 
 	parser_missingThingToDrop: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to drop. State thing to drop.";
-		
-		return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
+		}
 	},
 		
 	parser_missingPredicate: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: ";
-		
-		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+		}
 	},
 		
 	parser_missingConditionalComma: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: ";
-		
-		return "I only know what to do when there's a comma after the test of an if.";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I only know what to do when there's a comma after the test of an if.";
+		}
 	},
 		
 	parser_missingThingToModify: function(keyword) {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: ";
-		
-		return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
+		}
 	},
 		
 	parser_missingThingToAdd: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to add from map. State thing to add.";
-		
-		return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
+		}
 	},
 				
 	parser_missingThingToRemove: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to remove from map. State thing to remove.";
-		
-		return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
+		}			
 	},
 		
 	parser_missingAndPredicate: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to check. State thing to check.";
-		
-		return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+		}
 	},
 	
 	parser_missingTag: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing tag of thing to check. State the tag to check.";
-		
-		return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
+		}
 	},
 	
 	parser_missingQueryName: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to find. State the thing to check.";
-		
-		return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
+		}
 	},
 	
 	parser_missingOn: function() {
-		GIDGET.sfx.play("parserError");
-	
-		if (GIDGET.experiment.isControl())
+		if (GIDGET.experiment.isControl()) {
+			GIDGET.sfx.play("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to check on other thing. State the thing to check.";
-		
-		return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
-	
+		} else {
+			GIDGET.sfx.play("parserErrorExp");
+			return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
+		}
 	},
 	
 
