@@ -26,6 +26,9 @@ GIDGET.sfx = {
 		this.success 		= new GIDGET.sound("success1");
 		this.successHigh 	= new GIDGET.sound("success2");
 		
+		this.energyLow		= new GIDGET.sound("lowEnergy");
+		this.parserError	= new GIDGET.sound("sad1");
+		
 	},
 
 	play: function(command) {
@@ -52,6 +55,10 @@ GIDGET.sfx = {
 								break;
 				case "successHigh":	this.successHigh.play();
 								break;		
+				case "energyLow":	this.energyLow.play();
+								break;
+				case "parserError":	this.parserError.play();
+								break;
 				default:		console.error("An invalid sound, "+ command +", was specified to play.");
 								break;
 			}

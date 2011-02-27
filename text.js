@@ -336,10 +336,11 @@ GIDGET.text = {
 	},
 
 	noEnergy: function(){
-	
+		GIDGET.sfx.play("energyLow");
+		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Energy depleted.";
-			
+		
 		return "I ... can't... go ... any ... further...";
 		
 	},
@@ -506,6 +507,7 @@ GIDGET.text = {
 
 		
 	parser_unrecognizedCommand: function(token) {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command.";
@@ -515,6 +517,7 @@ GIDGET.text = {
 	},
 
 	parser_noCommandAfterComma: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing command after comma.";
@@ -524,6 +527,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToName: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNATX ERROR: Missing thing to name. State thing to name.";
@@ -533,6 +537,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingName: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing new name. State new name.";
@@ -542,6 +547,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToScan: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to scan. State thing to scan.";
@@ -551,6 +557,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToGoto: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to goto. State thing to goto.";
@@ -560,6 +567,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToAvoid: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to avoid. State thing to avoid.";
@@ -569,6 +577,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToAnalyze: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to analyze. State thing to analyze.";
@@ -578,6 +587,7 @@ GIDGET.text = {
 	},
 
 	parser_missingThingToAsk: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to ask. State thing to ask.";
@@ -587,6 +597,7 @@ GIDGET.text = {
 	},
 
 	parser_missingTo: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between ask command and thing.";
@@ -596,6 +607,7 @@ GIDGET.text = {
 	},
 
 	parser_missingAction: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing action. State action for thing to do.";
@@ -605,6 +617,7 @@ GIDGET.text = {
 	},
 
 	parser_missingThingToGrab: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to grab. State thing to grab.";
@@ -614,6 +627,7 @@ GIDGET.text = {
 	},
 
 	parser_missingThingToDrop: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to drop. State thing to drop.";
@@ -623,6 +637,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingPredicate: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: ";
@@ -632,6 +647,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingConditionalComma: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: ";
@@ -641,6 +657,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToModify: function(keyword) {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: ";
@@ -650,6 +667,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToAdd: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to add from map. State thing to add.";
@@ -659,6 +677,7 @@ GIDGET.text = {
 	},
 				
 	parser_missingThingToRemove: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to remove from map. State thing to remove.";
@@ -668,6 +687,7 @@ GIDGET.text = {
 	},
 		
 	parser_missingAndPredicate: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to check. State thing to check.";
@@ -677,6 +697,7 @@ GIDGET.text = {
 	},
 	
 	parser_missingTag: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing tag of thing to check. State the tag to check.";
@@ -686,6 +707,7 @@ GIDGET.text = {
 	},
 	
 	parser_missingQueryName: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to find. State the thing to check.";
@@ -695,6 +717,7 @@ GIDGET.text = {
 	},
 	
 	parser_missingOn: function() {
+		GIDGET.sfx.play("parserError");
 	
 		if (GIDGET.experiment.isControl())
 			return "SYNTAX ERROR: Missing name of thing to check on other thing. State the thing to check.";
