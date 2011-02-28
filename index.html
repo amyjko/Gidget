@@ -113,6 +113,107 @@
 		</p>
 	
 	</div>
+	
+	<div class='popup' id='postSurvey'>
+	  <h2>Survey</h2>
+
+      <form id="postQuiz" name="postQuiz" method="post" action="">
+        <table>
+          <tr>
+            <td valign="middle" ><b>1) Are you Male or Female?</b><br />
+              <input type="radio" name="sex" value="male" /> Male<br />
+              <input type="radio" name="sex" value="female" /> Female<br />
+              <input type="radio" name="sex" value="uspecified" /> Prefer not to say
+            </td>
+          </tr>
+          <tr>
+            <td valign="middle" ><b>2) What is your age in years?</b><br />
+              <select name="age">
+                <option value="">-- Select Here --</option>
+                <option value="0"> 18-21 </option>
+                <option value="1"> 22-25 </option>
+                <option value="2"> 26-30 </option>
+                <option value="3"> 31-40 </option>
+                <option value="4"> 41-50 </option>
+                <option value="5"> 51-60 </option>
+                <option value="6"> 61 or over </option>
+              </select></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><b>3) What is the highest level of education you have completed?</b><br />
+              <select name="education">
+                <option value="" selected="selected">-- Select Here --</option>
+                <option value="0"> Less than High School </option>
+                <option value="1"> High School/GED </option>
+                <option value="2"> Some College </option>
+                <option value="3"> 2-Year College Degree (Associates) </option>
+                <option value="4"> 4-Year College Degree (BA, BS) </option>
+                <option value="5"> Master's Degree </option>
+                <option value="6"> Doctoral Degree (PhD, EdD) </option>
+                <option value="7"> Professional Degree (MD, JD, PharmD) </option>
+              </select></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><b>4) Prior to playing this game (check all that apply)</b>:
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="webCourse" />
+                  I have taken a website design course</label>
+              </p>
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="csCourse" />
+                  I have taken a computer programming course</label>
+              </p>
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="madeWebsite" />
+                  I have made a website from scratch</label>
+              </p>
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="customizedWebsite" />
+                  I have modified or customized an existing webpage using HTML and/or CSS (e.g. myspace)</label>
+              </p>
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="madeSimpleProgram" />
+                  I have written a simple computer program</label>
+              </p>
+              <p>
+                <label>
+                  <input name="experience" type="checkbox" value="madeApplication" />
+                  I have written or contributed to developing software</label>
+              </p></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>5) Rate your agreement of the following statement: <br />
+            "I enjoyed playing the game."</b></p>
+              <p>
+                <input type="radio" name="enjoyment" value="agree+" /> Strongly Agree<br />
+                <input type="radio" name="enjoyment" value="agree" /> Agree<br />
+                <input type="radio" name="enjoyment" value="undecided" /> Undecided <br />
+                <input type="radio" name="enjoyment" value="disagree" /> Disagree <br />
+                <input type="radio" name="enjoyment" value="disagree+" /> Strongly Disagree</p></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>6) Rate your agreement of the following statement: <br />
+            "While playing the game, I felt I wanted to help Gidget succeed."</b></p>
+              <p>
+                <input type="radio" name="helpGidget" value="agree+" /> Strongly Agree<br />
+                <input type="radio" name="helpGidget" value="agree" /> Agree<br />
+                <input type="radio" name="helpGidget" value="undecided" /> Undecided <br />
+                <input type="radio" name="helpGidget" value="disagree" /> Disagree <br />
+                <input type="radio" name="helpGidget" value="disagree+" /> Strongly Disagree</p></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><label>
+              <input class="align-right" type="submit" name="submit" id="submit" value="Submit" />
+            </label></td>
+          </tr>
+        </table>
+      </form>
+	</div>
 		
 	<div class='popup' id='debug'>
 		<h2>Debug Menu</h2>

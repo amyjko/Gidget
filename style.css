@@ -462,6 +462,31 @@ table {
 }
 */
 
+#postSurvey {
+	border-radius: 	.75em 0 0 0;
+	-moz-border-radius: .75em 0 0 0;
+
+	width: 			40em;
+	height:			30em;
+	padding:		1em;
+	padding-top:	0em;
+	position: 		fixed;
+	margin-left:	-20em;
+	top:			2em;
+	left:			50%;
+	overflow: 		scroll;
+}
+
+#postSurvey p,td {
+	font-size: small;
+}
+
+#postSurvey td {
+	padding-bottom: 1em;
+}
+
+
+
 #commandReset {
 	float: right;
 	margin-top: 1em;

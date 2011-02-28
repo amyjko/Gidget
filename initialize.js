@@ -136,7 +136,10 @@ $().ready(function() {
 		else if(e.keyCode == 112) {
 
 			playIntro();		
-		
+		}
+		else if(e.keyCode == 113) {
+
+			$('#postSurvey').toggle();		
 		}
 	
 	});
