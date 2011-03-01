@@ -518,7 +518,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 1em 0 .5em;' /></td><td>" + message + "</td></tr></table></div>";	
 		}
 		else {
-			return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+			return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
 		}
 		
 	},
@@ -538,7 +538,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
 		}
 		else {
-			return "<table class='thoughtTable'><tr><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
+			return "<table class='thoughtTable'><tr><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
 		}	
 		
 
