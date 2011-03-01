@@ -492,7 +492,7 @@ GIDGET.ui = {
 		if (this.world.gidget.runtime.state == "sad") {
 			GIDGET.ui.setThought(
 				"<span id='learnerSpeech'>"+message+"</span> <br>" +
-				"<button onclick='GIDGET.ui.showExecutionControls(); this.currentMissionText = -1; this.showNextMissionText();'>retry this mission!</button><br>", 
+				"<button onclick='GIDGET.ui.showExecutionControls(); GIDGET.ui.currentMissionText = -1; GIDGET.ui.showNextMissionText();'>retry this mission!</button><br>", 
 				0, "learner");
 		} else {
 			GIDGET.ui.setThought(

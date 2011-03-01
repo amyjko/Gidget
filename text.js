@@ -149,6 +149,14 @@ GIDGET.text = {
 	
 	},
 
+	go_alreadyAt: function(name) {
+		if (GIDGET.experiment.isControl())
+			return "Already at $results@0(" + name + ").";
+			
+		return "I'm already at $results@0(" + name + ").";
+	
+	},
+
 	analyze_success: function(name) {
 		GIDGET.sfx.play("analyze");
 		

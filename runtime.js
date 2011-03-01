@@ -864,6 +864,13 @@ GIDGET.runtime = {
 						}
 					
 					}
+					else if(runtime.thing.row === thing.row && runtime.thing.column === thing.column) {
+					
+						runtime.addDecision(
+							GIDGET.text.go_alreadyAt(thing.name),
+							new runtime.IncrementPC(runtime, 1));
+					
+					}
 					// We keep going until there's a path.
 					else {
 					

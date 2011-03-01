@@ -1199,8 +1199,8 @@ GIDGET.levels = {
 		// ----- G - C O D E -----
 	
 		var code = 
-			"goto cat\n" +
-			"analyze cat";
+			"scan cat\n" +
+			"goto cat";
 		
 		var world = new GIDGET.World([10,10], [1,8], [], code);
 		world.gidget.setEnergy(500);
