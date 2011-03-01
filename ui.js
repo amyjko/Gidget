@@ -965,29 +965,33 @@ GIDGET.ui = {
 	
 		// Go through the decisions references and highlight the desired references, 
 		// constructing the html to display in the thought bubble.
-		var span, text, reference, index;
 		var thought = "";
-		var spans = this.parseThought(text);
-		for(span = 0; span < spans.length; span++) {
 
-			text = spans[span].text;
-			reference = spans[span].reference;
-			index = parseInt(spans[span].index);
-			index = isNaN(index) ? undefined : index;
-
-			// If there's a reference, make a span to represent it.
-			if(isDef(reference)) {
-			
-				thought = thought + "<span class='runtimeReference'>" + text + "</span>";
-
+		if(isDef(text)) {
+			var spans = this.parseThought(text);
+			var span;
+			var reference, index;
+			for(span = 0; span < spans.length; span++) {
+	
+				text = spans[span].text;
+				reference = spans[span].reference;
+				index = parseInt(spans[span].index);
+				index = isNaN(index) ? undefined : index;
+	
+				// If there's a reference, make a span to represent it.
+				if(isDef(reference)) {
+				
+					thought = thought + "<span class='runtimeReference'>" + text + "</span>";
+	
+				}
+				// Otherwise, just concatenate the text.
+				else {
+				
+					thought = thought + text;
+	
+				}
+	
 			}
-			// Otherwise, just concatenate the text.
-			else {
-			
-				thought = thought + text;
-
-			}
-
 		}
 
 		this.setThought(thought, animate === true ? 50 : 0);
