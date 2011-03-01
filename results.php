@@ -102,8 +102,23 @@
 	
 	$(document).ready(function() {
 	
-		$('#results').append("id,condition,currentLevel,mturkcode,bonus,levelsCompleted,steps,lineSteps,plays,ends,\n"); 		
-	
+		$('#results').append("id,condition,currentLevel,mturkcode,bonus,levelsCompleted,steps,lineSteps,plays,ends,gender,age,education,exp1,exp2,exp3,exp4,exp5,ex6,enjoyment,help\n"); 		
+		
+/*
+						gender: $('input[name=gender]:checked').val(),
+				age: $('input[name=age]').val(),
+				education: $('select[name=education] option:selected').val(),
+				experience1: $('input[name=experience1]').attr('checked'),
+				experience2: $('input[name=experience2]').attr('checked'),
+				experience3: $('input[name=experience3]').attr('checked'),
+				experience4: $('input[name=experience4]').attr('checked'),
+				experience5: $('input[name=experience5]').attr('checked'),
+				experience6: $('input[name=experience6]').attr('checked'),
+				enjoyment: $('input[name=enjoyment]:checked').val(),
+				help: $('input[name=helpGidget]:checked').val()			
+*/
+
+		
 		var id, row;
 		for(id in results) {
 			if(results.hasOwnProperty(id)) {
@@ -120,6 +135,17 @@
 				add(countSteps(row, "line"));
 				add(countSteps(row, "play"));
 				add(countSteps(row, "end"));
+				add(row.survey.gender);
+				add(row.survey.age);
+				add(row.survey.education);
+				add(row.survey.experience1);
+				add(row.survey.experience2);
+				add(row.survey.experience3);
+				add(row.survey.experience4);
+				add(row.survey.experience5);
+				add(row.survey.experience6);
+				add(row.survey.enjoyment);
+				add(row.survey.help);
 				line();
 			
 			}

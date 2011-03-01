@@ -122,12 +122,27 @@ GIDGET.ui = {
 		}
 
 		var password = randomPassword(10);
+		
 
 		var payload = {
 			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
 			code: password,
-			levelMetadata: localStorage.getObject('levelMetadata')
+			levelMetadata: localStorage.getObject('levelMetadata'),
+			// Extract all of the questionnaire data from the form.
+			survey: {
+				gender: $('input[name=gender]:checked').val(),
+				age: $('input[name=age]').val(),
+				education: $('select[name=education] option:selected').val(),
+				experience1: $('input[name=experience1]').attr('checked'),
+				experience2: $('input[name=experience2]').attr('checked'),
+				experience3: $('input[name=experience3]').attr('checked'),
+				experience4: $('input[name=experience4]').attr('checked'),
+				experience5: $('input[name=experience5]').attr('checked'),
+				experience6: $('input[name=experience6]').attr('checked'),
+				enjoyment: $('input[name=enjoyment]:checked').val(),
+				help: $('input[name=helpGidget]:checked').val()			
+			}
 		}
 		
 		payload = JSON.stringify(payload);

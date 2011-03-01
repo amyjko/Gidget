@@ -109,7 +109,7 @@
 		<p>Are you sure you want to quit?</p><p>You will receive your MTurk code but you <b>will not be able to return</b> to play the game.</p>
 		<p class='align-right'>
 			<button onclick='$("#quitConfirm").hide()'>No, I don't want to quit!</button>
-			<button onclick='$("#quitConfirm").hide(); GIDGET.ui.quit("Okay.")'>Yes, I give up.</button>
+			<button onclick='$("#quitConfirm").hide(); $("#postSurvey").show()'>Yes, I give up.</button>
 		</p>
 	
 	</div>
@@ -117,13 +117,13 @@
 	<div class='popup' id='postSurvey'>
 	  <h2>Survey</h2>
 
-      <form id="postQuiz" name="postQuiz" method="post" action="">
+      <form id="postQuiz" name="postQuiz" onsubmit='GIDGET.ui.quit("Okay.")'>
         <table>
           <tr>
             <td valign="middle" ><b>1) Are you male or female?</b><br />
-              <input type="radio" name="sex" value="male" /> Male<br />
-              <input type="radio" name="sex" value="female" /> Female<br />
-              <input type="radio" name="sex" value="uspecified" /> Prefer not to say
+              <input type="radio" name="gender" value="male" /> Male<br />
+              <input type="radio" name="gender" value="female" /> Female<br />
+              <input type="radio" name="gender" value="uspecified" /> Prefer not to say
             </td>
           </tr>
           <tr>
@@ -153,52 +153,52 @@
             <td valign="middle" ><b>4) Prior to playing this game (check all that apply)</b>:
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="webCourse" />
+                  <input name="experience1" type="checkbox" value="webCourse" />
                   I have taken a website design course</label>
               </p>
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="csCourse" />
+                  <input name="experience2" type="checkbox" value="csCourse" />
                   I have taken a computer programming course</label>
               </p>
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="madeWebsite" />
+                  <input name="experience3" type="checkbox" value="madeWebsite" />
                   I have made a website from scratch</label>
               </p>
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="customizedWebsite" />
+                  <input name="experience4" type="checkbox" value="customizedWebsite" />
                   I have modified or customized an existing webpage using HTML and/or CSS (e.g. myspace)</label>
               </p>
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="madeSimpleProgram" />
+                  <input name="experience5" type="checkbox" value="madeSimpleProgram" />
                   I have written a simple computer program</label>
               </p>
               <p>
                 <label>
-                  <input name="experience" type="checkbox" value="madeApplication" />
+                  <input name="experience6" type="checkbox" value="madeApplication" />
                   I have written or contributed to developing software</label>
               </p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>5) Rate your agreement of the following statement: "I enjoyed playing the game."</b></p>
+            <td valign="middle" ><p><b>5) I enjoyed playing the game.</b></p>
               <p>
-                <input type="radio" name="enjoyment" value="agree+" /> Strongly Agree<br />
-                <input type="radio" name="enjoyment" value="agree" /> Agree<br />
-                <input type="radio" name="enjoyment" value="undecided" /> Undecided <br />
-                <input type="radio" name="enjoyment" value="disagree" /> Disagree <br />
-                <input type="radio" name="enjoyment" value="disagree+" /> Strongly Disagree</p></td>
+                <input type="radio" name="enjoyment" value="2" /> Strongly Agree<br />
+                <input type="radio" name="enjoyment" value="1" /> Agree<br />
+                <input type="radio" name="enjoyment" value="0" /> Undecided <br />
+                <input type="radio" name="enjoyment" value="-1" /> Disagree <br />
+                <input type="radio" name="enjoyment" value="-2" /> Strongly Disagree</p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>6) Rate your agreement of the following statement: "I wanted to help Gidget succeed."</b></p>
+            <td valign="middle" ><p><b>6) I wanted to help Gidget succeed.</b></p>
               <p>
-                <input type="radio" name="helpGidget" value="agree+" /> Strongly Agree<br />
-                <input type="radio" name="helpGidget" value="agree" /> Agree<br />
-                <input type="radio" name="helpGidget" value="undecided" /> Undecided <br />
-                <input type="radio" name="helpGidget" value="disagree" /> Disagree <br />
-                <input type="radio" name="helpGidget" value="disagree+" /> Strongly Disagree</p></td>
+                <input type="radio" name="helpGidget" value="2" /> Strongly Agree<br />
+                <input type="radio" name="helpGidget" value="1" /> Agree<br />
+                <input type="radio" name="helpGidget" value="0" /> Undecided <br />
+                <input type="radio" name="helpGidget" value="-1" /> Disagree <br />
+                <input type="radio" name="helpGidget" value="-2" /> Strongly Disagree</p></td>
           </tr>
           <tr>
             <td valign="middle" ><label>
