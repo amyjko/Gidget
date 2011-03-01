@@ -1269,4 +1269,137 @@ GIDGET.levels = {
 	
 	}
 	
+	// *******************************************************
+	
+	// Unexpected behavior: If gidget is already on the thing you ask him to go to, he gets stuck in an infinite
+	//						loop saying that there is "No valid path. Aborting goto."
+	
+		bug_stuckGoto: function() {
+
+		// ----- G - C O D E -----
+	
+		var code = 
+			"goto cat\n" +
+			"analyze cat";
+		
+		var world = new GIDGET.World([10,10], [1,8], [], code);
+		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("analyzed cat");
+
+		// ---- T I T L E --------
+		
+		world.addTitle("Testing: bug_stuckGoto");		
+
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("sad", "Parser Debugging");
+		}		
+		else {
+			world.addMissionText("sad", "Whee, Parser Debugging!!");
+		}
+		
+		// ----- T H I N G S -----
+		
+		new GIDGET.Thing(world, "cat", 1, 8, "orange", [], {});
+		new GIDGET.Thing(world, "crate", 9, 6, "Chocolate", [], {});
+		
+		// -----------------------
+								
+		return world;
+	
+	},	
+
+	// *******************************************************
+	
+	// Unexpected behavior: For some reason, the two cats get "scanned" seperately,
+	//    that is, the scan animation happens for one, gidget goto-s it, then
+	//	  does another scan animation. Usually, all scan animations are done in series
+	//    before gidget goes on to the commands afer the comma.
+	
+	bug_stuckGoto2: function() {
+
+		// ----- G - C O D E -----
+	
+		var code = 
+			"scan cats, goto it";
+		
+		var world = new GIDGET.World([10,10], [1,6], [], code);
+		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("analyzed cat");
+
+		// ---- T I T L E --------
+		
+		world.addTitle("Testing: bug_stuckGoto2");		
+
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("sad", "Parser Debugging");
+		}		
+		else {
+			world.addMissionText("sad", "Whee, Parser Debugging!!");
+		}
+		
+		// ----- T H I N G S -----
+		
+		new GIDGET.Thing(world, "cat", 1, 8, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 2, 6, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "crate", 9, 6, "Chocolate", [], {});
+		
+		// -----------------------
+								
+		return world;
+	
+	},
+	
+	// *******************************************************
+	
+	// Unexpected behavior: if a 'thing' is not specified in the goals before a query, the
+	//    program loops infinitely in the goal check state.
+	
+	bug_stuckGoal: function() {
+
+		// ----- G - C O D E -----
+	
+		var code = 
+			"grab crate";
+		
+		var world = new GIDGET.World([10,10], [4,7], [], code);
+		world.gidget.setEnergy(500);
+			
+		// ---- G O A L S --------
+		
+		world.addGoal("on crate");
+
+		// ---- T I T L E --------
+		
+		world.addTitle("Testing: parser_missingOn");		
+
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("sad", "Parser Debugging");
+		}		
+		else {
+			world.addMissionText("sad", "Whee, Parser Debugging!!");
+		}
+		
+		// ----- T H I N G S -----
+		
+		new GIDGET.Thing(world, "bird", 4, 7, "orange", [], {});
+		new GIDGET.Thing(world, "cat", 4, 7, "orange", [ 'infected' ], {});
+		new GIDGET.Thing(world, "crate", 4, 7, "Chocolate", [], {});
+		
+		// -----------------------
+								
+		return world;
+	
+	},
 };
