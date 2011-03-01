@@ -117,7 +117,15 @@ $().ready(function() {
 	
 		if($('#code').attr('contentEditable') === 'false') {
 
-			$('#code').animate({ opacity: 0.25 }, 200, function() { $('#code').css('opacity', 1.0); });		
+//			$('#code').animate({ opacity: 0.25 }, 200, function() { $('#code').css('opacity', 1.0); });		
+
+			var count = 0;
+			$('#code').everyTime(25, function(i) {
+				$('#code').css('margin-left', 10 - Math.random() * 20);
+				count++;
+				if(count === 20)
+					$('#code').css('margin-left', 0);
+			}, 20);
 			GIDGET.ui.setThought(GIDGET.text.editingDisabled(), 200);
 		
 		}

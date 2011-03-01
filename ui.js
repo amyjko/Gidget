@@ -971,6 +971,7 @@ GIDGET.ui = {
 			var spans = this.parseThought(text);
 			var span;
 			var reference, index;
+
 			for(span = 0; span < spans.length; span++) {
 	
 				text = spans[span].text;
