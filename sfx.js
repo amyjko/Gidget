@@ -56,7 +56,7 @@ GIDGET.sfx = {
 								break;
 				case "goal_finalSuccess": this.goal_finalSuccess.play();
 								break;
-				case "goal_checkSuccess": this.goal_checkSuccess.goalPlus();
+				case "goal_checkSuccess": this.goal_checkSuccess.play();
 								break;
 				case "goal_finalFailure": this.goal_finalFailure.play();
 								break;		
