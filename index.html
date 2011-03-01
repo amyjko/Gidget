@@ -120,27 +120,23 @@
       <form id="postQuiz" name="postQuiz" method="post" action="">
         <table>
           <tr>
-            <td valign="middle" ><b>1) Are you Male or Female?</b><br />
+            <td valign="middle" ><b>1) Are you male or female?</b><br />
               <input type="radio" name="sex" value="male" /> Male<br />
               <input type="radio" name="sex" value="female" /> Female<br />
               <input type="radio" name="sex" value="uspecified" /> Prefer not to say
             </td>
           </tr>
           <tr>
-            <td valign="middle" ><b>2) What is your age in years?</b><br />
-              <select name="age">
-                <option value="">-- Select Here --</option>
-                <option value="0"> 18-21 </option>
-                <option value="1"> 22-25 </option>
-                <option value="2"> 26-30 </option>
-                <option value="3"> 31-40 </option>
-                <option value="4"> 41-50 </option>
-                <option value="5"> 51-60 </option>
-                <option value="6"> 61 or over </option>
-              </select></td>
+            <td valign="middle" ><b>2) What is your age?</b><br />
+              <p>
+              <label>
+                <input name="age" type="text" id="age" size="2" maxlength="2" />
+              </label>
+            years old</p>
+            </td>
           </tr>
           <tr>
-            <td valign="middle" ><b>3) What is the highest level of education you have completed?</b><br />
+            <td valign="middle" ><b>3) What is the highest level of education you have <i>completed?</i></b><br />
               <select name="education">
                 <option value="" selected="selected">-- Select Here --</option>
                 <option value="0"> Less than High School </option>
@@ -187,8 +183,7 @@
               </p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>5) Rate your agreement of the following statement: <br />
-            "I enjoyed playing the game."</b></p>
+            <td valign="middle" ><p><b>5) Rate your agreement of the following statement: "I enjoyed playing the game."</b></p>
               <p>
                 <input type="radio" name="enjoyment" value="agree+" /> Strongly Agree<br />
                 <input type="radio" name="enjoyment" value="agree" /> Agree<br />
@@ -197,8 +192,7 @@
                 <input type="radio" name="enjoyment" value="disagree+" /> Strongly Disagree</p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>6) Rate your agreement of the following statement: <br />
-            "While playing the game, I felt I wanted to help Gidget succeed."</b></p>
+            <td valign="middle" ><p><b>6) Rate your agreement of the following statement: "I wanted to help Gidget succeed."</b></p>
               <p>
                 <input type="radio" name="helpGidget" value="agree+" /> Strongly Agree<br />
                 <input type="radio" name="helpGidget" value="agree" /> Agree<br />
@@ -208,7 +202,7 @@
           </tr>
           <tr>
             <td valign="middle" ><label>
-              <input class="align-right" type="submit" name="submit" id="submit" value="Submit" />
+              <input class="align-right" type="submit" name="submit" id="submit" value="Submit and receive MTurk code" />
             </label></td>
           </tr>
         </table>
