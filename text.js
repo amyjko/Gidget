@@ -12,25 +12,25 @@ GIDGET.text = {
 	if_true: function() {
 
 		if (GIDGET.experiment.isControl())
-			return "$results(The recent results) are not empty. Going to next step.";
+			return "The $results(recent results) list is not empty, so continuing evaluation of list items.";
 			
-		return "I'm looking at $results(the recent results) and they weren't empty, so I'll go to the next step.";
+		return "There are $results(recent results) in my memory, so I'll continue with these things.";
 	
 	},
 	
 	if_false: function() {
 		if (GIDGET.experiment.isControl())
-			return "$results(The recent results) are empty, so jumping to next part.";
+			return "The $results(recent results) list is empty, so ending this set of evaluations and moving on to next instructions.";
 			
-		return "I'm looking at the $results(recent results) and they were empty, so I'm going to skip the next part.";
+		return "There aren't any $results(recent results) in my memory, so I'll end this set of evaluations and move on to the next part.";
 	
 	},
 	
 	if_popResults: function() {
 		if (GIDGET.experiment.isControl())
-			return "Removing $results(the recent results) before continuing.";
+			return "Evaluation of the $results(recent results) complete. Removing from list before continuing.";
 			
-		return "Before I move on, I'm going to get rid of $results(the recent results), now that I'm done with them.";
+		return "Before moving on, I'm going to empty the $results(recent results) from my memory since I'm done with them.";
 	
 	},
 		
@@ -48,41 +48,41 @@ GIDGET.text = {
 	
 	is_popResults: function() {
 		if (GIDGET.experiment.isControl())
-			return "Finished with $results(these results). Removing from list.";
+			return "Finished with $results(this result). Removing from list.";
 			
-		return "I'll remove $results(these results) since I'm done with it!";
+		return "I'll remove $results(this result) from my memory since I'm done with it!";
 	
 	},
 	
 	is_newResults: function() {
 		if (GIDGET.experiment.isControl())
-			return "Adding $results(the new results) to list.";
+			return "Adding the $results(new results) to list.";
 			
-		return "Now I'll add $results(the new results) to my list.";
+		return "Now I'll add the $results(new results) to my memory.";
 	
 	},
 		
 	unknown_clearFocus: function() {
 		if (GIDGET.experiment.isControl())
-			return "Cleared focus.";
+			return "Clearing focus.";
 			
-		return "I guess I'm going to stop focusing on everything.";
+		return "Now I'll stop focusing on everything.";
 	
 	},
 
 	unknown_clearResults: function() {
 		if (GIDGET.experiment.isControl())
-			return "Cleared results.";
+			return "Clearing results.";
 			
-		return "I'm going to forget all of my results too.";
+		return "I'm clear the $results(recent results) from my memory.";
 	
 	},	
 	
 	unknown_nextStep: function() {
 		if (GIDGET.experiment.isControl())
-			return "Executing next step.";
+			return "Unknown command, so skipping to next step.";
 			
-		return "I'm going to just go to the next step";
+		return "I don't know what this is, so I'll just go on the next step";
 	
 	},
 
@@ -92,7 +92,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "$scanned@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") " + " added to the scan list.";
 			
-		return "I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "$scanned@0(" + name + ")" + ". I'll add it to my scanned list!";
+		return "I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "$scanned@0(" + name + ")" + ". I'll add it to my scanned memory!";
 	
 	},
 
@@ -109,7 +109,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("goto");
 	
 		if (GIDGET.experiment.isControl())
-			return "Incremented to destination, $results@0(" + name + "), but may intersect with " + avoid + ".";
+			return "Moving one space closer to destination, $results@0(" + name + "), but may intersect with " + avoid + ".";
 		
 		return "I'm going one step closer to the $results@0(" + name + "), even though I might touch a " + avoid + "!";
 	
@@ -119,7 +119,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("goto");
 	
 		if (GIDGET.experiment.isControl())
-			return "Incremented to destination, $results@0(" + name + ").";
+			return "Moving one space towards destination, $results@0(" + name + ").";
 		
 		return "I'm going one step closer to the $results@0(" + name + ")!";
 	
@@ -129,23 +129,23 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Arrived at destination, $results@0(" + name + ").";
 		
-		return "I made it to $results@0(the " + name + ")!";
+		return "I made it to the $results@0(" + name + ")!";
 	
 	},
 
 	go_noPath: function(name) {
 		if (GIDGET.experiment.isControl())
-			return "No valid path. Aborting goto.";
+			return "No valid path to $results@0(" + name + "). Aborting 'goto'.";
 			
-		return "There's no way to get to $results@0(" + name + "). I guess I'm going to skip the rest of this goto.";
+		return "There's no way to get to the $results@0(" + name + "). So I guess I'm just going to skip the rest of this 'goto'.";
 	
 	},
 
 	go_finished: function() {
 		if (GIDGET.experiment.isControl())
-			return "Finished goto.";
+			return "Completed 'goto'.";
 			
-		return "There's $results(nothing left to go to), so I'm going on to the next step.";
+		return "Phew! There's $results(nothing left to go to)!";
 	
 	},
 
@@ -165,7 +165,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "$grabbed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") grabbed. Added to list.";
 		
-		return "Grabbed $grabbed@0(" + name + "). I'll add it to my list!";
+		return "I grabbed the $grabbed@0(" + name + "). I'll add it to my memory!";
 		
 	},
 
@@ -175,7 +175,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Dropped $results@0(" + name + "). Removing from list.";
 			
-		return "Dropped $results@0(" + name + "). Let me remove it from my list.";
+		return "I dropped the $results@0(" + name + "). I'll remove it from my memory.";
 	
 	},
 
@@ -184,21 +184,21 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Focusing on $results@0(next result), " + name;
 			
-		return "Okay, I'm going to concentrate on this $results@0(individual " + name + ") and add it to my focus list.";
+		return "Okay, I'm going to concentrate on this $results@0(individual " + name + ") and add it to my focus memory.";
 	
 	},
 
 	focus_failure: function() {
 		if (GIDGET.experiment.isControl())
-			return "Nothing more to focus on.";
+			return "Failed to focus on next result.";
 			
-		return "I'm supposed to focus on the next result, but $results(there isn't one) :(";
+		return "I'm supposed to focus on the next result, but $results(there isn't one)!";
 	
 	},
 
 	unfocus_success: function() {
 		if (GIDGET.experiment.isControl())
-			return "Finished focusing.";
+			return "Focusing terminated.";
 			
 		return "Alright, $focused(I stopped focusing).";
 	
@@ -208,7 +208,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return "Waiting for " + name + "to finish execution.";
 			
-		return "Wee! I'm waiting for $thing(" + name + ") to finish " + action + "ing.";
+		return "Wee! I'm waiting for the $thing(" + name + ") to finish " + action + "ing.";
 	
 	},
 
@@ -216,7 +216,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return name.charAt(0).toUpperCase() + name.slice(1) + "execution completed.";
 			
-		return "$thing(" + name.charAt(0).toUpperCase() + name.slice(1) + ") is done. I'm going to continue now.";
+		return "Okay, the $thing(" + name+ ") is finished so I'm going to continue now.";
 	
 	},
 
@@ -224,9 +224,9 @@ GIDGET.text = {
 		GIDGET.sfx.play("error");
 		
 		if (GIDGET.experiment.isControl())
-			return "Invalid ask syntax.";
+			return "ERROR: Invalid <b>ask</b> syntax";
 			
-		return "I couldn't find anything to ask by that name to ask.";
+		return "I couldn't find anything to 'ask' by that name.";
 	
 	},
 
@@ -234,7 +234,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("error");
 		
 		if (GIDGET.experiment.isControl())
-			return "Invalid <b>ask</b> syntax";
+			return "ERROR: Invalid <b>ask</b> syntax. "+name.charAt(0).toUpperCase() + name.slice(1)+" expected  <b>" + numberExpected + "</b>, instead of <b>" + numberGiven + "</b>. Skipping to next instructions.";
 			
 		return "Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.";
 	
@@ -252,7 +252,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("error");
 		
 		if (GIDGET.experiment.isControl())
-			return "Invalid ask command.";
+			return "ERROR: Invalid ask command. " +name.charAt(0).toUpperCase() + name.slice(1)+ " does not understand the action, '" + action + "'.";
 			
 		return "I told " + name + " to " + action + " but it didn't know how! I don't know what to do!";
 	
@@ -326,7 +326,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("error");
 	
 		if (GIDGET.experiment.isControl())
-			return "ERROR: Cannot modify code during program execution.";
+			return "ERROR: Cannot modify code during program execution. Click the <b>" + this.finishExecutingButtonLabel() + "</b> button to end execution.";
 	
 		return "If you change my commands while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b>" + this.finishExecutingButtonLabel() + "</b> button.";
 	},
@@ -339,7 +339,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("energyLow");
 		
 		if (GIDGET.experiment.isControl())
-			return "ERROR: Energy depleted.";
+			return "CRITICAL ERROR: Energy depleted. Cannot continue program execution.";
 		
 		return "I ... can't... go ... any ... further...";
 		
@@ -348,7 +348,7 @@ GIDGET.text = {
 	aboutToStartGoals: function() {
 
 		if (GIDGET.experiment.isControl())
-			return "Execution complete. Begin executing goals.";
+			return "Execution complete. Beginning evaluation of goals.";
 
   		return "I finished executing my commands! Let's see if I accomplished all of my goals.";
 	},
@@ -440,6 +440,8 @@ GIDGET.text = {
 	},
 		
 	memory_unanalyzed: function(name) {
+		GIDGET.sfx.play("error");
+	
 		if (GIDGET.experiment.isControl())
 			return "ERROR: '" + name + "' has not been analyzed. Attributes unknown.";
 			
@@ -449,7 +451,7 @@ GIDGET.text = {
 	
 	memory_unfocus: function() {
 		if (GIDGET.experiment.isControl())
-			return "Now returning back to program execution.";
+			return "Returning back to program execution.";
 		
 		return "Now where was I?";
 	},
@@ -509,117 +511,117 @@ GIDGET.text = {
 	parser_unrecognizedCommand: function(token) {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command.";
+			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "" + token + " isn't one of the commands I know.";
+			return "" + token + " isn't one of the commands I know. I'm just going to go on.";
 		}
 	},
 
 	parser_noCommandAfterComma: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing command after comma.";
+			return "SYNTAX ERROR: Missing command after comma. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I saw a comma, but I thought there would be a command after it, but there wasn't.";
+			return "I saw a comma so I thought there would be a command after it, but there wasn't. I'll just keep going.";
 		}
 	},
 		
 	parser_missingThingToName: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNATX ERROR: Missing thing to name. State thing to name.";
+			return "SYNATX ERROR: Missing thing to name. Must identify thing to name. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to name something, but I don't know what to name. Can you tell me to name?";
+			return "I know I'm supposed to name something, but I don't know what to name. I'm going to move on for now, but please tell me what you want to name next time since I'm so forgetful!";
 		}
 	},
 		
 	parser_missingName: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing new name. State new name.";
+			return "SYNTAX ERROR: Missing new name. Must state new name. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. Can you tell me what to name it?";
+			return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. I'm skipping this step for now since I can't figure it out, but can you tell me what to name it next time?";
 		}
 	},
 		
 	parser_missingThingToScan: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to scan. State thing to scan.";
+			return "SYNTAX ERROR: Missing name of thing to scan. Must identify thing to scan. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to scan something, but I don't know what. Can you tell me?";
+			return "I know I'm supposed to scan something, but I don't know what. I'll move on for now, but can you make sure to tell me what to scan?";
 		}
 	},
 		
 	parser_missingThingToGoto: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to goto. State thing to goto.";
+			return "SYNTAX ERROR: Missing name of thing to goto. Must identify thing to goto. Skipping step";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to goto something, but I don't know what. Can you tell me?";
+			return "I know I'm supposed to goto something, but I don't know what. This is difficult for me so I'll move on, but can you help me by telling me where to go next time?";
 		}
 	},
 		
 	parser_missingThingToAvoid: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to avoid. State thing to avoid.";
+			return "SYNTAX ERROR: Missing name of thing to avoid. Must identify thing to avoid. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. Can you tell me?";
+			return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?";
 		}	
 	},
 		
 	parser_missingThingToAnalyze: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to analyze. State thing to analyze.";
+			return "SYNTAX ERROR: Missing name of thing to analyze. Must identify thing to analyze. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to analyze something, but I don't know what. Can you tell me?";
+			return "I know I'm supposed to analyze something, but I don't know what. I get confused easily so I'll skip this step for now. Can you let me know what I should be analyzing next time?";
 		}
 	},
 
 	parser_missingThingToAsk: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to ask. State thing to ask.";
+			return "SYNTAX ERROR: Missing name of thing to ask. Must identify thing to ask. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to ask something to do something, but I don't know what to ask. Can you tell me?";
+			return "I know I'm supposed to ask something to do something, but I don't know what to ask. I'm going to skip this step for now, but I like talking to things, so can you let me know who or what I should be asking next time?";
 		}
 	},
 
 	parser_missingTo: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between ask command and thing.";
+			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between 'ask' command and thing. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "When I ask something to do something, I have to tell it 'to', but I didn't find that here.";
+			return "When I ask something to do something, I have to tell it 'to', but I didn't find that here so I'll skip it for now.";
 		}	
 	},
 
 	parser_missingAction: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing action. State action for thing to do.";
+			return "SYNTAX ERROR: Missing action. State action for thing to do. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. Can you tell me?";
+			return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. I'll skip it so I don't confuse myself, but can you tell me what I should do?";
 		}
 	},
 
 	parser_missingThingToGrab: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to grab. State thing to grab.";
+			return "SYNTAX ERROR: Missing name of thing to grab. Must identify thing to grab. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
 			return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
@@ -629,100 +631,100 @@ GIDGET.text = {
 	parser_missingThingToDrop: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to drop. State thing to drop.";
+			return "SYNTAX ERROR: Missing name of thing to drop. Must identify thing to drop. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me?";
+			return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me? It's fun holding on to things, so I'll skip this for now.";
 		}
 	},
 		
 	parser_missingPredicate: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: ";
+			return "SYNTAX ERROR: Must state thing to check. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+			return "I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll skip this for now.";
 		}
 	},
 		
 	parser_missingConditionalComma: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: ";
+			return "SYNTAX ERROR: A comma should come before any additional commands after an 'if'. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I only know what to do when there's a comma after the test of an if.";
+			return "I only know what to do when there's a comma after the test of an if so I'll skip this for now.";
 		}
 	},
 		
 	parser_missingThingToModify: function(keyword) {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: ";
+			return "SYNTAX ERROR: Must identify thing to '" + keyword + "'. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me?";
+			return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me? I'll skip this for now.";
 		}
 	},
 		
 	parser_missingThingToAdd: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to add from map. State thing to add.";
+			return "SYNTAX ERROR: Missing name of thing to add from map. Must identify thing to add. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm suppose to add something, but I don't know what. Can you tell me?";
+			return "I know I'm suppose to add something, but I don't know what. Can you tell me? I'm going to skip this for now.";
 		}
 	},
 				
 	parser_missingThingToRemove: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to remove from map. State thing to remove.";
+			return "SYNTAX ERROR: Missing name of thing to remove from map. Must identify the thing to remove. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?";
+			return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?  I'll skip this for now.";
 		}			
 	},
 		
 	parser_missingAndPredicate: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to check. State thing to check.";
+			return "SYNTAX ERROR: Missing name of thing to check. Must identify the thing to check. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm supposed to check something, but I don't know to check. Can you tell me?";
+			return "I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll just skip this step.";
 		}
 	},
 	
 	parser_missingTag: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing tag of thing to check. State the tag to check.";
+			return "SYNTAX ERROR: Missing tag of thing to check. Must state the tag to check. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me?";
+			return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me? I'll just go on for now.";
 		}
 	},
 	
 	parser_missingQueryName: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to find. State the thing to check.";
+			return "SYNTAX ERROR: Missing name of thing to find. Must identify the thing to check. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me?";
+			return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me? I'll skip this step for now.";
 		}
 	},
 	
 	parser_missingOn: function() {
 		if (GIDGET.experiment.isControl()) {
 			GIDGET.sfx.play("parserErrorCtrl");
-			return "SYNTAX ERROR: Missing name of thing to check on other thing. State the thing to check.";
+			return "SYNTAX ERROR: Missing name of thing to check on other thing. Must identify the thing to check. Skipping step.";
 		} else {
 			GIDGET.sfx.play("parserErrorExp");
-			return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me?";
+			return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me? I'll skip this for now.";
 		}
 	},
 	
