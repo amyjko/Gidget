@@ -141,13 +141,16 @@ $().ready(function() {
 		
 			$('#debug').toggle();
 		}
-		else if(e.keyCode == 112) {
+		else if(e.keyCode == 112) { //F1
 
 			playIntro();		
 		}
-		else if(e.keyCode == 113) {
+		else if(e.keyCode == 113) { // F2
 
 			$('#postSurvey').toggle();		
+		}
+		else if(e.keyCode == 117) {  //F6
+			$('#gotoNextLevel').click();
 		}
 	
 	});
@@ -298,5 +301,11 @@ $().ready(function() {
 	
 	// Pre-load sound effects
 	GIDGET.sfx.load();
+
+	// Set box and font styles depending on condition
+	if (GIDGET.experiment.condition === "control")
+		GIDGET.ui.modifyStylesForControl();
+	else
+		GIDGET.ui.modifyStylesForExperimental();
 
 });

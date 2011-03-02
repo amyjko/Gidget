@@ -39,6 +39,7 @@ GIDGET.sfx = {
 	play: function(command) {
 		// Play sounds as long as the learner didn't press the (runTo)"End" button.
 		if (GIDGET.ui.stepState !== "end"){
+			
 			switch(command) {
 				case "analyze":	this.analyze.play();
 								break;
@@ -71,6 +72,7 @@ GIDGET.sfx = {
 				default:		console.error("An invalid sound, "+ command +", was specified to play.");
 								break;
 			}
+
 		}
 	},
 	

@@ -505,14 +505,31 @@ GIDGET.ui = {
 	},
 	
 	modifyStylesForControl: function() {
-		$("body").append("<style type=\"text/css\">\n" +
-			"#gidgetSpeech{font-family: \"Courier New\", Courier, monospace;}\n" +
-			"#learnerSpeech{font-family: \"Courier New\", Courier, monospace;}\n" +
-			"#code{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
-			"#goals{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
-			"#memory{border-radius: .25em .25em .25em .25em; -moz-border-radius: .25em .25em .25em .25em;}\n" +
-			"</style>\n");
+		$('.thoughtTable').css('padding', '.5em .5em .5em 0');
+		$('#gidgetSpeech').css('font-family', '\"Courier New\", Courier, monospace');
+		$('#learnerSpeech').css('font-family', '\"Courier New\", Courier, monospace');
+		$('#code').css('border-radius', '.25em .25em .25em .25em');
+		$('#code').css('-moz-border-radius', '.25em .25em .25em .25em');
+		$('#goals').css('border-radius', '.25em .25em .25em .25em');
+		$('#goals').css('-moz-border-radius', '.25em .25em .25em .25em');
+		$('#memory').css('border-radius', '.25em .25em .25em .25em');
+		$('#memory').css('-moz-border-radius', '.25em .25em .25em .25em');
+			
 	},
+
+	modifyStylesForExperimental: function() {
+		$('.thoughtTable').css('padding', '0');
+		$('#gidgetSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
+		$('#learnerSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
+		$('#code').css('border-radius', '1em .5em 1em .5em');
+		$('#code').css('-moz-border-radius', '1em .5em 1em .5em');
+		$('#goals').css('border-radius', '1em .5em 1em .5em');
+		$('#goals').css('-moz-border-radius', '.1em .5em 1em .5em');
+		$('#memory').css('border-radius', '1em .5em 1em .5em');
+		$('#memory').css('-moz-border-radius', '1em .5em 1em .5em');
+			
+	},
+	
 	
 	createLearnerHTML: function(message) {	
 		
@@ -538,16 +555,14 @@ GIDGET.ui = {
 		
 	},
 
+
 	createThoughtHTML: function(message) { 
 		
 		var gidgetImg;
-		// If control condition, change interface styling
-		if (GIDGET.experiment.isControl()){
+		if (GIDGET.experiment.isControl())
 			gidgetImg = "media/control.";
-			this.modifyStylesForControl();
-		} else {
+		else
 			gidgetImg = "media/gidget.";
-		}
 			
 		if (GIDGET.experiment.isControl()){
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
@@ -555,7 +570,6 @@ GIDGET.ui = {
 		else {
 			return "<table class='thoughtTable'><tr><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
 		}	
-		
 
 	},
 	
@@ -773,13 +787,17 @@ GIDGET.ui = {
 
 					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
-
+					
+					GIDGET.sfx.play("goal_finalSuccess");
+					
 					this.rememberLevelPassed();					
 					
 				}
 				else {
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
+					
+					GIDGET.sfx.play("goal_finalFailure");
 				}
 
 				this.enableExecutionButtons(true);
@@ -817,6 +835,8 @@ GIDGET.ui = {
 					$('#goals .success:eq(' + this.goalNumberBeingExecuted + ')').show();
 					this.world.gidget.runtime.state = "happy";
 					this.visualizeDecision(GIDGET.text.goal_checkSuccess(), true);
+					
+					GIDGET.sfx.play("goal_checkSuccess");
 				
 				}
 				// If there aren't results, the goal wasn't achieved.
@@ -827,7 +847,8 @@ GIDGET.ui = {
 					this.allGoalsAchieved = false;
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_checkFailure(), true);
-				
+					
+					GIDGET.sfx.play("goal_checkFailure");
 				}
 				
 				// Erase the token highlighting.
@@ -863,7 +884,7 @@ GIDGET.ui = {
 				
 				}
 	
-				// If ther are none left, get some more by stepping the world once.
+				// If there are none left, get some more by stepping the world once.
 				while(this.world.isExecuting() && countDecisionsRemaining(this) === 0)
 					this.decisionsRemaining = this.world.step();
 	
@@ -895,7 +916,7 @@ GIDGET.ui = {
 							this.visualizeDecision(decision.thought, animate);
 						
 						}
-						// If this is a speak, add a speech bubble
+						// If this is a say, add a speech bubble
 						if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
 							$('#thingThought').html(decision.action.message);
 							$('#thingThought').css('visibility', 'visible');
