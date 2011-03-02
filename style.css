@@ -283,19 +283,17 @@ textarea {
 
 #learnerSpeech {
 	color:				black;
-	font-family: 		Verdana, Arial, Helvetica, sans-serif;
 	font-size:			small;		
 }
 
 #gidgetSpeech {
 	color:				black;
-	font-family: 		Verdana, Arial, Helvetica, sans-serif;
 	font-size:			11.5pt;	
 }
 
 img.thoughtFloat{
 	position: relative;
-	left: 34px;
+	left: 25px;
 	top: -2em;
 }
 

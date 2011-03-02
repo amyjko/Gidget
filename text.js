@@ -471,7 +471,6 @@ GIDGET.text = {
 
 
 	goal_checkSuccess: function() {
-		GIDGET.sfx.play("goal_checkSuccess");
 		
 		if (GIDGET.experiment.isControl())
 			return "$results(Results) detected, goal satisfied.";	
@@ -481,7 +480,6 @@ GIDGET.text = {
 	},
 	
 	goal_checkFailure: function(){
-		GIDGET.sfx.play("goal_checkFailure");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>some of your goals</span> failed.";
@@ -491,7 +489,6 @@ GIDGET.text = {
 	},
 	
 	goal_finalSuccess: function() {
-		GIDGET.sfx.play("goal_finalSuccess");
 		
 		if (GIDGET.experiment.isControl())
 			return "<span class='runtimeReference'>All goals</span> satisfied.";	
@@ -501,7 +498,6 @@ GIDGET.text = {
 	},
 	
 	goal_finalFailure: function(){
-		GIDGET.sfx.play("goal_finalFailure");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: <span class='runtimeReference'>Some goals</span> failed.";

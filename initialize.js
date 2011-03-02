@@ -299,4 +299,10 @@ $().ready(function() {
 	// Pre-load sound effects
 	GIDGET.sfx.load();
 
+	// Set box and font styles depending on condition
+	if (GIDGET.experiment.condition === "control")
+		GIDGET.ui.modifyStylesForControl();
+	else
+		GIDGET.ui.modifyStylesForExperimental();
+
 });
