@@ -214,7 +214,7 @@ GIDGET.text = {
 
 	ask_waiting: function(name, action) {
 		if (GIDGET.experiment.isControl())
-			return "Waiting for " + name + "to finish execution.";
+			return "Waiting for " + name + " to finish execution.";
 			
 		return "Wee! I'm waiting for the $thing(" + name + ") to finish " + action + "ing.";
 	
@@ -222,7 +222,7 @@ GIDGET.text = {
 
 	ask_finished: function(name) {
 		if (GIDGET.experiment.isControl())
-			return name.charAt(0).toUpperCase() + name.slice(1) + "execution completed.";
+			return name.charAt(0).toUpperCase() + name.slice(1) + " execution completed.";
 			
 		return "Okay, the $thing(" + name+ ") is finished so I'm going to continue now.";
 	
@@ -368,7 +368,7 @@ GIDGET.text = {
 
 	memory_analyzed: function(iName, iActions, iTags) {
 	
-		var tags = "<p>It has no special characteristics.</p>";
+		var tags = "It has no special characteristics. ";
 		var tagCount = 0;
 		for(var tag in iTags) {
 			if(iTags.hasOwnProperty(tag)) {
@@ -432,9 +432,9 @@ GIDGET.text = {
 					
 					}
 					if (GIDGET.experiment.isControl())
-						actions = "It can be <b>asked</b> to " + action + "</b>" + argString;	
+						actions = "It can be <b>asked</b> to " + action + "</b> and " + argString + ".";	
 					else
-						actions = "I can <b>ask</b> it to <b>" + action + "</b>" + argString;
+						actions = "I can <b>ask</b> it to <b>" + action + "</b> and " + argString + ".";
 					
 				}
 			}
@@ -448,10 +448,10 @@ GIDGET.text = {
 	},
 		
 	memory_unanalyzed: function(name) {
-		GIDGET.sfx.play("error");
+		//GIDGET.sfx.play("error");
 	
 		if (GIDGET.experiment.isControl())
-			return "ERROR: '" + name + "' has not been analyzed. Attributes unknown.";
+			return "'" + name +"' has not been analyzed. Attributes unknown.";
 			
 		return "I don't know anything about <b>" + name + "</b> because I haven't <b>analyzed</b> it yet.";
 	
