@@ -940,6 +940,11 @@ GIDGET.runtime = {
 			cost: function(runtime) { return 0; },
 			execute: function(runtime) {
 
+				// Assuming there's a result left, pop it since we're done with it.
+				if(runtime.hasRecentResults())
+					runtime.popResult();
+
+				// If there are results left, continue to the next one.
 				if(runtime.hasRecentResults()) {
 					
 /*
@@ -947,11 +952,11 @@ GIDGET.runtime = {
 						"I'm finished with this $results@0(result), get rid of it!",
 						new runtime.PopResult(runtime));
 */
-					runtime.popResult();
 						
 					runtime.pc += this.offset;
 					
 				}
+				// If there aren't results left, pop the empty list and move on to the next step.
 				else {
 
 /*

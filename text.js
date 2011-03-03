@@ -232,7 +232,7 @@ GIDGET.text = {
 		GIDGET.sfx.play("error");
 		
 		if (GIDGET.experiment.isControl())
-			return "ERROR: Invalid <b>ask</b> syntax";
+			return "ERROR: Nothing to <b>ask</b> by that name.";
 			
 		return "I couldn't find anything to 'ask' by that name.";
 	
