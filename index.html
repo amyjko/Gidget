@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
 	<div id='container'>
 		<div id='titleBar'>
 		<span id="levelTitle"></span>
@@ -81,19 +82,6 @@
 			</div>
 		</div><div style="clear: both;"></div>
 	</div>
-
-	<div class='introBox' id='intro'>
-
-<!--
-		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
-		
-		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
--->
-
-		<canvas id='introCanvas' width='640' height='480'></canvas>
-
-	</div>
-
 
 	<div class='popup' id='quitResults'></div>
 
@@ -209,7 +197,21 @@
         </table>
       </form>
 	</div>
+	
+	</div>
 		
+	<div class='introBox' id='intro'>
+
+<!--
+		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
+		
+		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
+-->
+
+		<canvas id='introCanvas' width='640' height='480'></canvas>
+
+	</div>
+
 	<div class='popup' id='debug'>
 		<h2>Debug Menu</h2>
 		<p><button id='playIntro'>play intro</button></p>
@@ -222,6 +224,7 @@
 		<div class='progress'>loading...</div>
 	</div>
 
+		
 </body>
 
 </html>
