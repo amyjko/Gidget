@@ -946,7 +946,7 @@ GIDGET.ui = {
 		}
 
 		// If we're playing, invoke another step.
-		if(play === true)
+		if(play === true && this.world.gidget.energy > 0)
 			setTimeout(GIDGET.ui.stepContinue, GIDGET.ui.stepSpeedInMilliseconds);
 	
 	},
