@@ -208,9 +208,10 @@ $().ready(function() {
 
 		localStorage.setItem('currentLevel', 'learnScan');
 		
+		// Hide the container and show the introduction.
 		$('#container').fadeTo(0, 0.0);
 
-		playIntro();		
+		playIntro();	
 			
 	}
 

@@ -16,6 +16,9 @@ var SCENES = {
 		this.image.onload = function () {
 			SCENES.imagesRemaining--;
 		};
+		this.image.onerror = function () {
+			SCENES.imagesRemaining--;
+		};
 		this.image.src = url;
 
 	},
