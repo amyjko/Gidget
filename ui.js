@@ -474,10 +474,10 @@ GIDGET.ui = {
 			message = "Gidget, please execute...";
 		
 		GIDGET.ui.setThought("<span id='learnerSpeech'>"+message+"</span> <br>\n" +
-			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1 step</button>\n" +
-			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1 line</button>\n"+
-			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all steps</button>\n" +
-			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to the end</button>\n",
+			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1<br />step</button>\n" +
+			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1<br />line</button>\n"+
+			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all<br />steps</button>\n" +
+			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to the<br />end</button>\n",
 			0, "learner");
 	
 	},
