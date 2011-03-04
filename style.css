@@ -177,6 +177,12 @@ a {
 	-moz-border-radius: 1em .5em 1em .5em;
 }
 
+#goals table {
+	width: inherit;
+	word-wrap: 		break-word;
+}
+
+
 .goal {
 	font-family: 	"Courier New", Courier, monospace;
 	font-size:		small;
@@ -385,6 +391,10 @@ table {
 .sourceLine.runtimeReference {
 	
 	background-color: #fcc; /* Color 7 */
+}
+
+.sourceLine {
+	word-wrap: 	normal;
 }
 
 .sourceToken.keyword {

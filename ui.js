@@ -261,7 +261,7 @@ GIDGET.ui = {
 				if(char.match(/\s/)) {
 					if(id.length > 0)
 						lineText = lineText + tokenToHTML(id);
-					lineText = lineText + "&nbsp;";
+					lineText = lineText + " "; // this needs to be " " instead of &nbsp for text-wrapping purposes.
 					id = "";
 				}
 				// If it's a comma, add the accumulated id if necessary and then add a comma,
