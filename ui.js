@@ -505,6 +505,7 @@ GIDGET.ui = {
 	},
 	
 	modifyStylesForControl: function() {
+		$('#learnerThought').css('padding-top', '.67em');
 		$('.thoughtTable').css('padding', '.5em .5em .5em 0');
 		$('#gidgetSpeech').css('font-family', '\"Courier New\", Courier, monospace');
 		$('#learnerSpeech').css('font-family', '\"Courier New\", Courier, monospace');
@@ -518,6 +519,7 @@ GIDGET.ui = {
 	},
 
 	modifyStylesForExperimental: function() {
+		$('#learnerThought').css('padding-top', '1.1em');
 		$('.thoughtTable').css('padding', '0');
 		$('#gidgetSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
 		$('#learnerSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
