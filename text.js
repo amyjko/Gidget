@@ -381,9 +381,9 @@ GIDGET.text = {
 	noEnergy: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("CRITICAL ERROR: Energy depleted. Cannot continue program execution.", "energyLow");
+			return new GIDGET.text.Message("CRITICAL ERROR: Energy depleted. Cannot continue program execution.", "lowEnergy");
 		
-		return new GIDGET.text.Message("I ... can't... go ... any ... further...", "energyLow");
+		return new GIDGET.text.Message("I ... can't... go ... any ... further...", "lowEnergy");
 		
 	},
 	

@@ -1003,7 +1003,7 @@ GIDGET.ui = {
 		// constructing the html to display in the thought bubble.
 		var thought = "";
 
-		if(isDef(message.text)) {
+		if(isDef(message) && isDef(message.text)) {
 			var spans = this.parseThought(message.text);
 			var span;
 			var text;
@@ -1033,7 +1033,7 @@ GIDGET.ui = {
 		}
 
 		// Play the sound by the specified name.
-		if(isDef(message.sound))
+		if(isDef(message) && isDef(message.sound))
 			GIDGET.ui.media.playSound(message.sound);
 
 		this.setThought(thought, animate === true ? 50 : 0);
