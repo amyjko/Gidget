@@ -87,7 +87,7 @@ GIDGET.text = {
 	},
 
 	scan_success: function(name) {
-		GIDGET.sfx.play("scan");
+		GIDGET.ui.media.playSound("scan");
 		
 		if (GIDGET.experiment.isControl())
 			return "$scanned@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") " + " added to the scan list.";
@@ -106,7 +106,7 @@ GIDGET.text = {
 
 	go_dangerousStep: function(name, avoid) {
 
-		GIDGET.sfx.play("goto");
+		GIDGET.ui.media.playSound("goto");
 	
 		if (GIDGET.experiment.isControl())
 			return "Moving one space closer to destination, $results@0(" + name + "), but may intersect with " + avoid + ".";
@@ -116,7 +116,7 @@ GIDGET.text = {
 	},
 
 	go_step: function(name) {
-		GIDGET.sfx.play("goto");
+		GIDGET.ui.media.playSound("goto");
 	
 		if (GIDGET.experiment.isControl())
 			return "Moving one space towards destination, $results@0(" + name + ").";
@@ -158,7 +158,7 @@ GIDGET.text = {
 	},
 
 	analyze_success: function(name) {
-		GIDGET.sfx.play("analyze");
+		GIDGET.ui.media.playSound("analyze");
 		
 		if (GIDGET.experiment.isControl())
 			return "$analyzed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") analyzed.";
@@ -168,7 +168,7 @@ GIDGET.text = {
 	},
 
 	grab_success: function(name) {
-		GIDGET.sfx.play("grab");
+		GIDGET.ui.media.playSound("grab");
 		
 		if (GIDGET.experiment.isControl())
 			return "$grabbed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") grabbed. Added to list.";
@@ -178,7 +178,7 @@ GIDGET.text = {
 	},
 
 	drop_success: function(name) {
-		GIDGET.sfx.play("drop");
+		GIDGET.ui.media.playSound("drop");
 	
 		if (GIDGET.experiment.isControl())
 			return "Dropped $results@0(" + name + "). Removing from list.";
@@ -188,7 +188,7 @@ GIDGET.text = {
 	},
 
 	focus_success: function(name) {
-		GIDGET.sfx.play("focusIn");
+		GIDGET.ui.media.playSound("focusIn");
 		if (GIDGET.experiment.isControl())
 			return "Focusing on $results@0(next result), " + name;
 			
@@ -229,7 +229,7 @@ GIDGET.text = {
 	},
 
 	ask_noObject: function() {
-		GIDGET.sfx.play("error");
+		GIDGET.ui.media.playSound("error");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Nothing to <b>ask</b> by that name.";
@@ -239,7 +239,7 @@ GIDGET.text = {
 	},
 
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
-		GIDGET.sfx.play("error");
+		GIDGET.ui.media.playSound("error");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Invalid <b>ask</b> syntax. "+name.charAt(0).toUpperCase() + name.slice(1)+" expected  <b>" + numberExpected + "</b>, instead of <b>" + numberGiven + "</b>. Skipping to next instructions.";
@@ -257,7 +257,7 @@ GIDGET.text = {
 	},
 	
 	ask_unknownAction: function(name, action) {
-		GIDGET.sfx.play("error");
+		GIDGET.ui.media.playSound("error");
 		
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Invalid ask command. " +name.charAt(0).toUpperCase() + name.slice(1)+ " does not understand the action, '" + action + "'.";
@@ -331,7 +331,7 @@ GIDGET.text = {
 // *******************************************************
 	
 	editingDisabled: function() {
-		GIDGET.sfx.play("error");
+		GIDGET.ui.media.playSound("error");
 	
 		if (GIDGET.experiment.isControl())
 			return "ERROR: Cannot modify code during program execution. Click the <b>" + this.finishExecutingButtonLabel() + "</b> button to end execution.";
@@ -344,7 +344,7 @@ GIDGET.text = {
 	},
 
 	noEnergy: function(){
-		GIDGET.sfx.play("energyLow");
+		GIDGET.ui.media.playSound("energyLow");
 		
 		if (GIDGET.experiment.isControl())
 			return "CRITICAL ERROR: Energy depleted. Cannot continue program execution.";
@@ -448,7 +448,7 @@ GIDGET.text = {
 	},
 		
 	memory_unanalyzed: function(name) {
-		//GIDGET.sfx.play("error");
+		//GIDGET.ui.media.playSound("error");
 	
 		if (GIDGET.experiment.isControl())
 			return "'" + name +"' has not been analyzed. Attributes unknown.";
@@ -514,220 +514,220 @@ GIDGET.text = {
 		
 	parser_unrecognizedCommand: function(token) {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: \'" + token + "\' is an unrecognized command. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "" + token + " isn't one of the commands I know. I'm just going to go on.";
 		}
 	},
 
 	parser_noCommandAfterComma: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing command after comma. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I saw a comma so I thought there would be a command after it, but there wasn't. I'll just keep going.";
 		}
 	},
 		
 	parser_missingThingToName: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNATX ERROR: Missing thing to name. Must identify thing to name. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to name something, but I don't know what to name. I'm going to move on for now, but please tell me what you want to name next time since I'm so forgetful!";
 		}
 	},
 		
 	parser_missingName: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing new name. Must state new name. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to name something, and I know what to name, but I don't know what to name it. I'm skipping this step for now since I can't figure it out, but can you tell me what to name it next time?";
 		}
 	},
 		
 	parser_missingThingToScan: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to scan. Must identify thing to scan. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to scan something, but I don't know what. I'll move on for now, but can you make sure to tell me what to scan?";
 		}
 	},
 		
 	parser_missingThingToGoto: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to goto. Must identify thing to goto. Skipping step";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to goto something, but I don't know what. This is difficult for me so I'll move on, but can you help me by telling me where to go next time?";
 		}
 	},
 		
 	parser_missingThingToAvoid: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to avoid. Must identify thing to avoid. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?";
 		}	
 	},
 		
 	parser_missingThingToAnalyze: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to analyze. Must identify thing to analyze. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to analyze something, but I don't know what. I get confused easily so I'll skip this step for now. Can you let me know what I should be analyzing next time?";
 		}
 	},
 
 	parser_missingThingToAsk: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to ask. Must identify thing to ask. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to ask something to do something, but I don't know what to ask. I'm going to skip this step for now, but I like talking to things, so can you let me know who or what I should be asking next time?";
 		}
 	},
 
 	parser_missingTo: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing 'to' statement. State 'to' between 'ask' command and thing. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "When I ask something to do something, I have to tell it 'to', but I didn't find that here so I'll skip it for now.";
 		}	
 	},
 
 	parser_missingAction: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing action. State action for thing to do. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. I'll skip it so I don't confuse myself, but can you tell me what I should do?";
 		}
 	},
 
 	parser_missingThingToGrab: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to grab. Must identify thing to grab. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to grab something, but I don't know what. Can you tell me?";
 		}
 	},
 
 	parser_missingThingToDrop: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to drop. Must identify thing to drop. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to drop something, but I don't know what to drop. Can you tell me? It's fun holding on to things, so I'll skip this for now.";
 		}
 	},
 		
 	parser_missingPredicate: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Must state thing to check. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll skip this for now.";
 		}
 	},
 		
 	parser_missingConditionalComma: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: A comma should come before any additional commands after an 'if'. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I only know what to do when there's a comma after the test of an if so I'll skip this for now.";
 		}
 	},
 		
 	parser_missingThingToModify: function(keyword) {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Must identify thing to '" + keyword + "'. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm suppose to " + keyword + " something, but I don't know what. Can you tell me? I'll skip this for now.";
 		}
 	},
 		
 	parser_missingThingToAdd: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to add from map. Must identify thing to add. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm suppose to add something, but I don't know what. Can you tell me? I'm going to skip this for now.";
 		}
 	},
 				
 	parser_missingThingToRemove: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to remove from map. Must identify the thing to remove. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to remove something, but I don't know what to remove. Can you tell me?  I'll skip this for now.";
 		}			
 	},
 		
 	parser_missingAndPredicate: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to check. Must identify the thing to check. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll just skip this step.";
 		}
 	},
 	
 	parser_missingTag: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing tag of thing to check. Must state the tag to check. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm suppose to see if this has some tag, but I don't know which tag. Can you tell me? I'll just go on for now.";
 		}
 	},
 	
 	parser_missingQueryName: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to find. Must identify the thing to check. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm suppose to see find something with a certain name, but I don't know the name of things to find., but I don't know which tag. Can you tell me? I'll skip this step for now.";
 		}
 	},
 	
 	parser_missingOn: function() {
 		if (GIDGET.experiment.isControl()) {
-			GIDGET.sfx.play("parserErrorCtrl");
+			GIDGET.ui.media.playSound("parserErrorCtrl");
 			return "SYNTAX ERROR: Missing name of thing to check on other thing. Must identify the thing to check. Skipping step.";
 		} else {
-			GIDGET.sfx.play("parserErrorExp");
+			GIDGET.ui.media.playSound("parserErrorExp");
 			return "I know I'm suppose to find something on something else, but I don't know what something else. Can you tell me? I'll skip this for now.";
 		}
 	},

@@ -552,7 +552,10 @@ table {
 }
 
 .progress {
-	margin-top: 1em;
-	background-color: gray;
-	height: 1em;
+	margin-top: 		1em;
+	padding:			1em;
+	background-color: 	rgb(200,200,200);
+	height: 			1em;
+	overflow-x: 		visible;
+	white-space: 		nowrap;
 }

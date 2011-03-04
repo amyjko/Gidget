@@ -1,18 +1,3 @@
-function supportsCanvas() {
-
-	return !!document.createElement('canvas').getContext;
-
-}
-
-function supportsLocalStorage() {
-
-	try {
-		return 'localStorage' in window && window['localStorage'] !== null;
-	} catch(e){
-		return false;
-	}
-
-}
 
 function hideToolTip() {
 	
@@ -25,31 +10,19 @@ function hideToolTip() {
 
 $().ready(function() {
 
-	function playIntro() {
-
-		$('#loadingIntro').show();
-		var intro = GIDGET.createIntroduction();
-		var total = SCENES.imagesRemaining;
-		intro.play($('#introCanvas')[0], 
-			function() {
-			
-				var percent = (100 - Math.round(SCENES.imagesRemaining * 100 / total));
-				$('#loadingIntro .progress').width("" + percent + "%");
-			
-			},
-			function() {
-			
-				$('#loadingIntro').hide();
-				$('#intro').toggle();
-			
-			},
-			function() { 
-		
-				$('#intro').fadeTo(1000, 0.0, function() { $('#intro').hide(); });
-				$('#container').fadeTo(1000, 1.0);
-			
-			}
-		);
+	function supportsCanvas() {
+	
+		return !!document.createElement('canvas').getContext;
+	
+	}
+	
+	function supportsLocalStorage() {
+	
+		try {
+			return 'localStorage' in window && window['localStorage'] !== null;
+		} catch(e){
+			return false;
+		}
 	
 	}
 
@@ -57,15 +30,15 @@ $().ready(function() {
 	if(!supportsCanvas() || !supportsLocalStorage())
 		window.location.href = "unsupported.html";
 
+	// Add convenience functions to the local storage object to faciliate the getting and setting of object literals.
 	Storage.prototype.setObject = function(key, value) {
 	    this.setItem(key, JSON.stringify(value));
 	}
-	
 	Storage.prototype.getObject = function(key) {
 	    return this.getItem(key) && JSON.parse(this.getItem(key));
 	}
 
-	// Populate the level selection drop down.
+	// Populate the level selection drop down menu for debugging purposes.
 	var levelCount = 1;
 	for(var level in GIDGET.levels) {
 		
@@ -93,6 +66,7 @@ $().ready(function() {
 		levelCount++;
 	}
 	
+	// Log the current version of the editor code when focus is lost in the editor, also providing focus feedback.
 	$('#code').
 	focusout(function() {
 		// Controls gCode background color on focusOut (should be same as in the CSS file)
@@ -117,8 +91,7 @@ $().ready(function() {
 	
 		if($('#code').attr('contentEditable') === 'false') {
 
-//			$('#code').animate({ opacity: 0.25 }, 200, function() { $('#code').css('opacity', 1.0); });		
-
+			// Shake the editor to indicate that it's not editable.
 			var count = 0;
 			$('#code').everyTime(25, function(i) {
 				$('#code').css('margin-left', 10 - Math.random() * 20);
@@ -133,8 +106,8 @@ $().ready(function() {
 	});
 		
 	$('.popup').hide();
-	$('.introBox').hide();
 	
+	// Secret debugging keyboard shortcuts.
 	$(document).keyup(function(e) {
 	
 		if(e.keyCode == 27) {
@@ -154,7 +127,8 @@ $().ready(function() {
 		}
 	
 	});
-	
+
+	// Debugging handler for resetting progress.	
 	$('#clearLocalStorage').click(function() {
 	
 		localStorage.clear();
@@ -201,24 +175,79 @@ $().ready(function() {
 			alert("There are no more levels to go to!");
 	});
 
-	var test = localStorage;
+	function playIntro() {
 
-	// Start afresh and play intro movie is there is no record of play
+		$('#intro').show();
+		var intro = GIDGET.createIntroduction();
+		intro.play($('#introCanvas')[0], 
+			// When done, hide the intro and show the container
+			function() { 
+		
+				$('#intro').fadeTo(100, 0.0, function() { $('#intro').hide(); });
+				GIDGET.ui.drawGrid();
+				$('#container').fadeTo(1000, 1.0);
+			
+			}
+		);
+	
+	}
+
+	function playIntroductionIfNotPlayedPreviously() {
+	
+		// If there is no record of previous play, start anew
+		if(localStorage.getItem('playedMovie') === null) {
+	
+			localStorage.setItem('playedMovie', 'true');
+			
+			// Hide the container and show the introduction.
+			$('#container').fadeTo(0, 0.0);
+
+			// Play the introduction	
+			playIntro();	
+				
+		}
+		else {
+
+			$('#container').show();
+			GIDGET.ui.drawGrid();
+
+		}
+			
+	}
+
+	// Make sure only the loading dialog is visible
+	$('#loadingIntro').show();
+	$('#container').hide();
+	$('#intro').hide();
+	
+	// Load the media
+	GIDGET.ui.media.loadMedia(function(remaining, total) {
+	
+		var percent = Math.min(100, (Math.ceil(100 - Math.round(remaining * 100 / total))));
+		$('#loadingIntro .progress').width("" + percent + "%");
+		$('#loadingIntro .progress').text("" + remaining + " media remaining...");
+		
+		// If we're done, decide whether to show introduction if necessary.
+		if(remaining <= 0) {
+		
+			// Hide the loading dialog
+			$('#loadingIntro').hide();
+			playIntroductionIfNotPlayedPreviously();
+		
+		}
+
+	});	
+
+	// If we've already stored the experimental condition for this participant, load it.
+	if(localStorage.getItem('expCondition') !== null)
+		GIDGET.experiment.loadExpCondition();
+
+	// If there is no record of previous play, start on the first level.
 	if(localStorage.getItem('currentLevel') === null) {
 
 		localStorage.setItem('currentLevel', 'learnScan');
 		
-		// Hide the container and show the introduction.
-		$('#container').fadeTo(0, 0.0);
-
-		playIntro();	
-			
 	}
-
-	// If we've already stored the experimental condition for this participant,
-	// load it.
-	if(localStorage.getItem('expCondition') !== null)
-		GIDGET.experiment.loadExpCondition();
 	
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
@@ -298,10 +327,6 @@ $().ready(function() {
 
 	// State which tags we'd like to have tooltips for.
 	 tooltip(["button","h2", "h3"],"tooltip");
-
-	
-	// Pre-load sound effects
-	GIDGET.sfx.load();
 
 	// Set box and font styles depending on condition
 	if (GIDGET.experiment.condition === "control")

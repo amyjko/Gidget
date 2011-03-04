@@ -336,15 +336,13 @@ GIDGET.ui = {
 		$('#reset').attr('disabled', true);
 
 		this.currentMissionText = -1;
-
-		this.showNextMissionText();
-		
-		this.reset();
-		
+				
 		this.saveCurrentLevelCode();
 		
 		// Set titlebar with level number and title (if there is one)
 		this.showLevelInfo();		
+
+		this.showNextMissionText();
 	
 	},
 	
@@ -408,6 +406,7 @@ GIDGET.ui = {
 	
 	},
 
+	// Restores the defaults for the current level.
 	reset: function() {
 
 		this.messages = "";
@@ -790,7 +789,7 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
 					
-					GIDGET.sfx.play("goal_finalSuccess");
+					GIDGET.ui.media.playSound("goal_finalSuccess");
 					
 					this.rememberLevelPassed();					
 					
@@ -799,7 +798,7 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
 					
-					GIDGET.sfx.play("goal_finalFailure");
+					GIDGET.ui.media.playSound("goal_finalFailure");
 				}
 
 				this.enableExecutionButtons(true);
@@ -838,7 +837,7 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "happy";
 					this.visualizeDecision(GIDGET.text.goal_checkSuccess(), true);
 					
-					GIDGET.sfx.play("goal_checkSuccess");
+					GIDGET.ui.media.playSound("goal_checkSuccess");
 				
 				}
 				// If there aren't results, the goal wasn't achieved.
@@ -850,7 +849,7 @@ GIDGET.ui = {
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_checkFailure(), true);
 					
-					GIDGET.sfx.play("goal_checkFailure");
+					GIDGET.ui.media.playSound("goal_checkFailure");
 				}
 				
 				// Erase the token highlighting.
@@ -1428,7 +1427,7 @@ GIDGET.ui = {
 	},
 
 	drawGrid: function() {
-	
+		
 		var grid = this.world.grid;
 	
 		var canvas = document.getElementById('grid');

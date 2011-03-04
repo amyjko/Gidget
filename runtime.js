@@ -342,8 +342,6 @@ GIDGET.Runtime = function(thing, world) {
 
 		// Ask how much energy to deduct.
 		var deduction = step.cost(this);
-		
-		console.log("Deducting " + deduction + " from " + this.thing.name);
 
 		// Deduct the energy.
 		this.thing.energy -= deduction;
