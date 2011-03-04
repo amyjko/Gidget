@@ -15,12 +15,19 @@ var SCENES = {
 		this.length = length;
 		
 		this.sprites = [];
+		this.sounds = [];
 		
 		this.addSprite = function(sprite, begin, end) {
 		
 			this.sprites.push({ sprite: sprite, begin: begin, end: end });		
 		
 		};
+		
+		this.addSound = function(url, begin) {
+		
+			this.sounds.push({ url: url, begin: begin});
+		
+		},
 		
 		this.draw = function(canvas, time) {
 		
@@ -30,7 +37,18 @@ var SCENES = {
 	
 			ctx.fillStyle = 'rgb(0,0,0)';
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			for(i = 0; i < this.sounds.length; i++) {
 			
+				if(this.sounds[i].begin <= time) {
+					
+					GIDGET.ui.media.playSound(this.sounds[i].url);
+					this.sounds.splice(i, 1);
+					i--;
+				
+				}
+			
+			}			
 			
 			for(i = 0; i < this.sprites.length; i++) {
 			

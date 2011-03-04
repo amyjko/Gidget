@@ -70,6 +70,7 @@ GIDGET.createIntroduction = function() {
 	scene1.addSprite(frame10, 9000, 10000);
 	
 	scene1.addSprite(frame11, 10000, 11000);
+	scene1.addSound("error", 10000);
 	scene1.addSprite(frame12, 11000, 12000);
 	scene1.addSprite(frame13, 12000, 13000);
 	scene1.addSprite(frame14, 13000, 14000);
