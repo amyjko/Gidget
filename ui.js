@@ -361,7 +361,7 @@ GIDGET.ui = {
 		else {
 		
 			this.world.gidget.runtime.state = this.world.missionText[this.currentMissionText].state;
-			this.visualizeDecision(this.world.missionText[this.currentMissionText].text, false);
+			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text), false);
 		
 		}
 	
@@ -983,15 +983,18 @@ GIDGET.ui = {
 
 	// This takes a Thing's decision and converts the spans of text and references
 	// into text and user interface highlights. Currently, this is only written for Gidget.
-	visualizeDecision: function(text, animate) {
+	visualizeDecision: function(message, animate) {
+	
+		console.log("Sound = " + message.sound + ", text = " + message.text + " " + message);
 	
 		// Go through the decisions references and highlight the desired references, 
 		// constructing the html to display in the thought bubble.
 		var thought = "";
 
-		if(isDef(text)) {
-			var spans = this.parseThought(text);
+		if(isDef(message.text)) {
+			var spans = this.parseThought(message.text);
 			var span;
+			var text;
 			var reference, index;
 
 			for(span = 0; span < spans.length; span++) {
@@ -1016,6 +1019,10 @@ GIDGET.ui = {
 	
 			}
 		}
+
+		// Play the sound by the specified name.
+		if(isDef(message.sound))
+			GIDGET.ui.media.playSound(message.sound);
 
 		this.setThought(thought, animate === true ? 50 : 0);
 

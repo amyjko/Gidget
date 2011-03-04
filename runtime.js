@@ -386,7 +386,7 @@ GIDGET.Runtime = function(thing, world) {
 		this.state = isDef(state) ? state : 'default';
 
 		this.thought = message;
-						
+
 		this.execute = function() {
 		
 			if(isDef(action))

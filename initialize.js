@@ -99,7 +99,7 @@ $().ready(function() {
 				if(count === 20)
 					$('#code').css('margin-left', 0);
 			}, 20);
-			GIDGET.ui.setThought(GIDGET.text.editingDisabled(), 200);
+			GIDGET.ui.visualizeDecision(GIDGET.text.editingDisabled(), 200);
 		
 		}
 	
