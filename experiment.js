@@ -1,6 +1,6 @@
 GIDGET.experiment = {
 
-	condition: Math.round(Math.random()) < 1 ? "control" : "male",	// control, male, female
+	condition: "male",	// control, male, female
 	
 	bonusPerLevel: 0.25,
 	

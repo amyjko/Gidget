@@ -239,8 +239,14 @@ $().ready(function() {
 	});	
 
 	// If we've already stored the experimental condition for this participant, load it.
-	if(localStorage.getItem('expCondition') !== null)
+	if(localStorage.getItem('expCondition') !== null) {
 		GIDGET.experiment.loadExpCondition();
+	}
+	// If we haven't chose one, choose one and save it.
+	else {
+		GIDGET.experiment.condition = Math.round(Math.random()) < 1 ? "control" : "male";
+		GIDGET.experiment.saveExpCondition();
+	}
 
 	// If there is no record of previous play, start on the first level.
 	if(localStorage.getItem('currentLevel') === null) {
