@@ -64,8 +64,8 @@ a {
 	color:			black;
 	margin-left:	auto;
 	margin-right:	auto;
+	margin-bottom:	0em;
 	width:			60em;
-	height:			100%;
 	padding:		1em;
 	padding-top:	0em;
 	border:			1px solid gray;
