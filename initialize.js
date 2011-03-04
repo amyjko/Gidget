@@ -70,7 +70,7 @@ $().ready(function() {
 	$('#code').
 	focusout(function() {
 		// Controls gCode background color on focusOut (should be same as in the CSS file)
-		$(this).css('backgroundColor', '#f0f5f0');
+//		$(this).css('backgroundColor', '#f0f5f0');
 		
 		// Format the formatting each time to update the line and token numbers.
 		$(this).html(GIDGET.ui.gidgetCodeToHTML(GIDGET.ui.htmlToGidgetCode($(this).html())));
@@ -84,12 +84,14 @@ $().ready(function() {
 	}).
 	focusin(function() {
 		// Controls gCode background color on focusIn
-		$(this).css('backgroundColor', 'white'); // was rgb(25,25,25) for dark background
+//		$(this).css('backgroundColor', 'white'); // was rgb(25,25,25) for dark background
 	});	
 	
 	$('#code').click(function() {
 	
 		if($('#code').attr('contentEditable') === 'false') {
+
+			GIDGET.ui.visualizeDecision(GIDGET.text.editingDisabled(), 200);
 
 			// Shake the editor to indicate that it's not editable.
 			var count = 0;
@@ -99,7 +101,6 @@ $().ready(function() {
 				if(count === 20)
 					$('#code').css('margin-left', 0);
 			}, 20);
-			GIDGET.ui.visualizeDecision(GIDGET.text.editingDisabled(), 200);
 		
 		}
 	

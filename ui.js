@@ -344,6 +344,9 @@ GIDGET.ui = {
 
 		this.showNextMissionText();
 	
+		// Make the code editable
+		$('#code').attr('contentEditable', 'true');	
+	
 	},
 	
 	// Checks to see if current code has changed from the original code.
@@ -437,7 +440,6 @@ GIDGET.ui = {
 	
 	done: function() {
 		
-		$('#code').attr('contentEditable', 'true');
 		this.highlightToken(undefined);
 
 	},
@@ -481,6 +483,15 @@ GIDGET.ui = {
 	
 	},
 	
+	retryLevel: function() {
+	
+		GIDGET.ui.showExecutionControls(); 
+		GIDGET.ui.currentMissionText = -1; 
+		GIDGET.ui.showNextMissionText();
+		$('#code').attr('contentEditable', 'true');	
+	
+	},
+	
 	showLevelControls: function() {
 		var message;	
 		if (GIDGET.experiment.isControl())
@@ -491,7 +502,7 @@ GIDGET.ui = {
 		if (this.world.gidget.runtime.state == "sad") {
 			GIDGET.ui.setThought(
 				"<span id='learnerSpeech'>"+message+"</span> <br>" +
-				"<button onclick='GIDGET.ui.showExecutionControls(); GIDGET.ui.currentMissionText = -1; GIDGET.ui.showNextMissionText();'>retry this mission!</button><br>", 
+				"<button onclick='GIDGET.ui.retryLevel();'>retry this mission!</button><br>", 
 				0, "learner");
 		} else {
 			GIDGET.ui.setThought(
@@ -610,8 +621,7 @@ GIDGET.ui = {
 	stepLog: [],
 	
 	logStep: function(kind) {
-		this.stepState = kind;
-		
+			
 		// Save the kind of command, when it happened, and for which level.
 		this.stepLog.push({ 
 			kind: kind, 
@@ -631,6 +641,8 @@ GIDGET.ui = {
 	},
 
 	runToEnd: function() {
+
+		GIDGET.ui.media.disableSounds = true;
 		
 		this.logStep("end");
 		
@@ -645,6 +657,8 @@ GIDGET.ui = {
 
 		this.executeGoals();
 		
+		GIDGET.ui.media.disableSounds = false;
+
 		while(this.goalNumberBeingExecuted <= this.world.goals.length)
 			GIDGET.ui.step(false, false);
 
@@ -984,8 +998,6 @@ GIDGET.ui = {
 	// This takes a Thing's decision and converts the spans of text and references
 	// into text and user interface highlights. Currently, this is only written for Gidget.
 	visualizeDecision: function(message, animate) {
-	
-		console.log("Sound = " + message.sound + ", text = " + message.text + " " + message);
 	
 		// Go through the decisions references and highlight the desired references, 
 		// constructing the html to display in the thought bubble.

@@ -140,11 +140,13 @@ a {
 #code[contentEditable="false"] {
 	overflow-x: 	auto;
 	word-wrap: break-word;
+	background-color: lightGray;
 }
 
 #code[contentEditable="true"] {
 	color:			black;
 	overflow-x: 	auto;
+	background-color: white;
 }
 
 #goalBox {

@@ -1,5 +1,7 @@
 GIDGET.ui.media = {
 
+	disableSounds: false,
+
 	mediaToLoad: 0,
 	mediaRemainingToLoad: 0,
 
@@ -20,7 +22,7 @@ GIDGET.ui.media = {
 	playSound: function(command) {
 
 		// Play sounds as long as the learner didn't press the (runTo)"End" button.
-		if (GIDGET.ui.stepState !== "end") {
+		if(!this.disableSounds) {
 
 			var sound = this.sounds[command];
 			if(isDef(sound))
