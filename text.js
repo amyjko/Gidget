@@ -9,10 +9,11 @@ GIDGET.text = {
 // *** R U N T I M E - M E S S A G E S *******************
 // *******************************************************
 
-	Message: function(text, sound) {
+	Message: function(text, sound, functionToCall) {
 	
 		this.text = text;
 		this.sound = sound;
+		this.functionToCall = functionToCall;
 		
 		return this;
 	
@@ -546,11 +547,20 @@ GIDGET.text = {
 
 		
 	parser_unrecognizedCommand: function(token) {
-		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: \'" + token + "\' is an unrecognized command. Skipping step.", "parserErrorCtrl");
-		} else {
-			return new GIDGET.text.Message("" + token + " isn't one of the commands I know. I'm just going to go on.", "parserErrorExp");
+	
+		function showCommands() {
+		
+			GIDGET.ui.toggleCheatsheet(true);
+			$('#cheatsheet').addClass('runtimeReference');
+		
 		}
+	
+		if (GIDGET.experiment.isControl()) {
+			return new GIDGET.text.Message("SYNTAX ERROR: \'" + token + "\' is an unrecognized command. Skipping step.", "parserErrorCtrl", showCommands);
+		} else {
+			return new GIDGET.text.Message("" + token + " isn't one of the commands I know. I'm just going to go on.", "parserErrorExp", showCommands);
+		}
+		
 	},
 
 	parser_noCommandAfterComma: function() {
@@ -578,94 +588,128 @@ GIDGET.text = {
 	},
 		
 	parser_missingThingToScan: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('scan'); }
+	
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to scan. Must identify thing to scan. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to scan. Must identify thing to scan. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to scan something, but I don't know what. I'll move on for now, but can you make sure to tell me what to scan?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to scan something, but I don't know what. I'll move on for now, but can you make sure to tell me what to scan?", "parserErrorExp", showCommand);
 		}
 	},
 		
 	parser_missingThingToGoto: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('goto'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to goto. Must identify thing to goto. Skipping step", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to goto. Must identify thing to goto. Skipping step", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to goto something, but I don't know what. This is difficult for me so I'll move on, but can you help me by telling me where to go next time?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to goto something, but I don't know what. This is difficult for me so I'll move on, but can you help me by telling me where to go next time?", "parserErrorExp", showCommand);
 		}
 	},
 		
 	parser_missingThingToAvoid: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('goto'); }
+	
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to avoid. Must identify thing to avoid. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to avoid. Must identify thing to avoid. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?", "parserErrorExp", showCommand);
 		}	
 	},
 		
 	parser_missingThingToAnalyze: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('analyze'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to analyze. Must identify thing to analyze. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to analyze. Must identify thing to analyze. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to analyze something, but I don't know what. I get confused easily so I'll skip this step for now. Can you let me know what I should be analyzing next time?");
+			return new GIDGET.text.Message("I know I'm supposed to analyze something, but I don't know what. I get confused easily so I'll skip this step for now. Can you let me know what I should be analyzing next time?", "parserErrorExp", showCommand);
 		}
 	},
 
 	parser_missingThingToAsk: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('ask'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to ask. Must identify thing to ask. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to ask. Must identify thing to ask. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to ask something to do something, but I don't know what to ask. I'm going to skip this step for now, but I like talking to things, so can you let me know who or what I should be asking next time?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to ask something to do something, but I don't know what to ask. I'm going to skip this step for now, but I like talking to things, so can you let me know who or what I should be asking next time?", "parserErrorExp", showCommand);
 		}
 	},
 
 	parser_missingTo: function() {
+
+		function showCommand() { GIDGET.ui.highlightCommand('ask'); }	
+	
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing 'to' statement. State 'to' between 'ask' command and thing. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing 'to' statement. State 'to' between 'ask' command and thing. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("When I ask something to do something, I have to tell it 'to', but I didn't find that here so I'll skip it for now.", "parserErrorExp");
+			return new GIDGET.text.Message("When I ask something to do something, I have to tell it 'to', but I didn't find that here so I'll skip it for now.", "parserErrorExp", showCommand);
 		}	
 	},
 
 	parser_missingAction: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('ask'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing action. State action for thing to do. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing action. State action for thing to do. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. I'll skip it so I don't confuse myself, but can you tell me what I should do?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. I'll skip it so I don't confuse myself, but can you tell me what I should do?", "parserErrorExp", showCommand);
 		}
 	},
 
 	parser_missingThingToGrab: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('grab'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to grab. Must identify thing to grab. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to grab. Must identify thing to grab. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to grab something, but I don't know what. Can you tell me?", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to grab something, but I don't know what. Can you tell me?", "parserErrorExp", showCommand);
 		}
 	},
 
 	parser_missingThingToDrop: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('drop'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to drop. Must identify thing to drop. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to drop. Must identify thing to drop. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to drop something, but I don't know what to drop. Can you tell me? It's fun holding on to things, so I'll skip this for now.", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to drop something, but I don't know what to drop. Can you tell me? It's fun holding on to things, so I'll skip this for now.", "parserErrorExp", showCommand);
 		}
 	},
-		
+
 	parser_missingPredicate: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('if'); }
+	
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: Must state thing to check. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: Must state thing to check. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll skip this for now.", "parserErrorExp");
+			return new GIDGET.text.Message("I know I'm supposed to check something, but I don't know to check. Can you tell me? I'll skip this for now.", "parserErrorExp", showCommand);
 		}
 	},
 		
 	parser_missingConditionalComma: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('if'); }
+
 		if (GIDGET.experiment.isControl()) {
-			return new GIDGET.text.Message("SYNTAX ERROR: A comma should come before any additional commands after an 'if'. Skipping step.", "parserErrorCtrl");
+			return new GIDGET.text.Message("SYNTAX ERROR: A comma should come before any additional commands after an 'if'. Skipping step.", "parserErrorCtrl", showCommand);
 		} else {
-			return new GIDGET.text.Message("I only know what to do when there's a comma after the test of an if so I'll skip this for now.", "parserErrorExp");
+			return new GIDGET.text.Message("I only know what to do when there's a comma after the test of an if so I'll skip this for now.", "parserErrorExp", showCommand);
 		}
 	},
 		
 	parser_missingThingToModify: function(keyword) {
+	
 		if (GIDGET.experiment.isControl()) {
 			return new GIDGET.text.Message("SYNTAX ERROR: Must identify thing to '" + keyword + "'. Skipping step.","parserErrorCtrl");
 		} else {
@@ -714,6 +758,7 @@ GIDGET.text = {
 	},
 	
 	parser_missingOn: function() {
+		
 		if (GIDGET.experiment.isControl()) {
 			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to check on other thing. Must identify the thing to check. Skipping step.", "parserErrorCtrl");
 		} else {

@@ -176,6 +176,12 @@ $().ready(function() {
 			alert("There are no more levels to go to!");
 	});
 
+	$('#toggleCheatsheet').click(function() {
+
+		GIDGET.ui.toggleCheatsheet();
+		
+	}).click();
+	
 	function playIntro() {
 
 		$('#intro').show();

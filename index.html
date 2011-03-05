@@ -44,6 +44,40 @@
 				</div>
 				<div>
 					<div id='code' class='codeContainer' contentEditable='true'></div>
+					
+					<button id='toggleCheatsheet' style='margin-top:-1em;margin-left:10em'>show steps</button>
+					
+					<div id='cheatsheet' class='infoPanel'>
+						<div id='cheat-scan' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>scan </span><span class='sourceToken identifier'>thing</span></div>
+							<div class='cheatsheetExplanation'>Enables Gidget to <span class='sourceToken keyword'>goto</span> a thing.</div>
+						</div>
+						<div id='cheat-goto' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>goto </span><span class='sourceToken identifier'>thing </span><span class='sourceToken optional'>avoid thing</span></div>
+							<div class='cheatsheetExplanation'>Moves Gidget to all of the things matching the name <span class='sourceToken identifier'>thing</span>. If a thing to avoid is supplied, Gidget tries to find a path that avoids things with the given name.</div>
+						</div>
+						<div id='cheat-ask' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>ask </span><span class='sourceToken identifier'>thing</span> <span class='sourceToken keyword'>to </span><span class='sourceToken identifier'>action </span><span class='sourceToken optional'>things...</span></div>
+							<div class='cheatsheetExplanation'>Causes thing to perform an action.</div>
+						</div>
+						<div id='cheat-analyze' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>analyze </span><span class='sourceToken identifier'>thing</span></div>
+							<div class='cheatsheetExplanation'>Enables Gidget to ask a thing to perform an action.</div>
+						</div>
+						<div id='cheat-grab' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>grab </span><span class='sourceToken identifier'>thing</span></div>
+							<div class='cheatsheetExplanation'>Enables Gidget to move a thing to wherever he moves.</div>
+						</div>
+						<div id='cheat-drop' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>drop </span><span class='sourceToken identifier'>thing</span></div>
+							<div class='cheatsheetExplanation'>Stops grabbing a thing.</div>
+						</div>
+						<div id='cheat-if' class='cheatsheetItem'>
+							<div class='sourceLine'><span class='sourceToken keyword'>if </span><span class='sourceToken identifier'>thing </span><span class='sourceToken keyword'>is(n't) </span><span class='sourceToken identifier'>aspect</span>, ...</div>
+							<div class='cheatsheetExplanation'>Only executes step if the thing has the specified aspect.</div>
+						</div>
+					</div>
+					
 					<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 				</div>			
 					

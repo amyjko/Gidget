@@ -157,6 +157,14 @@ GIDGET.World = function(gridSize, gidgetPos, groundAtt, code) {
 		this.numberOfLevels = index-1;
 	}
 
+	this.hiddenCommands = [];
+
+	this.addHiddenCommand = function(name) {
+	
+		this.hiddenCommands[name] = true;
+	
+	};
+ 
 	// Add a paragraph of text and an associated emotional state for it.
 	this.addMissionText = function(state, text) {
 

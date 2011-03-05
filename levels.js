@@ -20,6 +20,12 @@ GIDGET.levels = {
 
 		var world = new GIDGET.World([3], [1,1,50], ["grass", "olivedrab", 1], code);
 			
+		world.addHiddenCommand('goto');
+		world.addHiddenCommand('ask');
+		world.addHiddenCommand('grab');
+		world.addHiddenCommand('drop');
+		world.addHiddenCommand('analyze');
+			
 		// ---- G O A L S --------
 		
 		world.addGoal("scanned rock");
