@@ -225,7 +225,6 @@ GIDGET.ui = {
 		
 			var classes = 'sourceToken';
 			
-
 			if(string.match(/scan|say|analyze|goto|ask|to|grab|drop|it|if|is|are|on|avoid/))
 				classes = classes + ' keyword';		
 				
@@ -342,8 +341,9 @@ GIDGET.ui = {
 		// Set titlebar with level number and title (if there is one)
 		this.showLevelInfo();		
 
+		// Show the first mission text.
 		this.showNextMissionText();
-	
+
 		// Make the code editable
 		$('#code').attr('contentEditable', 'true');	
 	
@@ -374,12 +374,20 @@ GIDGET.ui = {
 	
 		this.currentMissionText++;
 	
-		if(this.currentMissionText >= this.world.missionText.length)
+		if(this.currentMissionText >= this.world.missionText.length) {
+
 			this.currentMissionText = undefined;
+			this.showExecutionControls();
+			
+		}
 		else {
 		
 			this.world.gidget.runtime.state = this.world.missionText[this.currentMissionText].state;
 			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text), false);
+
+			GIDGET.ui.setThought(
+				"<div style='text-align:right'><button onclick='GIDGET.ui.step()'>next...</button></div>", 
+				0, "learner");
 		
 		}
 	
@@ -412,7 +420,6 @@ GIDGET.ui = {
 		if(isDef(nextLevel)) {
 		
 			this.setLevel(nextLevel);
-			this.showExecutionControls();
 		
 		}
 		else {
@@ -473,12 +480,6 @@ GIDGET.ui = {
 
 		this.updateRuntimeUserInterface();
 	
-		// It may be the case that there is no code.	
-/*
-		if(this.world.gidget.runtime.isExecuting())
-			this.step(false, true);
-*/
-
 	},
 	
 	showExecutionControls: function() {
@@ -501,8 +502,7 @@ GIDGET.ui = {
 	retryLevel: function() {
 	
 		GIDGET.ui.showExecutionControls(); 
-		GIDGET.ui.currentMissionText = -1; 
-		GIDGET.ui.showNextMissionText();
+		GIDGET.ui.currentMissionText = undefined;
 		$('#code').attr('contentEditable', 'true');	
 	
 	},
@@ -523,7 +523,7 @@ GIDGET.ui = {
 			GIDGET.ui.setThought(
 				"<span id='learnerSpeech'>"+message+"</span> <br>" +
 				"<button onclick='GIDGET.ui.nextLevel()'>start the next mission!</button><br>" +
-				"<button onclick='GIDGET.ui.showExecutionControls()'>redo this mission!</button><br>", 
+				"<button onclick='GIDGET.ui.retryLevel()'>redo this mission!</button><br>", 
 				0, "learner");
 		}
 	

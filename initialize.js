@@ -284,9 +284,6 @@ $().ready(function() {
 		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
 	}
 	
-	// Populate Learner Communication Box
-	GIDGET.ui.showExecutionControls();
-
 	// Update the bonus pay for MTURK
 	GIDGET.ui.updateBonus();
 	
