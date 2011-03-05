@@ -256,11 +256,8 @@ $().ready(function() {
 	}
 
 	// If there is no record of previous play, start on the first level.
-	if(localStorage.getItem('currentLevel') === null) {
-
+	if(localStorage.getItem('currentLevel') === null)
 		localStorage.setItem('currentLevel', 'learnScan');
-		
-	}
 	
 	// Set the current level to whatever was found in local storage (or the default).		
 	GIDGET.ui.setLevel(localStorage.currentLevel);
@@ -287,7 +284,19 @@ $().ready(function() {
 	// Update the bonus pay for MTURK
 	GIDGET.ui.updateBonus();
 	
-	//Targets a tag using jQuery and adding a div to it. It extracts the 'title' tag from the code and uses that as its text.
+	// Sets UI styles based on condition
+	if (GIDGET.experiment.condition === "control") {
+		GIDGET.ui.modifyStylesForControl();
+		$("#memoryBoxHeading").html("memory bank");
+	} else {
+		GIDGET.ui.modifyStylesForExperimental();
+		$("#memoryBoxHeading").html("gidget's memory");
+	}
+	
+	
+	
+	// Add Tooltips
+	// Targets a tag using jQuery adding a div to it. Uses the 'title' attribute as its text.
 	function tooltip(target_items, name) {
 		var index = 0;
 
@@ -337,11 +346,5 @@ $().ready(function() {
 
 	// State which tags we'd like to have tooltips for.
 	 tooltip(["button","h2", "h3"],"tooltip");
-
-	// Set box and font styles depending on condition
-	if (GIDGET.experiment.condition === "control")
-		GIDGET.ui.modifyStylesForControl();
-	else
-		GIDGET.ui.modifyStylesForExperimental();
 
 });
