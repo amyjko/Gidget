@@ -190,14 +190,9 @@ textarea {
 	padding: 		1em;
 	font-size:		small;
 	width:			18em;
+	border-width:	1px;
 	border-radius: 	0em;
 	-moz-border-radius: 0em;
-	border-width:	1px;
-}
-
-.cheatsheetExplanation {
-	margin-left:	1em;
-	margin-bottom:	.5em;
 }
 
 #cheatsheet.runtimeReference {
@@ -206,6 +201,16 @@ textarea {
 
 #cheatsheet .cheatsheetItem.runtimeReference {
 	border: 3px solid red;
+}
+
+#toggleCheatsheet {
+	margin-top:		-1em;
+	margin-left:	7em;
+}
+
+.cheatsheetExplanation {
+	margin-left:	1em;
+	margin-bottom:	.5em;
 }
 
 /** M I S S I O N **************************************/

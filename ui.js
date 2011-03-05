@@ -1102,9 +1102,9 @@ GIDGET.ui = {
 		else {
 		
 			if($('#cheatsheet').css('display') === 'none')
-				$('#toggleCheatsheet').text("hide steps");
+				$('#toggleCheatsheet').text("hide instructions key");
 			else
-				$('#toggleCheatsheet').text("show steps");		
+				$('#toggleCheatsheet').text("show instructions key");		
 	
 			$('#cheatsheet').slideToggle(200);
 			
