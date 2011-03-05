@@ -284,15 +284,14 @@ $().ready(function() {
 	// Update the bonus pay for MTURK
 	GIDGET.ui.updateBonus();
 	
-	// Sets UI styles based on condition
-	if (GIDGET.experiment.condition === "control") {
-		GIDGET.ui.modifyStylesForControl();
+	// Sets box labels condition
+	if (GIDGET.experiment.condition === "control")		
 		$("#memoryBoxHeading").html("memory bank");
-	} else {
-		GIDGET.ui.modifyStylesForExperimental();
+	else
 		$("#memoryBoxHeading").html("gidget's memory");
-	}
 	
+	// Sets communication bubble styles based on condition
+	GIDGET.ui.modifyCommStyles();
 	
 	
 	// Add Tooltips

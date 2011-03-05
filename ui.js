@@ -386,7 +386,7 @@ GIDGET.ui = {
 			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text), false);
 
 			GIDGET.ui.setThought(
-				"<div style='text-align:right'><button onclick='GIDGET.ui.step()'>next...</button></div>", 
+				"<div><button onclick='GIDGET.ui.step()' class='align-right'>next...</button></div>", 
 				0, "learner");
 		
 		}
@@ -532,32 +532,29 @@ GIDGET.ui = {
 	
 	},
 	
-	modifyStylesForControl: function() {
-		$('#learnerThought').css('padding-top', '1.1em');
-		$('.thoughtTable').css('padding', '.5em .5em .5em 0');
-		$('#gidgetSpeech').css('font-family', '\"Courier New\", Courier, monospace');
-		$('#learnerSpeech').css('font-family', '\"Courier New\", Courier, monospace');
-		$('#code').css('border-radius', '.25em .25em .25em .25em');
-		$('#code').css('-moz-border-radius', '.25em .25em .25em .25em');
-		$('#goals').css('border-radius', '.25em .25em .25em .25em');
-		$('#goals').css('-moz-border-radius', '.25em .25em .25em .25em');
-		$('#memory').css('border-radius', '.25em .25em .25em .25em');
-		$('#memory').css('-moz-border-radius', '.25em .25em .25em .25em');
-			
+	modifyCommStylesForControl: function() {
+		$('#thoughtsContainer').css('font-family', '\"Courier New\", Courier, monospace');
+		$('#code').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
+		$('#goals').css({'border-radius': '.25em', '-moz-border-radius': '.25em'})
+		$('#memory').css({'border-radius': '.25em', '-moz-border-radius': '.25em'})
+		
+		$("body").append("<style type='text/css'>#thoughtsContainer button{font-family: \"Courier New\", Courier, monospace;}</style>");
 	},
 
-	modifyStylesForExperimental: function() {
-		$('#learnerThought').css('padding-top', '1.1em');
-		$('.thoughtTable').css('padding', '0');
-		$('#gidgetSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
-		$('#learnerSpeech').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
-		$('#code').css('border-radius', '1em .5em 1em .5em');
-		$('#code').css('-moz-border-radius', '1em .5em 1em .5em');
-		$('#goals').css('border-radius', '1em .5em 1em .5em');
-		$('#goals').css('-moz-border-radius', '.1em .5em 1em .5em');
-		$('#memory').css('border-radius', '1em .5em 1em .5em');
-		$('#memory').css('-moz-border-radius', '1em .5em 1em .5em');
-			
+	modifyCommStylesForExperimental: function() {
+		$('#thoughtsContainer').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
+		$('#code').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
+		$('#goals').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
+		$('#memory').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
+		
+		$("body").append("<style type='text/css'>#thoughtsContainer button{font-family: Verdana, Arial, Helvetica, sans-serif;}</style>");
+	},
+	
+	modifyCommStyles: function() {
+		if (GIDGET.experiment.condition === "control")
+			this.modifyCommStylesForControl();
+		else
+			this.modifyCommStylesForExperimental();	
 	},
 	
 	
@@ -577,7 +574,7 @@ GIDGET.ui = {
 		}
 		
 		if (GIDGET.experiment.isControl()){
-			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 1em 0 .5em;' /></td><td>" + message + "</td></tr></table></div>";	
+			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 1em 0 .5em;' /></td><td style='width: 100%;'>" + message + "</td></tr></table></div>";	
 		}
 		else {
 			return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
@@ -775,6 +772,9 @@ GIDGET.ui = {
 
 		// Hide the cheatsheet
 		GIDGET.ui.toggleCheatsheet(false);
+
+		// Update communication bubble styles for condition
+		//GIDGET.ui.modifyCommStyles();
 
 		// Remove highlighting
 		this.hideUnknownCommands();

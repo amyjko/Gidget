@@ -90,8 +90,10 @@
 				<h2 title="This is the area where you can see Gidget out in the field.">World</h2>
 				<div class='thoughtBubbleThing' id='thingThought'></div>
 				<canvas id='grid' width='300' height='300' title="This is Gidget's world! You can give him commands by editing the code in the left panel, and communicate with him in the panels below!"></canvas>
-				<div id='learnerThought'></div>
-				<div id='gidgetThought'></div>
+				<div id="thoughtsContainer">
+					<div id='learnerThought'></div>
+					<div id='gidgetThought'></div>
+				</div>
 			</div>
 			
 			<!-- RIGHT PANEL -->
@@ -256,8 +258,8 @@
 		<h2>Debug Menu</h2>
 		<p><button id='playIntro'>play intro</button></p>
 		<p>Choose a level:<br /><select id='levels'></select>  <button id='gotoNextLevel'>next</button><br /><button id='clearLocalStorage'>Reset progress</button></p>
-		<p>Experimental Options: </p>
-		<p><button id='setCondControl'>control</button> <button id='setCondMale'>male &#9794;</button> <button id='setCondFemale'>female &#9792;</button></p>
+		<p>Condition: </p>
+		<p><button id='setCondControl'>control</button> <button id='setCondFemale'>experimental &#9792;/&#9794;</button></p>
 	</div>
 
 	<div class='popup' id='loadingIntro'>

@@ -329,11 +329,33 @@ textarea {
 	border:				2px solid #a9a9a9;
 	border-radius: 		1em;
 	-moz-border-radius: 1em;
-	width: 100%;
+	width: 				100%;
 }
 
 .thoughtBubbleCommunication button {
 	margin-top:	1em;
+}
+
+/** LEARNER **********/
+
+#learnerThought {
+	padding-top:		1.1em;
+}
+
+#learnerSpeech {
+	color:				black;
+	font-size:			small;
+}
+
+.thoughtBubbleControl {
+	background-color: #f0f0f0; /* Color 6b */
+	padding:			.25em;
+	margin-top:			.5em;
+	min-height:			2em;
+	font-family: 		"Courier New", Courier, monospace;
+	border:				2px solid #a9a9a9;
+	border-radius: 		.25em;
+	-moz-border-radius: .25em;
 }
 
 img.thoughtFloat{
@@ -345,7 +367,7 @@ img.thoughtFloat{
 .thoughtTable {
 	margin:		0em;
 	margin-top:	.5em;
-	padding:	0 .5em .5em 0;
+	padding:	0 0 .5em 0;
 }
 
 .thoughtTable td {
@@ -359,29 +381,12 @@ img.thoughtFloat{
 	padding-top:	1em;
 }
 
-/** LEARNER **********/
-
-#learnerSpeech {
-	color:				black;
-	font-size:			small;		
-}
-
-.thoughtBubbleControl {
-	background-color: #f0f0f0; /* Color 6b */
-	padding:		.25em;
-	margin-top:		.5em;
-	min-height:		2em;
-	font-family: 	"Courier New", Courier, monospace;
-	border:			2px solid #a9a9a9;
-	border-radius: 	.25em;
-	-moz-border-radius: .25em;
-}
 
 /** GIDGET ***********/
 
 #gidgetSpeech {
 	color:				black;
-	font-size:			11.5pt;	
+	font-size:			10.5pt;
 }
 
 /** THING ************/
