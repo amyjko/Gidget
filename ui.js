@@ -457,6 +457,8 @@ GIDGET.ui = {
 		this.done();
 		
 		this.drawGrid();
+		
+		this.updateRuntimeUserInterface();
 
 	},
 	
@@ -504,6 +506,7 @@ GIDGET.ui = {
 		GIDGET.ui.showExecutionControls(); 
 		GIDGET.ui.currentMissionText = undefined;
 		$('#code').attr('contentEditable', 'true');	
+		GIDGET.ui.reset();
 	
 	},
 	
