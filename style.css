@@ -20,6 +20,10 @@
 
 */
 
+/*********************************************************
+****** M A I N - T A G S *********************************
+*********************************************************/
+
 body {
 	background: 	white; /* Color 0 */
 	color: 			black;
@@ -39,172 +43,9 @@ a {
 	text-decoration: none;
 }
 
-#titleBar {
-	background:		#5386c2; /* Color 1 */
-	color: 			white;
-
-	font-size:		medium;
-	font-weight: 	bold;
-	margin-left:	auto;
-	margin-right:	auto;
-	width:			60em;
-	height:			1.5em;
-	vertical-align: middle;
-	
-	padding:		1em; /*.5em 1em .5em 1em;*/
-	border:			1px solid gray;
-	border-top-right-radius:	.5em;
-	border-top-left-radius:		.5em;
-	-moz-border-radius-topleft: .5em;
-	-moz-border-radius-topright: .5em;
-}
-
-#content {
-	background-color: #d5e7ff;
-	color:			black;
-	margin-left:	auto;
-	margin-right:	auto;
-	margin-bottom:	0em;
-	width:			60em;
-	padding:		1em;
-	padding-top:	0em;
-	border:			1px solid gray;
-	vertical-align: top;
-	text-align: 	left;
-
-	border-bottom-right-radius:		1em;
-	border-bottom-left-radius:		1em;
-	-moz-border-radius-bottomleft:	1em;
-	-moz-border-radius-bottomright: 1em;
-}
-
-#leftPanel {
-	width:			20em;
-	float: 			left;
-}
-
-#centerPanel {
-	width:			19em;
-	float: 			left;
-}
-
-#rightPanel {
-	width:			19.25em;
-	float: 			right;
-}
-
-#grid {
-	margin:				 0em; 
-	border-radius:		.25em;
-	-moz-border-radius: .25em;
-}
-
-.infoPanel {
-	background:		#f0f0f0; /* Color 3 */
-	border:			2px solid #a9a9a9;
-	border-radius: 	.5em;
-	
-	border-bottom-right-radius: 1em;
-	border-top-left-radius: 	1em;
-	-moz-border-radius: 1em .5em 1em .5em;
-}
-
-#memory {
-	color:			black;
-	padding: 		0em 1em .5em 1em;
-}
-
-#controls {
-	padding:		.25em;
-	margin-top:		.5em;
-	text-align: 	center;
-}
-
-.codeContainer {
-	font-family: 	"Courier New", Courier, monospace;
-	font-size: 		small;
-}
-
-#code {
-	background-color: #f0f5f0; /* Color 4*/
-	color: 			black;
-	font-family: 	"Courier New", Courier, monospace;
-	font-weight: 	bold;
-	font-size: 		small;
-	width:			20em;
-	height:			18.5em;
-	border:			2px solid #a9a9a9;
-	padding: 		1em;
-
-	z-index:		2;
-
-	border-radius: 		1em .5em 1em .5em;
-	-moz-border-radius: 1em .5em 1em .5em;
-}
-
-#code[contentEditable="false"] {
-	overflow-x: 	auto;
-	word-wrap: break-word;
-	background-color: lightGray;
-}
-
-#code[contentEditable="true"] {
-	color:			black;
-	overflow-x: 	auto;
-	background-color: white;
-}
-
-#goalBox {
-	background-color: #fcc; /* Color 7 */
-	width:		100%;
-	padding:	.2em;
-	padding-left:0em;
-}
-
-#goalLine {
-	background-color: #fcc; /* Color 7 */
-	color:rgb(201,170,55);
-	padding-left:	.3em;
-	padding-top:	.25em;
-	padding-bottom:	.25em;
-	padding-right:	.25em;
-}
-
-#goals {
-	background-color: #f0f0f0; /* Color 3 */
-	color:			black;
-	font-family: 	"Courier New", Courier, monospace;
-	font-weight: 	bold;
-	font-size: 		small;
-	width:			20em;
-	padding:		1em;	
-}
-
-#goals table {
-	width: inherit;
-	word-wrap: 		break-word;
-}
-
-
-.goal {
-	font-family: 	"Courier New", Courier, monospace;
-	font-size:		small;
-	color: 			black;
-	font-weight:	bold;
-}
-
-.success {
-	font-family:	Arial, Helvetica, sans-serif;
-	font-size:		10pt;
-	margin-left:	1em;
-	color:			green;
-}
-
-.failure {
-	font-family:	Arial, Helvetica, sans-serif;
-	font-size:		10pt;
-	margin-left:	1em;
-	color:			red;
+table {
+	padding: 0em;
+	margin: 0em;
 }
 
 h1 {
@@ -239,43 +80,243 @@ textarea {
 	margin: 		0em;
 }
 
-.runtimeInfoContainer {
-	font-family: 	Arial;
-	text-transform: lowercase;
-	font-size:		small;
+/*********************************************************
+****** C O N T A I N E R *********************************
+*********************************************************/
+
+#titleBar {
+	background:		#5386c2; /* Color 1 */
+	color: 			white;
+
+	font-size:		medium;
+	font-weight: 	bold;
+	margin-left:	auto;
+	margin-right:	auto;
+	width:			60em;
+	height:			1.5em;
+	vertical-align: middle;
+	
+	padding:		1em;
+	border:			1px solid gray;
+	border-top-right-radius:	.5em;
+	border-top-left-radius:		.5em;
+	-moz-border-radius-topleft: .5em;
+	-moz-border-radius-topright: .5em;
+}
+
+#titleRight {
+	float: right;
+	font-size:	small;
+}
+
+#content {
+	background-color: #d5e7ff;
+	color:			black;
+	margin-left:	auto;
+	margin-right:	auto;
+	margin-bottom:	0em;
+	width:			60em;
+	padding:		1em;
+	padding-top:	0em;
+	border:			1px solid gray;
+	vertical-align: top;
+	text-align: 	left;
+
+	border-bottom-right-radius:		1em;
+	border-bottom-left-radius:		1em;
+	-moz-border-radius-bottomleft:	1em;
+	-moz-border-radius-bottomright: 1em;
+}
+
+
+/*********************************************************
+****** L E F T - P A N E L *******************************
+*********************************************************/
+
+#leftPanel {
 	width:			20em;
-	min-height:		4em;
+	float: 			left;
+}
+
+/** C O D E - B O X *************************************/
+
+.codeContainer {
+	font-family: 	"Courier New", Courier, monospace;
+	font-size: 		small;
+}
+
+#code {
+	background-color: #f0f5f0; /* Color 4*/
+	color: 			black;
+	font-family: 	"Courier New", Courier, monospace;
+	font-weight: 	bold;
+	font-size: 		small;
+	width:			20em;
+	height:			18.5em;
+	border:			2px solid #a9a9a9;
+	padding: 		1em;
+
+	z-index:		2;
+
+	border-radius: 		1em .5em 1em .5em;
+	-moz-border-radius: 1em .5em 1em .5em;
+}
+
+#code[contentEditable="false"] {
+	overflow-x: 		auto;
+	word-wrap: 			break-word;
+	background-color: 	lightGray;
+}
+
+#code[contentEditable="true"] {
+	color:				black;
+	overflow-x: 		auto;
+	background-color: 	white;
+}
+
+#commandReset {
+	float: right;
+	margin-top: 1em;
+	margin-right: 2em;	
+}
+
+/** C H E A T - S H E E T *******************************/
+
+#cheatsheet {
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
+	margin-left:	1em;
+	margin-right:	1em;
+	margin-top:		-.8em;
+	padding: 		1em;
+	font-size:		small;
+	width:			18em;
+	border-radius: 	0em;
+	-moz-border-radius: 0em;
+	border-width:	1px;
+}
+
+.cheatsheetExplanation {
+	margin-left:	1em;
+	margin-bottom:	.5em;
+}
+
+#cheatsheet.runtimeReference {
+	border: 3px solid red;
+}
+
+#cheatsheet .cheatsheetItem.runtimeReference {
+	border: 3px solid red;
+}
+
+/** M I S S I O N **************************************/
+
+#mission {
+	width:			18em;
+	height:			17em;
+	top: 			4.5em;
+	display:		none;
+	position:		absolute;
+	background:		rgb(42,33,28);
+	border:			2px solid rgb(200,200,200);
+	border-radius: 	.25em;
+	-moz-border-radius: .25em;
+	text-align:		right;
+	z-index:		50;
+	padding: 		1em;
+}
+
+#missionText {
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
+	padding-bottom:	1em;
 	text-align: 	left;
 }
 
-.thoughtBubbleThing {
-	background-color: white; /* Color 6 */
-	color:			black;
-	padding:		.25em;
-	margin-top:		.5em;
-	min-height:		2em;
-	font-family: 	Verdana, Arial, Helvetica, sans-serif;
-	border:			2px solid #a9a9a9;
-	border-radius: 	1em;
-	-moz-border-radius: 1em;
+/** G O A L - B O X ************************************/
+
+#goals {
+	background-color: 	#f0f0f0; /* Color 7*/
+	color:				black;
+	font-family:		"Courier New", Courier, monospace;
+	font-weight:		bold;
+	font-size:			small;
+	width:				20em;
+	padding:			1em;
 }
 
-.thoughtBubbleControl {
-	background-color: #f0f0f0; /* Color 6b */
-	padding:		.25em;
-	margin-top:		.5em;
-	min-height:		2em;
-	font-family: 	"Courier New", Courier, monospace;
-	border:			2px solid #a9a9a9;
-	border-radius: 	.25em;
+#goals table {
+	word-wrap: 			break-word;
+}
+
+.goal {
+	font-family:		"Courier New", Courier, monospace;
+	font-size:			small;
+	color:				black;
+	font-weight:		bold;
+}
+
+#goalBox {
+	background-color: #fcc; /* Color 7 */
+	width:		100%;
+	padding:	.2em;
+	padding-left:0em;
+}
+
+#goalLine {
+	background-color: #fcc; /* Color 7 */
+	color:rgb(201,170,55);
+	padding-left:	.3em;
+	padding-top:	.25em;
+	padding-bottom:	.25em;
+	padding-right:	.25em;
+}
+
+.success {
+	font-family:	Arial, Helvetica, sans-serif;
+	font-size:		10pt;
+	margin-left:	1em;
+	color:			green;
+}
+
+.failure {
+	font-family:	Arial, Helvetica, sans-serif;
+	font-size:		10pt;
+	margin-left:	1em;
+	color:			red;
+}
+
+
+
+/*********************************************************
+****** C E N T E R - P A N E L ***************************
+*********************************************************/
+
+#centerPanel {
+	width:			19em;
+	float: 			left;
+}
+
+/** W O R L D - G R I D *********************************/
+
+#grid {
+	margin:				 0em; 
+	border-radius:		.25em;
 	-moz-border-radius: .25em;
 }
 
-.thoughtBubbleThing p {
-	color:				black;
-	font-family: 		Verdana, Arial, Helvetica, sans-serif;
-	font-size:			11pt;
+.infoPanel {
+	background:		#f0f0f0; /* Color 3 */
+	border:			2px solid #a9a9a9;
+	border-radius: 	.5em;
+	
+	border-bottom-right-radius: 1em;
+	border-top-left-radius: 	1em;
+	-moz-border-radius: 1em .5em 1em .5em;
 }
+
+
+/** C O M M U N I C A T I O N - B U B B L E S ***********/
+
+/** SHARED ***********/
 
 .thoughtBubbleCommunication {
 	background-color:	white; /* Color 6 */
@@ -290,16 +331,6 @@ textarea {
 	margin-top:	1em;
 }
 
-#learnerSpeech {
-	color:				black;
-	font-size:			small;		
-}
-
-#gidgetSpeech {
-	color:				black;
-	font-size:			11.5pt;	
-}
-
 img.thoughtFloat{
 	position: relative;
 	left: 25px;
@@ -309,7 +340,7 @@ img.thoughtFloat{
 .thoughtTable {
 	margin:		0em;
 	margin-top:	.5em;
-	padding:	.5em .5em .5em 0;
+	padding:	0 .5em .5em 0;
 }
 
 .thoughtTable td {
@@ -323,11 +354,49 @@ img.thoughtFloat{
 	padding-top:	1em;
 }
 
+/** LEARNER **********/
 
+#learnerSpeech {
+	color:				black;
+	font-size:			small;		
+}
 
-table {
-	padding: 0em;
-	margin: 0em;
+.thoughtBubbleControl {
+	background-color: #f0f0f0; /* Color 6b */
+	padding:		.25em;
+	margin-top:		.5em;
+	min-height:		2em;
+	font-family: 	"Courier New", Courier, monospace;
+	border:			2px solid #a9a9a9;
+	border-radius: 	.25em;
+	-moz-border-radius: .25em;
+}
+
+/** GIDGET ***********/
+
+#gidgetSpeech {
+	color:				black;
+	font-size:			11.5pt;	
+}
+
+/** THING ************/
+
+.thoughtBubbleThing {
+	background-color: white; /* Color 6 */
+	color:			black;
+	padding:		.25em;
+	margin-top:		.5em;
+	min-height:		2em;
+	font-family: 	Verdana, Arial, Helvetica, sans-serif;
+	border:			2px solid #a9a9a9;
+	border-radius: 	1em;
+	-moz-border-radius: 1em;
+}
+
+.thoughtBubbleThing p {
+	color:				black;
+	font-family: 		Verdana, Arial, Helvetica, sans-serif;
+	font-size:			11pt;
 }
 
 #thingThought {
@@ -335,6 +404,32 @@ table {
 	visibility: 	hidden;
 	width:			15em;
 	z-index: 		2;
+}
+
+
+/*********************************************************
+****** R I G H T - P A N E L *****************************
+*********************************************************/
+
+#rightPanel {
+	width:			19.25em;
+	float: 			right;
+}
+
+/** M E M O R Y - B O X *********************************/
+
+#memory {
+	color:			black;
+	padding: 		0em 1em .5em 1em;
+}
+
+.runtimeInfoContainer {
+	font-family: 	Arial, Helvetica, sans-serif;
+	text-transform: lowercase;
+	font-size:		small;
+	width:			20em;
+	min-height:		4em;
+	text-align: 	left;
 }
 
 #energy {
@@ -404,7 +499,6 @@ table {
 }
 
 .sourceToken.keyword {
-/* 	font-weight: bold; */
 	color:			green;
 }
 
@@ -417,25 +511,20 @@ table {
 }
 
 
-#mission {
-	width:			18em;
-	height:			17em;
-	top: 			4.5em;
-	display:		none;
-	position:		absolute;
-	background:		rgb(42,33,28);
-	border:			2px solid rgb(200,200,200);
-	border-radius: 	.25em;
-	-moz-border-radius: .25em;
-	text-align:		right;
-	z-index:		50;
-	padding: 		1em;
-}
 
-#missionText {
-	font-family: 	Verdana, Arial, Helvetica, sans-serif;
-	padding-bottom:	1em;
-	text-align: 	left;
+/*********************************************************
+****** T R I G G E R E D - B O X E S *********************
+*********************************************************/
+
+/** L O A D / I N T R O - B O X *************************/
+
+.progress {
+	margin-top: 		1em;
+	padding:			1em;
+	background-color: 	rgb(200,200,200);
+	height: 			1em;
+	overflow-x: 		visible;
+	white-space: 		nowrap;
 }
 
 .introBox {
@@ -454,6 +543,7 @@ table {
 	left:			50%;
 }
 
+/** P O P U P - W I N D O W S ***************************/
 
 .popup {
 	background:		#f0f0f0; /* Color 8 */
@@ -475,6 +565,8 @@ table {
 	color: black;
 }
 
+/** Q U I T - C O N F I R M - B O X **********************/
+
 /*
 #quit {
 	background:		#fcc;
@@ -484,6 +576,8 @@ table {
 	-moz-border-radius: 1em;
 }
 */
+
+/** S U R V E Y - B O X *********************************/
 
 #postSurvey {
 	border-radius: 	.75em 0 0 0;
@@ -508,40 +602,7 @@ table {
 	padding-bottom: 1em;
 }
 
-
-
-#commandReset {
-	float: right;
-	margin-top: 1em;
-	margin-right: 2em;	
-}
-
-
-#titleRight {
-	float: right;
-	font-size:	small;
-}
-
-
-.align-right {
-	float:right;
-}
-
-.align-left {
-	float:left;
-}
-
-.black {
-	color: black;
-}
-
-.white {
-	color: white;
-}
-
-.smallfont{
-	font-size: small;
-}
+/** T O O L T I P S *************************************/
 
 .tooltip {
 	background-color: white; /* Color 6 */
@@ -566,37 +627,42 @@ table {
    
 }
 
-.progress {
-	margin-top: 		1em;
-	padding:			1em;
-	background-color: 	rgb(200,200,200);
-	height: 			1em;
-	overflow-x: 		visible;
-	white-space: 		nowrap;
+
+
+/*********************************************************
+****** M I S C E L L A N E O U S - M O D I F I E R S *****
+*********************************************************/
+
+
+.align-right {
+	float:right;
 }
 
-#cheatsheet {
-	font-family: 	Verdana, Arial, Helvetica, sans-serif;
-	margin-left:	1em;
-	margin-right:	1em;
-	margin-top:		-.8em;
-	padding: 		1em;
-	font-size:		small;
-	width:			18em;
-	border-radius: 	0em;
-	-moz-border-radius: 0em;
-	border-width:	1px;
+.align-left {
+	float:left;
 }
 
-.cheatsheetExplanation {
-	margin-left:	1em;
-	margin-bottom:	.5em;
+.black {
+	color: black;
 }
 
-#cheatsheet.runtimeReference {
-	border: 3px solid red;
+.white {
+	color: white;
 }
 
-#cheatsheet .cheatsheetItem.runtimeReference {
-	border: 3px solid red;
+.smallfont{
+	font-size: small;
 }
+
+
+
+/** D E P R E C A T E D *******************************/
+
+/*
+#controls {
+	padding:		.25em;
+	margin-top:		.5em;
+	text-align: 	center;
+}
+
+*/
