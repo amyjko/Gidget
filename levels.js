@@ -265,9 +265,13 @@ GIDGET.levels = {
 		// ----- T H I N G S -----
 		
 		new GIDGET.Thing(world, "goop", 2, 5, "green", [], {});
-		new GIDGET.Thing(world, "kitten", 5, 3, "orange", [], {});
 		new GIDGET.Thing(world, "crate", 7, 7, "Chocolate", [], {});
 		new GIDGET.Thing(world, "bucket", 1, 0, "DarkSlateGray", [], {});
+		var kitten = new GIDGET.Thing(world, "kitten", 5, 3, "orange", [], {});
+		
+		kitten.setCode(
+			"say Meow, help me Gidget!"
+		);
 		
 		// -----------------------	
 
@@ -839,11 +843,80 @@ GIDGET.levels = {
 		return world;
 		
 	},
+
+	// *******************************************************
 	
+	apiCar: function() {
+
+		// ----- G - C O D E -----
+	
+		var code =
+			"scan dog\n" +
+			"goto dog\n" +
+			"analyze dog\n" +
+			"scan battery\n" +
+			"ask dog to carry gidget battery\n" +
+			"analyze battery\n" +
+			"ask battery to energize gidget\n" +
+			"scan goops\n" +
+			"goto goops, grab it\n" +
+			"goto bucket\n" +
+			"drop goops";
+	
+		var world = new GIDGET.World([10,10], [1,8], ["stone","gray"], code);
+		world.gidget.setEnergy(30);
+	
+		// ---- G O A L S --------
+		
+		world.addGoal("three goops on bucket");
+		
+		// ---- M I S S I O N ----
+		
+		if (GIDGET.experiment.isControl()) {
+			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
+		}		
+		else {
+			world.addMissionText("sad", "");
+		}
+		
+		// ----- T H I N G S -----
+		
+		new GIDGET.Thing(world, "bucket", 9, 0, "rgb(250,255,255)", [], {});
+		new GIDGET.Thing(world, "goop", 2, 2, "rgb(250,255,255)", [ 'contaminated'], {});
+		new GIDGET.Thing(world, "goop", 9, 5, "rgb(250,255,255)", [ 'contaminated'], {});
+		new GIDGET.Thing(world, "goop", 4, 7, "rgb(250,0,0)", [], {});
+		new GIDGET.Thing(world, "battery", 9, 1, "yellow", [], 
+			{ 
+			energize : new GIDGET.Action([ "beneficiary" ],
+				"raise beneficiary energy 100"
+				)
+			}
+		);
+		var dog = new GIDGET.Thing(world, "dog", 3, 9, "brown", [ 'helpful' ],{
+			carry : new GIDGET.Action([ "passenger", "destination" ],
+				"scan passenger\n" +
+				"goto passenger\n" +
+				"analyze passenger\n" +
+				"grab passenger\n" +
+				"scan destination\n" +
+				"goto destination\n" +
+				"drop passenger"
+				)
+			}
+		);
+		dog.setCode(
+			"say I'll help you Gidget!"
+		);
+		
+		// -----------------------
+
+		return world;
+		
+	},	
 	
 	// *******************************************************
 	
-	learnBlending: function() {
+	apiBlending: function() {
 
 		// ----- G - C O D E -----
 	
@@ -895,7 +968,7 @@ GIDGET.levels = {
 	
 	// *******************************************************
 	
-	learnSequence: function() {
+	apiButton: function() {
 
 		// ----- G - C O D E -----
 	
