@@ -19,12 +19,15 @@ GIDGET.levels = {
 			"scan rrrock";
 
 		var world = new GIDGET.World([3], [1,1,50], ["grass", "olivedrab", 1], code);
-			
+
+		// ----- H I D D E N -----
+					
 		world.addHiddenCommand('goto');
 		world.addHiddenCommand('ask');
 		world.addHiddenCommand('grab');
 		world.addHiddenCommand('drop');
 		world.addHiddenCommand('analyze');
+		world.addHiddenCommand('if');
 			
 		// ---- G O A L S --------
 		
@@ -122,11 +125,18 @@ GIDGET.levels = {
 			"goto rocks";
 	
 		var world = new GIDGET.World([5], [1,1,50], ["grass", "olivedrab"], code);
-		
+
+		// ----- H I D D E N -----
+					
+		world.addHiddenCommand('ask');
+		world.addHiddenCommand('grab');
+		world.addHiddenCommand('drop');
+		world.addHiddenCommand('analyze');
+		world.addHiddenCommand('if');
+					
 		// ---- G O A L S --------
 					
 		world.addGoal("gidget on bucket");
-
 		
 		// ---- T I T L E --------
 		
@@ -220,7 +230,13 @@ GIDGET.levels = {
 			"drop goop";
 	
 		var world = new GIDGET.World([8], [1,1, 60], ["grass", "olivedrab"], code);
-			
+
+		// ----- H I D D E N -----
+					
+		world.addHiddenCommand('ask');
+		world.addHiddenCommand('analyze');
+		world.addHiddenCommand('if');
+								
 		// ---- G O A L S --------
 		
 		world.addGoal("kitten on crate");
@@ -270,7 +286,13 @@ GIDGET.levels = {
 			"scan, goto crate, drop dog";
 		
 		var world = new GIDGET.World([5], [0,0, 30], ["grass", "olivedrab"], code);
-			
+
+		// ----- H I D D E N -----
+					
+		world.addHiddenCommand('ask');
+		world.addHiddenCommand('analyze');
+		world.addHiddenCommand('if');
+								
 		// ---- G O A L S --------
 		
 		world.addGoal("dog on crate");
@@ -322,7 +344,11 @@ GIDGET.levels = {
 		
 		var world = new GIDGET.World([6], [1,0], ["grass", "olivedrab"], code);	
 		world.gidget.setEnergy(105);
-			
+
+		// ----- H I D D E N -----
+					
+		world.addHiddenCommand('if');
+											
 		// ---- G O A L S --------
 		
 		world.addGoal("two goops on bucket");
