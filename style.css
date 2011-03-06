@@ -25,7 +25,7 @@
 *********************************************************/
 
 body {
-	background: 	white; /* Color 0 */
+	background: 	#42424a; /* Color 0 */
 	color: 			black;
 	font-family:	Arial, Helvetica, sans-serif;
 	padding:		1em;
@@ -85,7 +85,7 @@ textarea {
 *********************************************************/
 
 #titleBar {
-	background:		#5386c2; /* Color 1 */
+	background:		#8999ae; /* Color 1 */
 	color: 			white;
 
 	font-size:		medium;
@@ -110,7 +110,7 @@ textarea {
 }
 
 #content {
-	background-color: #d5e7ff;
+	background-color: #eff7ff;
 	color:			black;
 	margin-left:	auto;
 	margin-right:	auto;
@@ -239,7 +239,7 @@ textarea {
 /** G O A L - B O X ************************************/
 
 #goals {
-	background-color: 	#f0f0f0; /* Color 7*/
+	background-color: 	#ccd3d9; /* Color 7*/
 	color:				black;
 	font-family:		"Courier New", Courier, monospace;
 	font-weight:		bold;
@@ -309,7 +309,7 @@ textarea {
 }
 
 .infoPanel {
-	background:		#f0f0f0; /* Color 3 */
+	background:		#ccd3d9; /* Color 3 */
 	border:			2px solid #a9a9a9;
 	border-radius: 	.5em;
 	
@@ -324,7 +324,7 @@ textarea {
 /** SHARED ***********/
 
 .thoughtBubbleCommunication {
-	background-color:	white; /* Color 6 */
+	background-color:	white;
 	padding:			1em 1.5em 1em 1.5em;
 	border:				2px solid #a9a9a9;
 	border-radius: 		1em;
@@ -348,7 +348,7 @@ textarea {
 }
 
 .thoughtBubbleControl {
-	background-color: #f0f0f0; /* Color 6b */
+	background-color: 	#ccd3d9; /* Color 6b */
 	padding:			.25em;
 	margin-top:			.5em;
 	min-height:			2em;
@@ -498,7 +498,7 @@ img.thoughtFloat{
 }
 
 .sourceLine.runtimeReference {
-	background-color: #fcc; /* Color 7 */
+	background-color: #fcc;
 }
 
 .sourceLine {
@@ -615,7 +615,7 @@ img.thoughtFloat{
 /** T O O L T I P S *************************************/
 
 .tooltip {
-	background-color: white; /* Color 6 */
+	background-color: white;
     position:	absolute;
     z-index:	999;
     left: 		-9999px;
