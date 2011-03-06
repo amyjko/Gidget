@@ -92,7 +92,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("Unknown command, so skipping to next step.");
 			
-		return new GIDGET.text.Message("I don't know what this is, so I'll just go on the next step");
+		return new GIDGET.text.Message("I don't know what this is, so I'll just go on the next step.");
 	
 	},
 

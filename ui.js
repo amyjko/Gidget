@@ -1205,10 +1205,18 @@ GIDGET.ui = {
 
 		function thingToHTML(thing) {
 		
-			var name = thing.name;
+			var thingImage, name = thing.name;
 
 			var thingBox = $('<div class="thingBox" title="This is a '+ name +'."></div>');
-			var thingImage = $("<img src='media/" + (GIDGET.ui.hasImage(name, thing.runtime.state) ? name : "unknown") + "." + thing.runtime.state + ".png' class='thing' />");
+			// Fix a gidget scanned image issue
+			if (name === 'gidget'){
+				if (GIDGET.experiment.isControl())
+					thingImage = $("<img src='media/control.default.png' class='thing' />");
+				else
+					thingImage = $("<img src='media/gidget.default.png' class='thing' />");
+			}
+			else
+				thingImage = $("<img src='media/" + (GIDGET.ui.hasImage(name, thing.runtime.state) ? name : "unknown") + "." + thing.runtime.state + ".png' class='thing' />");
 			var thingLabel = $("<div class='thingLabel'>" + name + "</div>");
 			thingBox.data('thing', thing);
 			thingBox.append(thingLabel);
