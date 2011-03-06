@@ -97,10 +97,10 @@ GIDGET.text = {
 	},
 
 	scan_success: function(name) {
-		
+	
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$scanned@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") " + " added to the scan list.", 
+				"$scanned@0(" + this.capitalize(name) + ") " + " added to the scan list.", 
 				"scan");
 			
 		return 
@@ -185,11 +185,11 @@ GIDGET.text = {
 
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$analyzed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") analyzed.",
+				"$analyzed@0(" + this.capitalize(name) + ") analyzed. Detailed information in memory bank.",
 				"analyze");
 		
 		return new GIDGET.text.Message(
-			"I <b>analyzed</b> the $analyzed@0(" + name + "). I'll add it to my analyzed list where you can see more information about it!",
+			"I <b>analyzed</b> the $analyzed@0(" + name + "). I'll add it to my analyzed memory where you can see more information about it!",
 			"analyze");
 	
 	},
@@ -198,7 +198,7 @@ GIDGET.text = {
 		
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$grabbed@0(" + name.charAt(0).toUpperCase() + name.slice(1) + ") grabbed. Added to list.",
+				"$grabbed@0(" + this.capitalize(name) + ") grabbed. Added to memory bank.",
 				"grab");
 		
 		return new GIDGET.text.Message(
@@ -211,7 +211,7 @@ GIDGET.text = {
 	
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"Dropped $results@0(" + name + "). Removing from list.",
+				"Dropped $results@0(" + name + "). Removing from memory bank.",
 				"drop");
 			
 		return new GIDGET.text.Message(
@@ -255,13 +255,13 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("Waiting for " + name + " to finish execution.");
 			
-		return new GIDGET.text.Message("Wee! I'm waiting for the $thing(" + name + ") to finish " + action + "ing.");
+		return new GIDGET.text.Message("Wee! I'm waiting for the $thing(" + name + ") to finish " + this.add_ing(action) + ".");
 	
 	},
 
 	ask_finished: function(name) {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message(name.charAt(0).toUpperCase() + name.slice(1) + " execution completed.");
+			return new GIDGET.text.Message(this.capitalize(name) + " execution completed.");
 			
 		return new GIDGET.text.Message("Okay, the $thing(" + name+ ") is finished so I'm going to continue now.");
 	
@@ -279,7 +279,7 @@ GIDGET.text = {
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Invalid <b>ask</b> syntax. "+name.charAt(0).toUpperCase() + name.slice(1)+" expected  <b>" + numberExpected + "</b>, instead of <b>" + numberGiven + "</b>. Skipping to next instructions.", "error");
+			return new GIDGET.text.Message("ERROR: Invalid <b>ask</b> syntax. " + name + " expects  <b>" + numberExpected + "</b> names, instead of <b>" + numberGiven + "</b> names. Skipping to next instructions.", "error");
 			
 		return new GIDGET.text.Message("Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.", "error");
 	
@@ -287,16 +287,16 @@ GIDGET.text = {
 		
 	ask_begin: function(name, action) {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message(action.charAt(0).toUpperCase() + name.slice(1) + " executing.");
+			return new GIDGET.text.Message(this.capitalize(action) + " executing.");
 			
-		return new GIDGET.text.Message("Yay! " + name + " knows how to " + action + ". I'm going to tell it to do it.");
+		return new GIDGET.text.Message("Yay! " + this.capitalize(name) + " knows how to " + action + ". I'm going to tell it to do it.");
 	
 	},
 	
 	ask_unknownAction: function(name, action) {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Invalid ask command. " +name.charAt(0).toUpperCase() + name.slice(1)+ " does not understand the action, '" + action + "'.", "error");
+			return new GIDGET.text.Message("ERROR: Invalid ask command. " +this.capitalize(name)+ " does not understand the action, '" + action + "'.", "error");
 			
 		return new GIDGET.text.Message("I told " + name + " to " + action + " but it didn't know how! I don't know what to do!", "error");
 	
@@ -342,7 +342,7 @@ GIDGET.text = {
 		if(scope.length > 0) {
 			result += name === 'it' ? " " : " and detected ";
 			result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
-			result += " $results@(" + name + (scope.length > 1 && name.charAt(name.length - 1) !== 's' ? "s" : "") + ")";
+			result += " $results@(" + this.makePlural(name, scope) + ")";
 			
 			/*
 			for(i = 0; i < scope.length; i++)
@@ -771,7 +771,39 @@ GIDGET.text = {
 // *******************************************************
 // *******************************************************
 
-
-	placeholder: function() {}
+	capitalize: function(str) {
+    	return str.charAt(0).toUpperCase() + str.slice(1);
+	},
+	
+	makePlural: function(str, instances ){
+	
+		if (instances.length > 1 && str.charAt(str.length - 1) !== 's')
+			return str + "s";
+		else
+			return str;
+	},
+	
+	add_ing: function(str){
+	
+		if (str.length >= 3){
+			//check -ie suffix
+			if (str.charAt(str.length-2) === "i" && str.charAt(str.length-1) === "e")
+				return str.substring(0, str.length-1) + "ing";
+			//check if consonant + 'e' suffix
+			if (!this.isVowel(str.charAt(str.length-2)) && str.charAt(str.length-1) === "e" )
+				return str.substring(0, str.length-1) + "ing";
+			// check for suffix: consonant + vowel + consonant
+			if (!this.isVowel(str.charAt(str.length-3)) && this.isVowel(str.charAt(str.length-2)) && !this.isVowel(str.charAt(str.length-3)))
+				return str + str.charAt(str.length - 1) + "ing";
+		}
+		return str;
+	},
+	
+	isVowel: function(a) {
+	
+		if(a.length == 1 && (a == 'a' || a == 'e' || a == 'i' || a == 'o' || a == 'u'))
+			return true;
+		else return false;
+  	},
 
 };
