@@ -394,19 +394,21 @@ img.thoughtFloat{
 .thoughtBubbleThing {
 	background-color: white; /* Color 6 */
 	color:			black;
-	padding:		.25em;
+	text-align: 	left;
+	vertical-align:	middle;
+	padding:		.75em .75em .2em .75em;
 	margin-top:		.5em;
 	min-height:		2em;
 	font-family: 	Verdana, Arial, Helvetica, sans-serif;
 	border:			2px solid #a9a9a9;
-	border-radius: 	1em;
-	-moz-border-radius: 1em;
+	border-radius: 	.75em;
+	-moz-border-radius: .75em;
 }
 
 .thoughtBubbleThing p {
 	color:				black;
 	font-family: 		Verdana, Arial, Helvetica, sans-serif;
-	font-size:			11pt;
+	font-size:			10pt;
 }
 
 #thingThought {
