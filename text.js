@@ -403,7 +403,7 @@ GIDGET.text = {
 
 	memory_analyzed: function(iName, iActions, iTags) {
 	
-		var tags = "<br /><br />It has no special characteristics. ";
+		var tags = "<br /><br />It has no special attributes.<br /><br />";
 		var tagCount = 0;
 		for(var tag in iTags) {
 			if(iTags.hasOwnProperty(tag)) {
@@ -443,14 +443,13 @@ GIDGET.text = {
 			actions = "";
 			for(var action in iActions) {
 				if(iActions.hasOwnProperty(action)) {
-				
 					var arguments = iActions[action].arguments;
 					var argString = "";
 					if(arguments.length === 0) {
 						if (GIDGET.experiment.isControl())
-							argString = ". It does not need any additional arguments.";
+							argString = "it does not need any additional arguments";
 						else
-							argString = ". I don't have to give it anything.";
+							argString = "I don't have to give it anything";
 					}
 					else {
 						if (GIDGET.experiment.isControl())
@@ -460,16 +459,18 @@ GIDGET.text = {
 						
 						for(var index = 0; index < arguments.length; index++) {
 							if(arguments.length > 2 && index != 0) argString = argString + ", ";
-							if(arguments.length >= 2 && index === arguments.length - 1) argString = argString + " and ";
+							if(arguments.length >= 2 && index === arguments.length - 1)	argString = argString + " and ";
 							argString = argString + "<b>" + arguments[index] + "</b>";
 						}
 						//argString = argString + ".";
 					
 					}
-					if (GIDGET.experiment.isControl())
-						actions = "<br /><br />It can be <b>asked</b> to <b>" + action + "</b> and " + argString + ".";	
-					else
-						actions = "<br /><br />I can <b>ask</b> it to <b>" + action + "</b> and " + argString + ".";
+					if (GIDGET.experiment.isControl()){
+						actions += " It can be <b>asked</b> to <b>" + action + "</b> and " + argString + ".";
+						}
+					else{
+						actions += " I can <b>ask</b> it to <b>" + action + "</b> and " + argString + ".";
+						}
 					
 				}
 			}
