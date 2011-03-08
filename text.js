@@ -100,12 +100,12 @@ GIDGET.text = {
 	
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$scanned@0(" + this.capitalize(name) + ") " + " added to the scan list.", 
+				"<b>$scanned@0(" + this.capitalize(name) + ")</b> " + " added to the scan list.", 
 				"scan");
 			
 		return 
 			new GIDGET.text.Message(
-				"I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "$scanned@0(" + name + ")" + ". I'll add it to my scanned memory!",
+				"I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "<b>$scanned@0(" + name + ")</b>. I'll add it to my scanned memory!",
 				"scan");
 	
 	},
@@ -123,11 +123,11 @@ GIDGET.text = {
 
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"Moving one space closer to destination, $results@0(" + name + "), but may intersect with " + avoid + ".",
+				"Moving one space closer to destination, <b>$results@0(" + name + ")</b>, but may collide with <b>" + avoid + "</b>.",
 				"goto");
 		
 		return new GIDGET.text.Message(
-			"I'm going one step closer to the $results@0(" + name + "), even though I might touch a " + avoid + "!",
+			"I'm going one step closer to the <b>$results@0(" + name + ")</b>, even though I might touch a <b>" + avoid + "</b>!",
 			"goto");
 	
 	},
@@ -136,11 +136,11 @@ GIDGET.text = {
 	
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"Moving one space towards destination, $results@0(" + name + ").",
+				"Moving one space towards destination, <b>$results@0(" + name + ")</b>.",
 				"goto");
 		
 		return new GIDGET.text.Message(
-			"I'm going one step closer to the $results@0(" + name + ")!",
+			"I'm going one step closer to the <b>$results@0(" + name + ")</b>!",
 			"goto");
 	
 	},
@@ -148,9 +148,9 @@ GIDGET.text = {
 	go_arrive: function(name) {
 
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("Arrived at destination, $results@0(" + name + ").");
+			return new GIDGET.text.Message("Arrived at destination, <b>$results@0(" + name + ")</b>.");
 		
-		return new GIDGET.text.Message("I made it to the $results@0(" + name + ")!");
+		return new GIDGET.text.Message("I made it to the <b>$results@0(" + name + ")</b>!");
 	
 	},
 
@@ -185,11 +185,11 @@ GIDGET.text = {
 
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$analyzed@0(" + this.capitalize(name) + ") analyzed. Detailed information in memory bank.",
+				"<b>$analyzed@0(" + this.capitalize(name) + ") analyzed</b>. Detailed information in memory bank.",
 				"analyze");
 		
 		return new GIDGET.text.Message(
-			"I <b>analyzed</b> the $analyzed@0(" + name + "). I'll add it to my analyzed memory where you can see more information about it!",
+			"I <b>analyzed</b> the <b>$analyzed@0(" + name + ")</b>. I'll add it to my analyzed memory where you can see more information about it!",
 			"analyze");
 	
 	},
@@ -198,11 +198,11 @@ GIDGET.text = {
 		
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"$grabbed@0(" + this.capitalize(name) + ") grabbed. Added to memory bank.",
+				"<b>$grabbed@0(" + this.capitalize(name) + ")</b> grabbed. Added to memory bank.",
 				"grab");
 		
 		return new GIDGET.text.Message(
-			"I grabbed the $grabbed@0(" + name + "). I'll add it to my memory!",
+			"I grabbed the <b>$grabbed@0(" + name + ")</b>. I'll add it to my memory!",
 			"grab");
 		
 	},
@@ -224,11 +224,11 @@ GIDGET.text = {
 
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message(
-				"Focusing on $results@0(next result), " + name,
+				"Focusing on $results@0(next result), <b>" + name + "</b>",
 				"focusIn");
 			
 		return new GIDGET.text.Message(
-			"Okay, I'm going to concentrate on this $results@0(individual " + name + ") and add it to my focus memory.",
+			"Okay, I'm going to concentrate on this <b>$results@0(individual " + name + ")</b> and add it to my focus memory.",
 			"focusIn");
 	
 	},
@@ -245,25 +245,25 @@ GIDGET.text = {
 	unfocus_success: function() {
 
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("Focusing terminated.");
+			return new GIDGET.text.Message("<b>Focusing</b> terminated.");
 			
-		return new GIDGET.text.Message("Alright, $focused(I stopped focusing).");
+		return new GIDGET.text.Message("Alright, I stopped <b>$focused(focusing)</b>.");
 	
 	},
 
 	ask_waiting: function(name, action) {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("Waiting for " + name + " to finish execution.");
+			return new GIDGET.text.Message("Waiting for <b>" + name + "</b> to finish execution.");
 			
-		return new GIDGET.text.Message("Wee! I'm waiting for the $thing(" + name + ") to finish " + this.add_ing(action) + ".");
+		return new GIDGET.text.Message("Wee! I'm waiting for the <b>$thing(" + name + ")</b> to finish <b>" + this.add_ing(action) + "</b>.");
 	
 	},
 
 	ask_finished: function(name) {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message(this.capitalize(name) + " execution completed.");
+			return new GIDGET.text.Message("<b>"+this.capitalize(name) + "</b> execution completed.");
 			
-		return new GIDGET.text.Message("Okay, the $thing(" + name+ ") is finished so I'm going to continue now.");
+		return new GIDGET.text.Message("Okay, the <b>$thing(" + name+ ")</b> is finished so I'm going to continue now.");
 	
 	},
 
@@ -287,9 +287,9 @@ GIDGET.text = {
 		
 	ask_begin: function(name, action) {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message(this.capitalize(action) + " executing.");
+			return new GIDGET.text.Message("<b>"+this.capitalize(action) + "</b> executing.");
 			
-		return new GIDGET.text.Message("Yay! " + this.capitalize(name) + " knows how to " + action + ". I'm going to tell it to do it.");
+		return new GIDGET.text.Message("Yay! <b>" + this.capitalize(name) + "</b> knows how to <b>" + action + "</b>. I'm going to tell it to do it.");
 	
 	},
 	
@@ -341,8 +341,8 @@ GIDGET.text = {
 		var i;
 		if(scope.length > 0) {
 			result += name === 'it' ? " " : " and detected ";
-			result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " the " : scope.length + " ");
-			result += " $results@(" + this.makePlural(name, scope) + ")";
+			result += ((name === 'gidget') ? "" : (scope.length === 1 && name !== 'it') ? "a " : (name === 'it') ? " " : "<b>" + scope.length + "</b> ");
+			result += " <b>$results@(" + this.makePlural(name, scope) + ")</b>";
 			
 			/*
 			for(i = 0; i < scope.length; i++)
@@ -486,7 +486,7 @@ GIDGET.text = {
 	memory_unanalyzed: function(name) {
 	
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("'" + name +"' has not been analyzed. Attributes unknown.");
+			return new GIDGET.text.Message("'" + name +"' has not been <b>analyzed</b>. Attributes unknown.");
 			
 		return new GIDGET.text.Message("I don't know anything about <b>" + name + "</b> because I haven't <b>analyzed</b> it yet.");
 	
