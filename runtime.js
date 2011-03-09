@@ -1215,9 +1215,11 @@ GIDGET.runtime = {
 				if($.inArray("scanned", this.constraints) >= 0) {
 
 					scope = filter(scope, function(thing) { 
-						// The code commented out below originally allowed things to go to themselves without having scanned themselves.
+						// @DEPRECATED The code commented out below originally allowed things to go to themselves without having scanned themselves.
 						// This isn't necessary though, and breaks the first gidget level, where he scans himself to know where he is.
-						return /*thing === runtime.thing || */$.inArray(thing, runtime.scanned) >= 0; });
+						// 
+						// 3/8/2011 We've decided that things *should* know themselves after all.
+						return thing === runtime.thing || $.inArray(thing, runtime.scanned) >= 0; });
 				
 				}
 
