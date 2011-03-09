@@ -160,7 +160,8 @@ GIDGET.ui.media = {
 		this.loadSound("goal_finalFailure");
 		
 		// Event Sounds
-		this.loadSound("lowEnergy");
+		this.loadSound("energyDown");
+		this.loadSound("energyUp");
 		this.loadSound("error");
 		this.loadSound("parserErrorExp");
 		this.loadSound("parserErrorCtrl");
