@@ -103,8 +103,7 @@ GIDGET.text = {
 				"<b>$scanned@0(" + this.capitalize(name) + ")</b> " + " added to the scan list.", 
 				"scan");
 			
-		return 
-			new GIDGET.text.Message(
+		return new GIDGET.text.Message(
 				"I <b>scanned</b> " + (name === 'gidget' ? "" : "a ") + "<b>$scanned@0(" + name + ")</b>. I'll add it to my scanned memory!",
 				"scan");
 	
