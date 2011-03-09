@@ -1110,24 +1110,30 @@ GIDGET.ui = {
 		
 		if(isDef(this.currentExecutionMode) && this.currentExecutionMode !== 'step')
 			return;
+			
+		var shown = undefined;
 		
 		if(isDef(show)) {
 		
 			if((show && $('#cheatsheet').css('display') === 'none') ||
 				(!show && $('#cheatsheet').css('display') !== 'none'))
 				$('#cheatsheet').slideToggle(200);
+				
+			shown = show;
 		
 		}
 		else {
-		
-			if($('#cheatsheet').css('display') === 'none')
-				$('#toggleCheatsheet').text("hide instructions key");
-			else
-				$('#toggleCheatsheet').text("show instructions key");		
-	
+
+			shown = $('#cheatsheet').css('display') === 'none';
+			
 			$('#cheatsheet').slideToggle(200);
 			
 		}
+
+		if(shown)
+			$('#toggleCheatsheet').text("hide instructions key");
+		else
+			$('#toggleCheatsheet').text("show instructions key");		
 
 	},
 	
