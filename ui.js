@@ -634,27 +634,35 @@ GIDGET.ui = {
 	// Used to temporarily store the list of commands logged for this level.
 	// These are saved when the levelMetadata is saved.
 	stepLog: [],
-	
+
+	currentExecutionMode: undefined,	
+
 	logStep: function(kind) {
+	
+		this.currentExecutionMode = kind;
 			
 		// Save the kind of command, when it happened, and for which level.
 		this.stepLog.push({ 
 			kind: kind, 
 			time: (new Date()).getTime() 
 		});
+		
 	},
 
 	stepOnce: function() {
 		this.logStep("step");
 		GIDGET.ui.step(false, true);
+		this.currentExecutionMode = undefined;
 	},
 
+	// Just a helper function for playToEnd() to call.
 	stepContinue: function() { 
 	
 		GIDGET.ui.step(true, false);
 		
 	},
 
+	// Executes, but does not animate, each instruction
 	runToEnd: function() {
 
 		GIDGET.ui.media.disableSounds = true;
@@ -678,6 +686,8 @@ GIDGET.ui = {
 			GIDGET.ui.step(false, false);
 
 		this.enableExecutionButtons(true);
+
+		this.currentExecutionMode = undefined;
 
 	},
 
@@ -844,6 +854,9 @@ GIDGET.ui = {
 				this.enableExecutionButtons(true);
 				
 				this.showLevelControls();
+
+				// We're done, so reset the execution mode.
+				this.currentExecutionMode = undefined;
 
 				// In case we're playing, return without invoking another step.
 				return;
@@ -1058,12 +1071,14 @@ GIDGET.ui = {
 			}
 		}
 
-		// Play the sound by the specified name.
+		// If there's a message
 		if(isDef(message)) {
 		
+			// Play its sound, if defined
 			if(isDef(message.sound))
 				GIDGET.ui.media.playSound(message.sound);
 				
+			// Call its custom behavior, if defined.
 			if(isDef(message.functionToCall)) {
 		
 				message.functionToCall.call();	
@@ -1090,7 +1105,11 @@ GIDGET.ui = {
 	
 	},
 	
+	// If show is defined, either hides or shows. Otherwise, toggles.
 	toggleCheatsheet: function(show) {
+		
+		if(isDef(this.currentExecutionMode) && this.currentExecutionMode !== 'step')
+			return;
 		
 		if(isDef(show)) {
 		
@@ -1112,7 +1131,10 @@ GIDGET.ui = {
 
 	},
 	
+	// Only works when stepping one instruction at a time; stepping by line, playing, or running to end don't show the cheatsheet.
 	highlightCommand: function(command) {
+	
+		console.log("Current mode = " + this.currentExecutionMode);
 	
 		GIDGET.ui.toggleCheatsheet(true);
 		$('.cheatsheetItem').hide();
