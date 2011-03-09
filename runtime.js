@@ -869,13 +869,14 @@ GIDGET.runtime = {
 							new runtime.IncrementPC(runtime, 1));
 					
 					}
-					// We keep going until there's a path.
+					// There are two behavior's we've had implemented in the past here: one is to keep
+					// looping until a path opens up, the other is to just continue forward.
 					else {
 					
 						runtime.path = undefined;
 						runtime.addDecision(
 							GIDGET.text.go_noPath(thing.name),
-							new runtime.IncrementPC(runtime, 0));
+							new runtime.IncrementPC(runtime, 1));
 					
 					}
 				
