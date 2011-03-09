@@ -1435,7 +1435,7 @@ GIDGET.runtime = {
 			arguments: arguments,
 			offset: undefined,
 			toString: function() { return "ask " + (isDef(this.action) ? this.action.text : "unspecified") + " offset " + this.offset; },
-			cost: function(runtime) { return 1; },
+			cost: function(runtime) { return isDef(runtime.peekAsked()) ? 0 : 1; },
 			execute: function(runtime) {
 
 				var arguments = [];
