@@ -879,8 +879,11 @@ GIDGET.parser = {
 		ast.keyword = tokenStream.eat();
 
 		var message = "";
-		while(!tokenStream.eol())
-			message = message + tokenStream.eat().text + " ";
+		var token;
+		while(!tokenStream.eol()) {
+			token = tokenStream.eat().text;
+			message = message + token + (tokenStream.hasMore() && tokenStream.nextIsComma() ? "" : " ");
+		}
 		
 		ast.message = message;
 
