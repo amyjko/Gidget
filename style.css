@@ -152,11 +152,11 @@ textarea {
 	font-weight: 	bold;
 	font-size: 		small;
 	width:			20em;
-	height:			18.5em;
+	height:			15.5em; /* originally 18.5em*/
 	border:			2px solid #a9a9a9;
 	padding: 		1em;
 
-	z-index:		2;
+	z-index:		10;
 
 	border-radius: 		1em .5em 1em .5em;
 	-moz-border-radius: 1em .5em 1em .5em;
@@ -206,6 +206,9 @@ textarea {
 #toggleCheatsheet {
 	margin-top:		-1em;
 	margin-left:	7em;
+	position:	relative;
+	left: 19em;
+	top: -13em;
 }
 
 .cheatsheetExplanation {
@@ -245,7 +248,14 @@ textarea {
 	font-weight:		bold;
 	font-size:			small;
 	width:				20em;
+	height:				3em;
 	padding:			1em;
+	
+	position:			relative;
+	top: 				-.7em;
+	z-index:			5;
+	
+	overflow-y: 		auto;
 }
 
 #goals table {
@@ -338,10 +348,6 @@ textarea {
 
 /** LEARNER **********/
 
-#learnerThought {
-	padding-top:		1.1em;
-}
-
 #learnerSpeech {
 	color:				black;
 	font-size:			small;
@@ -349,8 +355,8 @@ textarea {
 
 .thoughtBubbleControl {
 	background-color: 	#ccd3d9; /* Color 6b */
-	padding:			.25em;
-	margin-top:			.5em;
+	padding:			.5em .25em .5em .25em;
+	margin-right:		1.9em;
 	min-height:			2em;
 	font-family: 		"Courier New", Courier, monospace;
 	border:				2px solid #a9a9a9;
@@ -358,16 +364,19 @@ textarea {
 	-moz-border-radius: .25em;
 }
 
-img.thoughtFloat{
-	position: relative;
-	left: 25px;
-	top: -2em;
-}
 
 .thoughtTable {
 	margin:		0em;
-	margin-top:	.5em;
 	padding:	0 0 .5em 0;
+}
+
+.thoughtTableLearner {
+	margin-top:	.75em;
+	margin-right: 1.8em;
+}
+
+.thoughtTableGidget {
+	margin-top:	.35em;
 }
 
 .thoughtTable td {
@@ -376,13 +385,24 @@ img.thoughtFloat{
 	margin:			0em;
 }
 
-.thoughtTable img {
+.thoughtTableLearner img {
 	padding-right:  1em; 
 	padding-top:	1em;
 }
 
+.thoughtTableGidget img {
+	padding-left:  1.15em; 
+	padding-top:	1em;
+}
+
+
+
 
 /** GIDGET ***********/
+
+#GidgetThought {
+	padding-top:	1em;
+}
 
 #gidgetSpeech {
 	color:				black;
@@ -415,7 +435,7 @@ img.thoughtFloat{
 	position:		absolute;
 	visibility: 	hidden;
 	width:			15em;
-	z-index: 		2;
+	z-index: 		15;
 }
 
 

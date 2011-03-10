@@ -95,11 +95,21 @@ $().ready(function() {
 
 			// Shake the editor to indicate that it's not editable.
 			var count = 0;
-			$('#code').everyTime(25, function(i) {
-				$('#code').css('margin-left', 10 - Math.random() * 20);
+			$('#codeMissionContainer').everyTime(25, function(i) {
+				$('#codeMissionContainer').css('margin-left', 10 - Math.random() * 20);
 				count++;
 				if(count === 20)
-					$('#code').css('margin-left', 0);
+					$('#codeMissionContainer').css('margin-left', 0);
+			}, 20);
+		
+			
+			// Shake the editor to indicate that it's not editable.
+			var count = 0;
+			$('#avatarGidget').everyTime(25, function(i) {
+				$('#avatarGidget').css('margin-left', 10 - Math.random() * 20);
+				count++;
+				if(count === 20)
+					$('#avatarGidget').css('margin-left', 0);
 			}, 20);
 		
 		}

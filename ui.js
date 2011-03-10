@@ -578,21 +578,22 @@ GIDGET.ui = {
 	},
 	
 	modifyCommStylesForControl: function() {
-		$('#thoughtsContainer').css('font-family', '\"Courier New\", Courier, monospace');
-		$('#code').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
-		$('#goals').css({'border-radius': '.25em', '-moz-border-radius': '.25em'})
+		$('#learnerThought').css('margin-top', '.5em');
+		$('.bubbleText').css('font-family', '\"Courier New\", Courier, monospace');
+		$('#code').css({'border-radius': '.25em .25em 0em 0em', '-moz-border-radius': '.25em .25em 0em 0em'})
+		$('#goals').css({'border-radius': '0em 0em .25em .25em', '-moz-border-radius': '0em 0em .25em .25em'})
 		$('#memory').css({'border-radius': '.25em', '-moz-border-radius': '.25em'})
 		
-		$("body").append("<style type='text/css'>#thoughtsContainer button{font-family: \"Courier New\", Courier, monospace;}</style>");
+		$("body").append("<style type='text/css'>.bubbleText button{font-family: \"Courier New\", Courier, monospace;}</style>");
 	},
 
 	modifyCommStylesForExperimental: function() {
-		$('#thoughtsContainer').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
-		$('#code').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
-		$('#goals').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
+		$('.bubbleText').css('font-family', 'Verdana, Arial, Helvetica, sans-serif');
+		$('#code').css({'border-radius': '1em .5em 0 0', '-moz-border-radius': '1em .5em 0 0'})
+		$('#goals').css({'border-radius': '0 0 1em .5em', '-moz-border-radius': '0 0 1em .5em'})
 		$('#memory').css({'border-radius': '1em .5em 1em .5em', '-moz-border-radius': '1em .5em 1em .5em'})
 		
-		$("body").append("<style type='text/css'>#thoughtsContainer button{font-family: Verdana, Arial, Helvetica, sans-serif;}</style>");
+		$("body").append("<style type='text/css'>.bubbleText button{font-family: Verdana, Arial, Helvetica, sans-serif;}</style>");
 	},
 	
 	modifyCommStyles: function() {
@@ -603,7 +604,7 @@ GIDGET.ui = {
 	},
 	
 	
-	createLearnerHTML: function(message) {	
+	createLearnerBubble: function(message) {	
 		
 		var image;
 		switch (GIDGET.experiment.condition) {
@@ -619,16 +620,16 @@ GIDGET.ui = {
 		}
 		
 		if (GIDGET.experiment.isControl()){
-			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 1em 0 .5em;' /></td><td style='width: 100%;'>" + message + "</td></tr></table></div>";	
+			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 .15 0 .15em;' /></td><td style='width: 100%;'>" + message + "</td></tr></table></div>";	
 		}
 		else {
-			return "<table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+			return "<table class='thoughtTable thoughtTableLearner'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTailLearner.default.png' style='position: relative; left: 25px; top: -2em;' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
 		}
 		
 	},
 
 
-	createThoughtHTML: function(message) { 
+	createGidgetBubble: function(message) { 
 		
 		var gidgetImg;
 		if (GIDGET.experiment.isControl())
@@ -640,7 +641,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
 		}
 		else {
-			return "<table class='thoughtTable'><tr><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTail.default.png' class='thoughtFloat' /></td><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td></tr></table>";
+			return "<table class='thoughtTable thoughtTableGidget'><tr><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTailGidget.default.png' style='position: relative; left: -1.5em; top: -2.2em;' /></td></tr></table>";
 		}	
 
 	},
@@ -653,9 +654,9 @@ GIDGET.ui = {
 		var who = isDef(target) ? target : "gidget";
 		
 		if (who === "gidget")
-			html = this.createThoughtHTML(message);
+			html = this.createGidgetBubble(message);
 		else
-			html = this.createLearnerHTML(message);
+			html = this.createLearnerBubble(message);
 	
 		if(delay === 0) {
 			$('#'+who+"Thought").html(html);
@@ -1176,9 +1177,9 @@ GIDGET.ui = {
 		}
 
 		if(shown)
-			$('#toggleCheatsheet').text("hide instructions key");
+			$('#toggleCheatsheet').text("<"); // hide instructions key
 		else
-			$('#toggleCheatsheet').text("show instructions key");		
+			$('#toggleCheatsheet').text(">"); // show instructions key
 
 	},
 	
