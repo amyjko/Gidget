@@ -46,9 +46,16 @@ GIDGET.levels = {
 		}		
 		else {
 			world.addMissionText("sad", "Ouch! That fall really messed up my systems! I can't seem to think straight!");
-			world.addMissionText("sad", "It looks like my solar panels are cracked too! They're working, but not very well... it looks like I'll have to find my own power soon.");
-			world.addMissionText("default", "I have important work to do, so I should start by checking to make sure my other systems are okay.");
-			world.addMissionText("sad", "First, let's use my scanner to check out what I bumped myself on the way down. My scanner gives me the coordinate of things in the world!");
+			world.addMissionText("sad", "It looks like my solar panels are cracked too! They're working, but not very well... it looks like I'll have to find my own power soon.");			
+			
+			world.addMissionText("default", "$memory(My memory) is still working fine though! This is where I keep track of all of the things I'm thinking about while completing instructions.");
+
+			world.addMissionText("default", "Let's see if I can scan. I'll set $goals(a goal), which let's me know when my mission has been accomplished.");
+
+			world.addMissionText("default", "Now how do I scan again? Mmm... I put my best guess in $instructions(the instructions box). These are the steps I follow to complete my missions.");
+
+			world.addMissionText("default", "Can you execute my instructions with $controls(these controls), and if they don't work, help me fix them?");
+			
 		}		
 		
 		// ----- T H I N G S -----

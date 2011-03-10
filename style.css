@@ -162,6 +162,10 @@ textarea {
 	-moz-border-radius: 1em .5em 1em .5em;
 }
 
+#code.runtimeReference {
+	border:			solid 4px red;
+}
+
 #code[contentEditable="false"] {
 	overflow-x: 		auto;
 	word-wrap: 			break-word;
@@ -266,6 +270,10 @@ textarea {
 	overflow-y: 		auto;
 }
 
+#goals.runtimeReference {
+	border: 		4px solid red;
+}
+
 #goals table {
 	word-wrap: 			break-word;
 }
@@ -355,6 +363,10 @@ textarea {
 	width: 				100%;
 }
 
+.thoughtBubbleCommunication.runtimeReference {
+	border:				solid 4px red;
+}
+
 .thoughtBubbleCommunication button {
 	margin-top:	1em;
 }
@@ -422,6 +434,10 @@ textarea {
 	font-size:			10.5pt;
 }
 
+#gidgetSpeech .runtimeReference {
+	border-bottom:		4px solid red;
+}
+
 /** THING ************/
 
 .thoughtBubbleThing {
@@ -466,6 +482,10 @@ textarea {
 #memory {
 	color:			black;
 	padding: 		0em 1em .5em 1em;
+}
+
+#memory.runtimeReference {
+	border:			solid 4px red;
 }
 
 .runtimeInfoContainer {
@@ -518,7 +538,7 @@ textarea {
 	-moz-border-radius: 5px;
 }
 
-.runtimeInfoContainer .runtimeReference, #goals.runtimeReference {
+.runtimeInfoContainer .runtimeReference {
 	border:			4px solid rgb(255,0,0);
 	border-radius:	5px;
 	-moz-border-radius: 5px;

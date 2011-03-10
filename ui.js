@@ -181,8 +181,9 @@ GIDGET.ui = {
 	
 		var duration = 200;
 		var opacity = show ? 0.0 : 1.0;
-	
-		$('#instructionsContainer').animate({ 'opacity': opacity}, duration);
+
+		$('#instructionsContainer').animate({ 'opacity': opacity }, duration);
+		$('#code').animate({ 'opacity': opacity }, duration);
 		$('#goals').animate({ 'opacity': opacity}, duration);
 		$('#learnerThought').animate({ 'opacity': opacity}, duration);
 		$('#rightPanel').animate({ 'opacity': opacity}, duration);
@@ -420,6 +421,8 @@ GIDGET.ui = {
 	},
 
 	showNextMissionText: function() {
+	
+		$('*').removeClass('runtimeReference');
 	
 		this.currentMissionText++;
 	
@@ -1107,6 +1110,25 @@ GIDGET.ui = {
 				if(isDef(reference)) {
 				
 					thought = thought + "<span class='runtimeReference'>" + text + "</span>";
+	
+					if(reference === 'instructions') {
+						$('#instructionsContainer').animate({'opacity': 1.0}, 200);
+						$('#code').animate({'opacity': 1.0}, 200);
+						$('#code').addClass('runtimeReference');						
+					}
+					else if(reference === 'memory') {
+						$('#rightPanel').animate({'opacity': 1.0 }, 200);
+						$('#memory').addClass('runtimeReference');
+					}
+					else if(reference === 'goals') {
+						$('#goals').animate({'opacity': 1.0 }, 200);
+						$('#goals').addClass('runtimeReference');
+					}
+					else if(reference === 'controls') {
+						this.showExecutionControls();
+						$('#learnerThought').show().animate({'opacity': 1.0}, 200);
+						$('#learnerThought .thoughtBubbleCommunication').addClass('runtimeReference');
+					}
 	
 				}
 				// Otherwise, just concatenate the text.
