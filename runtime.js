@@ -272,8 +272,8 @@ GIDGET.Runtime = function(thing, world) {
 
 		var name = query.text;
 
-		if(name === thing.name) return true;
-		if(name.length > 1 && name.charAt(name.length - 1) === 's' && name.substring(0, name.length - 1) === thing.name) 
+		if(name.toLowerCase() === thing.name.toLowerCase()) return true;
+		if(name.length > 1 && name.charAt(name.length - 1).toLowerCase() === 's' && name.substring(0, name.length - 1).toLowerCase() === thing.name.toLowerCase()) 
 			return true;
 	
 		// Does the query match the names of one of the arguments? Is the thing passed in
@@ -476,7 +476,7 @@ GIDGET.runtime = {
 				
 				for(i = 0; i < results.length; i++) {
 			
-					hasTag = results[i].tags.hasOwnProperty(this.name.text);
+					hasTag = results[i].tags.hasOwnProperty(this.name.text.toLowerCase());
 
 					if((positive && hasTag) || (!positive && !hasTag)) {
 					
@@ -574,21 +574,10 @@ GIDGET.runtime = {
 						
 					runtime.pc++;
 					
-/*
-					runtime.addDecision(
-						"Next step!",
-						new runtime.IncrementPC(runtime, 1));
-*/
-
 				}
 				else {
 
 					runtime.pc += this.offset;
-/*
-					runtime.addDecision(
-						"All done scanning.",
-						new runtime.IncrementPC(runtime, this.offset));
-*/
 				
 				}
 					
@@ -702,7 +691,7 @@ GIDGET.runtime = {
 											for(i = 0; i < grid[r][c].length; i++) {
 												// Does the thing have the same name as the thing to avoid?
 												var thing = grid[r][c][i]; 
-												if(isDef(thing.name) && thing.name === theNameToAvoid) {
+												if(isDef(thing.name) && thing.name.toLowerCase() === theNameToAvoid.toLowerCase()) {
 													return false;
 												}
 											}
@@ -714,7 +703,7 @@ GIDGET.runtime = {
 									for(i = 0; i < grid[row][column].length; i++) {
 										// Does the thing have the same name as the thing to avoid?
 										var thing = grid[row][column][i]; 
-										if(isDef(thing.name) && thing.name === theNameToAvoid) {
+										if(isDef(thing.name) && thing.name.toLowerCase() === theNameToAvoid.toLowerCase()) {
 											return false;
 										}
 									}
@@ -909,11 +898,6 @@ GIDGET.runtime = {
 						GIDGET.text.analyze_success(runtime.peekResult().name),
 						new runtime.PushAnalyzed(runtime, runtime.peekResult()));
 						
-/*
-					runtime.addDecision(
-						"On to the next step!",
-						new runtime.IncrementPC(runtime, 1));
-*/
 					runtime.pc++;
 									
 				}
@@ -945,24 +929,13 @@ GIDGET.runtime = {
 
 				// If there are results left, continue to the next one.
 				if(runtime.hasRecentResults()) {
-					
-/*
-					runtime.addDecision(
-						"I'm finished with this $results@0(result), get rid of it!",
-						new runtime.PopResult(runtime));
-*/
-						
+											
 					runtime.pc += this.offset;
 					
 				}
 				// If there aren't results left, pop the empty list and move on to the next step.
 				else {
 
-/*
-					runtime.addDecision(
-						"I'm finished with $results@0(the last result).",
-						new runtime.PopResults(runtime));
-*/
 					runtime.popResults();
 
 					runtime.pc++;
@@ -1255,7 +1228,7 @@ GIDGET.runtime = {
 				// Now filter by names.
 				scope = filter(scope, function(thing) { 
 				
-					if(nameToMatch.text === 'it') return thing === runtime.peekFocus();
+					if(nameToMatch.text.toLowerCase() === 'it') return thing === runtime.peekFocus();
 					else return runtime.queryMatches(nameToMatch, thing); 
 				
 				});
@@ -1492,7 +1465,6 @@ GIDGET.runtime = {
 	
 						var i = 0;
 						var object = runtime.peekResult();
-						var action = undefined;
 						script = undefined;
 
 						// If we didn't find an object, we're in trouble.
@@ -1504,10 +1476,24 @@ GIDGET.runtime = {
 							return;						
 						
 						}
+
+						// The action found to execute.
+						var action = undefined;
 						
-						if(object.actions.hasOwnProperty(this.action.text)) {
+						var objectAction = undefined;
+						for(objectAction in object.actions) {
+							if(object.actions.hasOwnProperty(objectAction)) {
+							
+								if(objectAction.toLowerCase() === this.action.text.toLowerCase()) {
+									action = object.actions[objectAction];
+									break;
+								}
+							}
+						}
+						
+						// If we found the action...
+						if(isDef(action)) {
 	
-							action = object.actions[this.action.text];
 							script = action.script;
 							argumentNames = action.arguments;
 	

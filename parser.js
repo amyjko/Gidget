@@ -69,7 +69,7 @@ GIDGET.parser = {
 		this.hasMore = function() { return this.tokens.length > 0; };
 		this.peek = function() { return this.hasMore() ? this.tokens[0].text : undefined; };
 		this.eat = function() { return this.hasMore() && this.tokens.splice(0, 1)[0]; };
-		this.nextIs = function(text) { return this.hasMore() && this.peek() == text; };
+		this.nextIs = function(text) { return this.hasMore() && this.peek().toLowerCase() === text.toLowerCase(); };
 		this.eol = function() { return this.hasMore() && this.peek().match(/\r\n|\r|\n/); };
 		this.nextIsComma = function() { return this.hasMore() && this.peek() == ','; };
 		this.nextIsString = function() { return this.hasMore() && this.tokens[0].kind === 'string'; };
@@ -772,6 +772,7 @@ GIDGET.parser = {
 	
 		// eat one of the valid keywords
 		modify.keyword = tokenStream.eat();
+		modify.keyword.text = modify.keyword.text.toLowerCase();
 
 		// Try to parse a query
 		if(!tokenStream.nextIsString())
@@ -790,6 +791,7 @@ GIDGET.parser = {
 
 		// Eat the thing to modify.
 		modify.property = tokenStream.eat();
+		modify.property.text = modify.property.text.toLowerCase();
 
 		// There must be an amount
 		if(!isNaN(parseInt(tokenStream.peek())))
@@ -1048,9 +1050,9 @@ GIDGET.parser = {
 		}
 
 		// Otherwise, we look for zero or more query filters.
-		while(tokenStream.tokens[0].text.match(/nearest|first|second|third|one|two|three|last|grabbed|scanned|analyzed|level|over|focused/)) {
+		while(tokenStream.tokens[0].text.match(/nearest|first|second|third|one|two|three|last|grabbed|scanned|analyzed|level|over|focused/i)) {
 		
-			query.constraints.push(tokenStream.eat().text);
+			query.constraints.push(tokenStream.eat().text.toLowerCase());
 			
 		}
 
