@@ -346,8 +346,6 @@ GIDGET.ui = {
 	
 		code = jQuery.trim(code);
 	
-		console.log("Returning " + code);
-	
 		return code;
 	
 	},
@@ -1176,8 +1174,6 @@ GIDGET.ui = {
 	// Only works when stepping one instruction at a time; stepping by line, playing, or running to end don't show the cheatsheet.
 	highlightCommand: function(command) {
 	
-		console.log("Current mode = " + this.currentExecutionMode);
-	
 		GIDGET.ui.toggleCheatsheet(true);
 		$('.cheatsheetItem').hide();
 		$('#cheat-' + command).show().addClass('runtimeReference');
@@ -1554,8 +1550,6 @@ GIDGET.ui = {
 			}
 			// Otherwise, highlight the main code
 			else {
-			
-				console.log("Highlighting line " + token.line + " token " + token.index);
 			
 				$('#code #sourceToken' + token.index).addClass('runtimeReference');
 				$('#code #sourceLine' + token.line).addClass('runtimeReference');
