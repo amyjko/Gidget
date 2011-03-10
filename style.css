@@ -270,6 +270,11 @@ textarea {
 	word-wrap: 			break-word;
 }
 
+#goals table td {
+	margin: 0em;
+	padding: 0em;
+}
+
 .goal {
 	font-family:		"Courier New", Courier, monospace;
 	font-size:			small;
