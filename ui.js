@@ -297,8 +297,9 @@ GIDGET.ui = {
 	
 	htmlToGidgetCode: function(html) {
 
+/*
 		// Convert the given HTML to Gidget source code amenable for execution.
-		// <div>s are treated as new lines.	
+		// <div>s and <br>s are treated as new lines, all text is extracted otherwise.
 		var code = "";
 		var lines = $('#code').children();
 		var lineNumber;
@@ -312,6 +313,50 @@ GIDGET.ui = {
 		// Remove the trailing newline
 		if(code.length > 0)
 			code = code.substr(0, code.length - 1);
+*/
+
+		// This function gets all of the text, div and br nodes that are descendants of the given node,
+		// in the order they are rendered on screen.
+		function getTextDivAndBrNodesIn(node) {
+
+		    var textDivAndBrNodes = [];
+		
+			// This is the recursive helper function.
+		    function getNodes(child) {
+		    
+		    	var i;
+		        if (child.nodeType == 3) {
+					textDivAndBrNodes.push(child);
+		        } else {
+		        	if(child.tagName.toLowerCase() === 'div' || child.tagName.toLowerCase() === 'br')
+		        		textDivAndBrNodes.push(child);
+		        
+		            for (i = 0; i < child.childNodes.length; i++) {
+		                getNodes(child.childNodes[i]);
+		            }
+		        }
+		    }
+		
+		    getNodes(node);
+		    return textDivAndBrNodes;
+		}
+	
+		var nodes = getTextDivAndBrNodesIn($('#code')[0]);
+		
+		// Take all of the nodes found and convert them to text.
+		var code = "";
+		var i;
+		for(i = 0; i < nodes.length; i++) {
+			if(nodes[i].nodeType === 3) {
+				code = code + nodes[i].nodeValue;
+			}
+			else if(nodes[i].tagName.toLowerCase() === 'div') {
+				code = code + "\n";
+			}
+			else if(nodes[i].tagName.toLowerCase() === 'br') {
+				code = code + "\n";
+			}
+		}
 	
 		return code;
 	
