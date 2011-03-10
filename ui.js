@@ -1164,19 +1164,21 @@ GIDGET.ui = {
 		$('#cheatsheet').css('top', ($('#code').offset().top + 20) + 'px');
 		$('#cheatsheet').css('left', "" + ($('#code').offset().left + $('#code').outerWidth() - 2) + "px");
 			
+		var hidden = $('#cheatsheet').css('display') === 'none';
+			
 		// If the caller wants to explicitly show or hide the cheatsheet, we already know what action to take.
 		// Otherwise, we have to get the current state.
 		if(!isDef(show))
-			show = $('#cheatsheet').css('display') === 'none';
+			show = hidden;
 
 		// If we're showing, set display to visible and slide out to the right
-		if(show) {
+		if(show && hidden) {
 			
 			$('#cheatsheet').animate({'width': '22em'}, 200);
 			$('#toggleCheatsheet').text("?"); // hide instructions key
 		
 		}
-		else {
+		else if(!hidden) {
 		
 /* 			$('#cheatsheet').animate({ 'left': 0 }, 200, function() { $('#cheatsheet').hide(); } ); */
 			$('#cheatsheet').animate({'width': '0em'}, 200, function() { $('#cheatsheet').hide(); });
