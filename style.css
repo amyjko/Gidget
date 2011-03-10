@@ -183,16 +183,26 @@ textarea {
 /** C H E A T - S H E E T *******************************/
 
 #cheatsheet {
+
+	position: 		fixed;
+	display:		hidden;
+
 	font-family: 	Verdana, Arial, Helvetica, sans-serif;
-	margin-left:	1em;
+
 	margin-right:	1em;
 	margin-top:		-.8em;
 	padding: 		1em;
 	font-size:		small;
-	width:			18em;
+	width:			26em;
+	max-height:		20em;
+	overflow-y: 	auto;
+
+/*
 	border-width:	1px;
 	border-radius: 	0em;
 	-moz-border-radius: 0em;
+*/
+	z-index:		2;
 }
 
 #cheatsheet.runtimeReference {
@@ -206,9 +216,10 @@ textarea {
 #toggleCheatsheet {
 	margin-top:		-1em;
 	margin-left:	7em;
-	position:	relative;
-	left: 19em;
-	top: -13em;
+	position:		relative;
+	left: 			18.25em;
+	top: 			-20.75em;
+	z-index:		2;
 }
 
 .cheatsheetExplanation {

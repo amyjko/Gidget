@@ -1142,32 +1142,34 @@ GIDGET.ui = {
 	// If show is defined, either hides or shows. Otherwise, toggles.
 	toggleCheatsheet: function(show) {
 		
+		// If the world is executing, but not one step at a time, don't show anything.
 		if(isDef(this.currentExecutionMode) && this.currentExecutionMode !== 'step')
 			return;
+
+		// Make sure the cheatsheet is always top aligned with the code editor.
+		$('#cheatsheet').css('top', ($('#code').offset().top + 10) + 'px');
+		$('#cheatsheet').css('left', "" + ($('#code').offset().left + $('#code').width() + 30) + "px");
 			
-		var shown = undefined;
-		
-		if(isDef(show)) {
-		
-			if((show && $('#cheatsheet').css('display') === 'none') ||
-				(!show && $('#cheatsheet').css('display') !== 'none'))
-				$('#cheatsheet').slideToggle(200);
-				
-			shown = show;
+		// If the caller wants to explicitly show or hide the cheatsheet, we already know what action to take.
+		// Otherwise, we have to get the current state.
+		if(!isDef(show))
+			show = $('#cheatsheet').css('display') === 'none';
+
+		// If we're showing, set display to visible and slide out to the right
+		if(show) {
+			
+			$('#cheatsheet').show(200);
+			$('#toggleCheatsheet').text("?"); // hide instructions key
 		
 		}
 		else {
-
-			shown = $('#cheatsheet').css('display') === 'none';
+		
+/* 			$('#cheatsheet').animate({ 'left': 0 }, 200, function() { $('#cheatsheet').hide(); } ); */
+			$('#cheatsheet').hide(200);
 			
-			$('#cheatsheet').slideToggle(200);
-			
+			$('#toggleCheatsheet').text("?"); // show instructions key
+		
 		}
-
-		if(shown)
-			$('#toggleCheatsheet').text("<"); // hide instructions key
-		else
-			$('#toggleCheatsheet').text(">"); // show instructions key
 
 	},
 	
