@@ -163,6 +163,7 @@ GIDGET.ui = {
 			
 	},
 	
+	// Hides the whole UI
 	disable: function(message) {
 
 		$('#container').hide();
@@ -172,6 +173,19 @@ GIDGET.ui = {
 			"<p>Your MTurk completion code is <b>" + localStorage.getItem('quit') + "</b>. Please enter it back on the MTurk HIT page.</p>" + 
 			"<p>From this point on, the game will be disabled."
 		).show();
+	
+	},
+	
+	// Hides all but the mission and thoughts
+	showAllButMission: function(show) {
+	
+		var duration = 200;
+		var opacity = show ? 0.0 : 1.0;
+	
+		$('#instructionsContainer').animate({ 'opacity': opacity}, duration);
+		$('#goals').animate({ 'opacity': opacity}, duration);
+		$('#learnerThought').animate({ 'opacity': opacity}, duration);
+		$('#rightPanel').animate({ 'opacity': opacity}, duration);
 	
 	},
 
@@ -374,6 +388,8 @@ GIDGET.ui = {
 		// Set titlebar with level number and title (if there is one)
 		this.showLevelInfo();		
 
+		this.showAllButMission(true);
+
 		// Show the first mission text.
 		this.showNextMissionText();
 
@@ -409,18 +425,16 @@ GIDGET.ui = {
 	
 		if(this.currentMissionText >= this.world.missionText.length) {
 
+			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText - 1].text));
 			this.currentMissionText = undefined;
 			this.showExecutionControls();
+			this.showAllButMission(false);
 			
 		}
 		else {
 		
 			this.world.gidget.runtime.state = this.world.missionText[this.currentMissionText].state;
-			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text), false);
-
-			GIDGET.ui.setThought(
-				"<div><button onclick='GIDGET.ui.step()' class='align-right'>next...</button></div>", 
-				0, "learner");
+			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text + "<div><button onclick='GIDGET.ui.step()' class='align-right'>next...</button></div>"), false);
 		
 		}
 	
