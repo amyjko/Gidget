@@ -1486,7 +1486,7 @@ GIDGET.ui = {
 			if(runtime.thing.energy <= 0)
 				$('#energy').css('color', 'red');
 			else if(runtime.thing.energy < 20)
-				$('#energy').css('color', 'gold');
+				$('#energy').css('color', 'yellow');
 			else
 				$('#energy').css('color', 'green'); //bright green: #00FF00
 			

@@ -165,7 +165,7 @@ GIDGET.ui.media = {
 		this.loadSound("error");
 		this.loadSound("parserErrorExp");
 		this.loadSound("parserErrorCtrl");
-		this.loadSound("editErrorExp");
+		this.loadSound("errorExp");
 	
 	}
 
