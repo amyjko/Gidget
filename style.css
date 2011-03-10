@@ -527,7 +527,9 @@ textarea {
 	font-family: 	"Courier New", Courier, monospace;
 	font-size: 		small;
 	font-weight:	bold;
-	word-wrap: 	normal;
+	word-wrap: 		normal;
+	text-indent:	-1em;
+	padding-left:	1em;
 }
 
 .sourceToken.keyword {
