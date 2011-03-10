@@ -261,7 +261,7 @@ GIDGET.Runtime = function(thing, world) {
 
 	};
 
-	this.addDecision = function(message, action, state) { this.decisions.push(new this.Decision(this, message, action, state)); }
+	this.addDecision = function(message, action) { this.decisions.push(new this.Decision(this, message, action)); }
 				
 	this.hasRecentResults = function() { return this.resultsStack.length > 0 && this.resultsStack[0].length > 0; };
 
@@ -376,14 +376,12 @@ GIDGET.Runtime = function(thing, world) {
 	
 	// Represents a decision that a Step_ made while executing. Messages can refer to
 	// runtime state, which can then be highlighted in the user interface to explain the decision.
-	this.Decision = function(runtime, message, action, state) {
+	this.Decision = function(runtime, message, action) {
 		
 		this.runtime = runtime;
 		
 		// Remember the function to execute.
 		this.action = action;
-		
-		this.state = isDef(state) ? state : 'default';
 
 		this.thought = message;
 
@@ -392,7 +390,7 @@ GIDGET.Runtime = function(thing, world) {
 			if(isDef(action))
 				action.execute();
 				
-			this.runtime.state = this.state;
+			this.runtime.state = this.thought.emotion;
 		
 		};
 			
@@ -534,23 +532,19 @@ GIDGET.runtime = {
 
 				runtime.addDecision(
 					this.message,
-					undefined, 
-					"sad");
+					undefined);
 
 				// Clear the results and focus stacks
 				runtime.addDecision(
 					GIDGET.text.unknown_clearFocus(), 
-					new runtime.ClearFocus(runtime),
-					"sad");
+					new runtime.ClearFocus(runtime));
 
 				runtime.addDecision(GIDGET.text.unknown_clearResults(), 
-					new runtime.ClearResults(runtime),
-					"sad");
+					new runtime.ClearResults(runtime));
 
 				runtime.addDecision(
 					GIDGET.text.unknown_nextStep(),
-					new runtime.IncrementPC(runtime, 1), 
-					"sad");
+					new runtime.IncrementPC(runtime, 1));
 				
 			}
 		};
@@ -1057,7 +1051,7 @@ GIDGET.runtime = {
 
 				thing.runtime.start(thing.code, false, {});
 
-				runtime.addDecision("I created " + thing.name + ".");
+				runtime.addDecision(new GIDGET.text.Message("I created " + thing.name + "."));
 
 				runtime.pc++;
 
@@ -1079,7 +1073,7 @@ GIDGET.runtime = {
 
 					runtime.world.removeThing(thing);
 
-					runtime.addDecision("I removed " + thing.name + ".");
+					runtime.addDecision(new GIDGET.text.Message("I removed " + thing.name + "."));
 	
 					runtime.pc++;
 					
@@ -1329,7 +1323,7 @@ GIDGET.runtime = {
 				}
 				else {
 
-					runtime.addDecision(GIDGET.text.focus_failure(), undefined, "sad");
+					runtime.addDecision(GIDGET.text.focus_failure(), undefined);
 					
 				}
 	

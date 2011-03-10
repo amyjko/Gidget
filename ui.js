@@ -1144,6 +1144,11 @@ GIDGET.ui = {
 		// If there's a message
 		if(isDef(message)) {
 		
+			if(isDef(message.emotion)) {
+			
+				this.world.gidget.runtime.state = message.emotion;
+			}
+		
 			// Play its sound, if defined
 			if(isDef(message.sound))
 				GIDGET.ui.media.playSound(message.sound);
