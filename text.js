@@ -271,7 +271,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("ERROR: Nothing to <b>ask</b> by that name.", "error");
 			
-		return new GIDGET.text.Message("I couldn't find anything to 'ask' by that name.", "error");
+		return new GIDGET.text.Message("I couldn't find anything to 'ask' by that name.", "errorExp");
 	
 	},
 
@@ -280,7 +280,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("ERROR: Invalid <b>ask</b> syntax. " + name + " expects  <b>" + numberExpected + "</b> names, instead of <b>" + numberGiven + "</b> names. Skipping to next instructions.", "error");
 			
-		return new GIDGET.text.Message("Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.", "error");
+		return new GIDGET.text.Message("Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.", "errorExp");
 	
 	},
 		
@@ -297,7 +297,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("ERROR: Invalid ask command. " +this.capitalize(name)+ " does not understand the action, '" + action + "'.", "error");
 			
-		return new GIDGET.text.Message("I told " + name + " to " + action + " but it didn't know how! I don't know what to do!", "error");
+		return new GIDGET.text.Message("I told " + name + " to " + action + " but it didn't know how! I don't know what to do!", "errorExp");
 	
 	},
 	
@@ -354,7 +354,10 @@ GIDGET.text = {
 				return new GIDGET.text.Message(result + ". I'm going to add " + (scope.length === 1 ? "it" : "them") + " to my results list!");
 		}
 		else {
-			return new GIDGET.text.Message(result + ", but didn't find anything.", "error");
+			if (GIDGET.experiment.isControl())
+				return new GIDGET.text.Message(result + ", but didn't find anything.", "error");
+			else
+				return new GIDGET.text.Message(result + ", but didn't find anything.", "errorExp");
 		}
 
 	},
@@ -368,9 +371,9 @@ GIDGET.text = {
 	editingDisabled: function() {
 	
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Cannot modify code during program execution. Click the <b>" + this.finishExecutingButtonLabel() + "</b> button to end execution and then on  <b>retry this misssion</b> button to restart.", "error");
+			return new GIDGET.text.Message("ERROR: Cannot modify code during program execution. Click the <b> to " + this.finishExecutingButtonLabel() + "</b> button to end execution and then on  <b>retry this misssion</b> button to restart.", "error");
 	
-		return new GIDGET.text.Message("If you change my commands while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b>" + this.finishExecutingButtonLabel() + "</b> button and then clicking the <b>retry this mission</b> button.", "editErrorExp");
+		return new GIDGET.text.Message("If you change my instructions while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b> to " + this.finishExecutingButtonLabel() + "</b> button and then clicking the <b>retry this mission</b> button.", "errorExp");
 		
 	},
 	
@@ -507,18 +510,18 @@ GIDGET.text = {
 	goal_checkSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("$results(Results) detected, goal satisfied.");	
+			return new GIDGET.text.Message("$results(Results) detected in memory banks, goal satisfied.");	
 		
-		return new GIDGET.text.Message("There were $results(results) for this goal, so I succeeded!"
+		return new GIDGET.text.Message("There were $results(results) for this goal in my memory, so I succeeded!"
 
 	},
 	
 	goal_checkFailure: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: <span class='runtimeReference'>some of your goals</span> failed.");
+			return new GIDGET.text.Message("ERROR: There were $results(no results) in the memory banks for this goal, so you <span class='runtimeReference'>failed this goal</span>.");
 			
-		return new GIDGET.text.Message("There were $results(no results) for this goal, so I didn't accomplish this goal!");
+		return new GIDGET.text.Message("There were $results(no results) for this goal in my memory, so I didn't accomplish this goal!");
 		
 	},
 	
