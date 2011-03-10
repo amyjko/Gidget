@@ -188,20 +188,17 @@ textarea {
 	display:		hidden;
 
 	font-family: 	Verdana, Arial, Helvetica, sans-serif;
+	background:		#ccd3d9; /* Color 3 */
 
 	margin-right:	1em;
 	margin-top:		-.8em;
 	padding: 		1em;
 	font-size:		small;
-	width:			26em;
-	max-height:		20em;
+	width:			30em;
+	max-height:		19em;
 	overflow-y: 	auto;
 
-/*
-	border-width:	1px;
-	border-radius: 	0em;
-	-moz-border-radius: 0em;
-*/
+	border:	solid 1px gray;	
 	z-index:		2;
 }
 
@@ -263,7 +260,7 @@ textarea {
 	padding:			1em;
 	
 	position:			relative;
-	top: 				-.7em;
+	top: 				-.9em;
 	z-index:			5;
 	
 	overflow-y: 		auto;

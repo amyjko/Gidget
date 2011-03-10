@@ -1147,8 +1147,8 @@ GIDGET.ui = {
 			return;
 
 		// Make sure the cheatsheet is always top aligned with the code editor.
-		$('#cheatsheet').css('top', ($('#code').offset().top + 10) + 'px');
-		$('#cheatsheet').css('left', "" + ($('#code').offset().left + $('#code').width() + 30) + "px");
+		$('#cheatsheet').css('top', ($('#code').offset().top + 20) + 'px');
+		$('#cheatsheet').css('left', "" + ($('#code').offset().left + $('#code').outerWidth() - 2) + "px");
 			
 		// If the caller wants to explicitly show or hide the cheatsheet, we already know what action to take.
 		// Otherwise, we have to get the current state.
@@ -1158,14 +1158,14 @@ GIDGET.ui = {
 		// If we're showing, set display to visible and slide out to the right
 		if(show) {
 			
-			$('#cheatsheet').show(200);
+			$('#cheatsheet').animate({'width': '22em'}, 200);
 			$('#toggleCheatsheet').text("?"); // hide instructions key
 		
 		}
 		else {
 		
 /* 			$('#cheatsheet').animate({ 'left': 0 }, 200, function() { $('#cheatsheet').hide(); } ); */
-			$('#cheatsheet').hide(200);
+			$('#cheatsheet').animate({'width': '0em'}, 200, function() { $('#cheatsheet').hide(); });
 			
 			$('#toggleCheatsheet').text("?"); // show instructions key
 		
