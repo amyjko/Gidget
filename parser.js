@@ -69,7 +69,7 @@ GIDGET.parser = {
 		this.hasMore = function() { return this.tokens.length > 0; };
 		this.peek = function() { return this.hasMore() ? this.tokens[0].text : undefined; };
 		this.eat = function() { return this.hasMore() && this.tokens.splice(0, 1)[0]; };
-		this.nextIs = function(text) { return this.hasMore() && this.peek() == text; };
+		this.nextIs = function(text) { return this.hasMore() && this.peek().toLowerCase() === text.toLowerCase(); };
 		this.eol = function() { return this.hasMore() && this.peek().match(/\r\n|\r|\n/); };
 		this.nextIsComma = function() { return this.hasMore() && this.peek() == ','; };
 		this.nextIsString = function() { return this.hasMore() && this.tokens[0].kind === 'string'; };
@@ -129,64 +129,6 @@ GIDGET.parser = {
 			
 			// End the line.
 			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, this.tokens.length));
-		
-/*		
-		
-			// Divide up each line by text separated by spaces and new lines.
-			spaced = lines[lineNumber].split(/\s/);
-			
-			col = 0;
-
-			// Go through each space separated character sequence and find commas.			
-			for(tokenNumber = 0; tokenNumber < spaced.length; tokenNumber++) {
-			
-				if(spaced[tokenNumber] == '') {
-				
-					count += spaced[tokenNumber].length + 1;
-					col += spaced[tokenNumber].length + 1;
-
-				}
-				else {
-
-					// Split this into commas.
-					var commas = spaced[tokenNumber].split(',');
-	
-					// If the result was only one thing, there were no commas.				
-					if(commas.length == 1) {
-	
-						this.tokens.push(new GIDGET.parser.Token(spaced[tokenNumber], "string", lineNumber, col, count));
-		
-					}
-					// Otherwise, there were one or more commas.
-					else {
-					
-						var i;
-						var commaCount = 0;
-						for(i = 0; i < commas.length; i++) {
-						
-							if(commas[i].length === 0) {
-								this.tokens.push(new GIDGET.parser.Token(',', "comma", lineNumber, col + commaCount, count + commaCount));
-								commaCount++;
-							}
-							else {
-								this.tokens.push(new GIDGET.parser.Token(commas[i], "string", lineNumber, col, count));
-								commaCount += commas[i].length;
-							}
-						
-						}
-						
-					}
-
-					count += spaced[tokenNumber].length + 1;
-					col += spaced[tokenNumber].length + 1;
-
-				}					
-									
-			}
-				
-			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, col, count));
-		
-*/
 				
 		}
 
@@ -830,6 +772,7 @@ GIDGET.parser = {
 	
 		// eat one of the valid keywords
 		modify.keyword = tokenStream.eat();
+		modify.keyword.text = modify.keyword.text.toLowerCase();
 
 		// Try to parse a query
 		if(!tokenStream.nextIsString())
@@ -848,6 +791,7 @@ GIDGET.parser = {
 
 		// Eat the thing to modify.
 		modify.property = tokenStream.eat();
+		modify.property.text = modify.property.text.toLowerCase();
 
 		// There must be an amount
 		if(!isNaN(parseInt(tokenStream.peek())))
@@ -1106,9 +1050,9 @@ GIDGET.parser = {
 		}
 
 		// Otherwise, we look for zero or more query filters.
-		while(tokenStream.tokens[0].text.match(/nearest|first|second|third|one|two|three|last|grabbed|scanned|analyzed|level|over|focused/)) {
+		while(tokenStream.tokens[0].text.match(/nearest|first|second|third|one|two|three|last|grabbed|scanned|analyzed|level|over|focused/i)) {
 		
-			query.constraints.push(tokenStream.eat().text);
+			query.constraints.push(tokenStream.eat().text.toLowerCase());
 			
 		}
 

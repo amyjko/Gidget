@@ -225,7 +225,7 @@ GIDGET.ui = {
 		
 			var classes = 'sourceToken';
 			
-			if(string.match(/scan|say|analyze|goto|ask|to|grab|drop|it|if|is|are|on|avoid/))
+			if(string.match(/scan|say|analyze|goto|ask|to|grab|drop|it|if|is|are|on|avoid/i))
 				classes = classes + ' keyword';		
 				
 			if(first) {
@@ -297,24 +297,6 @@ GIDGET.ui = {
 	
 	htmlToGidgetCode: function(html) {
 
-/*
-		// Convert the given HTML to Gidget source code amenable for execution.
-		// <div>s and <br>s are treated as new lines, all text is extracted otherwise.
-		var code = "";
-		var lines = $('#code').children();
-		var lineNumber;
-		for(lineNumber = 0; lineNumber < lines.length; lineNumber++) {
-		
-			var line = $(lines[lineNumber]).text().trim();
-			code = code + line + "\n";
-		
-		}
-	
-		// Remove the trailing newline
-		if(code.length > 0)
-			code = code.substr(0, code.length - 1);
-*/
-
 		// This function gets all of the text, div and br nodes that are descendants of the given node,
 		// in the order they are rendered on screen.
 		function getTextDivAndBrNodesIn(node) {
@@ -346,17 +328,23 @@ GIDGET.ui = {
 		// Take all of the nodes found and convert them to text.
 		var code = "";
 		var i;
+		var reachedText = false;
 		for(i = 0; i < nodes.length; i++) {
 			if(nodes[i].nodeType === 3) {
 				code = code + nodes[i].nodeValue;
+				reachedFirstText = true;
 			}
-			else if(nodes[i].tagName.toLowerCase() === 'div') {
+			else if(nodes[i].tagName.toLowerCase() === 'div' && reachedText) {
 				code = code + "\n";
+				reachedText = false;
 			}
-			else if(nodes[i].tagName.toLowerCase() === 'br') {
+			else if(nodes[i].tagName.toLowerCase() === 'br' && reachedText) {
 				code = code + "\n";
+				reachedText = false;
 			}
 		}
+	
+		code = jQuery.trim(code);
 	
 		return code;
 	
@@ -1186,8 +1174,6 @@ GIDGET.ui = {
 	// Only works when stepping one instruction at a time; stepping by line, playing, or running to end don't show the cheatsheet.
 	highlightCommand: function(command) {
 	
-		console.log("Current mode = " + this.currentExecutionMode);
-	
 		GIDGET.ui.toggleCheatsheet(true);
 		$('.cheatsheetItem').hide();
 		$('#cheat-' + command).show().addClass('runtimeReference');
@@ -1564,6 +1550,7 @@ GIDGET.ui = {
 			}
 			// Otherwise, highlight the main code
 			else {
+			
 				$('#code #sourceToken' + token.index).addClass('runtimeReference');
 				$('#code #sourceLine' + token.line).addClass('runtimeReference');
 			}

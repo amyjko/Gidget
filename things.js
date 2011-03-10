@@ -21,7 +21,7 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 	// Translate the list of tags into a set (well, an object literal hash table of tag keys with true values).
 	var i;
 	for(i = 0; i < tags.length; i++)
-		this.tags[tags[i]] = true;
+		this.tags[tags[i].toLowerCase()] = true;
 	
 	this.actions = actions;
 
