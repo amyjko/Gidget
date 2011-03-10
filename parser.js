@@ -129,64 +129,6 @@ GIDGET.parser = {
 			
 			// End the line.
 			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, this.tokens.length));
-		
-/*		
-		
-			// Divide up each line by text separated by spaces and new lines.
-			spaced = lines[lineNumber].split(/\s/);
-			
-			col = 0;
-
-			// Go through each space separated character sequence and find commas.			
-			for(tokenNumber = 0; tokenNumber < spaced.length; tokenNumber++) {
-			
-				if(spaced[tokenNumber] == '') {
-				
-					count += spaced[tokenNumber].length + 1;
-					col += spaced[tokenNumber].length + 1;
-
-				}
-				else {
-
-					// Split this into commas.
-					var commas = spaced[tokenNumber].split(',');
-	
-					// If the result was only one thing, there were no commas.				
-					if(commas.length == 1) {
-	
-						this.tokens.push(new GIDGET.parser.Token(spaced[tokenNumber], "string", lineNumber, col, count));
-		
-					}
-					// Otherwise, there were one or more commas.
-					else {
-					
-						var i;
-						var commaCount = 0;
-						for(i = 0; i < commas.length; i++) {
-						
-							if(commas[i].length === 0) {
-								this.tokens.push(new GIDGET.parser.Token(',', "comma", lineNumber, col + commaCount, count + commaCount));
-								commaCount++;
-							}
-							else {
-								this.tokens.push(new GIDGET.parser.Token(commas[i], "string", lineNumber, col, count));
-								commaCount += commas[i].length;
-							}
-						
-						}
-						
-					}
-
-					count += spaced[tokenNumber].length + 1;
-					col += spaced[tokenNumber].length + 1;
-
-				}					
-									
-			}
-				
-			this.tokens.push(new GIDGET.parser.Token('\n', "eol", lineNumber, col, count));
-		
-*/
 				
 		}
 
