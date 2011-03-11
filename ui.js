@@ -1179,7 +1179,8 @@ GIDGET.ui = {
 
 		this.setThought(thought, animate === true ? 50 : 0);
 
-		this.log(thought);
+		// Only for debugging purposes...
+		// this.log(thought);
 
 	},
 
