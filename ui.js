@@ -1023,16 +1023,37 @@ GIDGET.ui = {
 							this.visualizeDecision(decision.thought, animate);
 						
 						}
-						// If this is a say, add a speech bubble
+						// If this is a say command, add a speech bubble
 						if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
+						
+							// Add the message to the thought bubble.
 							$('#thingThought').html(decision.action.message);
+
+							// Make it visible, so we can size it.
 							$('#thingThought').css('visibility', 'visible');
-							var top = runtime.thing.row * (this.getCellSize() + 1) + $('#thingThought').height() + $('#grid').position().top;
-							var left = runtime.thing.column * this.getCellSize() + $('#grid').position().left - $('#thingThought').width() / 2;
+							
+							// Choose a location for it that minimizes how much it obscures other Gidget UI.
+							
+							// This gets the thing's row position, so the thought appears below the thing.
+							var top = runtime.thing.row * (this.getCellSize() + 1) + $('#thingThought').outerHeight() + $('#grid').position().top;
+							
+							// This gets the thing's horizontal center.
+							var left = 1.5 * runtime.thing.column * this.getCellSize() + $('#grid').position().left - $('#thingThought').outerWidth() / 2;
+
+							// Is the left past the left margin of the world?
+							if(left < $('#grid').position().left - this.getCellSize()) left = $('#grid').position().left - this.getCellSize();
+
+							// If the bottom is past the bottom margin of the window, move it above the thing
+							if(top + $('#thingThought').outerHeight() > $('#grid').position().top + $('#grid').outerHeight())
+								top = $('#grid').position().top + (runtime.thing.row) * (this.getCellSize() + 1) - $('#thingThought').outerHeight();
+							
+							// Place the location of it.
 							$('#thingThought').css('top', "" + top + "px");
 							$('#thingThought').css('left', "" + left + "px");
+
 						
 						}
+						// In all other cases, hide the thought bubble.
 						else {
 							$('#thingThought').css('visibility', 'hidden');
 						}

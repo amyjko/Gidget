@@ -156,7 +156,7 @@ textarea {
 	border:			2px solid #a9a9a9;
 	padding: 		1em;
 
-	z-index:		10;
+	z-index:		1;
 
 	border-radius: 		1em .5em 1em .5em;
 	-moz-border-radius: 1em .5em 1em .5em;
@@ -203,7 +203,7 @@ textarea {
 	overflow-y: 	auto;
 
 	border:	solid 1px gray;	
-	z-index:		2;
+	z-index:		4;
 }
 
 #cheatsheet.runtimeReference {
@@ -241,7 +241,7 @@ textarea {
 	border-radius: 	.25em;
 	-moz-border-radius: .25em;
 	text-align:		right;
-	z-index:		50;
+	z-index:		1;
 	padding: 		1em;
 }
 
@@ -265,7 +265,7 @@ textarea {
 	
 	position:			relative;
 	top: 				-.9em;
-	z-index:			5;
+	z-index:			1;
 	
 	overflow-y: 		auto;
 }
@@ -468,7 +468,8 @@ textarea {
 	position:		absolute;
 	visibility: 	hidden;
 	width:			15em;
-	z-index: 		15;
+	z-index: 		3;
+	padding:		.75em;
 }
 
 
