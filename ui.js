@@ -1023,6 +1023,19 @@ GIDGET.ui = {
 							this.visualizeDecision(decision.thought, animate);
 						
 						}
+						// Handle non-gidget visualization.
+						else {
+						
+							// Play the sound if there is one.
+							if(isDef(decision.thought) && isDef(decision.thought.sound)) {
+	
+								GIDGET.ui.media.playSound(decision.thought.sound);
+								
+							}
+						
+						}
+						
+						
 						// If this is a say command, add a speech bubble
 						if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
 						
@@ -1057,7 +1070,7 @@ GIDGET.ui = {
 						else {
 							$('#thingThought').css('visibility', 'hidden');
 						}
-						
+												
 					}
 				
 				}
@@ -1176,10 +1189,13 @@ GIDGET.ui = {
 				this.world.gidget.runtime.state = message.emotion;
 				
 			}
-		
-			// Play its sound, if defined
-			if(isDef(message.sound))
+
+			// Play the sound if there is one.
+			if(isDef(message.sound)) {
+	
 				GIDGET.ui.media.playSound(message.sound);
+				
+			}
 				
 			// Call its custom behavior, if defined.
 			if(isDef(message.functionToCall)) {

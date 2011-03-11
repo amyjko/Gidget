@@ -393,7 +393,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl())
 			return new GIDGET.text.Message("CRITICAL ERROR: Energy depleted. Cannot continue program execution.", "energyDown");
 		
-		return new GIDGET.text.Message("I ... can't... go ... any ... further...", "energyDown", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("I ... can't... go ... any ... further...", "energyDown", GIDGET.text.SAD);
 		
 	},
 	
@@ -508,6 +508,19 @@ GIDGET.text = {
 		return new GIDGET.text.Message("Now where was I?");
 	},
 
+	modify: function(keyword, property, number) {
+		
+		var sound = undefined;
+		
+		if(property === 'energy') {
+			if(keyword === 'raise') sound = "energyUp";
+			else if(keyword === 'lower') sound = "energyDown";
+			else if(keyword === 'set' && number === "0") sound = "energyDown";
+		}
+		
+		return new GIDGET.text.Message("" + keyword + " " + property, sound);
+		
+	},
 
 // *******************************************************
 // *** U S E R - I N T E R F A C E  - G O A L S **********
@@ -548,7 +561,6 @@ GIDGET.text = {
 		return new GIDGET.text.Message("I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(", undefined, GIDGET.text.SAD);
 		
 	},
-
 
 // *******************************************************
 // *** P A R S E R - E R R O R - M E S S A G E S *********
