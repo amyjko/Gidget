@@ -445,6 +445,9 @@ GIDGET.ui = {
 	
 	nextLevel: function() {
 	
+		// Disable any UI in the learner's thought bubble, so the learner can't do anything yet.
+		GIDGET.ui.setThought("<span id='learnerSpeech'></span>", 0, "learner");		
+	
 		// Remember that this level was passed, what time, and the final code.
 		this.saveCurrentLevelCode();
 		var levelData = localStorage.getObject('levelMetadata');
@@ -477,7 +480,6 @@ GIDGET.ui = {
 			this.quit("Congratulations! You beat all of the levels.");
 		
 		}
-		
 	
 	},
 
