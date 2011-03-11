@@ -57,7 +57,7 @@ GIDGET.Thing = function(world, name, row, col, color, tags, actions) {
 		// Compute a level offset, so that things that are a certain height go above their cell.
 		var levelOffset = this.level > 1 ? (this.level - 1) * size : 0;
 
-		if(isDef(image) && image.width > 0 && image.height > 0) {
+		if(isDef(image) && image.width > 0 && image.height > 0 && size > 0) {
 			ctx.drawImage(image, this.column * size + padding + animateColumnOffset, this.row * size + padding + animateRowOffset - levelOffset, size - padding * 2, size - padding * 2 + levelOffset);
 		}
 		else {

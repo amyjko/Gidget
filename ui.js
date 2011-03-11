@@ -250,7 +250,7 @@ GIDGET.ui = {
 
 			var html = "<span class='" + classes + "' id='sourceToken" + count + "'>" + string + "</span>";
 			count++;
-			return html;					
+			return html;
 		
 		}
 	
@@ -265,41 +265,51 @@ GIDGET.ui = {
 
 			var lineText = "<div class='sourceLine' + id='sourceLine" + lineNumber + "'>";
 
-			var charIndex, char;
-			var id = "";
-			for(charIndex = 0; charIndex < line.length; charIndex++) {
-				
-				char = line.charAt(charIndex);
-
-				// If it's a space, add a space.
-				if(char.match(/\s/)) {
-					if(id.length > 0)
-						lineText = lineText + tokenToHTML(id);
-					lineText = lineText + " "; // this needs to be " " instead of &nbsp for text-wrapping purposes.
-					id = "";
-				}
-				// If it's a comma, add the accumulated id if necessary and then add a comma,
-				// resetting the accumulated id.
-				else if(char === ',') {
-				
-					if(id.length > 0)
-						lineText = lineText + tokenToHTML(id);
-					lineText = lineText + tokenToHTML(",");
-					id = "";
-
-				}
-				// Otherwise, just accumulate characters for the id.
-				else
-					id = id + char;
+			// If it was just a line break, keep it
+			if(line.length === 0) {
+			
+				lineText = lineText + "<br>";
 			
 			}
+			else {
 
-			// If there's text accumulated for the id, generate a token for it.			
-			if(id.length > 0)
-				lineText = lineText + tokenToHTML(id);
+				var charIndex, char;
+				var id = "";
+				for(charIndex = 0; charIndex < line.length; charIndex++) {
+					
+					char = line.charAt(charIndex);
+	
+					// If it's a space, add a space.
+					if(char.match(/\s/)) {
+						if(id.length > 0)
+							lineText = lineText + tokenToHTML(id);
+						lineText = lineText + " "; // this needs to be " " instead of &nbsp for text-wrapping purposes.
+						id = "";
+					}
+					// If it's a comma, add the accumulated id if necessary and then add a comma,
+					// resetting the accumulated id.
+					else if(char === ',') {
+					
+						if(id.length > 0)
+							lineText = lineText + tokenToHTML(id);
+						lineText = lineText + tokenToHTML(",");
+						id = "";
+	
+					}
+					// Otherwise, just accumulate characters for the id.
+					else
+						id = id + char;
+				
+				}
+	
+				// If there's text accumulated for the id, generate a token for it.			
+				if(id.length > 0)
+					lineText = lineText + tokenToHTML(id);
+					
+			}
 			
 			// End the line.
-			lineText = lineText + tokenToHTML("\n") + "</div>";
+			lineText = lineText + "</div>";
 			
 			// Add the line to the html.
 			html = html + lineText;
@@ -312,55 +322,17 @@ GIDGET.ui = {
 	
 	htmlToGidgetCode: function(html) {
 
-		// This function gets all of the text, div and br nodes that are descendants of the given node,
-		// in the order they are rendered on screen.
-		function getTextDivAndBrNodesIn(node) {
+	    var ce = $("<pre />").html(html);
+	    if ($.browser.webkit)
+	      ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
+	    if ($.browser.msie)
+	      ce.find("p").replaceWith(function() { return this.innerHTML + "<br>"; });
+	    if ($.browser.mozilla || $.browser.opera || $.browser.msie)
+	      ce.find("br").replaceWith("\n");
+		
+	    var code = ce.text();
+	    code = jQuery.trim(code);
 
-		    var textDivAndBrNodes = [];
-		
-			// This is the recursive helper function.
-		    function getNodes(child) {
-		    
-		    	var i;
-		        if (child.nodeType == 3) {
-					textDivAndBrNodes.push(child);
-		        } else {
-		        	if(child.tagName.toLowerCase() === 'div' || child.tagName.toLowerCase() === 'br')
-		        		textDivAndBrNodes.push(child);
-		        
-		            for (i = 0; i < child.childNodes.length; i++) {
-		                getNodes(child.childNodes[i]);
-		            }
-		        }
-		    }
-		
-		    getNodes(node);
-		    return textDivAndBrNodes;
-		}
-	
-		var nodes = getTextDivAndBrNodesIn($('#code')[0]);
-		
-		// Take all of the nodes found and convert them to text.
-		var code = "";
-		var i;
-		var reachedText = false;
-		for(i = 0; i < nodes.length; i++) {
-			if(nodes[i].nodeType === 3) {
-				code = code + nodes[i].nodeValue;
-				reachedFirstText = true;
-			}
-			else if(nodes[i].tagName.toLowerCase() === 'div' && reachedText) {
-				code = code + "\n";
-				reachedText = false;
-			}
-			else if(nodes[i].tagName.toLowerCase() === 'br' && reachedText) {
-				code = code + "\n";
-				reachedText = false;
-			}
-		}
-	
-		code = jQuery.trim(code);
-	
 		return code;
 	
 	},

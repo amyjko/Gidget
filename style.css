@@ -176,6 +176,7 @@ textarea {
 	color:				black;
 	overflow-x: 		auto;
 	background-color: 	white;
+	white-space: 		pre;
 }
 
 #commandReset {
