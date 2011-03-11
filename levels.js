@@ -46,7 +46,7 @@ GIDGET.levels = {
 			
 			world.addMissionText("default", "$memory(MEMORY BANKS) FUNCTIONAL - Directive: keep track of interactions with things in the world during instruction execution.");
 			world.addMissionText("default", "$goals(MISSION EVALUATOR) FUNCTIONAL - Directive: keep track of goals to complete the current mission.");
-			world.addMissionText("default", "$goals(INSTRUCTION GENERATOR) *WARNING* DAMAGE DETECTED - Directive: sequence execution steps to complete the mission.");
+			world.addMissionText("default", "$instructions(INSTRUCTION GENERATOR) *WARNING* DAMAGE DETECTED - Directive: sequence execution steps to complete the mission.");
 			world.addMissionText("default", "RECOMMENDATION: manually fix problematic instructions and use $controls(these controls) to execute.");
 			
 		}		

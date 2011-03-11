@@ -643,7 +643,7 @@ GIDGET.ui = {
 			gidgetImg = "media/gidget.";
 			
 		if (GIDGET.experiment.isControl()){
-			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
+			return "<div class='thoughtBubbleControl' style='width: 18em;'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
 		}
 		else {
 			return "<table class='thoughtTable thoughtTableGidget'><tr><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTailGidget.default.png' style='position: relative; left: -1.5em; top: -2.2em;' /></td></tr></table>";
@@ -1127,7 +1127,11 @@ GIDGET.ui = {
 					else if(reference === 'controls') {
 						this.showExecutionControls();
 						$('#learnerThought').show().animate({'opacity': 1.0}, 200);
-						$('#learnerThought .thoughtBubbleCommunication').addClass('runtimeReference');
+						if (GIDGET.experiment.isControl())
+							$('#learnerThought .thoughtBubbleControl').addClass('runtimeReference');
+						else
+							$('#learnerThought .thoughtBubbleCommunication').addClass('runtimeReference');
+						
 					}
 	
 				}
