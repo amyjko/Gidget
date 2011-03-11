@@ -324,7 +324,7 @@ GIDGET.Runtime = function(thing, world) {
 			return undefined;
 		}
 	
-		console.log("[" + thing.name + "]: " + this.pc + " " + this.steps[this.pc].toString());
+		// console.log("[" + thing.name + "]: " + this.pc + " " + this.steps[this.pc].toString());
 
 		var step = this.steps[this.pc];
 		
