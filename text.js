@@ -86,9 +86,9 @@ GIDGET.text = {
 
 	unknown_clearResults: function() {
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("Clearing results.", undefined, GIDGET.text.SAD);
+			return new GIDGET.text.Message("Clearing $results(recent results) from memory banks.", undefined, GIDGET.text.SAD);
 			
-		return new GIDGET.text.Message("I'm clear the $results(recent results) from my memory.", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("I'm going to clear the $results(recent results) from my memory.", undefined, GIDGET.text.SAD);
 	
 	},	
 	
@@ -514,10 +514,9 @@ GIDGET.text = {
 	goal_checkSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("$results(Results) detected in memory banks, goal satisfied.");	
+			return new GIDGET.text.Message("$results(Results) detected in memory banks, goal satisfied.");
 		
-		return new GIDGET.text.Message("There were $results(results) for this goal in my memory, so I succeeded!"
-
+		return new GIDGET.text.Message("There were $results(results) for this goal in my memory, so I succeeded!");
 	},
 	
 	goal_checkFailure: function(){
