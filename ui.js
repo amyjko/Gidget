@@ -1158,7 +1158,7 @@ GIDGET.ui = {
 				GIDGET.ui.media.playSound(message.sound);
 				
 			// Call its custom behavior, if defined.
-			if(isDef(message.functionToCall) && (message.functionToCall !== "sad")) {
+			if(isDef(message.functionToCall)) {
 				
 				message.functionToCall.call();	
 			
