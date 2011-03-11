@@ -16,9 +16,9 @@ GIDGET.levels = {
 		// ----- G - C O D E -----
 		
 		var code = 
-			"scan rrrock";
+			"scan ruck";
 
-		var world = new GIDGET.World([3], [1,1,50], ["grass", "olivedrab", 1], code);
+		var world = new GIDGET.World([3], [1,1,20], ["grass", "olivedrab", 1], code);
 
 		// ----- H I D D E N -----
 					
@@ -40,22 +40,23 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("sad", "SYSTEM DIAGNOSTICS: <span style='color: red; font-weight: bolder;'>failure</span> in problem solving chip.");
+			world.addMissionText("sad", "SYSTEM DIAGNOSTICS: <span style='color: red; font-weight: bolder;'>failure</span> in instruction generator chip.");
 			world.addMissionText("sad", "Minimal functionality detected in solar panels. Recommended to charge manually.");
 			world.addMissionText("sad", "OBJECTIVE: check environment. Scanner reports and stores coordinates of objects on the map.");
+			
+			world.addMissionText("default", "$memory(MEMORY BANKS) FUNCTIONAL - Directive: keep track of interactions with things in the world during instruction execution.");
+			world.addMissionText("default", "$goals(MISSION EVALUATOR) FUNCTIONAL - Directive: keep track of goals to complete the current mission.");
+			world.addMissionText("default", "$goals(INSTRUCTION GENERATOR) *WARNING* DAMAGE DETECTED - Directive: sequence execution steps to complete the mission.");
+			world.addMissionText("default", "RECOMMENDATION: manually fix problematic instructions and use $controls(these controls) to execute.");
+			
 		}		
 		else {
 			world.addMissionText("sad", "Ouch! That fall really messed up my systems! I can't seem to think straight!");
-			world.addMissionText("sad", "It looks like my solar panels are cracked too! They're working, but not very well... it looks like I'll have to find my own power soon.");			
-			
-			world.addMissionText("default", "$memory(My memory) is still working fine though! This is where I keep track of all of the things I'm thinking about while completing instructions.");
-
-			world.addMissionText("default", "Let's see if I can scan. I'll set $goals(a goal), which let's me know when my mission has been accomplished.");
-
+			world.addMissionText("sad", "It looks like my solar panels are cracked too! They're working, but not very well... it looks like I'll have to find more power soon.");      
+ 			world.addMissionText("default", "$memory(My memory) is still working fine though! This is where I keep track of all of the things I'm thinking about while completing instructions.");
+ 			world.addMissionText("default", "Let's see if I can scan. I'll set $goals(a goal), which let's me know when my mission has been accomplished.");
 			world.addMissionText("default", "Now how do I scan again? Mmm... I put my best guess in $instructions(the instructions box). These are the steps I follow to complete my missions.");
-
-			world.addMissionText("default", "Can you execute my instructions with $controls(these controls), and if they don't work, help me fix them?");
-			
+			world.addMissionText("default", "You can ask me to execute my instructions with $controls(these controls). I've tried my best, but if they don't work, can you help me out by fixing my instructions?");
 		}		
 		
 		// ----- T H I N G S -----
@@ -78,7 +79,7 @@ GIDGET.levels = {
 			"scan rocks\n" +
 			"goto rocks";
 	
-		var world = new GIDGET.World([5], [1,1,50], ["grass", "olivedrab"], code);
+		var world = new GIDGET.World([5], [1,1,20], ["grass", "olivedrab"], code);
 
 		// ----- H I D D E N -----
 					
@@ -112,7 +113,7 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "rock", 1, 0, "brown", [], {});
 		new GIDGET.Thing(world, "rock", 4, 1, "brown", [], {});
 		new GIDGET.Thing(world, "rock", 0, 4, "brown", [], {});
-		new GIDGET.Thing(world, "bucket", 3, 4, "DarkSlateGray", [], {});
+		new GIDGET.Thing(world, "bucket", 4, 2, "DarkSlateGray", [], {});
 		
 		// -----------------------
 
@@ -998,29 +999,25 @@ GIDGET.levels = {
 	
 	
 	// *******************************************************
+	// Gidget has to grab the bird before the rat does (otherwise it gets "eaten" and removed from the map)
 	
 	level14: function() {
 	
 		// ----- G - C O D E -----
 	
 		var code = 
-			"scan bucket\n" +
-			"scan button\n" +
-			"goto button, analyze it\n" +
-			"ask button to raise\n" +	
-			"scan goops\n" +
-			"goto goops, grab it\n" +
-			"goto button\n" +
-			"ask button to lower\n" +
-			"goto bucket\n" +
-			"drop goops";
+			"scan rat\n" +
+			"scan bird, goto it avoid rat, grab it\n" +
+			"scan goops, goto it, analyze it, grab it\n" +
+			"scan bucket, goto it avoid rat, drop goops\n" +
+			"scan crate, goto it avoid rat, drop bird\n";
 		
 		var world = new GIDGET.World([7], [1,5], ["stone","gray"], code);
-		world.gidget.setEnergy(1000);
 			
 		// ---- G O A L S --------
 		
-		world.addGoal("three goops on bucket");
+		world.addGoal("goop on bucket");
+		world.addGoal("bird on crate");
 		
 		// ---- T I T L E --------
 		
@@ -1029,54 +1026,35 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "[BATTERY PACK FUNCTIONAL] Proceed to collect goops and find a way to stop production.");
 		}		
 		else {
-			world.addMissionText("sad", "");
+			world.addMissionText("sad", "Yay! My battery pack seems to be working great!");
+			world.addMissionText("sad", "So this building is where the goops are coming from!");
+			world.addMissionText("sad", "I'll continue to collect goops in my bucket and find a way to stop more goops!");
 		}
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "bucket", 1, 6, "rgb(0,0,0)", ["stone","gray"], {});
-		new GIDGET.Thing(world, "button", 3, 0, "red", [],
-			{ 
-			lower : new GIDGET.Action([],
-				"lower wall1 height\n" +
-				"raise wall2 height"
-				),
-			raise : new GIDGET.Action([],
-				"raise wall1 height\n" +
-				"lower wall2 height"
-				)
-			
-			}
+		new GIDGET.Thing(world, "bucket", 6, 5, "rgb(0,0,0)", ["stone","gray"], {});
+		new GIDGET.Thing(world, "crate", 6, 4, "Chocolate", [], {});
+		new GIDGET.Thing(world, "goop", 3, 1, "green", [], {});
+		var bird = new GIDGET.Thing(world, "bird", 3, 6, "red", [ 'scared' ], {});
+		
+		var rat = new GIDGET.Thing(world, "rat", 0, 0, "black", [ 'hungry' ], {});
+		
+		rat.setCode(
+			"say That bird looks tasty! I'm going to eat him before you can save him Gidget!\n" +
+			"when gidget on rat, set gidget energy 0\n" +
+			"scan bird, goto bird\n" +
+			"when rat on bird, remove bird\n" +
+			"scan gidget, goto gidget\n" +
+			"when gidget on rat, set gidget energy 0"
 		);
 		
-		new GIDGET.Thing(world, "goop", 6, 4, "green", [], {});
-		new GIDGET.Thing(world, "goop", 6, 5, "green", [], {});
-		new GIDGET.Thing(world, "goop", 6, 6, "green", [], {});
-
-
+		rat.setSpeed(4);
 		
-		var wall;
-		wall = new GIDGET.Thing(world, "wall1", 2, 0, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 1, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 2, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 3, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 4, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 5, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 6, "black", [], {}); wall.labeled = false;
-
-
-		wall = new GIDGET.Thing(world, "wall2", 5, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-
-
+		
 		// -----------------------	
 
 		return world;
@@ -1088,27 +1066,19 @@ GIDGET.levels = {
 	// *******************************************************
 	
 	level15: function() {
+	// Gidget has to catch the dog that's running away.
+	
 	
 		// ----- G - C O D E -----
 	
 		var code = 
-			"scan bucket\n" +
-			"scan button\n" +
-			"goto button, analyze it\n" +
-			"ask button to raise\n" +	
-			"scan goops\n" +
-			"goto goops, grab it\n" +
-			"goto button\n" +
-			"ask button to lower\n" +
-			"goto bucket\n" +
-			"drop goops";
+			"scan dog, goto it, grab it\n";
 		
-		var world = new GIDGET.World([7], [1,5], ["stone","gray"], code);
-		world.gidget.setEnergy(1000);
+		var world = new GIDGET.World([10], [9,9], ["stone","gray"], code);
 			
 		// ---- G O A L S --------
 		
-		world.addGoal("three goops on bucket");
+		world.addGoal("grabbed dog");
 		
 		// ---- T I T L E --------
 		
@@ -1117,54 +1087,48 @@ GIDGET.levels = {
 		// ---- M I S S I O N ----
 		
 		if (GIDGET.experiment.isControl()) {
-			world.addMissionText("sad", "PLACEHOLDER:<br />(control mission)");
+			world.addMissionText("sad", "[BATTERY PACK FUNCTIONAL] Proceed to collect goops and find a way to stop production.");
 		}		
 		else {
-			world.addMissionText("sad", "");
+			world.addMissionText("sad", "Yay! My battery pack seems to be working great!");
+			world.addMissionText("sad", "So this building is where the goops are coming from!");
+			world.addMissionText("sad", "I'll continue to collect goops in my bucket and find a way to stop more goops!");
 		}
 		
 		// ----- T H I N G S -----
 		
-		new GIDGET.Thing(world, "bucket", 1, 6, "rgb(0,0,0)", ["stone","gray"], {});
-		new GIDGET.Thing(world, "button", 3, 0, "red", [],
-			{ 
-			lower : new GIDGET.Action([],
-				"lower wall1 height\n" +
-				"raise wall2 height"
-				),
-			raise : new GIDGET.Action([],
-				"raise wall1 height\n" +
-				"lower wall2 height"
-				)
-			
-			}
+		var hidden;
+		hidden = new GIDGET.Thing(world, "hidden", 9, 0, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 0, 9, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 9, 9, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		
+		
+		hidden = new GIDGET.Thing(world, "hidden", 1, 0, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 9, 8, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 0, 8, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 9, 1, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 0, 2, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 9, 2, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 1, 2, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 8, 8, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 7, 0, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 2, 8, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		hidden = new GIDGET.Thing(world, "hidden", 0, 0, "rgb(0,0,0)", [], {});  hidden.labeled = false;
+		
+		new GIDGET.Thing(world, "bucket", 6, 5, "rgb(0,0,0)", ["stone","gray"], {});
+		new GIDGET.Thing(world, "crate", 6, 4, "Chocolate", [], {});
+		new GIDGET.Thing(world, "goop", 3, 1, "green", [], {});
+		
+		var dog = new GIDGET.Thing(world, "dog", 0, 0, "black", [ 'paranoid' ], {});
+		
+		dog.setCode(
+			//"scan gidget\n"+
+			"scan hiddens, goto hiddens avoid gidget"
 		);
 		
-		new GIDGET.Thing(world, "goop", 6, 4, "green", [], {});
-		new GIDGET.Thing(world, "goop", 6, 5, "green", [], {});
-		new GIDGET.Thing(world, "goop", 6, 6, "green", [], {});
-
-
+		dog.setSpeed(0);
 		
-		var wall;
-		wall = new GIDGET.Thing(world, "wall1", 2, 0, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 1, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 2, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 3, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 4, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 5, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 2, 6, "black", [], {}); wall.labeled = false;
-
-
-		wall = new GIDGET.Thing(world, "wall2", 5, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 3, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 4, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 5, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall2", 5, 6, "black", [], {}); wall.setLevel(2); wall.labeled = false;
-
-
+		
 		// -----------------------	
 
 		return world;
@@ -1493,8 +1457,6 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "goop", 6, 5, "green", [], {});
 		new GIDGET.Thing(world, "goop", 6, 6, "green", [], {});
 
-
-		
 		var wall;
 		wall = new GIDGET.Thing(world, "wall1", 2, 0, "black", [], {}); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall1", 2, 1, "black", [], {}); wall.labeled = false;
@@ -1533,13 +1495,15 @@ GIDGET.levels = {
 			"ask blender to rinse goop\n" +
 			"analyze key, grab it\n" +
 			"scan blackhole, goto it\n" +
-			"scan bird, goto bird, grab it";
+			"scan bird, goto bird, grab it\n" +
+			"scan bucket, goto it, drop goop";
 		
 		var world = new GIDGET.World([10,10], [2,8], ["stone","gray"], code);
 		world.gidget.setEnergy(1000);
 			
 		// ---- G O A L S --------
 		
+		world.addGoal("goop on bucket");
 		world.addGoal("grabbed bird");
 		
 		// ---- T I T L E --------
@@ -1556,8 +1520,10 @@ GIDGET.levels = {
 		}
 		
 		// ----- T H I N G S -----
-		
+		new GIDGET.Thing(world, "goop", 1, 1, "green", [ 'glowing' ], {});
+		new GIDGET.Thing(world, "bird", 9, 9, "black", [], {});		
 		new GIDGET.Thing(world, "bucket", 2, 2, "rgb(0,0,0)", ["stone","gray"], {});
+		
 		new GIDGET.Thing(world, "button", 5, 8, "red", [],
 			{ 
 			lower : new GIDGET.Action([],
@@ -1571,28 +1537,13 @@ GIDGET.levels = {
 			
 			}
 		);
-		
-		new GIDGET.Thing(world, "goop", 1, 1, "green", [ 'glowing' ], {});
-		
-		var button;
+
 		var blackhole = new GIDGET.Thing(world, "blackhole", 4, 0, "black", [], {});
 		blackhole.setCode(
 			"when key on blackhole, lower wall2 height\n"
 		);
-		
-		new GIDGET.Thing(world, "bird", 9, 9, "black", [], {});		
-		var wall;
-		wall = new GIDGET.Thing(world, "wall1", 3, 0, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 1, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 2, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 3, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 4, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 5, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 6, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 7, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 8, "black", [], {}); wall.labeled = false;
-		wall = new GIDGET.Thing(world, "wall1", 3, 9, "black", [], {}); wall.labeled = false;
 
+		var wall;
 		wall = new GIDGET.Thing(world, "wall2", 8, 0, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 1, "black", [], {}); wall.setLevel(2); wall.labeled = false;
 		wall = new GIDGET.Thing(world, "wall2", 8, 2, "black", [], {}); wall.setLevel(2); wall.labeled = false;
