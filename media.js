@@ -40,11 +40,14 @@ GIDGET.ui.media = {
 		var sound = document.createElement('audio');
 
 		// Listen to success and failure		
-		sound.onload = function() { 
+		var handleLoad = function() { 
 			GIDGET.ui.media.mediaRemainingToLoad--;
 			GIDGET.ui.media.sounds[name] = this;
 			GIDGET.ui.media.notifyOfProgress();
 		}
+		
+		$(sound).bind("canplay", handleLoad);
+		
 		sound.onerror = function() {
 			GIDGET.ui.media.mediaRemainingToLoad--;
 			GIDGET.ui.media.notifyOfProgress();
