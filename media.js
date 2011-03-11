@@ -46,13 +46,12 @@ GIDGET.ui.media = {
 			GIDGET.ui.media.notifyOfProgress();
 		}
 		
-		$(sound).bind("canplay", handleLoad);
-//		sound.onload = handleLoad;		
+		$(sound).bind("loadeddata", handleLoad);
 		
-		sound.onerror = function() {
+		$(sound).bind("error", function() {
 			GIDGET.ui.media.mediaRemainingToLoad--;
 			GIDGET.ui.media.notifyOfProgress();
-		}
+		});
 
 		// Indicate which file
 		sound.setAttribute('src', 'media/sfx/' + name + '.wav');
@@ -164,8 +163,8 @@ GIDGET.ui.media = {
 		this.loadSound("goal_finalFailure");
 		
 		// Event Sounds
-		this.loadSound("energyDown");
 		this.loadSound("energyUp");
+		this.loadSound("energyDown");
 		this.loadSound("error");
 		this.loadSound("parserErrorExp");
 		this.loadSound("parserErrorCtrl");
