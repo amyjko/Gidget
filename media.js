@@ -47,6 +47,7 @@ GIDGET.ui.media = {
 		}
 		
 		$(sound).bind("canplay", handleLoad);
+//		sound.onload = handleLoad;		
 		
 		sound.onerror = function() {
 			GIDGET.ui.media.mediaRemainingToLoad--;
