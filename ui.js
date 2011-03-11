@@ -533,14 +533,14 @@ GIDGET.ui = {
 	
 	},
 	
-	showLevelControls: function() {
+	showLevelControls: function(succeeded) {
 		var message;	
 		if (GIDGET.experiment.isControl())
 			message = "Tell Gidget to:";
 		else
 			message = "Gidget, let's...";
 		
-		if (this.world.gidget.runtime.state == "sad") {
+		if (!succeeded) {
 			GIDGET.ui.setThought(
 				"<span id='learnerSpeech'>"+message+"</span> <br>" +
 				"<button onclick='GIDGET.ui.retryLevel();'>retry this mission!</button><br>", 
@@ -858,8 +858,11 @@ GIDGET.ui = {
 				// Erase the token highlighting.
 				this.highlightToken(undefined);
 
+				var succeeded = undefined;
+
 				if(this.allGoalsAchieved === true) {
 
+					succeeded = true;
 					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
 					
@@ -869,6 +872,8 @@ GIDGET.ui = {
 					
 				}
 				else {
+
+					succeeded = false;
 					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
 					
@@ -877,7 +882,7 @@ GIDGET.ui = {
 
 				this.enableExecutionButtons(true);
 				
-				this.showLevelControls();
+				this.showLevelControls(succeeded);
 
 				// We're done, so reset the execution mode.
 				this.currentExecutionMode = undefined;
@@ -1074,7 +1079,7 @@ GIDGET.ui = {
 		if(this.world.gidget.energy <= 0) {
 			
 			this.world.gidget.runtime.state = "sad";
-			this.showLevelControls();
+			this.showLevelControls(true);
 			this.visualizeDecision(GIDGET.text.noEnergy(), true);
 		
 		}
