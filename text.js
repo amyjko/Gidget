@@ -19,6 +19,9 @@ GIDGET.text = {
 		this.emotion = isDef(emotion) ? emotion : 'default';
 		this.functionToCall = functionToCall;
 		
+		if(isDef(functionToCall) && !jQuery.isFunction(functionToCall))
+			console.error("Value passed to GIDGET.text.Message() is not a function but should be.");
+		
 		return this;
 	
 	},
