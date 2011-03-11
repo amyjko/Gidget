@@ -104,12 +104,12 @@ $().ready(function() {
 		
 			
 			// Shake the editor to indicate that it's not editable.
-			var count = 0;
-			$('#avatarGidget').everyTime(25, function(i) {
-				$('#avatarGidget').css('margin-left', 10 - Math.random() * 20);
-				count++;
-				if(count === 20)
-					$('#avatarGidget').css('margin-left', 0);
+			var otherCount = 0;
+			$('#gidgetThought').everyTime(25, function(i) {
+				$('#gidgetThought').css('margin-left', 10 - Math.random() * 20);
+				otherCount++;
+				if(otherCount === 20)
+					$('#gidgetThought').css('margin-left', 0);
 			}, 20);
 		
 		}
