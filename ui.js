@@ -263,7 +263,7 @@ GIDGET.ui = {
 			first = true;
 			var line = lines[lineNumber];
 
-			var lineText = "<div class='sourceLine' + id='sourceLine" + lineNumber + "'>";
+			var lineText = "<div class='sourceLine' id='sourceLine" + lineNumber + "'>";
 
 			// If it was just a line break, keep it
 			if(line.length === 0) {
@@ -324,13 +324,17 @@ GIDGET.ui = {
 
 	    var ce = $("<pre />").html(html);
 
-	    if ($.browser.webkit)
-	      ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
+	    if ($.browser.webkit || $.browser.mozilla)
+			ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
 	    if ($.browser.msie)
-	      ce.find("p").replaceWith(function() { return this.innerHTML + "<br>"; });
+			ce.find("p").replaceWith(function() { return this.innerHTML + "<br>"; });
+		if($.browser.mozilla || $.browser.opera ||$.browser.msie )
+  			ce.find("br").replaceWith("<span>\n</span>");
 		
 	    var code = ce.text();
 	    code = jQuery.trim(code);
+
+		console.log("Converted\n " + html + "\nInto\n" + code);
 
 		return code;
 	
