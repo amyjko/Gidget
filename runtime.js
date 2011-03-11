@@ -390,7 +390,8 @@ GIDGET.Runtime = function(thing, world) {
 			if(isDef(action))
 				action.execute();
 				
-			this.runtime.state = this.thought.emotion;
+			if(isDef(this.thought.emotion))
+				this.runtime.state = this.thought.emotion;
 		
 		};
 			
