@@ -73,9 +73,9 @@ GIDGET.ui = {
 	
 	},
 
-	startOver: function() {
+	setCodeToWorldDefault: function() {
 	
-		this.setLevel(localStorage.currentLevel);
+		$('#code').html(this.gidgetCodeToHTML(this.world.code));
 	
 	},
 	
@@ -350,7 +350,7 @@ GIDGET.ui = {
 		this.reset();
 
 		// Initialize the Gidget code with the code provided in the level specification.
-		$('#code').html(this.gidgetCodeToHTML(this.world.code));
+		this.setCodeToWorldDefault();
 		
 		// Initially disable the reset button
 		$('#reset').attr('disabled', true);
