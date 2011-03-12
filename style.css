@@ -155,6 +155,7 @@ textarea {
 	height:			15.5em; /* originally 18.5em*/
 	border:			2px solid #a9a9a9;
 	padding: 		1em;
+	white-space: 	pre-wrap;
 
 	z-index:		1;
 
@@ -168,7 +169,6 @@ textarea {
 
 #code[contentEditable="false"] {
 	overflow-x: 		auto;
-	word-wrap: 			break-word;
 	background-color: 	lightGray;
 }
 
@@ -176,7 +176,6 @@ textarea {
 	color:				black;
 	overflow-x: 		auto;
 	background-color: 	white;
-	white-space: 		pre;
 }
 
 #commandReset {

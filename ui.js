@@ -334,8 +334,6 @@ GIDGET.ui = {
 	    var code = ce.text();
 	    code = jQuery.trim(code);
 
-		console.log("Converted\n " + html + "\nInto\n" + code);
-
 		return code;
 	
 	},
