@@ -1028,7 +1028,7 @@ GIDGET.runtime = {
 						else if(this.property.text === 'energy') result.energy = amount;
 					}
 
-					runtime.addDecision(GIDGET.text.modify(this.keyword.text, this.property.text, this.number.text));
+					runtime.addDecision(GIDGET.text.modify(this.keyword.text, this.property.text, isDef(this.number) ? this.number.text : ""));
 
 					runtime.pc++;
 
