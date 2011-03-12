@@ -268,7 +268,7 @@ GIDGET.ui = {
 			// If it was just a line break, keep it
 			if(line.length === 0) {
 			
-				lineText = lineText + "<br>";
+				lineText = lineText + "\n";
 			
 			}
 			else {
@@ -324,6 +324,9 @@ GIDGET.ui = {
 
 	    var ce = $("<pre />").html(html);
 
+		if($.browser.mozilla)
+			ce.find("div br").replaceWith("<span>\n</span>");
+
 	    if ($.browser.webkit || $.browser.mozilla)
 			ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
 	    if ($.browser.msie)
@@ -333,6 +336,8 @@ GIDGET.ui = {
 		
 	    var code = ce.text();
 	    code = jQuery.trim(code);
+
+/* 		console.log("Converted\n" + html + "\nto\n" + code); */
 
 		return code;
 	

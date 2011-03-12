@@ -240,9 +240,9 @@ $().ready(function() {
 	// Load the media
 	GIDGET.ui.media.loadMedia(function(remaining, total) {
 	
-		var percent = Math.min(100, (Math.ceil(100 - Math.round(remaining * 100 / total))));
+		var percent = Math.min(90, (Math.ceil(100 - Math.round(remaining * 100 / total))));
 		$('#loadingIntro .progress').width("" + percent + "%");
-		$('#loadingIntro .progress').text("" + remaining + " media remaining...");
+		$('#loadingIntro .progress').text("" + remaining + " remaining to download...");
 		
 		// If we're done, decide whether to show introduction if necessary.
 		if(remaining <= 0) {

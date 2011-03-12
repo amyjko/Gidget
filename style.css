@@ -568,6 +568,7 @@ textarea {
 	word-wrap: 		normal;
 	text-indent:	-1em;
 	padding-left:	1em;
+	min-height:		1em;
 }
 
 .sourceToken.keyword {
