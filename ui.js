@@ -268,7 +268,7 @@ GIDGET.ui = {
 			// If it was just a line break, keep it
 			if(line.length === 0) {
 			
-				lineText = lineText + "\n";
+				lineText = lineText + "<br>";
 			
 			}
 			else {
@@ -324,20 +324,22 @@ GIDGET.ui = {
 
 	    var ce = $("<pre />").html(html);
 
-		if($.browser.mozilla)
-			ce.find("div br").replaceWith("<span>\n</span>");
+		// If this is mozilla, opera, or IE, replace non-last child, non-only-child <br> tags with new lines.
+		// The reason for this is that <br>s don't actually create a new line when immediately followed by a block.
+		// We do this before replacing divs, so we can keep track of which <br>s are only or last children.
+		if($.browser.mozilla || $.browser.opera ||$.browser.msie )
+  			ce.find("br:not(:last-child,:only-child)").replaceWith("<span>\n</span>");
 
+		// After doing this, replace all divs with new lines.
 	    if ($.browser.webkit || $.browser.mozilla)
 			ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
+			
+		// If this is IE, which inserts <p> tags, replace the <p> with the text followed by a <br>
 	    if ($.browser.msie)
 			ce.find("p").replaceWith(function() { return this.innerHTML + "<br>"; });
-		if($.browser.mozilla || $.browser.opera ||$.browser.msie )
-  			ce.find("br").replaceWith("<span>\n</span>");
-		
+					
 	    var code = ce.text();
 	    code = jQuery.trim(code);
-
-/* 		console.log("Converted\n" + html + "\nto\n" + code); */
 
 		return code;
 	
