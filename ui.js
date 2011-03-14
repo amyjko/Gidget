@@ -263,7 +263,13 @@ GIDGET.ui = {
 			first = true;
 			var line = lines[lineNumber];
 
-			var lineText = "<div class='sourceLine' id='sourceLine" + lineNumber + "'>";
+			var classes = "sourceLine";
+						
+			// If this is not Firefox, add indent
+			if(!$.browser.mozilla)
+				classes = classes + ",indent";
+
+			var lineText = "<div class='" + classes + "' id='sourceLine" + lineNumber + "'>";
 
 			// If it was just a line break, keep it
 			if(line.length === 0) {

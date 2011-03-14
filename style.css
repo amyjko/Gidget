@@ -566,9 +566,13 @@ textarea {
 	font-size: 		small;
 	font-weight:	bold;
 	word-wrap: 		normal;
+	min-height:		1em;
+}
+
+.sourceLine.indent {
+	/* This results in a hanging indent for multi-line commands */
 	text-indent:	-1em;
 	padding-left:	1em;
-	min-height:		1em;
 }
 
 .sourceToken.keyword {
