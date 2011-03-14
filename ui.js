@@ -1030,7 +1030,7 @@ GIDGET.ui = {
 						else {
 						
 							// Play the sound if there is one.
-							if(isDef(decision.thought) && isDef(decision.thought.sound)) {
+							if(isDef(decision.thought) && isDef(decision.thought.sound) && isDef(decision.step) && decision.step.ast.type == 'modify') {
 	
 								GIDGET.ui.media.playSound(decision.thought.sound);
 								

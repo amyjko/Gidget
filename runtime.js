@@ -261,7 +261,7 @@ GIDGET.Runtime = function(thing, world) {
 
 	};
 
-	this.addDecision = function(message, action) { this.decisions.push(new this.Decision(this, message, action)); }
+	this.addDecision = function(step, message, action) { this.decisions.push(new this.Decision(this, step, message, action)); }
 				
 	this.hasRecentResults = function() { return this.resultsStack.length > 0 && this.resultsStack[0].length > 0; };
 
@@ -376,9 +376,11 @@ GIDGET.Runtime = function(thing, world) {
 	
 	// Represents a decision that a Step_ made while executing. Messages can refer to
 	// runtime state, which can then be highlighted in the user interface to explain the decision.
-	this.Decision = function(runtime, message, action) {
+	this.Decision = function(runtime, step, message, action) {
 		
 		this.runtime = runtime;
+		
+		this.step = step;
 		
 		// Remember the function to execute.
 		this.action = action;
@@ -416,6 +418,7 @@ GIDGET.runtime = {
 				if(results.length > 0) {
 				
 					runtime.addDecision(
+						this,
 						GIDGET.text.if_true(),
 						new runtime.IncrementPC(runtime, 1));
 
@@ -423,12 +426,14 @@ GIDGET.runtime = {
 				else {
 
 					runtime.addDecision(
+						this,
 						GIDGET.text.if_false(),
 						new runtime.IncrementPC(runtime, this.offset));
 					
 				}
 
 				runtime.addDecision(
+					this,
 					GIDGET.text.if_popResults(),
 					new runtime.PopResults(runtime));
 
@@ -479,24 +484,26 @@ GIDGET.runtime = {
 
 					if((positive && hasTag) || (!positive && !hasTag)) {
 					
-						runtime.addDecision(GIDGET.text.is_positive(results[i].name, i, this.keyword.text, this.name.text));
+						runtime.addDecision(this, GIDGET.text.is_positive(results[i].name, i, this.keyword.text, this.name.text));
 							
 						newResults.push(results[i]);
 						
 					}
 					else {
 						allTrue = false;
-						runtime.addDecision(GIDGET.text.is_negative(results[i].name, i, this.keyword.text, this.name.text));
+						runtime.addDecision(this, GIDGET.text.is_negative(results[i].name, i, this.keyword.text, this.name.text));
 						
 					}
 				
 				}
 				
 				runtime.addDecision(
+					this,
 					GIDGET.text.is_popResults(), 
 					new runtime.PopResults(runtime));
 
 				runtime.addDecision(
+					this,
 					GIDGET.text.is_newResults(), 
 					new runtime.PushResults(runtime, allTrue ? newResults : []));
 
@@ -532,18 +539,23 @@ GIDGET.runtime = {
 					string = string + this.tokens[i].text + " ";
 
 				runtime.addDecision(
+					this,
 					this.message,
 					undefined);
 
 				// Clear the results and focus stacks
 				runtime.addDecision(
+					this,
 					GIDGET.text.unknown_clearFocus(), 
 					new runtime.ClearFocus(runtime));
 
-				runtime.addDecision(GIDGET.text.unknown_clearResults(), 
+				runtime.addDecision(
+					this,
+					GIDGET.text.unknown_clearResults(), 
 					new runtime.ClearResults(runtime));
 
 				runtime.addDecision(
+					this,
 					GIDGET.text.unknown_nextStep(),
 					new runtime.IncrementPC(runtime, 1));
 				
@@ -564,6 +576,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
+						this,
 						GIDGET.text.scan_success(runtime.peekResult().name),
 						new runtime.PushScanned(runtime, runtime.peekResult()));
 						
@@ -596,7 +609,7 @@ GIDGET.runtime = {
 					var result = runtime.peekResult();
 					
 					result.name = this.name.text;
-					runtime.addDecision(GIDGET.text.name_success(this.name.text));
+					runtime.addDecision(this, GIDGET.text.name_success(this.name.text));
 
 					runtime.pc++;
 									
@@ -830,6 +843,7 @@ GIDGET.runtime = {
 						// If we're moving somewhere, say so!
 						if(rowIncrement !== 0 || columnIncrement !== 0)
 							runtime.addDecision(
+								this,
 								noPath ? 
 									GIDGET.text.go_dangerousStep(thing.name, this.avoid.text) :
 									GIDGET.text.go_step(thing.name),
@@ -840,6 +854,7 @@ GIDGET.runtime = {
 	
 							runtime.path = undefined;
 							runtime.addDecision(
+								this,
 								GIDGET.text.go_arrive(thing.name),
 								new runtime.IncrementPC(runtime, 1));
 						
@@ -849,6 +864,7 @@ GIDGET.runtime = {
 					else if(runtime.thing.row === thing.row && runtime.thing.column === thing.column) {
 					
 						runtime.addDecision(
+							this,
 							GIDGET.text.go_alreadyAt(thing.name),
 							new runtime.IncrementPC(runtime, 1));
 					
@@ -859,6 +875,7 @@ GIDGET.runtime = {
 					
 						runtime.path = undefined;
 						runtime.addDecision(
+							this,
 							GIDGET.text.go_noPath(thing.name),
 							new runtime.IncrementPC(runtime, 1));
 					
@@ -868,6 +885,7 @@ GIDGET.runtime = {
 				else {
 
 					runtime.addDecision(
+						this,
 						GIDGET.text.go_finished(),
 						new runtime.IncrementPC(runtime, this.offset));
 
@@ -890,6 +908,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 				
 					runtime.addDecision(
+						this,
 						GIDGET.text.analyze_success(runtime.peekResult().name),
 						new runtime.PushAnalyzed(runtime, runtime.peekResult()));
 						
@@ -953,6 +972,7 @@ GIDGET.runtime = {
 
 				if(runtime.hasRecentResults()) {
 					runtime.addDecision(
+						this,
 						GIDGET.text.grab_success(runtime.peekResult().name),
 						new runtime.PushGrabbed(runtime, runtime.peekResult()));
 						
@@ -979,6 +999,7 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 
 					runtime.addDecision(
+						this,
 						GIDGET.text.drop_success(runtime.peekResult().name),
 						new runtime.PopGrabbed(runtime, runtime.peekResult()));		
 
@@ -1026,7 +1047,7 @@ GIDGET.runtime = {
 						else if(this.property.text === 'energy') result.energy = amount;
 					}
 
-					runtime.addDecision(GIDGET.text.modify(this.keyword.text, this.property.text, isDef(this.number) ? this.number.text : ""));
+					runtime.addDecision(this, GIDGET.text.modify(this.keyword.text, this.property.text, isDef(this.number) ? this.number.text : ""));
 
 					runtime.pc++;
 
@@ -1052,7 +1073,7 @@ GIDGET.runtime = {
 
 				thing.runtime.start(thing.code, false, {});
 
-				runtime.addDecision(new GIDGET.text.Message("I created " + thing.name + "."));
+				runtime.addDecision(this, new GIDGET.text.Message("I created " + thing.name + "."));
 
 				runtime.pc++;
 
@@ -1074,7 +1095,7 @@ GIDGET.runtime = {
 
 					runtime.world.removeThing(thing);
 
-					runtime.addDecision(new GIDGET.text.Message("I removed " + thing.name + "."));
+					runtime.addDecision(this, new GIDGET.text.Message("I removed " + thing.name + "."));
 	
 					runtime.pc++;
 					
@@ -1286,6 +1307,7 @@ GIDGET.runtime = {
 				if(scope.length > 0) {
 					
 					runtime.addDecision(
+						this,
 						description,
 						new runtime.PushResults(runtime, scope, this));
 
@@ -1293,6 +1315,7 @@ GIDGET.runtime = {
 				else {
 					
 					runtime.addDecision(
+						this,
 						description,
 						new runtime.PushResults(runtime, scope));
 						
@@ -1318,13 +1341,14 @@ GIDGET.runtime = {
 				if(runtime.hasRecentResults()) {
 
 					runtime.addDecision(
+						this,
 						GIDGET.text.focus_success(runtime.peekResult().name),
 						new runtime.PushFocus(runtime, runtime.peekResult()));
 
 				}
 				else {
 
-					runtime.addDecision(GIDGET.text.focus_failure(), undefined);
+					runtime.addDecision(this, GIDGET.text.focus_failure(), undefined);
 					
 				}
 	
@@ -1343,6 +1367,7 @@ GIDGET.runtime = {
 			execute: function(runtime) {
 	
 				runtime.addDecision(
+					this,
 					GIDGET.text.unfocus_success(),
 					new runtime.PopFocus(runtime));
 	
@@ -1362,6 +1387,7 @@ GIDGET.runtime = {
 			execute: function(runtime) {
 	
 				runtime.addDecision(
+					this,
 					message,
 					new runtime.Say(runtime, message));
 	
@@ -1423,13 +1449,13 @@ GIDGET.runtime = {
 					// If it's done, Gidget waits.				
 					if(runtime.peekAsked().runtime.isExecuting()) {
 					
-						runtime.addDecision(GIDGET.text.ask_waiting(runtime.peekAsked().name, this.action.text));
+						runtime.addDecision(this, GIDGET.text.ask_waiting(runtime.peekAsked().name, this.action.text));
 					
 					}
 					// If it's done, pop the object and continue.
 					else {
 
-						runtime.addDecision(GIDGET.text.ask_finished(runtime.peekAsked().name));
+						runtime.addDecision(this, GIDGET.text.ask_finished(runtime.peekAsked().name));
 						runtime.popAsked();
 						runtime.pc++;
 					
@@ -1465,7 +1491,7 @@ GIDGET.runtime = {
 						// If we didn't find an object, we're in trouble.
 						if(!isDef(object)) {
 
-							runtime.addDecision(GIDGET.text.ask_noObject());
+							runtime.addDecision(this, GIDGET.text.ask_noObject());
 
 							runtime.pc += this.offset;
 							return;						
@@ -1496,9 +1522,8 @@ GIDGET.runtime = {
 							if(argumentNames.length !== arguments.length) {
 
 								runtime.addDecision(
-									GIDGET.text.ask_missingArguments(object.name, this.action.text, argumentNames.length, arguments.length), 
-									undefined, 
-									"sad");
+									this,
+									GIDGET.text.ask_missingArguments(object.name, this.action.text, argumentNames.length, arguments.length));
 								
 								runtime.pc += this.offset;
 								return;
@@ -1506,7 +1531,7 @@ GIDGET.runtime = {
 							}
 							else {
 	
-								runtime.addDecision(GIDGET.text.ask_begin(object.name, this.action.text));
+								runtime.addDecision(this, GIDGET.text.ask_begin(object.name, this.action.text));
 								
 								var actualArguments = {};
 		
@@ -1531,7 +1556,7 @@ GIDGET.runtime = {
 						}
 						else {
 						
-							runtime.addDecision(GIDGET.text.ask_unknownAction(object.name, this.action.text));
+							runtime.addDecision(this, GIDGET.text.ask_unknownAction(object.name, this.action.text));
 							runtime.pc += this.offset;
 	
 						}
