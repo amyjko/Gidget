@@ -35,7 +35,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Testing Gidget's Scanner");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Testing Scanner");
+		else
+			world.addTitle("Testing Gidget's Scanner");
 		
 		// ---- M I S S I O N ----
 		
@@ -95,7 +98,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Testing Gidget's Mobility");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Testing Mobility");
+		else
+			world.addTitle("Testing Gidget's Mobility");
 		
 		// ---- M I S S I O N ----
 		
@@ -156,7 +162,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Starting the cleanup");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Testing Grabbing and Dropping");
+		else
+			world.addTitle("Testing Gidget's Grabbing and Dropping");
 
 		// ---- M I S S I O N ----
 		
@@ -215,7 +224,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("More cleanup");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Condensing Instructions");
+		else
+			world.addTitle("Condensing Gidget's Instructions");
 
 		// ---- M I S S I O N ----
 		
@@ -275,7 +287,10 @@ GIDGET.levels = {
 
 		// ---- T I T L E --------
 		
-		world.addTitle("Time to Energize");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Utilizing Special Items");
+		else
+			world.addTitle("Using Special Items with Gidget");
 
 		
 		// ---- M I S S I O N ----
@@ -412,7 +427,10 @@ GIDGET.levels = {
 
 		// ---- T I T L E --------
 		
-		world.addTitle("The Plants are Getting Infected");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Testing Conditionals");
+		else
+			world.addTitle("Checking Conditionals with Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -464,7 +482,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Around the Trees");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Navigate Barriers");
+		else
+			world.addTitle("Moving Around Barriers with Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -540,7 +561,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Avoid the Cracks!");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Navigating Obstacles");
+		else
+			world.addTitle("Avoiding Obstacles with Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -625,7 +649,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Watch our for the Infected Rat!");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Navigating Active Obstacles");
+		else
+			world.addTitle("Avoiding Active Obstacles with Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -741,7 +768,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Help from a friend");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Low on Energy");
+		else
+			world.addTitle("Gidget's Low on Energy");
 		
 		// ---- M I S S I O N ----		
 		if (GIDGET.experiment.isControl()) {
@@ -810,7 +840,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Infiltrating the Factory!");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Factory Infiltration");
+		else
+			world.addTitle("Entering the Factory with Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -879,7 +912,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("A New Power Source!");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("New Power Source");
+		else
+			world.addTitle("Energizing Gidget");
 		
 		// ---- M I S S I O N ----
 		
@@ -938,7 +974,10 @@ GIDGET.levels = {
 		
 		// ---- T I T L E --------
 		
-		world.addTitle("Order Matters");
+		if (GIDGET.experiment.isControl())
+			world.addTitle("Sequenced Actions");
+		else
+			world.addTitle("Sequenced Actions with Gidget");
 		
 		// ---- M I S S I O N ----
 		
