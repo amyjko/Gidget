@@ -358,12 +358,10 @@ GIDGET.Runtime = function(thing, world) {
 		this.isExecutingGoal = isGoal;
 
 		// Print out the steps, just for reference
-/*
 		var i;
 		for(i = 0; i < this.steps.length; i++) {
 			console.log(i + " " + this.steps[i].toString());	
 		}
-*/
 
 		// Prepare the execution metadata.
 		this.pc = 0;

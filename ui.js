@@ -1038,6 +1038,7 @@ GIDGET.ui = {
 						
 						}
 						
+						console.log("[" + runtime.thing.name + ']' + decision.thought.text);
 						
 						// If this is a say command, add a speech bubble
 						if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
