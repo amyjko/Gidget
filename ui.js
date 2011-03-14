@@ -328,6 +328,8 @@ GIDGET.ui = {
 	
 	htmlToGidgetCode: function(html) {
 
+/* 		console.log("Before\n" + html); */
+
 	    var ce = $("<pre />").html(html);
 
 		// If this is mozilla, opera, or IE, replace non-last child, non-only-child <br> tags with new lines.
@@ -337,15 +339,25 @@ GIDGET.ui = {
   			ce.find("br:not(:last-child,:only-child)").replaceWith("<span>\n</span>");
 
 		// After doing this, replace all divs with new lines.
-	    if ($.browser.webkit || $.browser.mozilla)
-			ce.find("div").replaceWith(function() { return "\n" + this.innerHTML; });
+	    if ($.browser.webkit || $.browser.mozilla) {
+	    	// We do this in a loop since divs within divs are eliminated when outer divs are replaced.
+	    	// We just keep replacing until there are no more divs.
+	    	do {
+				var divs = ce.find("div");
+				divs.replaceWith(function() { return "\n" + this.innerHTML; });
+			} while(divs.length > 0);
+		}
 			
 		// If this is IE, which inserts <p> tags, replace the <p> with the text followed by a <br>
 	    if ($.browser.msie)
 			ce.find("p").replaceWith(function() { return this.innerHTML + "<br>"; });
+
+/* 		console.log("After transformation\n" + ce.html()); */
 					
 	    var code = ce.text();
 	    code = jQuery.trim(code);
+
+/* 		console.log("Extracted, trimmed text\n" + code); */
 
 		return code;
 	
