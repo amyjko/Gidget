@@ -49,7 +49,7 @@ GIDGET.experiment = {
 	saveExpCondition: function() {
 		
 		// Save the current experimental state to localStorage
-		localStorage.setObject('expCondition', this.condition);	
+		localStorage.setItem('expCondition', this.condition);	
 	},
 
 };

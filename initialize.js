@@ -8,6 +8,16 @@ function hideToolTip() {
 	});
 }
 
+// Add convenience functions to the local storage object to faciliate the getting and setting of object literals.
+function getLocalStorageObject(key) {
+    return localStorage.getItem(key) && JSON.parse(localStorage.getItem(key));
+}
+
+function setLocalStorageObject(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+
 $().ready(function() {
 
 	function supportsCanvas() {
@@ -27,15 +37,12 @@ $().ready(function() {
 	}
 
 	// Check for both canvas and local storage support before continuing.
-	if(!supportsCanvas() || !supportsLocalStorage())
+	if(!supportsCanvas() || !supportsLocalStorage()) {
+	
+		console.log("canvas: " + supportsCanvas());
+		console.log("localStorage: " + supportsLocalStorage());
+		
 		window.location.href = "unsupported.html";
-
-	// Add convenience functions to the local storage object to faciliate the getting and setting of object literals.
-	Storage.prototype.setObject = function(key, value) {
-	    this.setItem(key, JSON.stringify(value));
-	}
-	Storage.prototype.getObject = function(key) {
-	    return this.getItem(key) && JSON.parse(this.getItem(key));
 	}
 
 	// Populate the level selection drop down menu for debugging purposes.
@@ -275,7 +282,7 @@ $().ready(function() {
 	// Set the code to the most recent stored version of the code, restoring the user's work.
 	if(localStorage.getItem('levelMetadata') !== null) {
 	
-		var levelMetadata = localStorage.getObject('levelMetadata');
+		var levelMetadata = getLocalStorageObject('levelMetadata');
 		if(levelMetadata.hasOwnProperty(localStorage.currentLevel)) {
 		
 			var versions = levelMetadata[localStorage.currentLevel].versions;

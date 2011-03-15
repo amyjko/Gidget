@@ -84,7 +84,7 @@ GIDGET.ui = {
 		if(localStorage.getItem('levelMetadata') === null)
 			return 0;
 			
-		var levelMetadata = localStorage.getObject('levelMetadata');
+		var levelMetadata = getLocalStorageObject('levelMetadata');
 
 		var count = 0;
 		for(var level in levelMetadata) {
@@ -128,7 +128,7 @@ GIDGET.ui = {
 			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
 			code: password,
-			levelMetadata: localStorage.getObject('levelMetadata'),
+			levelMetadata: getLocalStorageObject('levelMetadata'),
 			// Extract all of the questionnaire data from the form.
 			survey: {
 				gender: $('input[name=gender]:checked').val(),
@@ -200,7 +200,7 @@ GIDGET.ui = {
 	
 		var currentCode = this.htmlToGidgetCode($('#code').html());
 	
-		var levelData = localStorage.getObject('levelMetadata');
+		var levelData = getLocalStorageObject('levelMetadata');
 		
 		// Create an empty object literal to store level versions.
 		if(levelData === null)
@@ -227,7 +227,7 @@ GIDGET.ui = {
 		this.stepLog = [];
 		
 		// Stringify the current versions object
-		localStorage.setObject('levelMetadata', levelData);		
+		setLocalStorageObject('levelMetadata', levelData);		
 	
 	},
 
@@ -451,10 +451,10 @@ GIDGET.ui = {
 	
 		// Remember that this level was passed, what time, and the final code.
 		this.saveCurrentLevelCode();
-		var levelData = localStorage.getObject('levelMetadata');
+		var levelData = getLocalStorageObject('levelMetadata');
 		levelData[this.getCurrentLevel()].passed = true;
 		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
-		localStorage.setObject('levelMetadata', levelData);
+		setLocalStorageObject('levelMetadata', levelData);
 
 		// Now find the next level.		
 		var found = false;
@@ -1223,10 +1223,10 @@ GIDGET.ui = {
 	rememberLevelPassed: function() {
 	
 		// Remember that the user passed the level and when
-		var levelData = localStorage.getObject('levelMetadata');
+		var levelData = getLocalStorageObject('levelMetadata');
 		levelData[this.getCurrentLevel()].passed = true;
 		levelData[this.getCurrentLevel()].endTime = (new Date()).getTime();
-		localStorage.setObject('levelMetadata', levelData);					
+		setLocalStorageObject('levelMetadata', levelData);					
 
 		this.updateBonus();
 	
@@ -1855,6 +1855,6 @@ GIDGET.ui = {
 		
 		}
 	
-	},
+	}
 	
 };
