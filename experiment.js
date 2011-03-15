@@ -2,7 +2,7 @@ GIDGET.experiment = {
 
 	condition: "male",	// control, male, female
 	
-	bonusPerLevel: 0.25,
+	bonusPerLevel: 0.10,
 	
 	isControl: function() {
 	
