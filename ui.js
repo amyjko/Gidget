@@ -311,12 +311,15 @@ GIDGET.ui = {
 				// If there's text accumulated for the id, generate a token for it.			
 				if(id.length > 0)
 					lineText = lineText + tokenToHTML(id);
-					
+										
 			}
 			
 			// End the line.
 			lineText = lineText + "</div>";
 			
+			// Increment the token number to account for the new line
+			count++;
+
 			// Add the line to the html.
 			html = html + lineText;
 			
@@ -1644,6 +1647,8 @@ GIDGET.ui = {
 			}
 			// Otherwise, highlight the main code
 			else {
+			
+/* 				console.log("Highlighting token # " + token.index); */
 			
 				$('#code #sourceToken' + token.index).addClass('runtimeReference');
 				$('#code #sourceLine' + token.line).addClass('runtimeReference');
