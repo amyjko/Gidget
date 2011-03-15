@@ -215,13 +215,13 @@ textarea {
 }
 
 #toggleCheatsheet {
-	margin-top:		-1em;
-	margin-left:	7em;
 	position:		relative;
-	left: 			18.25em;
-	top: 			-20.75em;
+	float:			right;
+	right: 			2em;
+	top: 			-.5em;
 	z-index:		2;
 }
+
 
 .cheatsheetExplanation {
 	margin-left:	1em;
@@ -260,11 +260,12 @@ textarea {
 	font-weight:		bold;
 	font-size:			small;
 	width:				20em;
-	height:				3em;
+	height:				3.3em;
 	padding:			1em;
+
+	border:				2px solid #a9a9a9;
+	border-top:			0;
 	
-	position:			relative;
-	top: 				-.9em;
 	z-index:			1;
 	
 	overflow-y: 		auto;

@@ -43,7 +43,7 @@
 				<div id='instructionsContainer'>
 			
 				<div>
-					<h2 title="Instructional code where you can view and modify Gidget's instructional code." style="display:inline-block;">instructions</h2><span id='commandReset'><button id='reset' onclick='hideToolTip(); GIDGET.ui.setCodeToWorldDefault();' title="Pressing this will reset the code to its original state and restart the level.">restore original instructions</button></span>
+					<h2 title="Instructional code where you can view and modify Gidget's instructional code." style="display:inline-block;">instructions</h2><span id='commandReset'><button id='reset' onclick='hideToolTip(); GIDGET.ui.setCodeToWorldDefault();' title="Pressing this will reset the code to its original state and restart the level.">restore original instructions</button></span><button id='toggleCheatsheet'><b>?</b></button>
 				</div>
 				<div id='codeMissionContainer'>
 				
@@ -78,11 +78,9 @@
 						</div>
 					</div>
 
-				
+					
+					
 					<div id='code' class='codeContainer' contentEditable='true'></div>
-					
-					<button id='toggleCheatsheet'><b>?</b></button>
-					
 					<div id='mission'><div id='missionText'></div><button id='missionDismiss' onclick='$("#mission").animate({opacity:0.0}, 500, function() { $(this).hide().css("opacity",1.0); });'>I'm ready to help!</button></div>
 
 				</div>

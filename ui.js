@@ -546,10 +546,10 @@ GIDGET.ui = {
 			message = "Gidget, please execute...";
 		
 		GIDGET.ui.setThought("<span id='learnerSpeech'>"+message+"</span> <br>\n" +
-			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>1<br />step</button>\n" +
-			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>1<br />line</button>\n"+
+			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>one<br />step</button>\n" +
+			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>one<br />line</button>\n"+
 			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all<br />steps</button>\n" +
-			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to the<br />end</button>\n",
+			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to<br />end</button>\n",
 			0, "learner");
 	
 	},
@@ -631,7 +631,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 .15 0 .15em;' /></td><td style='width: 100%;'>" + message + "</td></tr></table></div>";	
 		}
 		else {
-			return "<table class='thoughtTable thoughtTableLearner'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTailLearner.default.png' style='position: relative; left: 25px; top: -2em;' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+			return "<table class='thoughtTable thoughtTableLearner'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTailLearner.default.png' style='position: relative; right: -1.85em; top: -2em;' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
 		}
 		
 	},
@@ -649,7 +649,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl' style='width: 18em;'><table class='thoughtTable'><tr><td><img src='" + gidgetImg + this.world.gidget.runtime.state + ".png' class='thing' title='This is your communication window with Gidget' style='padding: 0 1em 0 .5em;' /></td><td><span id='gidgetSpeech'>" + message + "</span></td></tr></table></div>";
 		}
 		else {
-			return "<table class='thoughtTable thoughtTableGidget'><tr><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTailGidget.default.png' style='position: relative; left: -1.5em; top: -2.2em;' /></td></tr></table>";
+			return "<table class='thoughtTable thoughtTableGidget'><tr><td class='thoughtBubbleCommunication'><span id='gidgetSpeech'>" + message + "</span></td><td><img src='" + gidgetImg +  this.world.gidget.runtime.state + ".png' class='thing' title='This is Gidget communicating with you!' style='display: block;' /><img src='media/speechTailGidget.default.png' style='position: relative; left: -1.6em; top: -2.2em;' /></td></tr></table>";
 		}	
 
 	},
