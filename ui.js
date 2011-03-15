@@ -267,7 +267,7 @@ GIDGET.ui = {
 						
 			// If this is not Firefox, add indent
 			if(!$.browser.mozilla)
-				classes = classes + ",indent";
+				classes = classes + " indent";
 
 			var lineText = "<div class='" + classes + "' id='sourceLine" + lineNumber + "'>";
 
