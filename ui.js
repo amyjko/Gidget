@@ -631,7 +631,7 @@ GIDGET.ui = {
 			return "<div class='thoughtBubbleControl'><table class='thoughtTable'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you.' style='padding: 0 .15 0 .15em;' /></td><td style='width: 100%;'>" + message + "</td></tr></table></div>";	
 		}
 		else {
-			return "<table class='thoughtTable thoughtTableLearner'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTailLearner.default.png' style='position: relative; right: -1.85em; top: -2em;' /></td><td class='thoughtBubbleCommunication'>" + message + "</td></tr></table>";	
+			return "<table class='thoughtTable thoughtTableLearner'><tr><td><img src='media/" + image + ".default.png' class='thing' title='This is you!' style='display: block;' /><img src='media/speechTailLearner.default.png' style='position: relative; right: -1.85em; top: -2em;' /></td><td class='thoughtBubbleCommunication' style='padding: 1em 0 1em 1em;'>" + message + "</td></tr></table>";	
 		}
 		
 	},
