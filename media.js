@@ -107,7 +107,12 @@ GIDGET.ui.media = {
 	loadMedia: function(onProgress) {
 	
 		this.progressCallback = onProgress;
-	
+		
+		this.loadImage("media/scene/bg01.png");
+		this.loadImage("media/scene/heli-westbound.png");
+		this.loadImage("media/scene/gidget-confident.png");
+
+		/*
 		this.loadImage("media/scene/frame01.png");
 		this.loadImage("media/scene/frame02.png");
 		this.loadImage("media/scene/frame03.png");
@@ -147,6 +152,7 @@ GIDGET.ui.media = {
 		this.loadImage("media/scene/frame31.png");
 		this.loadImage("media/scene/frame32.png");
 		this.loadImage("media/scene/frame33.png");
+		*/
 	
 		// Action Sounds
 		this.loadSound("analyze");

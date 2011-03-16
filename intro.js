@@ -15,7 +15,12 @@ GIDGET.createIntroduction = function() {
 
 	intro.addScene(scene1);
 	*/
+	
+	var bgMain			 = new SCENES.Sprite("media/scene/bg01.png", 0, 0, 480, 480);
+	var gidgetConfident	 = new SCENES.Sprite("media/scene/gidget-confident.png", 200, 200, 25, 25);
+	var heliWestbound	 = new SCENES.Sprite("media/scene/heli-westbound.png", 300, 300, 139, 55);
 
+	/*
 	var frame01 = new SCENES.Sprite("media/scene/frame01.png", 0, 0, 640, 480);
 	var frame02 = new SCENES.Sprite("media/scene/frame02.png", 0, 0, 640, 480);
 	var frame03 = new SCENES.Sprite("media/scene/frame03.png", 0, 0, 640, 480);
@@ -55,8 +60,15 @@ GIDGET.createIntroduction = function() {
 	var frame34 = new SCENES.Sprite("media/scene/frame31.png", 0, 0, 640, 480);
 	var frame35 = new SCENES.Sprite("media/scene/frame32.png", 0, 0, 640, 480);
 	var frame36 = new SCENES.Sprite("media/scene/frame33.png", 0, 0, 640, 480);
+	*/
 
-	var scene1 = new SCENES.Scene(36000);
+
+	var scene1 = new SCENES.Scene(10000);
+	
+	scene1.addSprite(bgMain, 0,10000);
+	scene1.addSprite(heliWestbound, 1000, 4500);
+	scene1.addSprite(gidgetConfident, 2500, 10000);
+	/*
 
 	scene1.addSprite(frame01, 0,1000);
 	scene1.addSprite(frame02, 1000, 2000);
@@ -98,6 +110,8 @@ GIDGET.createIntroduction = function() {
 	scene1.addSprite(frame34, 33000, 34000);
 	scene1.addSprite(frame35, 34000, 35000);
 	scene1.addSprite(frame36, 35000, 36000);
+
+	*/
 
 	intro.addScene(scene1);
 
