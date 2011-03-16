@@ -98,9 +98,31 @@ $().ready(function() {
 	// Check browser support, redirect if not supported	
 	function checkBrowser() {
 		BrowserDetect.init();
+		
+		//whitelist
+		if (BrowserDetect.OS == "Windows") {
+			if (!((BrowserDetect.browser == "Chrome") || (BrowserDetect.browser == "Firefox")))
+				window.location.href = "unsupported.html";
+		}
+		else if (BrowserDetect.OS == "Mac") {
+			if (!((BrowserDetect.browser == "Firefox") || (BrowserDetect.browser == "Safari")))
+				window.location.href = "unsupported.html";
+		}
+		else if (BrowserDetect.OS == "Linux"){
+			if (!(BrowserDetect.browser == "Chrome"))
+				window.location.href = "unsupported.html";
+		}
+		else
+			window.location.href = "unsupported.html";
+
+		//blacklist
+		/*
 		if ((BrowserDetect.browser == "Opera" || BrowserDetect.browser == "MSIE") || (BrowserDetect.browser == "Chrome" && BrowserDetect.OS == "Mac")) window.location.href = "unsupported.html";
-		// Commented out for now until we ger results for issue #195
-		//else if (BrowserDetect.browser == "Safari" && BrowserDetect.OS == "Windows") window.location.href = "unsupported.html";
+		else if ((BrowserDetect.browser == "Safari" && BrowserDetect.OS == "Windows")) {
+			//var QtPlugin = navigator.plugins["Quicktime"];
+			//if (!QtPlugin) window.location.href = "unsupported.html";
+		}
+		*/
 	}
 	checkBrowser();
 
