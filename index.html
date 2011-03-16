@@ -159,8 +159,8 @@
 		<h2>Quit & Receive MTurk Code</h2>
 		<p>Are you sure you want to quit?</p><p>You will receive your MTurk code but you <b>will not be able to return</b> to play the game.</p>
 		<p class='align-right'>
-			<button onclick='$("#quitConfirm").hide()'>No, I don't want to quit!</button>
-			<button onclick='$("#quitConfirm").hide(); $("#postSurvey").show()'>Yes, I give up.</button>
+			<button onclick='$("#quitConfirm").hide()'>No, I do not want to quit</button>
+			<button onclick='$("#quitConfirm").hide(); $("#postSurvey").show()'>Yes, I want to quit</button>
 		</p>
 	
 	</div>
@@ -243,7 +243,16 @@
                 <input type="radio" name="enjoyment" value="-2" /> Strongly Disagree</p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>6) I wanted to help Gidget succeed.</b></p>
+            <td valign="middle" ><p><b>6) I would recommend this game to a friend wanting to learn programming.</b></p>
+              <p>
+                <input type="radio" name="recommend" value="2" /> Strongly Agree<br />
+                <input type="radio" name="recommend" value="1" /> Agree<br />
+                <input type="radio" name="recommend" value="0" /> Undecided <br />
+                <input type="radio" name="recommend" value="-1" /> Disagree <br />
+                <input type="radio" name="recommend" value="-2" /> Strongly Disagree</p></td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>7) I wanted to help Gidget succeed.</b></p>
               <p>
                 <input type="radio" name="helpGidget" value="2" /> Strongly Agree<br />
                 <input type="radio" name="helpGidget" value="1" /> Agree<br />
@@ -252,9 +261,33 @@
                 <input type="radio" name="helpGidget" value="-2" /> Strongly Disagree</p></td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>7) Please give us detailed feedback about your experience running through these tasks. What did you find enjoyable? What did you find difficult? Do you any suggestions about how we could improve it?</b></p>
+            <td valign="middle" ><p><b>8) Describe your feelings about the dialogue between yourself and Gidget.</b></p>
               <p>
-				<textarea name="comments" cols="50" rows="10"></textarea>
+				<textarea name="free-dialogue" cols="50" rows="10"></textarea>
+				<br>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>9) Describe your feelings towards Gidget's avatar (image)?</b></p>
+              <p>
+				<textarea name="free-avatar" cols="50" rows="10"></textarea>
+				<br>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>10) How was this learning experience different, if at all, from any previous experience you have had dealing with programming?</b></p>
+              <p>
+				<textarea name="free-experience" cols="50" rows="10"></textarea>
+				<br>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td valign="middle" ><p><b>11) How would you describe describe this task to a friend?</b></p>
+              <p>
+				<textarea name="free-description" cols="50" rows="10"></textarea>
 				<br>
               </p>
             </td>
