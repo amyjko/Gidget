@@ -605,7 +605,7 @@ GIDGET.ui = {
 	},
 	
 	modifyCommStyles: function() {
-		if (GIDGET.experiment.condition === "control")
+		if (GIDGET.experiment.isControl())
 			this.modifyCommStylesForControl();
 		else
 			this.modifyCommStylesForExperimental();	
@@ -622,8 +622,11 @@ GIDGET.ui = {
 		 	case "female":
 		 		image = "female";
 		 		break;
-		 	default:
+		 	case "male":
 		 		image = "male";
+		 		break;
+		 	default:
+		 		image = "experimental";
 		 		break;
 		}
 		

@@ -246,6 +246,9 @@ $().ready(function() {
 
 			$('#postSurvey').toggle();		
 		}
+		else if(e.keyCode == 115) {  //F4
+			$('#chooseAvatar').toggle();
+		}
 		else if(e.keyCode == 117) {  //F6
 			$('#gotoNextLevel').click();
 		}
@@ -288,7 +291,47 @@ $().ready(function() {
 		GIDGET.experiment.saveExpCondition();
 
 	});
+
+	$('#setCondExp').click(function() {
 	
+		GIDGET.experiment.condition = "experimental";
+		GIDGET.experiment.saveExpCondition();
+
+	});
+	
+	$('#setAvatarMale').mouseover(function() {
+		$(this).css('border', '4px solid red');
+	}).mouseout(function(){
+    	$(this).css('border', '0');
+
+  	}).click(function() {
+		GIDGET.experiment.condition = "male";
+		GIDGET.experiment.saveExpCondition();
+		$('#chooseAvatar').toggle();
+	});
+
+	$('#setAvatarFemale').mouseover(function() {
+		$(this).css('border', '4px solid red');
+	}).mouseout(function(){
+    	$(this).css('border', '0');
+
+  	}).click(function() {
+		GIDGET.experiment.condition = "female";
+		GIDGET.experiment.saveExpCondition();
+		$('#chooseAvatar').toggle();
+	});
+	
+	$('#setAvatarExp').mouseover(function() {
+		$(this).css('border', '4px solid red');
+	}).mouseout(function(){
+    	$(this).css('border', '0');
+
+  	}).click(function() {
+		GIDGET.experiment.condition = "experimental";
+		GIDGET.experiment.saveExpCondition();
+		$('#chooseAvatar').toggle();
+	});	
+		
 
 	$('#gotoNextLevel').click(function() {
 		if (!isDef(GIDGET.ui.world.levelNumber) || !isDef(GIDGET.ui.world.numberOfLevels))
@@ -374,8 +417,12 @@ $().ready(function() {
 	}
 	// If we haven't chose one, choose one and save it.
 	else {
-		GIDGET.experiment.condition = Math.round(Math.random()) < 1 ? "control" : "male";
-		GIDGET.experiment.saveExpCondition();
+		GIDGET.experiment.condition = Math.round(Math.random()) < 1 ? "control" : "experimental";
+		
+		if (!GIDGET.experiment.isControl())
+			$('#chooseAvatar').toggle();
+		else
+			GIDGET.experiment.saveExpCondition();
 	}
 
 	// If there is no record of previous play, start on the first level.
@@ -408,7 +455,7 @@ $().ready(function() {
 	GIDGET.ui.updateBonus();
 	
 	// Sets box labels condition
-	if (GIDGET.experiment.condition === "control")		
+	if (GIDGET.experiment.isControl())		
 		$("#memoryBoxHeading").html("memory bank");
 	else
 		$("#memoryBoxHeading").html("gidget's memory");

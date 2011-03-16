@@ -148,11 +148,19 @@
 	<div class='popup' id='quitResults'></div>
 
 	<div class='popup' id='noCodeYet'>
-	
 		<p>You will not receive an MTurk code until you've completed at least the first level.</p>
-
 		<button onclick='$("#noCodeYet").hide();"'>Okay</button>
-	
+	</div>
+
+	<div class='popup' id='chooseAvatar'>
+		<h2>Choose Your Avatar</h2>
+		<p>Please click on the image you would like to represent yourself in the game.</p>
+
+		<table style="margin-left: auto; margin-right: auto; height: 4em;"><tr>
+			<td style="width: 5em;"><img src="media/male.default.png" id="setAvatarMale" style="padding: .75em" /></td>
+			<td style="width: 5em;"><img src="media/female.default.png" id="setAvatarFemale" style="padding: .75em" /></td>
+			<td style="width: 5em;"><img src="media/experimental.default.png" id="setAvatarExp" style="padding: .75em" /></td>
+		</tr></table>
 	</div>
 
 	<div class='popup' id='quitConfirm'>
@@ -162,7 +170,6 @@
 			<button onclick='$("#quitConfirm").hide()'>No, I do not want to quit</button>
 			<button onclick='$("#quitConfirm").hide(); $("#postSurvey").show()'>Yes, I want to quit</button>
 		</p>
-	
 	</div>
 	
 	<div class='popup' id='postSurvey'>
@@ -285,7 +292,7 @@
             </td>
           </tr>
           <tr>
-            <td valign="middle" ><p><b>11) How would you describe describe this task to a friend?</b></p>
+            <td valign="middle" ><p><b>11) How would you describe this game to a friend?</b></p>
               <p>
 				<textarea name="free-description" cols="50" rows="10"></textarea>
 				<br>
@@ -318,7 +325,7 @@
 		<p><button id='playIntro'>play intro</button></p>
 		<p>Choose a level:<br /><select id='levels'></select>  <button id='gotoNextLevel'>next</button><br /><button id='clearLocalStorage'>Reset progress</button></p>
 		<p>Condition: </p>
-		<p><button id='setCondControl'>control</button> <button id='setCondFemale'>experimental &#9792;/&#9794;</button></p>
+		<p><button id='setCondControl'>control</button> <button id='setCondMale'>&#9792;</button> <button id='setCondFemale'>&#9794;</button> <button id='setCondExp'>E</button></p>
 	</div>
 
 	<div class='popup' id='loadingIntro'>
