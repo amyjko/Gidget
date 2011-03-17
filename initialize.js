@@ -232,25 +232,35 @@ $().ready(function() {
 	$('.popup').hide();
 	
 	// Secret debugging keyboard shortcuts.
-	$(document).keyup(function(e) {
-	
-		if(e.keyCode == 27) {
-		
+	var debugToggle = false;
+	$(document).keypress(function(e) {
+		var key = String.fromCharCode(e.which);
+		var alt = e.altKey; // doesn't work on mac due to special characters
+      	var ctrl = e.ctrlKey; // doesn't work consistently accross browsers
+      	var shift = e.shiftKey;
+      
+     	if(shift && key == '~') {
+			debugToggle = !debugToggle;
+		}
+		else if(debugToggle && shift && key == '_') {
 			$('#debug').toggle();
+			debugToggle = false;
 		}
-		else if(e.keyCode == 112) { //F1
-
-			playIntro();		
+		else if(debugToggle && shift && key == "{") { 
+			playIntro();
+			debugToggle = false;
 		}
-		else if(e.keyCode == 113) { // F2
-
-			$('#postSurvey').toggle();		
-		}
-		else if(e.keyCode == 115) {  //F4
+		else if(debugToggle && shift && key == '}') { 
 			$('#chooseAvatar').toggle();
+			debugToggle = false;
 		}
-		else if(e.keyCode == 117) {  //F6
+		else if(debugToggle && shift && key == "|") { 
+			$('#postSurvey').toggle();
+			debugToggle = false;	
+		}
+		else if(debugToggle && shift && key == '+') { 
 			$('#gotoNextLevel').click();
+			debugToggle = false;
 		}
 	
 	});
