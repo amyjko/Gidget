@@ -70,6 +70,7 @@ GIDGET.createIntroduction = function() {
 	scene1.addSprite(gidgetSurprised, [20500, 21000], [150, 150]);
 	scene1.addSprite(gidgetSurprised, [21000, 21500], [150, 225]);
 	scene1.addSprite(gidgetSurprised, [21500, 22000], [150, 300]);
+	scene1.addSound("energyDown", 22000);
 	scene1.addSprite(gidgetSmashExp, [22000, 30000], [65, 300]);
 	intro.addScene(scene1);
 
