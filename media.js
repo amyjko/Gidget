@@ -109,50 +109,38 @@ GIDGET.ui.media = {
 		this.progressCallback = onProgress;
 		
 		this.loadImage("media/scene/bg01.png");
+		this.loadImage("media/scene/bg02.png");
+		this.loadImage("media/scene/bg03.png");
+		this.loadImage("media/scene/sky.png");
+		this.loadImage("media/scene/ground.png");
+		
+		this.loadImage("media/scene/boom.png");
+		
+		this.loadImage("media/scene/gidget.sad.png");
+		this.loadImage("media/scene/gidget.confident.png");
+		this.loadImage("media/scene/gidget.control.png");
+		this.loadImage("media/scene/gidget.eager.png");				
+		this.loadImage("media/scene/gidget.surprised.png");
+		this.loadImage("media/scene/gidget.smashExp.png");
+		this.loadImage("media/scene/rock.png");
+		
 		this.loadImage("media/scene/heli-westbound.png");
-		this.loadImage("media/scene/gidget-confident.png");
+		this.loadImage("media/scene/heli-westboundExp.png");
+		this.loadImage("media/scene/heli-westboundControl.png");				
+		this.loadImage("media/scene/heli-eastbound.png");
 
-		/*
-		this.loadImage("media/scene/frame01.png");
-		this.loadImage("media/scene/frame02.png");
-		this.loadImage("media/scene/frame03.png");
-		this.loadImage("media/scene/frame04.png");
-		this.loadImage("media/scene/frame05.png");
-		this.loadImage("media/scene/frame06.png");
-		this.loadImage("media/scene/frame07.png");
-		this.loadImage("media/scene/frame08.png");
-		this.loadImage("media/scene/frame09.png");
-		this.loadImage("media/scene/frame10.png");
-		
-		this.loadImage("media/scene/frame11.png");
-		this.loadImage("media/scene/frame12.png");
-		this.loadImage("media/scene/frame13.png");
-		this.loadImage("media/scene/frame14.png");
-		this.loadImage("media/scene/frame15.png");
-		this.loadImage("media/scene/frame16.png");
-		this.loadImage("media/scene/frame17.png");
-		this.loadImage("media/scene/frame18.png");
-		this.loadImage("media/scene/frame19.png");
-		this.loadImage("media/scene/frame20.png");
-		
-		this.loadImage("media/scene/frame20b.png");
-		this.loadImage("media/scene/frame20c.png");
-		this.loadImage("media/scene/frame20d.png");
-		this.loadImage("media/scene/frame21.png");
-		this.loadImage("media/scene/frame22.png");
-		this.loadImage("media/scene/frame23.png");
-		this.loadImage("media/scene/frame24.png");
-		this.loadImage("media/scene/frame25.png");
-		this.loadImage("media/scene/frame26.png");
-		this.loadImage("media/scene/frame27.png");
-		
-		this.loadImage("media/scene/frame28.png");
-		this.loadImage("media/scene/frame29.png");
-		this.loadImage("media/scene/frame30.png");
-		this.loadImage("media/scene/frame31.png");
-		this.loadImage("media/scene/frame32.png");
-		this.loadImage("media/scene/frame33.png");
-		*/
+		this.loadImage("media/scene/goop.default.png");
+		this.loadImage("media/scene/kitten.default.png");
+		this.loadImage("media/scene/cat.default.png");
+		this.loadImage("media/scene/puppy.default.png");
+		this.loadImage("media/scene/dog.default.png");
+		this.loadImage("media/scene/piglet.default.png");
+		this.loadImage("media/scene/bird.default.png");
+
+
+
+
+
 	
 		// Action Sounds
 		this.loadSound("analyze");
