@@ -316,33 +316,38 @@ $().ready(function() {
 		$(this).css('border', '4px solid red');
 	}).mouseout(function(){
     	$(this).css('border', '0');
-
   	}).click(function() {
 		GIDGET.experiment.condition = "male";
 		GIDGET.experiment.saveExpCondition();
-		$('#chooseAvatar').toggle();
+		$('#grid').fadeTo(1000, 1.0);
+		$('#gidgetThought').fadeTo(1000, 1.0);
+		$('#chooseAvatar').hide();
 	});
+
 
 	$('#setAvatarFemale').mouseover(function() {
 		$(this).css('border', '4px solid red');
 	}).mouseout(function(){
     	$(this).css('border', '0');
-
   	}).click(function() {
 		GIDGET.experiment.condition = "female";
 		GIDGET.experiment.saveExpCondition();
-		$('#chooseAvatar').toggle();
+		$('#grid').fadeTo(1000, 1.0);
+		$('#gidgetThought').fadeTo(1000, 1.0);
+		$('#chooseAvatar').hide();
 	});
+	
 	
 	$('#setAvatarExp').mouseover(function() {
 		$(this).css('border', '4px solid red');
 	}).mouseout(function(){
     	$(this).css('border', '0');
-
   	}).click(function() {
 		GIDGET.experiment.condition = "experimental";
 		GIDGET.experiment.saveExpCondition();
-		$('#chooseAvatar').toggle();
+		$('#grid').fadeTo(1000, 1.0);
+		$('#gidgetThought').fadeTo(1000, 1.0);
+		$('#chooseAvatar').hide();
 	});	
 		
 
@@ -391,9 +396,9 @@ $().ready(function() {
 			// Play the introduction	
 			playIntro();	
 				
-		}
-		else {
-
+		} // check to see if there's a record of the learner quitting
+		else if(localStorage.getItem('quit') === null) {
+			
 			$('#container').show();
 			GIDGET.ui.drawGrid();
 
@@ -414,7 +419,7 @@ $().ready(function() {
 		$('#loadingIntro .progress').text("" + remaining + " remaining to download...");
 		
 		// If we're done, decide whether to show introduction if necessary.
-		if(remaining <= 0) {
+		if(remaining <= 0 || localStorage.getItem('quit') !== null ) {
 		
 			// Hide the loading dialog
 			$('#loadingIntro').hide();
@@ -423,7 +428,12 @@ $().ready(function() {
 		}
 		// Allow learner to choose their avatar if they are in the experimental condition & haven't yet
 		if($('#loadingIntro').is(':hidden') && GIDGET.experiment.condition === "unselected")
+		{
+			$('#grid').hide();
+			$('#gidgetThought').hide();
 			$('#chooseAvatar').toggle();
+		}
+			
 	});	
 
 	// If we've already stored the experimental condition for this participant, load it.
