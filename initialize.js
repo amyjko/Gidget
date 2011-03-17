@@ -263,6 +263,9 @@ $().ready(function() {
 			debugToggle = false;
 		}
 	
+	}).keyup(function(e) {
+		if(e.keyCode == 27)
+			$('#debug').hide();
 	});
 
 	// Debugging handler for resetting progress.	
@@ -418,7 +421,9 @@ $().ready(function() {
 			playIntroductionIfNotPlayedPreviously();
 		
 		}
-
+		// Allow learner to choose their avatar if they are in the experimental condition & haven't yet
+		if($('#loadingIntro').is(':hidden') && GIDGET.experiment.condition === "unselected")
+			$('#chooseAvatar').toggle();
 	});	
 
 	// If we've already stored the experimental condition for this participant, load it.
@@ -427,12 +432,8 @@ $().ready(function() {
 	}
 	// If we haven't chose one, choose one and save it.
 	else {
-		GIDGET.experiment.condition = Math.round(Math.random()) < 1 ? "control" : "experimental";
-		
-		if (!GIDGET.experiment.isControl())
-			$('#chooseAvatar').toggle();
-		else
-			GIDGET.experiment.saveExpCondition();
+		GIDGET.experiment.condition = Math.round(Math.random()) < 1 ? "control" : "unselected";
+		GIDGET.experiment.saveExpCondition();
 	}
 
 	// If there is no record of previous play, start on the first level.
