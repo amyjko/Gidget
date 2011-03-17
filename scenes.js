@@ -1,13 +1,11 @@
 var SCENES = {
 
-	Sprite: function(url, x, y, width, height) {
+	Sprite: function(url, width, height) {
 	
 		this.image = GIDGET.ui.media.getImage(url);
-		this.x = x;
-		this.y = y;
 		this.width = width;
 		this.height = height;
-	
+		
 	},
 
 	Scene: function(length) {
@@ -17,10 +15,11 @@ var SCENES = {
 		this.sprites = [];
 		this.sounds = [];
 		
-		this.addSprite = function(sprite, begin, end) {
-		
-			this.sprites.push({ sprite: sprite, begin: begin, end: end });		
-		
+		this.addSprite = function(sprite, time, coord) {
+			
+			// time == (begin, end); coord = (x-pos, y-pos)
+			this.sprites.push({ sprite: sprite, time: time, coord: coord });		
+			
 		};
 		
 		this.addSound = function(url, begin) {
@@ -53,14 +52,16 @@ var SCENES = {
 			for(i = 0; i < this.sprites.length; i++) {
 			
 				sprite = this.sprites[i].sprite;
-				begin = this.sprites[i].begin;
-				end = this.sprites[i].end;
-				
+				begin = this.sprites[i].time[0];
+				end = this.sprites[i].time[1];
+				xpos = this.sprites[i].coord[0];
+				ypos = this.sprites[i].coord[1];
+								
 				// If this is visible, draw the sprite.
 				if(begin < time && time < end) {
 	
 					if(sprite.width > 0 && sprite.height > 0 && isDef(sprite.image))
-						ctx.drawImage(sprite.image, sprite.x, sprite.y, sprite.width, sprite.height);	
+						ctx.drawImage(sprite.image, xpos, ypos, sprite.width, sprite.height);	
 				
 				}
 			
