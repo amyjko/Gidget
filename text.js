@@ -378,14 +378,14 @@ GIDGET.text = {
 	editingDisabled: function() {
 	
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Cannot modify code during program execution. Click the <b> to " + this.finishExecutingButtonLabel() + "</b> button to end execution and then on  <b>retry this misssion</b> button to restart.", "error", GIDGET.text.SAD);
+			return new GIDGET.text.Message("ERROR: Cannot modify code during program execution. Click the <b>" + this.finishExecutingButtonLabel() + "</b> button to end execution and then on the <b>retry this misssion</b> button to restart.", "error", GIDGET.text.SAD);
 	
-		return new GIDGET.text.Message("If you change my instructions while I'm doing them, I'm going to get really confused! You can make me stop by pressing <b> to " + this.finishExecutingButtonLabel() + "</b> button and then clicking the <b>retry this mission</b> button.", "errorExp", GIDGET.text.SAD);
+		return new GIDGET.text.Message("If you change my instructions while I'm doing them, I'm going to get really confused! You can make me stop by pressing the <b>" + this.finishExecutingButtonLabel() + "</b> button and then clicking the <b>retry this mission</b> button.", "errorExp", GIDGET.text.SAD);
 		
 	},
 	
 	finishExecutingButtonLabel: function() {
-		return "the end";
+		return "to end";
 	},
 
 	noEnergy: function(){
