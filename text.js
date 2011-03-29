@@ -11,6 +11,7 @@ GIDGET.text = {
 
 	// The constant used to represent Gidget's sad state.
 	SAD: 'sad',
+	HAPPY: 'happy',
 
 	Message: function(text, sound, emotion, functionToCall) {
 	
@@ -531,9 +532,9 @@ GIDGET.text = {
 	goal_checkSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("$results(Results) detected in memory banks, goal satisfied.");
+			return new GIDGET.text.Message("$results(Results) detected in memory banks, goal satisfied.", undefined, GIDGET.text.HAPPY);
 		
-		return new GIDGET.text.Message("There were $results(results) for this goal in my memory, so I succeeded!");
+		return new GIDGET.text.Message("There were $results(results) for this goal in my memory, so I succeeded!", undefined, GIDGET.text.HAPPY);
 	},
 	
 	goal_checkFailure: function(){
@@ -548,16 +549,16 @@ GIDGET.text = {
 	goal_finalSuccess: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("<span class='runtimeReference'>All goals</span> satisfied.");	
+			return new GIDGET.text.Message("<span class='runtimeReference'>All goals</span> satisfied.", undefined, GIDGET.text.HAPPY);	
 		
-		return new GIDGET.text.Message("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!");
+		return new GIDGET.text.Message("I accomplished <span class='runtimeReference'>all of my goals</span>! I never could have done it without you!", undefined, GIDGET.text.HAPPY);
 
 	},
 	
 	goal_finalFailure: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: <span class='runtimeReference'>Some goals</span> failed so mission is incomplete. Retry?");
+			return new GIDGET.text.Message("ERROR: <span class='runtimeReference'>Some goals</span> failed so mission is incomplete. Retry?", undefined, GIDGET.text.SAD);
 			
 		return new GIDGET.text.Message("I failed <span class='runtimeReference'>some of my goals</span> so I didn't complete this mission. I won't be able to figure this out without your help! Can you help me try again?", undefined, GIDGET.text.SAD);
 		

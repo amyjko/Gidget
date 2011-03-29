@@ -445,8 +445,7 @@ GIDGET.ui = {
 		}
 		else {
 		
-			this.world.gidget.runtime.state = this.world.missionText[this.currentMissionText].state;
-			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text + "<div><button onclick='GIDGET.ui.step()' class='align-right'>next...</button></div>"), false);
+			this.visualizeDecision(new GIDGET.text.Message(this.world.missionText[this.currentMissionText].text + "<div><button onclick='GIDGET.ui.step()' class='align-right'>next...</button></div>", undefined, this.world.missionText[this.currentMissionText].state), false);
 		
 		}
 	
@@ -904,7 +903,6 @@ GIDGET.ui = {
 				if(this.allGoalsAchieved === true) {
 
 					succeeded = true;
-					this.world.gidget.runtime.state = "happy";			
 					this.visualizeDecision(GIDGET.text.goal_finalSuccess(), true);	
 					
 					GIDGET.ui.media.playSound("goal_finalSuccess");
@@ -915,7 +913,6 @@ GIDGET.ui = {
 				else {
 
 					succeeded = false;
-					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_finalFailure(), true);
 					
 					GIDGET.ui.media.playSound("goal_finalFailure");
@@ -957,7 +954,6 @@ GIDGET.ui = {
 				if(this.world.gidget.runtime.hasRecentResults()) {
 				
 					$('#goals .success:eq(' + this.goalNumberBeingExecuted + ')').show();
-					this.world.gidget.runtime.state = "happy";
 					this.visualizeDecision(GIDGET.text.goal_checkSuccess(), true);
 					
 					GIDGET.ui.media.playSound("goal_checkSuccess");
@@ -969,7 +965,6 @@ GIDGET.ui = {
 	
 					$('#goals .failure:eq(' + this.goalNumberBeingExecuted + ')').show();
 					this.allGoalsAchieved = false;
-					this.world.gidget.runtime.state = "sad";
 					this.visualizeDecision(GIDGET.text.goal_checkFailure(), true);
 					
 					GIDGET.ui.media.playSound("goal_checkFailure");
@@ -1120,7 +1115,6 @@ GIDGET.ui = {
 		// don't test the goals.
 		if(this.world.gidget.energy <= 0) {
 			
-			this.world.gidget.runtime.state = "sad";
 			this.showLevelControls(false);
 			this.visualizeDecision(GIDGET.text.noEnergy(), true);
 		
