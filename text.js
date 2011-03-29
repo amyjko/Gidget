@@ -20,8 +20,7 @@ GIDGET.text = {
 		this.functionToCall = functionToCall;
 		
 		if(isDef(functionToCall) && !jQuery.isFunction(functionToCall)){
-			//console.error("Value passed to GIDGET.text.Message() is not a function but should be. " + functionToCall + ".");
-			return GIDGET.text.parser_unknownAction(); // Temporary fix. functionToCall is returning "sad" so somewhere, we need to update the fact that there is now also a sound that is being passed to this function.
+			console.error("Value passed to GIDGET.text.Message() is not a function but should be. " + functionToCall + ".");
 		}
 		
 		return this;
@@ -287,9 +286,9 @@ GIDGET.text = {
 	ask_missingArguments: function(name, action, numberExpected, numberGiven) {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Invalid <b>ask</b> syntax. " + name + " expects  <b>" + numberExpected + "</b> names, instead of <b>" + numberGiven + "</b> names. Skipping to next instructions.", "error", undefined, GIDGET.text.SAD);
+			return new GIDGET.text.Message("ERROR: Invalid <b>ask</b> syntax. " + name + " expects  <b>" + numberExpected + "</b> names, instead of <b>" + numberGiven + "</b> names. Skipping to next instructions.", "error", GIDGET.text.SAD);
 			
-		return new GIDGET.text.Message("Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.", "errorExp", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("Oh no... <b>" + name + "</b> knows how to <b>" + action + "</b>, but it wanted me to give it <b>" + numberExpected + "</b> names. I gave it <b>" + numberGiven + "</b> names. I don't know what to do! I guess I'll just skip this step.", "errorExp", GIDGET.text.SAD);
 	
 	},
 		
@@ -304,9 +303,9 @@ GIDGET.text = {
 	ask_unknownAction: function(name, action) {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Invalid ask command. " +this.capitalize(name)+ " does not understand the action, '" + action + "'.", "error", undefined, GIDGET.text.SAD);
+			return new GIDGET.text.Message("ERROR: Invalid ask command. " +this.capitalize(name)+ " does not understand the action, '" + action + "'.", "error", GIDGET.text.SAD);
 			
-		return new GIDGET.text.Message("I told " + name + " to " + action + " but it didn't know how! I don't know what to do!", "errorExp", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("I told " + name + " to " + action + " but it didn't know how! I don't know what to do!", "errorExp", GIDGET.text.SAD);
 	
 	},
 	
