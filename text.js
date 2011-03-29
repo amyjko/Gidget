@@ -19,8 +19,10 @@ GIDGET.text = {
 		this.emotion = isDef(emotion) ? emotion : 'default';
 		this.functionToCall = functionToCall;
 		
-		if(isDef(functionToCall) && !jQuery.isFunction(functionToCall))
-			console.error("Value passed to GIDGET.text.Message() is not a function but should be.");
+		if(isDef(functionToCall) && !jQuery.isFunction(functionToCall)){
+			//console.error("Value passed to GIDGET.text.Message() is not a function but should be. " + functionToCall + ".");
+			return GIDGET.text.parser_unknownAction(); // Temporary fix. functionToCall is returning "sad" so somewhere, we need to update the fact that there is now also a sound that is being passed to this function.
+		}
 		
 		return this;
 	
@@ -362,9 +364,9 @@ GIDGET.text = {
 		}
 		else {
 			if (GIDGET.experiment.isControl())
-				return new GIDGET.text.Message(result + ", but didn't find anything.", "error", GIDGET.text.SAD);
+				return new GIDGET.text.Message(result + ", but that object does not exist in memory banks.", "error", GIDGET.text.SAD);
 			else
-				return new GIDGET.text.Message(result + ", but didn't find anything.", "errorExp", GIDGET.text.SAD);
+				return new GIDGET.text.Message(result + ", but I don't have that object in my memory.", "errorExp", GIDGET.text.SAD);
 		}
 
 	},
@@ -391,9 +393,9 @@ GIDGET.text = {
 	noEnergy: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("CRITICAL ERROR: Energy depleted. Cannot continue program execution.", "energyDown");
+			return new GIDGET.text.Message("CRITICAL ERROR: Energy depleted so cannot continue program execution. Retry?", "energyDown", GIDGET.text.SAD);
 		
-		return new GIDGET.text.Message("I ... can't... go ... any ... further...", "energyDown", GIDGET.text.SAD);
+		return new GIDGET.text.Message("Oh no... I ran out of energy... Can we try again? I know with your help, I can succeed!", "energyDown", GIDGET.text.SAD);
 		
 	},
 	
@@ -538,7 +540,7 @@ GIDGET.text = {
 	goal_checkFailure: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: There were $results(no results) in the memory banks for this goal, so you <span class='runtimeReference'>failed this goal</span>.");
+			return new GIDGET.text.Message("ERROR: There were $results(no results) in the memory banks for this goal, so you <span class='runtimeReference'>failed this goal</span>.", undefined, GIDGET.text.SAD);
 			
 		return new GIDGET.text.Message("There were $results(no results) for this goal in my memory, so I didn't accomplish this goal!", undefined, GIDGET.text.SAD);
 		
@@ -556,9 +558,9 @@ GIDGET.text = {
 	goal_finalFailure: function(){
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: <span class='runtimeReference'>Some goals</span> failed.");
+			return new GIDGET.text.Message("ERROR: <span class='runtimeReference'>Some goals</span> failed so mission is incomplete. Retry?");
 			
-		return new GIDGET.text.Message("I failed <span class='runtimeReference'>some of my goals</span>. I feel like I'm never going to figure this out :(", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("I failed <span class='runtimeReference'>some of my goals</span> so I didn't complete this mission. I won't be able to figure this out without your help! Can you help me try again?", undefined, GIDGET.text.SAD);
 		
 	},
 
@@ -682,6 +684,17 @@ GIDGET.text = {
 			return new GIDGET.text.Message("SYNTAX ERROR: Missing action. State action for thing to do. Skipping step.", "parserErrorCtrl", GIDGET.text.SAD, showCommand);
 		} else {
 			return new GIDGET.text.Message("I know I'm supposed to ask something to do something, but I don't know what I'm asking it to do. I'll skip it so I don't confuse myself, but can you tell me what I should do?", "parserErrorExp", GIDGET.text.SAD, showCommand);
+		}
+	},
+	
+	parser_unknownAction: function() {
+	
+		function showCommand() { GIDGET.ui.highlightCommand('ask'); }
+
+		if (GIDGET.experiment.isControl()) {
+			return new GIDGET.text.Message("SYNTAX ERROR: Unknown action. Check object after analyzing it to see its list of commands. Skipping step.", "parserErrorCtrl", GIDGET.text.SAD, showCommand);
+		} else {
+			return new GIDGET.text.Message("The object doesn't seem to know what the action is. Check the object after analyzing it to see its list of commands. I'll skip it so I don't confuse myself for now.", "parserErrorExp", GIDGET.text.SAD, showCommand);
 		}
 	},
 

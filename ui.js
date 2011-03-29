@@ -141,23 +141,31 @@ GIDGET.ui = {
 				experience5: $('input[name=experience5]').attr('checked'),
 				experience6: $('input[name=experience6]').attr('checked'),
 				enjoyment: $('input[name=enjoyment]:checked').val(),
-				help: $('input[name=helpGidget]:checked').val()			
+				recommend: $('input[name=recommend]:checked').val(),
+				helpGidget: $('input[name=helpGidget]:checked').val(),
+				dialogue: $('input[name=free-dialogue]').val(),
+				avatar: $('input[name=free-avatar]').val(),	
+				experience: $('input[name=free-experience]').val(),	
+				description: $('input[name=free-description]').val(),
 			}
 		}
 		
-		payload = JSON.stringify(payload);
+		payload = "data=" + JSON.stringify(payload);
+		//alert(payload);
 	
 		localStorage.setItem("quit", password);
 
 		$.ajax({
-			type: "POST",
 			url: "submit.php",
-			data: "data=" + payload,
+			type: "POST",
+			data: payload,
 			success: function(msg) {
 				GIDGET.ui.disable("Successfully saved your results!");
+				alert("Saved your results!");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				GIDGET.ui.disable("Your results could not be saved :(");
+				alert("Could not save your results!");
 			}
 		});
 			
@@ -546,10 +554,10 @@ GIDGET.ui = {
 			message = "Gidget, please execute...";
 		
 		GIDGET.ui.setThought("<span id='learnerSpeech'>"+message+"</span> <br>\n" +
-			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the code.'>one<br />step</button>\n" +
-			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the code.'>one<br />line</button>\n"+
-			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute the entire code step-by-step.'>all<br />steps</button>\n" +
-			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute the entire code in one step.'>to<br />end</button>\n",
+			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the instructions - there may be multiple steps per line - this button may need to be pressed multiple times to go through the instructions and evaluate the goals.'>one<br />step</button>\n" +
+			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the instructions - his button may need to be pressed multiple times to go through the instructions and evaluate the goals.'>one<br />line</button>\n"+
+			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute all the instruction and check the goals step-by-step.'>all<br />steps</button>\n" +
+			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute all the instructions and check the goals in one step, showing only the final output.'>to<br />end</button>\n",
 			0, "learner");
 	
 	},
@@ -1113,7 +1121,7 @@ GIDGET.ui = {
 		if(this.world.gidget.energy <= 0) {
 			
 			this.world.gidget.runtime.state = "sad";
-			this.showLevelControls(true);
+			this.showLevelControls(false);
 			this.visualizeDecision(GIDGET.text.noEnergy(), true);
 		
 		}

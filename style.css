@@ -671,6 +671,7 @@ textarea {
 	top:			2em;
 	left:			50%;
 	overflow: 		scroll;
+	z-index:		999;
 }
 
 #postSurvey p,td {
@@ -686,7 +687,7 @@ textarea {
 .tooltip {
 	background-color: white;
     position:	absolute;
-    z-index:	999;
+    z-index:	979;
     left: 		-9999px;
     padding:	1em;
     border:		1px solid #fff;

@@ -32,7 +32,7 @@
 			<span id="titleRight">
 				<span><span id='passed'></span> levels passed | </span>
 				<span>total bonus <span id='bonus'>0.00</span> | </span>
-				<span><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) $("#quitConfirm").show(); else $("#noCodeYet").show();' title='Pressing this button will quit the game and give you your MTurk code.'>Quit & receive MTurk code</button></span>
+				<span><button id='quit' onclick='if(GIDGET.ui.getNumberOfLevelsPassed() > 0) {$("#quitConfirm").show();} else $("#noCodeYet").show();' title='Pressing this button will quit the game and give you your MTurk code.'>Quit & receive MTurk code</button></span>
 			</span>
 		</div>
 		<div id='content'>
@@ -168,7 +168,7 @@
 		<p>Are you sure you want to quit?</p><p>You will receive your MTurk code but you <b>will not be able to return</b> to play the game.</p>
 		<p class='align-right'>
 			<button onclick='$("#quitConfirm").hide()'>No, I do not want to quit</button>
-			<button onclick='$("#quitConfirm").hide(); $("#postSurvey").show()'>Yes, I want to quit</button>
+			<button onclick='$("#quitConfirm").hide(); $("#toggleCheatsheet").hide(); $("#postSurvey").show()'>Yes, I want to quit</button>
 		</p>
 	</div>
 	

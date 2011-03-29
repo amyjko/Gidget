@@ -108,6 +108,7 @@ GIDGET.ui.media = {
 	
 		this.progressCallback = onProgress;
 		
+		/*
 		this.loadImage("media/scene/bg01.png");
 		this.loadImage("media/scene/bg02.png");
 		this.loadImage("media/scene/bg03.png");
@@ -137,7 +138,7 @@ GIDGET.ui.media = {
 		this.loadImage("media/scene/piglet.default.png");
 		this.loadImage("media/scene/bird.default.png");
 
-
+		*/
 
 
 

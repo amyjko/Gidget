@@ -1,7 +1,7 @@
 GIDGET.createIntroduction = function() {
 
 	var intro = new SCENES.Movie();
-
+/*
 	var bgMain			 	= new SCENES.Sprite("media/scene/bg01.png", 480, 480);
 	var bgMain2			 	= new SCENES.Sprite("media/scene/bg02.png", 480, 480);
 	var bgMain3			 	= new SCENES.Sprite("media/scene/bg03.png", 480, 480);
@@ -10,7 +10,8 @@ GIDGET.createIntroduction = function() {
 	
 	var boom			 	= new SCENES.Sprite("media/scene/boom.png", 455, 366);
 	
-	var gidgetSad	 		= new SCENES.Sprite("media/scene/gidget.sad.png",  25, 25);
+	var gidgetSad	 		= new SCENES.Sprite("media/scene/gidget.sad.png",  113, 113);
+	var gidgetSadSmall		= new SCENES.Sprite("media/scene/gidget.sad.png",  20, 20);
 	var gidgetConfidentSmall= new SCENES.Sprite("media/scene/gidget.confident.png",  25, 25);
 	var gidgetControl		= new SCENES.Sprite("media/scene/gidget.control.png",  150, 150);
 	var gidgetControlSmall  = new SCENES.Sprite("media/scene/gidget.control.png",  25, 25);
@@ -24,23 +25,23 @@ GIDGET.createIntroduction = function() {
 	var heliWestboundE	 	= new SCENES.Sprite("media/scene/heli-westboundExp.png",  139, 55);
 	var heliWestboundC	 	= new SCENES.Sprite("media/scene/heli-westboundControl.png",  139, 55);
 
-
-	var goop	= new SCENES.Sprite("media/scene/goop.default.png",  25, 25);
-	var cat		= new SCENES.Sprite("media/scene/cat.default.png",  25, 25);
-	var kitten	= new SCENES.Sprite("media/scene/kitten.default.png",  25, 25);
-	var dog		= new SCENES.Sprite("media/scene/dog.default.png",  25, 25);
-	var puppy	= new SCENES.Sprite("media/scene/puppy.default.png",  25, 25);
-	var bird	= new SCENES.Sprite("media/scene/bird.default.png",  25, 25);
-	var piglet	= new SCENES.Sprite("media/scene/piglet.default.png",  25, 25);
+	var goop	= new SCENES.Sprite("media/scene/goop.default.png",  20, 20);
+	var cat		= new SCENES.Sprite("media/scene/cat.default.png",  20, 20);
+	var kitten	= new SCENES.Sprite("media/scene/kitten.default.png",  20, 20);
+	var dog		= new SCENES.Sprite("media/scene/dog.default.png",  20, 20);
+	var puppy	= new SCENES.Sprite("media/scene/puppy.default.png",  20, 20);
+	var bird	= new SCENES.Sprite("media/scene/bird.default.png",  20, 20);
+	var piglet	= new SCENES.Sprite("media/scene/piglet.default.png",  20, 20);
 	
 	
 
-	var scene1 = new SCENES.Scene(100000);
+	var scene1 = new SCENES.Scene(31000);
 	
 	scene1.addSprite(bgMain, [0,7000], [0, 0]);
 	scene1.addSprite(boom, [6000,8000], [10, 0]);
 	scene1.addSprite(bgMain2, [7000,11500], [0, 0]);
-	scene1.addSprite(bgMain3, [11500,16000], [0, 0]);
+	scene1.addSprite(bgMain3, [11500, 16000], [0, 0]);
+
 	scene1.addSprite(heliWestboundE, [9000, 10000],  [400, 300]);
 	scene1.addSprite(heliWestboundE, [10000, 11000], [300, 300]);
 	scene1.addSprite(heliWestboundE, [11000, 12000], [200, 300]);
@@ -63,15 +64,87 @@ GIDGET.createIntroduction = function() {
 	scene1.addSprite(gidgetSurprised, [18500, 19000], [150, 375]);
 	scene1.addSprite(gidgetSurprised, [19000, 19500], [150, 450]);
 
-	scene1.addSprite(ground, [19500, 30000], [0, 0]);
-	scene1.addSprite(rock, [19500, 30000], [65, 300]);
+	scene1.addSprite(ground, [19500, 27500], [0, 0]);
+	scene1.addSprite(rock, [19500, 27500], [65, 300]);
 	scene1.addSprite(gidgetSurprised, [19500, 20000], [150, 0]);
 	scene1.addSprite(gidgetSurprised, [20000, 20500], [150, 75]);
 	scene1.addSprite(gidgetSurprised, [20500, 21000], [150, 150]);
 	scene1.addSprite(gidgetSurprised, [21000, 21500], [150, 225]);
 	scene1.addSprite(gidgetSurprised, [21500, 22000], [150, 300]);
-	scene1.addSound("energyDown", 22000);
-	scene1.addSprite(gidgetSmashExp, [22000, 30000], [65, 300]);
+	scene1.addSound("energyDown", 21750);
+	scene1.addSprite(gidgetSmashExp, [22000, 25000], [65, 300]);
+	scene1.addSprite(gidgetSad, [25000, 27500], [240, 315]);
+	
+	scene1.addSprite(bgMain3, [27500, 31000], [0, 0]);
+	scene1.addSprite(gidgetSadSmall, [27500, 31000], [160, 455]);
+
+
+
+	// <animals>
+
+	scene1.addSprite(cat,		[0, 16000], [440, 180]);
+	scene1.addSprite(dog,		[0, 16000], [395, 400]);
+	scene1.addSprite(kitten,	[0, 16000], [225, 420]);
+	scene1.addSprite(puppy,		[0, 16000], [120, 410]);
+	scene1.addSprite(piglet,	[0, 16000], [60, 200]);
+	scene1.addSprite(bird,		[0, 16000], [35, 275]);
+		// round 2
+		
+	scene1.addSprite(cat,		[27500, 31000], [440, 180]);
+	scene1.addSprite(dog,		[27500, 31000], [395, 400]);
+	scene1.addSprite(kitten,	[27500, 31000], [225, 420]);
+	scene1.addSprite(puppy,		[27500, 31000], [120, 410]);
+	scene1.addSprite(piglet,	[27500, 31000], [60, 200]);
+	scene1.addSprite(bird,		[27500, 31000], [35, 275]);
+
+	// </animals>
+
+
+	// <goops>
+	scene1.addSprite(goop, [7000, 16000], [190, 200]);
+	scene1.addSprite(goop, [7000, 16000], [230, 225]);
+	scene1.addSprite(goop, [7000, 16000], [225, 135]);
+	scene1.addSprite(goop, [7000, 16000], [70, 120]);
+	scene1.addSprite(goop, [7000, 16000], [200, 100]);
+	scene1.addSprite(goop, [7000, 16000], [240, 90]);
+	scene1.addSprite(goop, [7000, 16000], [235, 85]);
+
+	scene1.addSprite(goop, [7000, 16000], [150, 150]);
+	scene1.addSprite(goop, [7050, 16000], [200, 188]);
+	scene1.addSprite(goop, [7100, 16000], [44, 240]);
+	scene1.addSprite(goop, [7150, 16000], [49, 58]);
+	scene1.addSprite(goop, [7200, 16000], [315, 412]);
+	scene1.addSprite(goop, [7250, 16000], [251, 421]);
+	scene1.addSprite(goop, [7300, 16000], [139, 257]);
+	scene1.addSprite(goop, [7350, 16000], [411, 180]);
+	scene1.addSprite(goop, [7400, 16000], [213, 8]);
+	scene1.addSprite(goop, [7450, 16000], [231, 175]);
+
+		// round 2
+
+	scene1.addSprite(goop, [27500, 31000], [190, 200]);
+	scene1.addSprite(goop, [27500, 31000], [230, 225]);
+	scene1.addSprite(goop, [27500, 31000], [225, 135]);
+	scene1.addSprite(goop, [27500, 31000], [70, 120]);
+	scene1.addSprite(goop, [27500, 31000], [200, 100]);
+	scene1.addSprite(goop, [27500, 31000], [240, 90]);
+	scene1.addSprite(goop, [27500, 31000], [235, 85]);
+	
+	scene1.addSprite(goop, [27500, 31000], [150, 150]);
+	scene1.addSprite(goop, [27500, 31000], [200, 188]);
+	scene1.addSprite(goop, [27500, 31000], [44, 240]);
+	scene1.addSprite(goop, [27500, 31000], [49, 58]);
+	scene1.addSprite(goop, [27500, 31000], [315, 412]);
+	scene1.addSprite(goop, [27500, 31000], [251, 421]);
+	scene1.addSprite(goop, [27500, 31000], [139, 257]);
+	scene1.addSprite(goop, [27500, 31000], [411, 180]);
+	scene1.addSprite(goop, [27500, 31000], [213, 8]);
+	scene1.addSprite(goop, [27500, 31000], [231, 175]);
+
+	
+	// </goops>
+	*/
+	
 	intro.addScene(scene1);
 
 	return intro;

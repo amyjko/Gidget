@@ -385,6 +385,7 @@ $().ready(function() {
 
 	function playIntroductionIfNotPlayedPreviously() {
 	
+		localStorage.setItem('playedMovie', 'true');	// post-pilot: skip movie
 		// If there is no record of previous play, start anew
 		if(localStorage.getItem('playedMovie') === null) {
 	
@@ -469,7 +470,7 @@ $().ready(function() {
 	
 	// If we've written quit to local storage, the user has already quit, so we disable the UI.
 	if(localStorage.getItem('quit') !== null) {
-		GIDGET.ui.disable("You've already quit, so Gidget is permanently disabled.");
+		GIDGET.ui.disable("You have quit, so Gidget is permanently disabled.");
 	}
 	
 	// Update the bonus pay for MTURK
