@@ -145,8 +145,10 @@ $().ready(function() {
 	// Check for both canvas and local storage support before continuing.
 	if(!supportsCanvas() || !supportsLocalStorage()) {
 	
-		console.log("canvas: " + supportsCanvas());
-		console.log("localStorage: " + supportsLocalStorage());
+		if (GIDGET.experiment.verbose) {
+			console.log("canvas: " + supportsCanvas());
+			console.log("localStorage: " + supportsLocalStorage());
+		}
 		
 		window.location.href = "unsupported.html";
 	}

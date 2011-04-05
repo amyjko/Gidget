@@ -2,6 +2,8 @@ GIDGET.experiment = {
 
 	condition: "male",	// control, male, female
 	
+	verbose: false,
+	
 	bonusPerLevel: 0.10,
 	
 	isControl: function() {

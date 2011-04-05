@@ -323,8 +323,10 @@ GIDGET.Runtime = function(thing, world) {
 		if(this.pc < 0 || this.pc >= this.steps.length) {
 			return undefined;
 		}
-	
-		// console.log("[" + thing.name + "]: " + this.pc + " " + this.steps[this.pc].toString());
+		
+		if (GIDGET.experiment.verbose) {
+		 console.log("[" + thing.name + "]: " + this.pc + " " + this.steps[this.pc].toString());
+		}
 
 		var step = this.steps[this.pc];
 		
@@ -357,12 +359,15 @@ GIDGET.Runtime = function(thing, world) {
 		this.steps = isGoal === true ? GIDGET.parser.parseGoal(code) : GIDGET.parser.parseScript(code);
 		this.isExecutingGoal = isGoal;
 
+		
 		// Print out the steps, just for reference
-		var i;
-		for(i = 0; i < this.steps.length; i++) {
-			console.log(i + " " + this.steps[i].toString());	
+		if (GIDGET.experiment.verbose) {
+			var i;
+			for(i = 0; i < this.steps.length; i++) {
+				console.log(i + " " + this.steps[i].toString());	
+			}
 		}
-
+		
 		// Prepare the execution metadata.
 		this.pc = 0;
 		this.resultsStack = [];
@@ -1463,7 +1468,6 @@ GIDGET.runtime = {
 				
 				}
 				else {
-
 					if(runtime.resultsStack.length >= this.arguments.length) {
 	
 						var i, result;
@@ -1512,9 +1516,11 @@ GIDGET.runtime = {
 							}
 						}
 						
+
+						
 						// If we found the action...
 						if(isDef(action)) {
-	
+
 							script = action.script;
 							argumentNames = action.arguments;
 	
@@ -1558,7 +1564,6 @@ GIDGET.runtime = {
 						
 							runtime.addDecision(this, GIDGET.text.ask_unknownAction(object.name, this.action.text));
 							runtime.pc += this.offset;
-	
 						}
 												
 					}

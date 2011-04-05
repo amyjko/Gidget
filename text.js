@@ -21,7 +21,7 @@ GIDGET.text = {
 		this.functionToCall = functionToCall;
 		
 		if(isDef(functionToCall) && !jQuery.isFunction(functionToCall)){
-			console.error("Value passed to GIDGET.text.Message() is not a function but should be. " + functionToCall + ".");
+			console.error("Value passed to GIDGET.text.Message() is not a function but should be: " + functionToCall + ".");
 		}
 		
 		return this;
@@ -278,9 +278,9 @@ GIDGET.text = {
 	ask_noObject: function() {
 		
 		if (GIDGET.experiment.isControl())
-			return new GIDGET.text.Message("ERROR: Nothing to <b>ask</b> by that name.", "error", undefined, GIDGET.text.SAD);
+			return new GIDGET.text.Message("ERROR: Nothing to <b>ask</b> by that name.", "error", GIDGET.text.SAD);
 			
-		return new GIDGET.text.Message("I couldn't find anything to 'ask' by that name.", "errorExp", undefined, GIDGET.text.SAD);
+		return new GIDGET.text.Message("I couldn't find anything to <b>ask</b> by that name.", "errorExp", GIDGET.text.SAD);
 	
 	},
 
@@ -639,7 +639,7 @@ GIDGET.text = {
 		if (GIDGET.experiment.isControl()) {
 			return new GIDGET.text.Message("SYNTAX ERROR: Missing name of thing to avoid. Must identify thing to avoid. Skipping step.", "parserErrorCtrl", GIDGET.text.SAD, showCommand);
 		} else {
-			return new GIDGET.text.Message("I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?", GIDGET.text.SAD, "parserErrorExp", showCommand);
+			return new GIDGET.text.Message("I know I'm supposed to goto something and avoid something, but I don't know what I'm supposed to avoid. I'm always getting so confused and bumping into things, so can you let me know what I should be avoiding next time?", "parserErrorExp", GIDGET.text.SAD, showCommand);
 		}	
 	},
 		

@@ -69,7 +69,10 @@ GIDGET.ui = {
 	log: function(message) {
 
 		this.messages = this.messages + "<br>" + message;
-		console.log("[gidget] " + message);
+		
+		if (GIDGET.experiment.verbose) {
+			console.log("[gidget] " + message);
+		}
 	
 	},
 
@@ -1047,7 +1050,9 @@ GIDGET.ui = {
 						
 						}
 						
-						console.log("[" + runtime.thing.name + ']' + decision.thought.text);
+						if (GIDGET.experiment.verbose) {
+							console.log("[" + runtime.thing.name + ']' + decision.thought.text);
+						}
 						
 						// If this is a say command, add a speech bubble
 						if ((decision.action !== undefined) && (decision.action.kind === 'Say')) {
