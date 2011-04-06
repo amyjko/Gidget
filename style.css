@@ -606,6 +606,7 @@ textarea {
 	white-space: 		nowrap;
 }
 
+/*
 .introBox {
 	background-color: white;
 	
@@ -620,6 +621,28 @@ textarea {
 	width:			480px;
 	margin-left:	-240px;
 	left:			50%;
+}
+*/
+
+.introBox {
+	background:		#f0f0f0; /* Color 8 */
+	font-family: 	Arial, Helvetica, sans-serif;
+	border:			solid 2px black;
+	border-radius: 	.75em;
+	-moz-border-radius: .75em;
+	color: black;
+
+	padding:		1em;
+	padding-top:	0em;
+	position: 		fixed;
+	width:			25em;
+	margin-left:	-15em;
+	top:			4em;
+	left:			50%;
+}
+
+.introBox p {
+	color: black;
 }
 
 /** P O P U P - W I N D O W S ***************************/
