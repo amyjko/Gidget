@@ -109,7 +109,7 @@ GIDGET.ui = {
 	
 	removeSpecialCharacters: function(myString) {
 
-		return myString.replace(/[^a-zA-Z 0-9,.();?!]+/g,' ');
+		return myString.replace(/[^a-zA-Z 0-9.();?!]+/g,' ');
 	},
 	
 	radioEmpty: function(name) {
