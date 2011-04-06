@@ -160,7 +160,8 @@ GIDGET.ui = {
 				dialogue: this.removeSpecialCharacters($('textarea[name=freeDialogue]').val()),
 				avatar: this.removeSpecialCharacters($('textarea[name=freeAvatar]').val()),	
 				experience: this.removeSpecialCharacters($('textarea[name=freeExperience]').val()),	
-				description: this.removeSpecialCharacters($('textarea[name=freeDescription]').val()),
+				whyQuit: this.removeSpecialCharacters($('textarea[name=freeQuit]').val()),
+				whyMore: this.removeSpecialCharacters($('textarea[name=freeMore]').val()),
 			}
 		}
 		
