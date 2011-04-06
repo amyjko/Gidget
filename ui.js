@@ -107,7 +107,19 @@ GIDGET.ui = {
 		$('#levelTitle').html("Level " + this.world.levelNumber + ". " + this.world.levelTitle);
 	},
 	
+	removeSpecialCharacters: function(myString) {
+
+		return myString.replace(/[^a-zA-Z 0-9,.();?!]+/g,' ');
+	},
+	
+	radioEmpty: function(name) {
+		if (!isDef($('input[name='+name+']:radio:checked').val())) {return "";} 
+		else {return $('input[name='+name+']:radio:checked').val();}
+	},
+	
 	quit: function(message) {
+	
+		$('#postSurvey').hide();
 	
 		var level = localStorage.getItem('currentLevel');
 
@@ -116,26 +128,25 @@ GIDGET.ui = {
 		function randomPassword(length) {
 		   chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		   pass = "";
-		   for(x=0;x<length;x++)
-		   {
-		     i = Math.floor(Math.random() * 62);
-		     pass += chars.charAt(i);
+		   for(x = 0; x < length; x++) {
+				i = Math.floor(Math.random() * 62);
+				pass += chars.charAt(i);
 		   }
 		   return pass;
 		}
 
 		var password = randomPassword(10);
-		
-
+	
 		var payload = {
 			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
+			levelsPassed: this.getNumberOfLevelsPassed(),
 			code: password,
 			levelMetadata: getLocalStorageObject('levelMetadata'),
 			// Extract all of the questionnaire data from the form.
 			survey: {
-				gender: $('input[name=gender]:checked').val(),
-				age: $('input[name=age]').val(),
+				gender: this.radioEmpty("gender"),
+				age: this.removeSpecialCharacters($('input[name=age]').val()),
 				education: $('select[name=education] option:selected').val(),
 				experience1: $('input[name=experience1]').attr('checked'),
 				experience2: $('input[name=experience2]').attr('checked'),
@@ -143,13 +154,13 @@ GIDGET.ui = {
 				experience4: $('input[name=experience4]').attr('checked'),
 				experience5: $('input[name=experience5]').attr('checked'),
 				experience6: $('input[name=experience6]').attr('checked'),
-				enjoyment: $('input[name=enjoyment]:checked').val(),
-				recommend: $('input[name=recommend]:checked').val(),
-				helpGidget: $('input[name=helpGidget]:checked').val(),
-				dialogue: $('input[name=free-dialogue]').val(),
-				avatar: $('input[name=free-avatar]').val(),	
-				experience: $('input[name=free-experience]').val(),	
-				description: $('input[name=free-description]').val(),
+				enjoyment: this.radioEmpty("enjoyment"),
+				recommend: this.radioEmpty("recommend"),
+				helpGidget:this.radioEmpty("helpGidget"),
+				dialogue: this.removeSpecialCharacters($('textarea[name=freeDialogue]').val()),
+				avatar: this.removeSpecialCharacters($('textarea[name=freeAvatar]').val()),	
+				experience: this.removeSpecialCharacters($('textarea[name=freeExperience]').val()),	
+				description: this.removeSpecialCharacters($('textarea[name=freeDescription]').val()),
 			}
 		}
 		
@@ -157,21 +168,19 @@ GIDGET.ui = {
 		//alert(payload);
 	
 		localStorage.setItem("quit", password);
-
+		
 		$.ajax({
-			url: "submit.php",
 			type: "POST",
+			url: "submit.php",
 			data: payload,
 			success: function(msg) {
 				GIDGET.ui.disable("Successfully saved your results!");
-				alert("Saved your results!");
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				GIDGET.ui.disable("Your results could not be saved :(");
-				alert("Could not save your results!");
 			}
 		});
-			
+		
 	},
 	
 	// Hides the whole UI
@@ -181,7 +190,7 @@ GIDGET.ui = {
 		
 		$('#quitResults').html(
 			"<p>" + message + "</p>" + 
-			"<p>Your MTurk completion code is <b>" + localStorage.getItem('quit') + "</b>. Please enter it back on the MTurk HIT page.</p>" + 
+			"<p>Your MTurk completion code is: <b>" + localStorage.getItem('quit') + "</b>.</p><p>Please enter it back on the MTurk HIT page.</p>" + 
 			"<p>From this point on, the game will be disabled."
 		).show();
 	

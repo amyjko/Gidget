@@ -175,7 +175,7 @@
 	<div class='popup' id='postSurvey'>
 	  <h2>Survey</h2>
 
-      <form id="postQuiz" name="postQuiz" onsubmit='GIDGET.ui.quit("Okay.")'>
+      <form id="postQuiz" name="postQuiz" onsubmit='GIDGET.ui.quit("Okay.");return false;'>
         <table>
           <tr>
             <td valign="middle" ><b>1) Are you male or female?</b><br />
@@ -270,7 +270,7 @@
           <tr>
             <td valign="middle" ><p><b>8) Describe your feelings about the dialogue between yourself and Gidget.</b></p>
               <p>
-				<textarea name="free-dialogue" cols="50" rows="10"></textarea>
+				<textarea name="freeDialogue" cols="50" rows="10"></textarea>
 				<br>
               </p>
             </td>
@@ -278,7 +278,7 @@
           <tr>
             <td valign="middle" ><p><b>9) Describe your feelings towards Gidget's avatar (image)?</b></p>
               <p>
-				<textarea name="free-avatar" cols="50" rows="10"></textarea>
+				<textarea name="freeAvatar" cols="50" rows="10"></textarea>
 				<br>
               </p>
             </td>
@@ -286,7 +286,7 @@
           <tr>
             <td valign="middle" ><p><b>10) How was this learning experience different, if at all, from any previous experience you have had dealing with programming?</b></p>
               <p>
-				<textarea name="free-experience" cols="50" rows="10"></textarea>
+				<textarea name="freeExperience" cols="50" rows="10"></textarea>
 				<br>
               </p>
             </td>
@@ -294,7 +294,7 @@
           <tr>
             <td valign="middle" ><p><b>11) How would you describe this game to a friend?</b></p>
               <p>
-				<textarea name="free-description" cols="50" rows="10"></textarea>
+				<textarea name="freeDescription" cols="50" rows="10"></textarea>
 				<br>
               </p>
             </td>

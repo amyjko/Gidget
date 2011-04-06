@@ -3,13 +3,9 @@
 	// Report all errors
 	error_reporting(-1);
 
-	$data = ($_GET['data']) ? $_GET['data'] : $_POST['data'];
- 
-	//flag to indicate which method it uses. If POST set it to 1
-	if ($_POST) $post = true;
-
 	// Get the JSON to save
-	//$data = $_POST["data"];
+	$data = $_POST["data"];
+
 
 	// Generate a unique ID
 	$id = uniqid();
