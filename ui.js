@@ -496,8 +496,9 @@ GIDGET.ui = {
 		
 		}
 		else {
-		
-			this.quit("Congratulations! You beat all of the levels.");
+			$('#container').fadeTo(1000, 0.0);
+			$('#finishedLevels').show();
+			//this.quit("Congratulations! You beat all of the levels.");
 		
 		}
 	
@@ -565,10 +566,10 @@ GIDGET.ui = {
 			message = "Gidget, please execute...";
 		
 		GIDGET.ui.setThought("<span id='learnerSpeech'>"+message+"</span> <br>\n" +
-			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the instructions - there may be multiple steps per line - this button may need to be pressed multiple times to go through the instructions and evaluate the goals.'>one<br />step</button>\n" +
-			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the instructions - his button may need to be pressed multiple times to go through the instructions and evaluate the goals.'>one<br />line</button>\n"+
-			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute all the instruction and check the goals step-by-step.'>all<br />steps</button>\n" +
-			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute all the instructions and check the goals in one step, showing only the final output.'>to<br />end</button>\n",
+			"<button id='step' onclick='hideToolTip(); GIDGET.ui.stepOnce();' title='Ask Gidget to execute one step of the instructions - there may be multiple steps per line - this button may need to be pressed multiple times to go through the instructions and evaluate the goals. This also toggles the command helper sheet when errors are detected.'>one<br />step</button>\n" +
+			"<button id='line' onclick='hideToolTip(); GIDGET.ui.runToNextLine();' title='Ask Gidget to execute one whole line of the instructions - this button may need to be pressed multiple times to go through the instructions and evaluate the goals. This also toggles the command helper sheet when errors are detected.'>one<br />line</button>\n"+
+			"<button id='play' onclick='hideToolTip(); GIDGET.ui.playToEnd();' title='Ask Gidget to execute all the instruction and check the goals step-by-step. This button does not stop for any errors.'>all<br />steps</button>\n" +
+			"<button id='end'  onclick='hideToolTip(); GIDGET.ui.runToEnd();' title='Ask Gidget to execute all the instructions and check the goals in one step, showing only the final output. This button does not stop for any errors.'>to<br />end</button>\n",
 			0, "learner");
 	
 	},

@@ -286,6 +286,14 @@ $().ready(function() {
 
 	});
 	
+	$('#closeIntro').click(function() {
+	
+		$('#introTextBox').fadeTo(100, 0.0, function() { $('#introTextBox').hide(); });
+		GIDGET.ui.drawGrid();
+		$('#container').fadeTo(1000, 1.0);
+
+	});
+	
 	$('#setCondControl').click(function() {
 	
 		GIDGET.experiment.condition = "control";
@@ -387,7 +395,7 @@ $().ready(function() {
 
 	function playIntroductionIfNotPlayedPreviously() {
 	
-		localStorage.setItem('playedMovie', 'true');	// post-pilot: skip movie
+		//localStorage.setItem('playedMovie', 'true');	// post-pilot: skip movie
 		// If there is no record of previous play, start anew
 		if(localStorage.getItem('playedMovie') === null) {
 	
@@ -396,8 +404,9 @@ $().ready(function() {
 			// Hide the container and show the introduction.
 			$('#container').fadeTo(0, 0.0);
 
-			// Play the introduction	
-			playIntro();	
+			// Play the introduction movie	
+			//playIntro();
+			$("#introTextBox").show();
 				
 		} // check to see if there's a record of the learner quitting
 		else if(localStorage.getItem('quit') === null) {
@@ -412,7 +421,8 @@ $().ready(function() {
 	// Make sure only the loading dialog is visible
 	$('#loadingIntro').show();
 	$('#container').hide();
-	$('#intro').hide();
+	//$('#intro').hide();
+	$("#introTextBox").hide();
 	
 	// Load the media
 	GIDGET.ui.media.loadMedia(function(remaining, total) {

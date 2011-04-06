@@ -308,16 +308,22 @@
       </form>
 	</div>
 		
-	<div class='introBox' id='intro'>
+	<div class='introBox' id='introTextBox'>
 
-<!--
-		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the new robot Gidget with the cleanup process from a major disaster. He is one of the highest functioning robots. While you shouldn't have any problems with him, we do want a human to monitor his work and help with any maintenance or other issues that arise.
+
+		<p>Welcome to the world of Gidget! Your mission, if you choose to accept it, is to help the robot Gidget with the cleanup process from a major disaster.</p><p>A rural <b><em>goop</em></b> factory has gone out of control and is spewing goops all around the countryside. Goop is highly toxic to humans, so all the residents have been evacuated from the area. Your job, from the safety of mission control, is to <b>communicate with Gidget</b> to clean up the goop, rescue any stranded animals, and ultimately shut down the goop factory.</p><p>Unfortunately, there was an <b>accident</b> while transporting Gidget to the disaster site and his logic chip and battery are <b>malfunctioning</b>. It is up to you to figure out how to help Gidget complete his missions!</p>
 		
-		<div style='text-align:right'><button onclick='$("#welcome").hide()'>Let's get started!</button></div>
--->
+		<div style='text-align:right'><button id='closeIntro'>Let's get started!</button></div>
 
-		<canvas id='introCanvas' width='480' height='480'></canvas>
 
+		<!-- <canvas id='introCanvas' width='480' height='480'></canvas> -->
+
+	</div>
+
+	<div class='popup' id='finishedLevels'>
+		<h2>success!</h2>
+		<p>Congratulations, you have helped Gidget complete all the missions!</p>
+		<button onclick='$("#finishedLevels").hide(); $("#toggleCheatsheet").hide(); $("#postSurvey").show()'>Take survey and receive MTurk code.</button>
 	</div>
 
 	<div class='popup' id='debug'>
