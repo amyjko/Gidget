@@ -480,7 +480,7 @@ GIDGET.text = {
 						actions += " It can be <b>asked</b> to <b>" + action + "</b> and " + argString + ".";
 						}
 					else{
-						actions += " I can <b>ask</b> it to <b>" + action + "</b> and " + argString + ".";
+						actions += " I can <b>ask</b> it to <b>" + action + "</b> " + argString + ".";
 						}
 					
 				}

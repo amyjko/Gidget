@@ -262,9 +262,9 @@ GIDGET.levels = {
 		// ----- G - C O D E -----
 	
 		var code = 
+			"scan battery, goto it, analyze it\n" +
+			"ask battery to enrgise gidget\n" +
 			"goto goops, grab it\n" +
-			"goto battery, analyze it\n" +
-			"ask battery to powerize gidget\n" +
 			"goto bucket\n" +
 			"drop goops";
 		
@@ -303,8 +303,8 @@ GIDGET.levels = {
 		new GIDGET.Thing(world, "goop", 4, 2, "green", [], {});
 		new GIDGET.Thing(world, "battery", 1, 3, "yellow", [], 
 			{ 
-			energize : new GIDGET.Action([ "beneficiary" ],
-				"raise beneficiary energy 100"
+			energize : new GIDGET.Action([ "who" ],
+				"raise who energy 100"
 				)
 			}
 		);
@@ -450,7 +450,9 @@ GIDGET.levels = {
 			var code = 
 			"scan crack\n" +
 			"scan goop, goto it avoid crack, grab it\n" +
-			"scan bucket, goto it, drop goop";
+			"scan bucket, goto it, drop goop\n" +
+			"scan kitten, goto it avoid crack, grab it\n" +
+			",goto crate, drop kitten";
 	
 		var world = new GIDGET.World([10], [5,5], ["dirt","burlywood", 0], code);
 		world.gidget.setEnergy(110);
@@ -538,7 +540,10 @@ GIDGET.levels = {
 		var code = 
 			"scan rat\n" +
 			"goto rat avoid bird, grab it\n" +
-			"scan crate, goto it avoid bird";
+			"scan crate, goto it avoid bird\n" +
+			"dop bird\n" +
+			"scan goop, goto it, grab it\n" +
+			"goto bucket avoid rat, drop goop";
 
 		var world = new GIDGET.World([10], [5,4], ["dirt","burlywood", 0], code);
 		world.gidget.setEnergy(90);

@@ -137,16 +137,99 @@ GIDGET.ui = {
 
 		var password = randomPassword(10);
 	
+	
+	
+		var systemDetect = {
+			init: function () {
+				this.browser = this.searchString(this.dataBrowser) || "unknown";
+				this.version = this.searchVersion(navigator.userAgent)
+					|| this.searchVersion(navigator.appVersion)
+					|| "an unknown version";
+				this.OS = this.searchString(this.dataOS) || "unknown";
+			},
+			searchString: function (data) {
+				for (var i=0;i<data.length;i++)	{
+					var dataString = data[i].string;
+					var dataProp = data[i].prop;
+					this.versionSearchString = data[i].versionSearch || data[i].identity;
+					if (dataString) {
+						if (dataString.indexOf(data[i].subString) != -1)
+							return data[i].identity;
+					}
+					else if (dataProp)
+						return data[i].identity;
+				}
+			},
+			searchVersion: function (dataString) {
+				var index = dataString.indexOf(this.versionSearchString);
+				if (index == -1) return;
+				return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+			},
+			dataBrowser: [
+				{
+					string: navigator.userAgent,
+					subString: "Chrome",
+					identity: "Chrome"
+				},
+				{
+					string: navigator.vendor,
+					subString: "Apple",
+					identity: "Safari",
+					versionSearch: "Version"
+				},
+				{
+					prop: window.opera,
+					identity: "Opera"
+				},
+				{
+					string: navigator.userAgent,
+					subString: "Firefox",
+					identity: "Firefox"
+				},
+				{
+					string: navigator.userAgent,
+						subString: "MSIE",
+					identity: "Explorer",
+					versionSearch: "MSIE"
+				}
+			],
+				dataOS : [
+				{
+					string: navigator.platform,
+					subString: "Win",
+					identity: "Windows"
+				},
+				{
+					string: navigator.platform,
+						subString: "Mac",
+					identity: "Mac"
+				},
+				{
+					string: navigator.platform,
+					subString: "Linux",
+					identity: "Linux"
+				}
+			]
+
+		};
+
+		systemDetect.init();
+	
+	
 		var payload = {
 			condition: GIDGET.experiment.condition,
 			currentLevel: localStorage.getItem('currentLevel'),
 			levelsPassed: this.getNumberOfLevelsPassed(),
 			code: password,
 			levelMetadata: getLocalStorageObject('levelMetadata'),
+			browser: systemDetect.browser,
+			os: systemDetect.OS,
+			finalTime: (new Date()).getTime(),
 			// Extract all of the questionnaire data from the form.
 			survey: {
 				gender: this.radioEmpty("gender"),
 				age: this.removeSpecialCharacters($('input[name=age]').val()),
+				country:  $('select[name=country] option:selected').val(),
 				education: $('select[name=education] option:selected').val(),
 				experience1: $('input[name=experience1]').attr('checked'),
 				experience2: $('input[name=experience2]').attr('checked'),

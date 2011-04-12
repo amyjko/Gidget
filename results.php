@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title>Gidget study results</title>
+	<title>Gidget Study Results</title>
 
 	<script type='text/javascript' src='lib/jquery.js'></script>
 	<script type='text/javascript' src='runtime.js'></script>
@@ -105,8 +105,14 @@
 		$('#results').append("id,condition,currentLevel,mturkcode,bonus,levelsCompleted,steps,lineSteps,plays,ends,gender,age,education,exp1,exp2,exp3,exp4,exp5,ex6,enjoyment,help\n"); 		
 		
 /*
-						gender: $('input[name=gender]:checked').val(),
-				age: $('input[name=age]').val(),
+			condition: GIDGET.experiment.condition,
+			currentLevel: localStorage.getItem('currentLevel'),
+			levelsPassed: this.getNumberOfLevelsPassed(),
+			code: password,
+			levelMetadata: getLocalStorageObject('levelMetadata'),
+				
+				gender: this.radioEmpty("gender"),
+				age: this.removeSpecialCharacters($('input[name=age]').val()),
 				education: $('select[name=education] option:selected').val(),
 				experience1: $('input[name=experience1]').attr('checked'),
 				experience2: $('input[name=experience2]').attr('checked'),
@@ -114,8 +120,14 @@
 				experience4: $('input[name=experience4]').attr('checked'),
 				experience5: $('input[name=experience5]').attr('checked'),
 				experience6: $('input[name=experience6]').attr('checked'),
-				enjoyment: $('input[name=enjoyment]:checked').val(),
-				help: $('input[name=helpGidget]:checked').val()			
+				enjoyment: this.radioEmpty("enjoyment"),
+				recommend: this.radioEmpty("recommend"),
+				helpGidget:this.radioEmpty("helpGidget"),
+				dialogue: this.removeSpecialCharacters($('textarea[name=freeDialogue]').val()),
+				avatar: this.removeSpecialCharacters($('textarea[name=freeAvatar]').val()),	
+				experience: this.removeSpecialCharacters($('textarea[name=freeExperience]').val()),	
+				whyQuit: this.removeSpecialCharacters($('textarea[name=freeQuit]').val()),
+				whyMore: this.removeSpecialCharacters($('textarea[name=freeMore]').val()),		
 */
 
 		
@@ -145,7 +157,12 @@
 				add(row.survey.experience5);
 				add(row.survey.experience6);
 				add(row.survey.enjoyment);
-				add(row.survey.help);
+				add(row.survey.recommend);
+				add(row.survey.dialogue);
+				add(row.survey.avatar);
+				add(row.survey.experience);
+				add(row.survey.whyQuit);
+				add(row.survey.whyMore);
 				line();
 			
 			}
