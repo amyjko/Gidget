@@ -145,7 +145,7 @@ GIDGET.createIntroduction = function() {
 	// </goops>
 	*/
 	
-	intro.addScene(scene1);
+	//intro.addScene(scene1);
 
 	return intro;
 
